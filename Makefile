@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/05 13:04:53 by prigaudi          #+#    #+#              #
-#    Updated: 2025/11/10 12:37:41 by prigaudi         ###   ########.fr        #
+#    Updated: 2025/11/10 17:22:34 by prigaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,18 +20,20 @@ SRC_DIR = sources
 SRC = 		$(SRC_DIR)/main.c						\
 			$(SRC_DIR)/init/init_config_data.c		\
 			$(SRC_DIR)/parsing/argument.c			\
-			$(SRC_DIR)/parsing/check_extract_rgb.c	\
-			$(SRC_DIR)/parsing/config_elements.c	\
+			$(SRC_DIR)/parsing/check_element_line.c	\
+			$(SRC_DIR)/parsing/check_map_line.c		\
 			$(SRC_DIR)/parsing/config.c				\
 			$(SRC_DIR)/parsing/parsing.c			\
 			$(SRC_DIR)/parsing/save_element.c		\
 			$(SRC_DIR)/utils/ft_atoi.c				\
 			$(SRC_DIR)/utils/ft_calloc.c			\
 			$(SRC_DIR)/utils/ft_memmove.c			\
+			$(SRC_DIR)/utils/ft_split.c				\
 			$(SRC_DIR)/utils/ft_strlen.c			\
 			$(SRC_DIR)/utils/ft_strncmp.c			\
 			$(SRC_DIR)/utils/ft_strnjoin.c			\
 			$(SRC_DIR)/utils/ft_strnstr.c			\
+			$(SRC_DIR)/utils/ft_strtrim.c			\
 			$(SRC_DIR)/utils/ft_substr.c			\
 			$(SRC_DIR)/utils/get_next_line.c			
 
