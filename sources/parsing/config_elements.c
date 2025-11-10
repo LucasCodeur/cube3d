@@ -6,47 +6,75 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:52:57 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/06 16:57:01 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/10 12:01:02 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	check_id(char *id)
+static char	*extract_id(char *line, int *i)
 {
-	if (!ft_strncmp(id, "NO", 2))
-		return (0);
-	if (!ft_strncmp(id, "SO", 2))
-		return (0);
-	if (!ft_strncmp(id, "WE", 2))
-		return (0);
-	if (!ft_strncmp(id, "F ", 2))
-		return (0);
-	if (!ft_strncmp(id, "C ", 2))
-		return (0);
-	return (1);
+	char	*id;
+	char	*test;
+
+	id = NULL;
+	test = ft_substr(line, 0, 3);
+	if (!ft_strncmp(test, "NO ", 3) || !ft_strncmp(test, "SO ", 3)
+		|| !ft_strncmp(test, "WE ", 3) || !ft_strncmp(test, "EA ", 3))
+	{
+		id = ft_substr(test, 0, 2);
+		*i = 3;
+	}
+	else if (!ft_strncmp(test, "F ", 2) || !ft_strncmp(test, "C ", 2))
+	{
+		id = ft_substr(test, 0, 1);
+		*i = 2;
+	}
+	return (id);
 }
 
-static int	extract_infos(char *line)
+static char	*extract_infos(char *line, int *i)
 {
-	return (0);
+	char	*info;
+	int		index_start;
+
+	index_start = *i;
+	while (line[*i] != ' ' && line[*i + 1] != '\0')
+		*i = *i + 1;
+	info = ft_substr(line, index_start, *i - index_start);
+	(*i)++;
+	while (line[*i] != '\0')
+	{
+		if (line[*i != ' '])
+		{
+			info = NULL;
+			return (info);
+		}
+		i++;
+	}
+	return (info);
 }
 
 int	check_element_line(char *line, t_config_data *config_data)
 {
 	char	*id;
+	char	*info;
+	int		i;
 
-	printf("line=%s\n", line);
-	while (*line == ' ')
-		line++;
-	id = ft_substr(line, 0, 2);
-	if (check_id(id))
+	i = 0;
+	while (line[i] == ' ')
+		i++;
+	id = extract_id(line, &i);
+	if (!id)
 		return (1);
-	while (*line == ' ')
-		line++;
-	if (extract_infos(line))
+	while (line[i] == ' ')
+		i++;
+	info = extract_infos(line, &i);
+	if (!info)
 		return (1);
-	printf("id valide=%s\n", id);
-	config_data->config_is_valid = 0; // A SUPPRIMER
+	printf("id=<%s>\n", id);
+	printf("info=<%s>\n", info);
+	if (!save_element(id, info, config_data))
+		return (1);
 	return (0);
 }

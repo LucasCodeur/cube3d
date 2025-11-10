@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:01:49 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/06 16:46:06 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/10 12:37:50 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #  define BUFFER_SIZE 1
 # endif
 # include <fcntl.h>
+# include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -45,8 +46,11 @@ int				parsing(int argc, char **argv, t_config_data *config_data);
 int				check_argument(int argc, char **argv);
 int				config(char *path, t_config_data *config_data);
 int				check_element_line(char *line, t_config_data *onfig_data);
+int				save_element(char *id, char *info, t_config_data *config_data);
+int				*check_extract_rgb(char *info);
 
 //========== UTILS ===========
+int				ft_atoi(const char *str);
 void			*ft_calloc(size_t elementCount, size_t elementSize);
 void			*ft_memmove(void *dest, const void *src, size_t c);
 size_t			ft_strlen(const char *str);
