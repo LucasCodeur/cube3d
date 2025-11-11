@@ -1,0 +1,62 @@
+[
+ {
+  "directory": "/home/lud-adam/Documents/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-c",
+   "src/main.c",
+   "-o",
+   ".obj/main.o"
+  ],
+  "file": "src/main.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-c",
+   "src/hooks.c",
+   "-o",
+   ".obj/hooks.o"
+  ],
+  "file": "src/hooks.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-c",
+   "src/mlx.c",
+   "-o",
+   ".obj/mlx.o"
+  ],
+  "file": "src/mlx.c"
+ }
+]
