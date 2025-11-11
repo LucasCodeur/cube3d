@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:10:16 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/10 17:11:06 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/11 10:33:40 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int	save_compass_element(char *id, char *info,
 		config_data->nb_valid_elements++;
 		return (0);
 	}
+	printf("Error\nDouble definition of a config element\n");
 	return (1);
 }
 
@@ -54,12 +55,15 @@ static int	*check_extract_rgb(char *info)
 		return (NULL);
 	rgb_int = malloc(sizeof(int) * 3 + 1);
 	if (!rgb_int)
+	{
+		printf("Error\nProblem with malloc in check_extract_rgb\n");
 		return (NULL);
+	}
 	while (*rgb_str)
 	{
 		if (i > 3)
 		{
-			printf("Err000or\nRGB Format Invalid\n");
+			printf("Error\nRGB Format Invalid\n");
 			return (NULL);
 		}
 		rgb_int[i] = ft_atoi(*rgb_str);

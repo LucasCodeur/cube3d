@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:51:37 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/10 17:25:36 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/11 15:09:10 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static int	check_line(char *line, t_config_data *config_data)
 {
-	if (config_data->nb_valid_elements < 6)
+	if (config_data->nb_valid_elements < 6 && *line != '\n')
 	{
 		if (check_element_line(line, config_data))
 			return (1);
 	}
-	else
+	else if (config_data->nb_valid_elements >= 6)
 	{
-		if (check_map_line(line, config_data))
+		if (check_map(line, config_data))
 			return (1);
 	}
 	return (0);
@@ -43,11 +43,17 @@ static int	read_config(char *path, t_config_data *config_data)
 {
 	int		fd;
 	char	*line;
+	int		i;
 
 	fd = -1;
 	if (check_file_opening(path, &fd))
 		return (1);
 	line = get_next_line(fd);
+	if (!line)
+	{
+		printf("Error\nLine cannot be read\n");
+		return (1);
+	}
 	while (line)
 	{
 		if (check_line(line, config_data))
@@ -55,6 +61,7 @@ static int	read_config(char *path, t_config_data *config_data)
 		free(line);
 		line = get_next_line(fd);
 	}
+	/*A SUPPRIMER*/
 	printf("STRUCTURE:\n");
 	printf("north_texture=%s\n", config_data->north_texture);
 	printf("south_texture=%s\n", config_data->south_texture);
@@ -67,6 +74,16 @@ static int	read_config(char *path, t_config_data *config_data)
 	printf("ceiling_rgb_color2=%d\n", config_data->ceiling_rgb_color[1]);
 	printf("ceiling_rgb_color3=%d\n", config_data->ceiling_rgb_color[2]);
 	printf("Nbre elements=%d\n", config_data->nb_valid_elements);
+	printf("MAP:\n");
+	printf("width=%d\n", config_data->map->width);
+	printf("height=%d\n", config_data->map->height);
+	i = 0;
+	while (config_data->map->map_lines[i])
+	{
+		printf("%s", config_data->map->map_lines[i]);
+		i++;
+	}
+	/*A SUPPRIMER*/
 	return (0);
 }
 

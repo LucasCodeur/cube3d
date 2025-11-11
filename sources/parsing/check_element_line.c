@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config_elements.c                                  :+:      :+:    :+:   */
+/*   check_element_line.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:52:57 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/10 17:12:10 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/11 10:37:25 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ static char	*extract_id(char *line, int *i)
 	id = NULL;
 	substr = ft_substr(line, 0, 3);
 	if (!substr)
+	{
+		printf("Error\nProblem with ft_substr in extract_id\n");
 		return (NULL);
+	}
 	if (!ft_strncmp(substr, "NO ", 3) || !ft_strncmp(substr, "SO ", 3)
 		|| !ft_strncmp(substr, "WE ", 3) || !ft_strncmp(substr, "EA ", 3))
 	{
@@ -31,6 +34,11 @@ static char	*extract_id(char *line, int *i)
 	{
 		id = ft_substr(substr, 0, 1);
 		*i = 2;
+	}
+	if (!id)
+	{
+		printf("Error\nProblem with config elements\n");
+		return (NULL);
 	}
 	return (id);
 }
@@ -46,10 +54,16 @@ static char	*extract_infos(char *line, int *i)
 		*i = *i + 1;
 	info_brut = ft_substr(line, index_start, *i - index_start);
 	if (!info_brut)
+	{
+		printf("Error\nProblem with ft_substr in extract_infos\n");
 		return (NULL);
+	}
 	info_clean = ft_strtrim(info_brut, " ");
 	if (!info_clean)
+	{
+		printf("Error\nProblem with ft_strtrim in extract_infos\n");
 		return (NULL);
+	}
 	return (info_clean);
 }
 
@@ -64,7 +78,9 @@ int	check_element_line(char *line, t_config_data *config_data)
 		i++;
 	id = extract_id(line, &i);
 	if (!id)
+	{
 		return (1);
+	}
 	info = extract_infos(line, &i);
 	if (!info)
 		return (1);

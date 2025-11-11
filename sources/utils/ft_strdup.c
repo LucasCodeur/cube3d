@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map_line.c                                   :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 17:22:08 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/10 17:25:44 by prigaudi         ###   ########.fr       */
+/*   Created: 2024/11/18 14:43:04 by prigaudi          #+#    #+#             */
+/*   Updated: 2025/11/11 11:48:23 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	check_map_line(char *line, t_config_data *config_data)
+char	*ft_strdup(const char *str)
 {
-	return (0);
+	char	*result;
+	int		i;
+	int		len;
+
+	len = ft_strlen(str);
+	result = malloc(sizeof(char) * (len + 1));
+	if (result == NULL)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		result[i] = (unsigned char)str[i];
+		i++;
+	}
+	result[i] = '\0';
+	return (result);
 }
