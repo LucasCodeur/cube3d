@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   create_sprites.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 20:06:38 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/12 17:35:46 by lud-adam         ###   ########.fr       */
+/*   Created: 2025/11/12 17:10:20 by lud-adam          #+#    #+#             */
+/*   Updated: 2025/11/12 17:26:28 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "display.h"
-#include "mlx.h"
 
+#include <stdlib.h>
 #include <stdio.h>
+#include <mlx.h>
 
-int main(void)
+t_img	fill_image(t_data* data, char *path_to_asset)
 {
-	t_data	data;
-	t_mlx	mlx;
-	int rows = 5;
-	int cols = 5;
-	char map[5][6];
+	t_img	img;
+	int		x;
+	int		y;
 
-	mlx.max_height = HEIGHT;
-	mlx.max_width = WIDTH;
-	data.mlx = mlx;
-
-	for (int i = 0; i < rows; i++)
+	img.img = mlx_xpm_file_to_image(data->mlx.mlx, path_to_asset, &x, &y);
+	if (!img.img)
 	{
-		for (int j = 0; j < cols; j++)
-			map[i][j] = (i + j) % 2 ? '1' : '0';
-		map[i][cols] = '\0';
+		perror("Error: Image not create\n");
+		exit(1);
 	}
-	for (int i = 0; i < rows; i++)
-		printf("%s\n", map[i]);
-	launcher(&data);
+	return (img);
 }

@@ -1,40 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 20:06:38 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/12 17:35:46 by lud-adam         ###   ########.fr       */
+/*   Created: 2025/11/12 17:28:43 by lud-adam          #+#    #+#             */
+/*   Updated: 2025/11/12 17:34:39 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "display.h"
-#include "mlx.h"
 
-#include <stdio.h>
+#include  <mlx.h>
 
-int main(void)
+void	launcher(t_data *data)
 {
-	t_data	data;
-	t_mlx	mlx;
-	int rows = 5;
-	int cols = 5;
-	char map[5][6];
-
-	mlx.max_height = HEIGHT;
-	mlx.max_width = WIDTH;
-	data.mlx = mlx;
-
-	for (int i = 0; i < rows; i++)
-	{
-		for (int j = 0; j < cols; j++)
-			map[i][j] = (i + j) % 2 ? '1' : '0';
-		map[i][cols] = '\0';
-	}
-	for (int i = 0; i < rows; i++)
-		printf("%s\n", map[i]);
-	launcher(&data);
+	init_screen_mlx(data);
+	data->img = fill_image(data, "/home/lud-adam/Documents/cube3d/assets/textures/basic/coin.xpm");
+	mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win, data->img.img, 10, 10);
+	mlx_loop(data->mlx.mlx);
 }

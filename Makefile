@@ -6,7 +6,7 @@
 #    By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2025/11/11 20:15:02 by lud-adam         ###   ########.fr        #
+#    Updated: 2025/11/12 17:34:29 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,9 @@ P_OBJ = .obj/
 
 SRC = \
 	main.c \
-	hooks.c \
-	mlx.c
+	mlx.c \
+	create_sprites.c \
+	launcher.c
 
 MLX_LIB = $(P_MLX)libmlx.a
 
