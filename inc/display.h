@@ -6,16 +6,24 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/12 17:30:11 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:41:25 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DISPLAY_H 
 # define DISPLAY_H
+
 # define WIDTH 1250
 # define HEIGHT 1250
 # define MAX_WIDTH 1250
 # define MAX_HEIGHT 1250
+# define SCALE_TILE	20
+
+# define ASSET_TILE "/home/lud-adam/Documents/cube3d/assets/basic/bg.xpm"
+# define ASSET_BG "/home/lud-adam/Documents/cube3d/assets/basic/end_bg.xpm"
+# define ASSET_PLAYER "/home/lud-adam/Documents/cube3d/assets/basic/player.xpm"
+
+#include <stdbool.h>
 
 typedef struct s_img
 {
@@ -35,15 +43,29 @@ typedef struct s_sprite
 typedef struct s_mlx
 {
 	void	*mlx;
-	void	*mlx_win;
+	void	*win;
 	int		max_width;
 	int		max_height;
 }				t_mlx;
+
+typedef struct	s_hero
+{
+	int	x;
+	int	y;
+}				t_hero;
+
+typedef struct s_minimap
+{
+	t_hero	hero;
+	int		scale_tile;
+}				t_minimap;
 
 typedef struct s_data
 {
 	t_mlx	mlx;
 	t_img	img;
+	char	map[5][6];
+	t_hero	hero_pos;
 }				t_data;
 
 //MLX
@@ -58,5 +80,7 @@ int			close_win(void *param);
 
 //IMAGE
 t_img	fill_image(t_data* data, char *path_to_asset);
+bool	display_minimap(t_data* data);
+int		key_hook_movements(t_data *data, int keycode);
 
 #endif
