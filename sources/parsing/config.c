@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:51:37 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/11 15:09:10 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/14 13:23:37 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	check_line(char *line, t_config_data *config_data)
 	}
 	else if (config_data->nb_valid_elements >= 6)
 	{
-		if (check_map(line, config_data))
+		if (extract_save_map(line, config_data))
 			return (1);
 	}
 	return (0);
@@ -34,12 +34,13 @@ static int	check_file_opening(char *path, int *fd)
 	{
 		printf("Error\n");
 		perror("open");
+		// free
 		return (1);
 	}
 	return (0);
 }
 
-static int	read_config(char *path, t_config_data *config_data)
+int	config(char *path, t_config_data *config_data)
 {
 	int		fd;
 	char	*line;
@@ -52,6 +53,7 @@ static int	read_config(char *path, t_config_data *config_data)
 	if (!line)
 	{
 		printf("Error\nLine cannot be read\n");
+		// free
 		return (1);
 	}
 	while (line)
@@ -61,6 +63,8 @@ static int	read_config(char *path, t_config_data *config_data)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (check_map(config_data))
+		return (1);
 	/*A SUPPRIMER*/
 	printf("STRUCTURE:\n");
 	printf("north_texture=%s\n", config_data->north_texture);
@@ -83,12 +87,10 @@ static int	read_config(char *path, t_config_data *config_data)
 		printf("%s", config_data->map->map_lines[i]);
 		i++;
 	}
+	printf("HERO:\n");
+	printf("pos x=%d\n", config_data->hero->x);
+	printf("pos y=%d\n", config_data->hero->y);
+	printf("orientation=%c\n", config_data->hero->orientation);
 	/*A SUPPRIMER*/
-	return (0);
-}
-
-int	config(char *path, t_config_data *config_data)
-{
-	read_config(path, config_data);
 	return (0);
 }

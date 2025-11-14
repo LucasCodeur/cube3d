@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:01:49 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/11 15:08:33 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/14 09:44:21 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,29 @@ typedef struct s_map
 	int			map_finished;
 }				t_map;
 
+typedef struct s_hero
+{
+	int			x;
+	int			y;
+	char		orientation;
+}				t_hero;
+
 /*
 is_valid = 1 if all elements are present and no superflux
 => Each element are tested after
 */
 typedef struct s_config_data
 {
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_map		*map;
+	t_hero		*hero;
 	char		*north_texture;
 	char		*south_texture;
 	char		*east_texture;
 	char		*west_texture;
 	int			*floor_rgb_color;
 	int			*ceiling_rgb_color;
-	t_map		*map;
 	int			nb_valid_elements;
 	int			config_is_valid;
 }				t_config_data;
@@ -54,8 +64,9 @@ int				parsing(int argc, char **argv, t_config_data *config_data);
 int				check_argument(int argc, char **argv);
 int				config(char *path, t_config_data *config_data);
 int				check_element_line(char *line, t_config_data *onfig_data);
-int				check_map(char *line, t_config_data *onfig_data);
+int				extract_save_map(char *line, t_config_data *onfig_data);
 int				save_element(char *id, char *info, t_config_data *config_data);
+int				check_map(t_config_data *config_data);
 
 //========== UTILS ===========
 int				ft_atoi(const char *str);

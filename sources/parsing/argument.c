@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 09:09:51 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/06 13:59:19 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/14 13:22:44 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	check_argument_number(int argc)
 	if (argc != 2)
 	{
 		printf("Error\nYou have to enter one and only one argument (path of the map)\n");
+		// free
 		return (1);
 	}
 	return (0);
@@ -34,12 +35,14 @@ static int	check_file_extension(char *path)
 		if (ft_strncmp(extension, ".cub", 4))
 		{
 			printf("Error\nFilename must have .cub extension\n");
+			// free
 			return (1);
 		}
 	}
 	else
 	{
 		printf("Error\nFilename must have .cub extension\n");
+		// free
 		return (1);
 	}
 	return (0);
