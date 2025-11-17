@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/04 15:06:01 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/17 14:28:26 by prigaudi         ###   ########.fr       */
+/*   Created: 2024/11/19 19:36:26 by prigaudi          #+#    #+#             */
+/*   Updated: 2025/11/17 11:25:08 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	main(int argc, char **argv)
+void	ft_lstadd_front(t_garbage **lst, t_garbage *new)
 {
-	t_config_data *config_data;
+	t_garbage	*tamp;
 
-	config_data = init_config_data();
-	if (!config_data)
-	{
-		free_all(config_data);
-		return (1);
-	}
-	if (parsing(argc, argv, config_data))
-	{
-		free_all(config_data);
-		return (1);
-	}
-	free_all(config_data);
-	return (0);
+	tamp = *lst;
+	*lst = new;
+	(*lst)->next = tamp;
 }

@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:57:02 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/10 15:45:00 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:43:45 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	index_end(char const *s1, char const *set)
 }
 
 // Remove characters stored in set at the beginning and the end of s1
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(t_config_data *config_data, char const *s1, char const *set)
 {
 	int		start;
 	int		end;
@@ -79,7 +79,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		str = ft_calloc(1, 1);
 		return (str);
 	}
-	str = malloc(sizeof(char) * end - start + 2);
+	str = ft_malloc(&config_data->garbage, sizeof(char) * end - start + 2);
 	if (str == NULL)
 		return (NULL);
 	i = 0;

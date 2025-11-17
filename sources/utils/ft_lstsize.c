@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/04 15:06:01 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/17 14:28:26 by prigaudi         ###   ########.fr       */
+/*   Created: 2024/11/19 19:52:53 by prigaudi          #+#    #+#             */
+/*   Updated: 2025/11/17 10:42:14 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	main(int argc, char **argv)
+int	ft_lstsize(t_garbage *lst)
 {
-	t_config_data *config_data;
+	int	counter;
 
-	config_data = init_config_data();
-	if (!config_data)
+	counter = 0;
+	while (lst)
 	{
-		free_all(config_data);
-		return (1);
+		counter++;
+		lst = lst->next;
 	}
-	if (parsing(argc, argv, config_data))
-	{
-		free_all(config_data);
-		return (1);
-	}
-	free_all(config_data);
-	return (0);
+	return (counter);
 }

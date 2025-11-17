@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:35:12 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/10 15:27:06 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:42:43 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ static void	free_malloc(char **split, int j)
 	free(split);
 }
 
-static char	*extract(char const *s, int start, int end)
+static char	*extract(t_config_data *config_data, char const *s, int start,
+		int end)
 {
 	int		i;
 	char	*extracted_str;
 
-	extracted_str = malloc(sizeof(char) * (end - start + 2));
+	extracted_str = ft_malloc(&config_data->garbage, sizeof(char) * (end - start
+				+ 2));
 	if (extracted_str == NULL)
 		return (NULL);
 	i = 0;
@@ -71,14 +73,15 @@ static char	*test_str(char **split, int j)
 	return (split[j]);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(t_config_data *config_data, char const *s, char c)
 {
 	char	**split;
 	int		start;
 	int		i;
 	int		j;
 
-	split = malloc(sizeof(char *) * (char_count(s, c) + 1));
+	split = ft_malloc(&config_data->garbage, sizeof(char *) * (char_count(s, c)
+				+ 1));
 	if (split == NULL)
 		return (NULL);
 	j = 0;
@@ -90,7 +93,7 @@ char	**ft_split(char const *s, char c)
 			start = i;
 			while (s[i + 1] != c && s[i + 1] != '\0')
 				i++;
-			split[j] = extract(s, start, i);
+			split[j] = extract(config_data, s, start, i);
 			if (test_str(split, j++) == NULL)
 				return (NULL);
 		}

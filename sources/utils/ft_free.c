@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/04 15:06:01 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/17 14:28:26 by prigaudi         ###   ########.fr       */
+/*   Created: 2025/11/17 13:09:35 by prigaudi          #+#    #+#             */
+/*   Updated: 2025/11/17 14:35:10 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	main(int argc, char **argv)
+void	free_all(t_config_data *config_data)
 {
-	t_config_data *config_data;
+	t_garbage	*tamp;
 
-	config_data = init_config_data();
-	if (!config_data)
+	if (config_data)
 	{
-		free_all(config_data);
-		return (1);
+		while (config_data->garbage)
+		{
+			free(config_data->garbage->ptr);
+			tamp = config_data->garbage;
+			config_data->garbage = config_data->garbage->next;
+			free(tamp);
+		}
+		config_data->garbage = NULL;
+		free(config_data);
 	}
-	if (parsing(argc, argv, config_data))
-	{
-		free_all(config_data);
-		return (1);
-	}
-	free_all(config_data);
-	return (0);
+	return ;
 }

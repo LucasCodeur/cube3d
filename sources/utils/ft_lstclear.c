@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/04 15:06:01 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/17 14:28:26 by prigaudi         ###   ########.fr       */
+/*   Created: 2024/11/20 14:29:44 by prigaudi          #+#    #+#             */
+/*   Updated: 2025/11/17 10:42:07 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	main(int argc, char **argv)
+void	ft_lstclear(t_garbage **lst, void (*del)(void *))
 {
-	t_config_data *config_data;
+	t_garbage	*tamp;
 
-	config_data = init_config_data();
-	if (!config_data)
+	while (*lst)
 	{
-		free_all(config_data);
-		return (1);
+		(*del)((*lst)->ptr);
+		tamp = *lst;
+		*lst = (*lst)->next;
+		free(tamp);
 	}
-	if (parsing(argc, argv, config_data))
-	{
-		free_all(config_data);
-		return (1);
-	}
-	free_all(config_data);
-	return (0);
+	lst = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:10:16 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/14 13:26:26 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:40:25 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,26 @@ static int	save_compass_element(char *id, char *info,
 		return (0);
 	}
 	printf("Error\nDouble definition of a config element\n");
-	// free
 	return (1);
 }
 
-static int	*check_extract_rgb(char *info)
+static int	*check_extract_rgb(t_config_data *config_data, char *info)
 {
 	char	**rgb_str;
 	int		*rgb_int;
 	int		i;
 
 	i = 0;
-	rgb_str = ft_split(info, ',');
+	rgb_str = ft_split(config_data, info, ',');
 	if (!rgb_str)
 	{
 		printf("Error\nProblem with split in check_extract_rgb\n");
-		// free
 		return (NULL);
 	}
-	rgb_int = malloc(sizeof(int) * 3 + 1);
+	rgb_int = ft_malloc(&config_data->garbage, sizeof(int) * 3 + 1);
 	if (!rgb_int)
 	{
 		printf("Error\nProblem with malloc in check_extract_rgb\n");
-		// free
 		return (NULL);
 	}
 	while (*rgb_str)
@@ -70,14 +67,12 @@ static int	*check_extract_rgb(char *info)
 		if (i > 3)
 		{
 			printf("Error\nRGB Format Invalid\n");
-			// free
 			return (NULL);
 		}
 		rgb_int[i] = ft_atoi(*rgb_str);
 		if (rgb_int[i] < 0 || rgb_int[i] > 255)
 		{
 			printf("Error\nRGB Format Invalid\n");
-			// free
 			return (NULL);
 		}
 		i++;
@@ -90,7 +85,7 @@ static int	save_ceiling_floor(char *id, char *info, t_config_data *config_data)
 {
 	if (!ft_strncmp(id, "F", 1) && !config_data->floor_rgb_color)
 	{
-		config_data->floor_rgb_color = check_extract_rgb(info);
+		config_data->floor_rgb_color = check_extract_rgb(config_data, info);
 		if (!config_data->floor_rgb_color)
 			return (1);
 		config_data->nb_valid_elements++;
@@ -98,7 +93,7 @@ static int	save_ceiling_floor(char *id, char *info, t_config_data *config_data)
 	}
 	else if (!ft_strncmp(id, "C", 1) && !config_data->ceiling_rgb_color)
 	{
-		config_data->ceiling_rgb_color = check_extract_rgb(info);
+		config_data->ceiling_rgb_color = check_extract_rgb(config_data, info);
 		if (!config_data->ceiling_rgb_color)
 			return (1);
 		config_data->nb_valid_elements++;

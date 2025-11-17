@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:38:45 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/14 13:32:02 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/17 13:35:08 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,12 @@ static int	check_save_hero(t_config_data *config_data)
 				if (config_data->hero->orientation != '\0')
 				{
 					printf("Error\nYou must have just one hero on the map\n");
-					// free
 					return (1);
 				}
 				if (i == 0 || j == 0 || i == config_data->map->height - 1
 					|| j == config_data->map->width - 1)
 				{
 					printf("Error\nMap open, hero out of the map\n");
-					// free
 					return (1);
 				}
 				config_data->hero->x = j;
@@ -52,33 +50,31 @@ static int	check_save_hero(t_config_data *config_data)
 	if (config_data->hero->orientation == '\0')
 	{
 		printf("Error\nNo hero on your map\n");
-		// free
 		return (1);
 	}
 	return (0);
 }
 
-static char	**map_copy(char **map, int height)
+static char	**map_copy(t_config_data *config_data)
 {
 	char	**map_copy;
 	int		i;
 
-	map_copy = malloc(sizeof(char *) * (height + 1));
+	map_copy = ft_malloc(&config_data->garbage, sizeof(char *)
+			* (config_data->map->height + 1));
 	if (!map_copy)
 	{
 		printf("Error\nMalloc of map_copy\n");
-		// free
 		return (NULL);
 	}
 	i = 0;
-	while (map[i])
+	while (config_data->map->map_lines[i])
 	{
-		map_copy[i] = ft_strdup(map[i]);
+		map_copy[i] = ft_strdup(config_data, config_data->map->map_lines[i]);
 		if (!map_copy[i])
 		{
 			printf("Error\nProblem with ft_strdup in map_copy\n");
-			// free
-			return (1);
+			return (NULL);
 		}
 		i++;
 	}
@@ -117,7 +113,6 @@ static int	recursive(char **map_test, int i, int j, t_config_data *config_data)
 		|| j == config_data->map->width - 1)
 	{
 		printf("Error\nMap open\n");
-		// free
 		return (1);
 	}
 	if (check_map_opened(map_test, i, j))
@@ -128,7 +123,6 @@ static int	recursive(char **map_test, int i, int j, t_config_data *config_data)
 		map_test[i][j + 1] = '1';
 		if (recursive(map_test, i, j + 1, config_data))
 		{
-			// free
 			return (1);
 		}
 	}
@@ -137,7 +131,6 @@ static int	recursive(char **map_test, int i, int j, t_config_data *config_data)
 		map_test[i + 1][j] = '1';
 		if (recursive(map_test, i + 1, j, config_data))
 		{
-			// free
 			return (1);
 		}
 	}
@@ -159,7 +152,6 @@ static int	check_hero_on_map(char **map_test)
 				&& map_test[i][j] != '\n' && map_test[i][j] != '\0')
 			{
 				printf("Error\nHero outside the map\n");
-				// free
 				return (1);
 			}
 			j++;
@@ -175,7 +167,7 @@ static int	check_map_structure(t_config_data *config_data)
 	int		i;
 	int		j;
 
-	map_test = map_copy(config_data->map->map_lines, config_data->map->height);
+	map_test = map_copy(config_data);
 	if (!map_test)
 		return (1);
 	i = 0;

@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/04 15:06:01 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/17 14:28:26 by prigaudi         ###   ########.fr       */
+/*   Created: 2024/11/19 19:23:36 by prigaudi          #+#    #+#             */
+/*   Updated: 2025/11/17 10:42:56 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	main(int argc, char **argv)
+t_garbage	*ft_lstnew(void *ptr)
 {
-	t_config_data *config_data;
+	t_garbage	*new;
 
-	config_data = init_config_data();
-	if (!config_data)
-	{
-		free_all(config_data);
-		return (1);
-	}
-	if (parsing(argc, argv, config_data))
-	{
-		free_all(config_data);
-		return (1);
-	}
-	free_all(config_data);
-	return (0);
+	new = malloc(sizeof(t_garbage));
+	if (new == NULL)
+		return (NULL);
+	new->ptr = ptr;
+	new->next = NULL;
+	return (new);
 }

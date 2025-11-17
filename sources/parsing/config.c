@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:51:37 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/14 13:23:37 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:59:52 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	check_file_opening(char *path, int *fd)
 	{
 		printf("Error\n");
 		perror("open");
-		// free
 		return (1);
 	}
 	return (0);
@@ -49,19 +48,17 @@ int	config(char *path, t_config_data *config_data)
 	fd = -1;
 	if (check_file_opening(path, &fd))
 		return (1);
-	line = get_next_line(fd);
+	line = get_next_line(config_data, fd);
 	if (!line)
 	{
 		printf("Error\nLine cannot be read\n");
-		// free
 		return (1);
 	}
 	while (line)
 	{
 		if (check_line(line, config_data))
 			return (1);
-		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(config_data, fd);
 	}
 	if (check_map(config_data))
 		return (1);

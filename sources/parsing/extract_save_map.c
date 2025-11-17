@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:22:08 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/14 13:27:37 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/17 13:35:25 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static int	extract_map_line(char *line, t_config_data *config_data)
 		if (config_data->map->map_finished)
 		{
 			printf("Error\nEmpty line in map structure\n");
-			// free
 			return (1);
 		}
 		if (line[i] != '1' && line[i] != '0' && line[i] != ' ' && line[i] != 'D'
@@ -35,7 +34,6 @@ static int	extract_map_line(char *line, t_config_data *config_data)
 			&& line[i] != 'W')
 		{
 			printf("Error\nBad character in map structure\n");
-			// free
 			return (1);
 		}
 		i++;
@@ -49,29 +47,28 @@ static int	save_map_line(char *line, t_config_data *config_data)
 	int		i;
 
 	i = 0;
-	new_map_lines = malloc(sizeof(char *) * (config_data->map->height + 2));
+	new_map_lines = ft_malloc(&config_data->garbage, sizeof(char *)
+			* (config_data->map->height + 2));
 	if (!new_map_lines)
 	{
 		printf("Error\nMalloc of new_map_lines failed\n");
-		// free
 		return (1);
 	}
 	while (config_data->map->map_lines && config_data->map->map_lines[i])
 	{
-		new_map_lines[i] = ft_strdup(config_data->map->map_lines[i]);
+		new_map_lines[i] = ft_strdup(config_data,
+				config_data->map->map_lines[i]);
 		if (!new_map_lines[i])
 		{
 			printf("Error\nProblem with ft_strdup in save_map_line\n");
-			// free
 			return (1);
 		}
 		i++;
 	}
-	new_map_lines[i] = ft_strdup(line);
+	new_map_lines[i] = ft_strdup(config_data, line);
 	if (!new_map_lines[i])
 	{
 		printf("Error\nProblem with ft_strdup in save_map_line\n");
-		// free
 		return (1);
 	}
 	new_map_lines[++i] = NULL;

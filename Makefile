@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/05 13:04:53 by prigaudi          #+#    #+#              #
-#    Updated: 2025/11/14 09:39:44 by prigaudi         ###   ########.fr        #
+#    Updated: 2025/11/17 13:09:59 by prigaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,14 @@ SRC = 		$(SRC_DIR)/main.c						\
 			$(SRC_DIR)/parsing/config.c				\
 			$(SRC_DIR)/parsing/parsing.c			\
 			$(SRC_DIR)/parsing/save_element.c		\
+			$(SRC_DIR)/utils/ft_free.c				\
 			$(SRC_DIR)/utils/ft_atoi.c				\
 			$(SRC_DIR)/utils/ft_calloc.c			\
+			$(SRC_DIR)/utils/ft_lstadd_front.c		\
+			$(SRC_DIR)/utils/ft_lstclear.c			\
+			$(SRC_DIR)/utils/ft_lstnew.c			\
+			$(SRC_DIR)/utils/ft_lstsize.c			\
+			$(SRC_DIR)/utils/ft_malloc.c			\
 			$(SRC_DIR)/utils/ft_memmove.c			\
 			$(SRC_DIR)/utils/ft_split.c				\
 			$(SRC_DIR)/utils/ft_strdup.c			\
