@@ -6,35 +6,29 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:06:40 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/14 16:49:02 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:44:23 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include  <mlx.h>
 
+#include "debug.h"
 #include "display.h"
 
-// void	update_maps(t_data* data)
-// {
-// 	for (int i = 0; i < rows; i++)
-// 	{
-// 		for (int j = 0; j < cols; j++)
-// 		{
-// 			if (i == 0 || i == rows - 1)
-// 				data.map[i][j] = '1';
-// 			else if (j == 0 || j == cols - 1)
-// 				data.map[i][j] = '1';
-// 			else if (j == 2 && i == 3)
-// 				data.map[i][j] = 'P';
-// 			else
-// 				data.map[i][j] = '0';
-// 		}
-// 		data.map[i][cols] = '\0';
-// 	}
-//
-// 	data->map[data->hero_pos.x][data->hero_pos.y] = 'P';
-// }
+void	update_maps(t_data* data)
+{
+	for (int i = 0; i < data->map.rows; i++)
+	{
+		for (int j = 0; j < data->map.rows; j++)
+		{
+			if (data->map.grid[i][j] == 'P')
+				data->map.grid[i][j] = '0';
+		}
+	}
+	data->map.grid[data->map.hero_pos.x][data->map.hero_pos.y] = 'P';
+	d_print_grid(data->map);
+}
 
 bool	display_minimap(t_data* data)
 {
@@ -47,22 +41,24 @@ bool	display_minimap(t_data* data)
 	j = 0;
 	x = 0;
 	y = 0;
-	while (data->map[i])
+	while (i < data->map.cols)
 	{
-		while (data->map[i][j])
+		while (j < data->map.rows)
 		{
-			if (data->map[i][j] == '0')
+			if (data->map.grid[i][j] == '0')
 			{
 				data->img = fill_image(data, ASSET_TILE);
 				mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->img.img, x, y);
 			}
-			else if (data->map[i][j] == '1')
+			else if (data->map.grid[i][j] == '1')
 			{
 				data->img = fill_image(data, ASSET_BG);
 				mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->img.img, x, y);
 			}
-			else if (data->map[i][j] == 'P')
+			else if (data->map.grid[i][j] == 'P')
 			{
+				data->map.hero_pos.x = j;
+				data->map.hero_pos.y = i;
 				data->img = fill_image(data, ASSET_PLAYER);
 				mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->img.img, x, y);
 			}

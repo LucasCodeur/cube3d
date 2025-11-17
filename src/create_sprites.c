@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 17:10:20 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/14 11:48:40 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:48:27 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_img	fill_image(t_data* data, char *path_to_asset)
 	int		x;
 	int		y;
 
+	if (img.img)
+		free(img.img);
 	img.img = mlx_xpm_file_to_image(data->mlx.mlx, path_to_asset, &x, &y);
 	if (!img.img)
 	{

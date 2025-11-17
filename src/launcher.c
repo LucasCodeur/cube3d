@@ -12,7 +12,25 @@
 
 #include "display.h"
 
+
 #include <mlx.h>
+#include <X11/keysym.h>
+#include <X11/X.h>
+
+// enum test {
+// 	TESt1,
+// 	TEST2,
+// 	TEST3,
+// 	JUMP,
+// 	INVENTORY
+// 	TEST_MAX
+// }
+
+// static const keymap[TEST_MAX] = {
+// 	[JUMP] = xk_left;
+// 	[TEST2] = xk_right;
+// 	[INVENTORY] = xk_e
+// }
 
 /*
 * * @brief allows to launch the main program.
@@ -21,8 +39,15 @@
 * */
 void	launcher(t_data *data)
 {
+	// bool keys_status[TEST_MAX]
+	// if (keys_status[JUMP])
+	// 	jump();
+	// if (keys_status[INVENTORY])
+	// 	open_inventory
 	init_screen_mlx(data);
 	// key_hook_movements(data, keycode);
 	display_minimap(data);
+	printf("I'NM HEREEEEEEEEEEEEEEEEEE\n");
+	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, move_hero, data);
 	mlx_loop(data->mlx.mlx);
 }

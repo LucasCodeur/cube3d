@@ -6,10 +6,11 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:13:52 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/14 16:49:19 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:09:03 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "debug.h"
 #include "display.h"
 
 #include <mlx.h>
@@ -21,19 +22,20 @@
 * @param keycode, link keybind to an effect
 * @return 0 if success
 */
-int key_hook_movements(t_data *data, int keycode)
+int move_hero(int keycode, t_data *data)
 {
-    if (keycode == 119)
-        data->hero_pos.y -= 1;
-    else if (keycode == 115)
-        data->hero_pos.y += 1;
-    else if (keycode == 97)
-        data->hero_pos.x -= 1;
-    else if (keycode == 100)
-		data->hero_pos.x += 1;
-	// update_maps(data);
+	d_print_grid(data->map);
+	if (keycode == 119)
+		data->map.hero_pos.y -= 1;
+	else if (keycode == 115)
+		data->map.hero_pos.y += 1;
+	else if (keycode == 97)
+		data->map.hero_pos.x -= 1;
+	else if (keycode == 100)
+		data->map.hero_pos.x += 1;
+	update_maps(data);
 	display_minimap(data);
-    return (0);
+	return (0);
 }
 
 int	key_press(int keycode, void *param)
@@ -60,13 +62,4 @@ int	close_win(void *param)
 	win = (t_mlx *)param;
 	// free_img(win);
 	exit(0);
-}
-
-void	hook_mandelbrot(t_data* data)
-{
-	mlx_hook(data->mlx.win, 2, 1L << 0, key_press, &data);
-	mlx_hook(data->mlx.win, 17, 0, close_win, &data);
-	mlx_loop(data->mlx.win);
-	key_hook_movements(data, int keycode);
-	// free_img(&data);
 }
