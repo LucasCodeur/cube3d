@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/14 16:41:25 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:09:31 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_sprite
 
 typedef struct s_mlx
 {
-	void	*mlx;
+	void	*ptr;
 	void	*win;
 	int		max_width;
 	int		max_height;
@@ -60,12 +60,19 @@ typedef struct s_minimap
 	int		scale_tile;
 }				t_minimap;
 
+typedef	struct	s_map
+{
+	char	grid[5][6];
+	t_hero	hero_pos;
+	int		rows;
+	int		cols;
+}				t_map;
+
 typedef struct s_data
 {
 	t_mlx	mlx;
 	t_img	img;
-	char	map[5][6];
-	t_hero	hero_pos;
+	t_map	map;
 }				t_data;
 
 //MLX
@@ -81,6 +88,7 @@ int			close_win(void *param);
 //IMAGE
 t_img	fill_image(t_data* data, char *path_to_asset);
 bool	display_minimap(t_data* data);
-int		key_hook_movements(t_data *data, int keycode);
+int		move_hero(int keycode, t_data *data);
+void	update_maps(t_data* data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 17:28:43 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/14 15:24:10 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/11/17 17:07:28 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,34 @@
 * * @param data structure contain all information about the program.
 * * @return 
 * */
+
+// struct LivingEntity
+// {
+// 	int hp
+// }
+//
+// struct Movement 
+// {
+//
+// }
+//
+// struct Player
+// {
+// 	LivingEntity livingData;
+// 	Movement	testMovement;
+// 	t_vec2	pos;
+// }
+//
+// void	test(Movement *entity)
+// {
+//
+// }
+
 void	launcher(t_data *data)
 {
+	// Player player;
+	// test((Movement *)(&Player + sizeof(LivingEntity+3
+	// )))
 	// bool keys_status[TEST_MAX]
 	// if (keys_status[JUMP])
 	// 	jump();
@@ -47,7 +73,6 @@ void	launcher(t_data *data)
 	init_screen_mlx(data);
 	// key_hook_movements(data, keycode);
 	display_minimap(data);
-	printf("I'NM HEREEEEEEEEEEEEEEEEEE\n");
 	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, move_hero, data);
-	mlx_loop(data->mlx.mlx);
+	mlx_loop(data->mlx.ptr);
 }

@@ -30,9 +30,9 @@ t_img	fill_image(t_data* data, char *path_to_asset)
 	int		x;
 	int		y;
 
-	if (img.img)
-		free(img.img);
-	img.img = mlx_xpm_file_to_image(data->mlx.mlx, path_to_asset, &x, &y);
+	// if (img.img)
+	// 	free(img.img);
+	img.img = mlx_xpm_file_to_image(data->mlx.ptr, path_to_asset, &x, &y);
 	if (!img.img)
 	{
 		perror("Error: Image not create\n");

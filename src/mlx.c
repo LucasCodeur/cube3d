@@ -17,17 +17,17 @@
 
 void	init_screen_mlx(t_data *data)
 {
-	data->mlx.mlx = mlx_init();
-	if (!data->mlx.mlx)
+	data->mlx.ptr = mlx_init();
+	if (!data->mlx.ptr)
 		return ;
-	mlx_get_screen_size(data->mlx.mlx, &data->mlx.max_width, &data->mlx.max_height);
-	data->mlx.win = mlx_new_window(data->mlx.mlx, WIDTH, HEIGHT, "cube3D");
+	mlx_get_screen_size(data->mlx.ptr, &data->mlx.max_width, &data->mlx.max_height);
+	data->mlx.win = mlx_new_window(data->mlx.ptr, WIDTH, HEIGHT, "cube3D");
 	if (!data->mlx.win || WIDTH > data->mlx.max_width || HEIGHT > data->mlx.max_height)
 	{
 		free_img(data);
 		return ;
 	}
-	data->img.img = mlx_new_image(data->mlx.mlx, WIDTH, HEIGHT);
+	data->img.img = mlx_new_image(data->mlx.ptr, WIDTH, HEIGHT);
 	if (!data->img.img)
 	{
 		free_img(data);
@@ -41,20 +41,20 @@ void	free_img(t_data *data)
 		return ;
 	if (data->img.img)
 	{
-		mlx_destroy_image(data->mlx.mlx, data->img.img);
+		mlx_destroy_image(data->mlx.ptr, data->img.img);
 		data->img.img = NULL;
 	}
 	if (data->img.addr)
 		data->img.addr = NULL;
 	if (data->mlx.win)
 	{
-		mlx_destroy_window(data->mlx.mlx, data->mlx.win);
+		mlx_destroy_window(data->mlx.ptr, data->mlx.win);
 		data->mlx.win = NULL;
 	}
-	if (data->mlx.mlx)
+	if (data->mlx.ptr)
 	{
-		mlx_destroy_display(data->mlx.mlx);
-		free(data->mlx.mlx);
-		data->mlx.mlx = NULL;
+		mlx_destroy_display(data->mlx.ptr);
+		free(data->mlx.ptr);
+		data->mlx.ptr = NULL;
 	}
 }

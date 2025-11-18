@@ -15,6 +15,7 @@
 
 #include <mlx.h>
 #include <stdlib.h>
+#include <X11/keysym.h>
 
 /**
 * @brief allow to move inside the map and set asdw
@@ -24,16 +25,14 @@
 */
 int move_hero(int keycode, t_data *data)
 {
-	d_print_grid(data->map);
-	if (keycode == 119)
-		data->map.hero_pos.y -= 1;
-	else if (keycode == 115)
+	if (keycode == XK_d && data->map.hero_pos.y != 0)
 		data->map.hero_pos.y += 1;
-	else if (keycode == 97)
-		data->map.hero_pos.x -= 1;
-	else if (keycode == 100)
+	else if (keycode == XK_a && data->map.hero_pos.y < data->map.rows)
+		data->map.hero_pos.y -= 1;
+	else if (keycode == XK_s && data->map.hero_pos.x != 0)
 		data->map.hero_pos.x += 1;
-	update_maps(data);
+	else if (keycode == XK_w && data->map.hero_pos.x < data->map.rows)
+		data->map.hero_pos.x -= 1;
 	display_minimap(data);
 	return (0);
 }
