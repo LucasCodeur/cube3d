@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:35:12 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/17 14:42:43 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/18 14:59:54 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,14 @@ static char	*test_str(char **split, int j)
 	return (split[j]);
 }
 
-char	**ft_split(t_config_data *config_data, char const *s, char c)
+char	**ft_split(t_config_data *cd, char const *s, char c)
 {
 	char	**split;
 	int		start;
 	int		i;
 	int		j;
 
-	split = ft_malloc(&config_data->garbage, sizeof(char *) * (char_count(s, c)
-				+ 1));
+	split = ft_malloc(&cd->garbage, sizeof(char *) * (char_count(s, c) + 1));
 	if (split == NULL)
 		return (NULL);
 	j = 0;
@@ -93,7 +92,7 @@ char	**ft_split(t_config_data *config_data, char const *s, char c)
 			start = i;
 			while (s[i + 1] != c && s[i + 1] != '\0')
 				i++;
-			split[j] = extract(config_data, s, start, i);
+			split[j] = extract(cd, s, start, i);
 			if (test_str(split, j++) == NULL)
 				return (NULL);
 		}

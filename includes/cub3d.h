@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:01:49 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/17 14:53:01 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:17:59 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+// enum						ERROR
+// {
+// 	MALLOC,
+// 	NO_ERROR,
+// 	PARSING,
+// }
 
 typedef struct s_garbage	t_garbage;
 
@@ -80,7 +87,10 @@ int							extract_save_map(char *line,
 								t_config_data *onfig_data);
 int							save_element(char *id, char *info,
 								t_config_data *config_data);
+int							*check_extract_rgb(t_config_data *config_data,
+								char *info);
 int							check_map(t_config_data *config_data);
+int							check_map_structure(t_config_data *config_data);
 
 //========== UTILS ===========
 void						free_all(t_config_data *config_data);

@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:52:57 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/17 15:07:07 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:23:05 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*extract_id(t_config_data *config_data, char *line, int *i)
 	}
 	if (!id)
 	{
-		printf("Error\nProblem with config elements0000\n");
+		printf("Error\nProblem with config elements\n");
 		return (NULL);
 	}
 	return (id);

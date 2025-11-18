@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:10:16 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/17 14:40:25 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/18 13:54:17 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,44 +41,6 @@ static int	save_compass_element(char *id, char *info,
 	}
 	printf("Error\nDouble definition of a config element\n");
 	return (1);
-}
-
-static int	*check_extract_rgb(t_config_data *config_data, char *info)
-{
-	char	**rgb_str;
-	int		*rgb_int;
-	int		i;
-
-	i = 0;
-	rgb_str = ft_split(config_data, info, ',');
-	if (!rgb_str)
-	{
-		printf("Error\nProblem with split in check_extract_rgb\n");
-		return (NULL);
-	}
-	rgb_int = ft_malloc(&config_data->garbage, sizeof(int) * 3 + 1);
-	if (!rgb_int)
-	{
-		printf("Error\nProblem with malloc in check_extract_rgb\n");
-		return (NULL);
-	}
-	while (*rgb_str)
-	{
-		if (i > 3)
-		{
-			printf("Error\nRGB Format Invalid\n");
-			return (NULL);
-		}
-		rgb_int[i] = ft_atoi(*rgb_str);
-		if (rgb_int[i] < 0 || rgb_int[i] > 255)
-		{
-			printf("Error\nRGB Format Invalid\n");
-			return (NULL);
-		}
-		i++;
-		rgb_str++;
-	}
-	return (rgb_int);
 }
 
 static int	save_ceiling_floor(char *id, char *info, t_config_data *config_data)
