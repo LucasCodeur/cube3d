@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:14:23 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/18 15:18:38 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/21 14:03:41 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,30 +90,6 @@ static int	recursive(char **map_test, int i, int j, t_config_data *config_data)
 	return (0);
 }
 
-static int	check_hero_on_map(char **map_test)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map_test[i])
-	{
-		j = 0;
-		while (map_test[i][j])
-		{
-			if (map_test[i][j] != ' ' && map_test[i][j] != '1'
-				&& map_test[i][j] != '\n' && map_test[i][j] != '\0')
-			{
-				printf("Error\nHero outside the map\n");
-				return (1);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
 int	check_map_structure(t_config_data *config_data)
 {
 	char	**map_test;
@@ -138,7 +114,5 @@ int	check_map_structure(t_config_data *config_data)
 			j++;
 		}
 	}
-	if (check_hero_on_map(map_test))
-		return (1);
 	return (0);
 }

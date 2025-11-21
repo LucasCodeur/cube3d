@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 13:54:18 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/21 10:47:50 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/21 15:02:56 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	rgb_loop(char **rgb_str, int *rgb_int)
 	{
 		if (i > 3)
 		{
-			printf("Error\nRGB Format Invalid\n");
+			printf("Error\nRGB format invalid\n");
 			return (1);
 		}
 		rgb_int[i] = ft_atoi(rgb_str[i]);
@@ -41,10 +41,51 @@ static int	rgb_loop(char **rgb_str, int *rgb_int)
 	}
 	if (i < 3)
 	{
-		printf("Error\nRGB Format Invalid\n");
+		printf("Error\nRGB format invalid\n");
 		return (1);
 	}
 	rgb_int[i] = 0;
+	return (0);
+}
+
+static int	loop_digit_or_space(char **rgb_str, int i, int *one_digit)
+{
+	int	j;
+
+	j = 0;
+	while (rgb_str[i][j])
+	{
+		if ((rgb_str[i][j] < '0' || rgb_str[i][j] > '9')
+			&& rgb_str[i][j] != ' ')
+		{
+			printf("Error\nRGB format invalid. You must have only digits\n");
+			return (1);
+		}
+		else if (rgb_str[i][j] >= '0' && rgb_str[i][j] <= '9')
+			*one_digit = 1;
+		j++;
+	}
+	return (0);
+}
+
+static int	is_digit_or_space(char **rgb_str)
+{
+	int	i;
+	int	one_digit;
+
+	i = 0;
+	while (rgb_str[i])
+	{
+		one_digit = 0;
+		if (loop_digit_or_space(rgb_str, i, &one_digit))
+			return (1);
+		if (!one_digit)
+		{
+			printf("Error\nRGB format invalid\n");
+			return (1);
+		}
+		i++;
+	}
 	return (0);
 }
 
@@ -59,6 +100,8 @@ int	*check_extract_rgb(t_config_data *config_data, char *info)
 		printf("Error\nProblem with split in check_extract_rgb\n");
 		return (NULL);
 	}
+	if (is_digit_or_space(rgb_str))
+		return (NULL);
 	rgb_int = ft_malloc(&config_data->garbage, sizeof(int) * (3 + 1));
 	if (!rgb_int)
 	{
