@@ -6,24 +6,17 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:52:57 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/18 15:23:05 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/21 11:01:47 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static char	*extract_id(t_config_data *config_data, char *line, int *i)
+static char	*choose_id(char *substr, t_config_data *config_data, int *i)
 {
 	char	*id;
-	char	*substr;
 
 	id = NULL;
-	substr = ft_substr(config_data, line, 0, 3);
-	if (!substr)
-	{
-		printf("Error\nProblem with ft_substr in extract_id\n");
-		return (NULL);
-	}
 	if (!ft_strncmp(substr, "NO ", 3) || !ft_strncmp(substr, "SO ", 3)
 		|| !ft_strncmp(substr, "WE ", 3) || !ft_strncmp(substr, "EA ", 3))
 	{
@@ -40,6 +33,24 @@ static char	*extract_id(t_config_data *config_data, char *line, int *i)
 		printf("Error\nProblem with config elements\n");
 		return (NULL);
 	}
+	return (id);
+}
+
+static char	*extract_id(t_config_data *config_data, char *line, int *i)
+{
+	char	*id;
+	char	*substr;
+
+	id = NULL;
+	substr = ft_substr(config_data, line, 0, 3);
+	if (!substr)
+	{
+		printf("Error\nProblem with ft_substr in extract_id\n");
+		return (NULL);
+	}
+	id = choose_id(substr, config_data, i);
+	if (!id)
+		return (NULL);
 	return (id);
 }
 

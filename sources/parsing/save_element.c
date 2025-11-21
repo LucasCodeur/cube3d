@@ -6,14 +6,30 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:10:16 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/18 13:54:17 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/21 11:29:53 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	save_compass_element(char *id, char *info,
-		t_config_data *config_data)
+static int	save_west_east(char *id, char *info, t_config_data *config_data)
+{
+	if (!ft_strncmp(id, "WE", 2) && !config_data->west_texture)
+	{
+		config_data->west_texture = info;
+		config_data->nb_valid_elements++;
+		return (0);
+	}
+	else if (!ft_strncmp(id, "EA", 2) && !config_data->east_texture)
+	{
+		config_data->east_texture = info;
+		config_data->nb_valid_elements++;
+		return (0);
+	}
+	return (1);
+}
+
+static int	save_north_south(char *id, char *info, t_config_data *config_data)
 {
 	if (!ft_strncmp(id, "NO", 2) && !config_data->north_texture)
 	{
@@ -27,18 +43,16 @@ static int	save_compass_element(char *id, char *info,
 		config_data->nb_valid_elements++;
 		return (0);
 	}
-	else if (!ft_strncmp(id, "WE", 2) && !config_data->west_texture)
-	{
-		config_data->west_texture = info;
-		config_data->nb_valid_elements++;
+	return (1);
+}
+
+static int	save_compass_element(char *id, char *info,
+		t_config_data *config_data)
+{
+	if (!save_north_south(id, info, config_data))
 		return (0);
-	}
-	else if (!ft_strncmp(id, "EA", 2) && !config_data->east_texture)
-	{
-		config_data->east_texture = info;
-		config_data->nb_valid_elements++;
+	else if (!save_west_east(id, info, config_data))
 		return (0);
-	}
 	printf("Error\nDouble definition of a config element\n");
 	return (1);
 }

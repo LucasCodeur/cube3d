@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:22:08 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/17 13:35:25 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/11/21 10:47:38 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,12 @@ static int	extract_map_line(char *line, t_config_data *config_data)
 	return (0);
 }
 
-static int	save_map_line(char *line, t_config_data *config_data)
+static int	loop_new_map(char **new_map_lines, char *line,
+		t_config_data *config_data)
 {
-	char	**new_map_lines;
-	int		i;
+	int	i;
 
 	i = 0;
-	new_map_lines = ft_malloc(&config_data->garbage, sizeof(char *)
-			* (config_data->map->height + 2));
-	if (!new_map_lines)
-	{
-		printf("Error\nMalloc of new_map_lines failed\n");
-		return (1);
-	}
 	while (config_data->map->map_lines && config_data->map->map_lines[i])
 	{
 		new_map_lines[i] = ft_strdup(config_data,
@@ -72,6 +65,22 @@ static int	save_map_line(char *line, t_config_data *config_data)
 		return (1);
 	}
 	new_map_lines[++i] = NULL;
+	return (0);
+}
+
+static int	save_map_line(char *line, t_config_data *config_data)
+{
+	char	**new_map_lines;
+
+	new_map_lines = ft_malloc(&config_data->garbage, sizeof(char *)
+			* (config_data->map->height + 2));
+	if (!new_map_lines)
+	{
+		printf("Error\nMalloc of new_map_lines failed\n");
+		return (1);
+	}
+	if (loop_new_map(new_map_lines, line, config_data))
+		return (1);
 	config_data->map->map_lines = new_map_lines;
 	if ((int)ft_strlen(line) - 1 > config_data->map->width)
 		config_data->map->width = ft_strlen(line) - 1;
