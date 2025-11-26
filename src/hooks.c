@@ -25,15 +25,29 @@
 */
 int move_hero(int keycode, t_data *data)
 {
-	if (keycode == XK_d && data->map.hero_pos.y != 0)
+	bool display = false;
+	if ((keycode == XK_d || keycode == XK_D || keycode == XK_l || keycode == XK_L) && data->map.hero_pos.y < data->map.rows - 2)
+	{
 		data->map.hero_pos.y += 1;
-	else if (keycode == XK_a && data->map.hero_pos.y < data->map.rows)
+		display = true;
+	}
+	else if ((keycode == XK_a || keycode == XK_A || keycode == XK_h || keycode == XK_H) && data->map.hero_pos.y > 1)
+	{
 		data->map.hero_pos.y -= 1;
-	else if (keycode == XK_s && data->map.hero_pos.x != 0)
+		display = true;
+	}
+	else if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j ) && data->map.hero_pos.x > data->map.cols - 2)
+	{
 		data->map.hero_pos.x += 1;
-	else if (keycode == XK_w && data->map.hero_pos.x < data->map.rows)
+		display = true;
+	}
+	else if ((keycode == XK_w || keycode == XK_W || keycode == XK_k || keycode == XK_K) && data->map.hero_pos.x > 1)
+	{
 		data->map.hero_pos.x -= 1;
-	display_minimap(data);
+		display = true;
+	}
+	if (display == true)
+		display_minimap(data);
 	return (0);
 }
 
@@ -46,7 +60,7 @@ int	key_press(int keycode, void *param)
 	mlx = (t_mlx *)param;
 	if (keycode == 65307)
 	{
-		// free_img(mlx);
+		free_img(mlx);
 		exit(0);
 	}
 	return (0);

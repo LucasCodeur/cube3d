@@ -46,7 +46,8 @@ SRC = \
 	hooks.c \
 	create_sprites.c \
 	minimap.c \
-	launcher.c
+	launcher.c \
+	debug.c
 
 MLX_LIB = $(P_MLX)libmlx.a
 

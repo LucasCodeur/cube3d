@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:06:40 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/17 14:44:23 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:09:46 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,24 @@
 // 	d_print_grid(data->map);
 // }
 
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
+{
+	t_pixel	*dst;
+
+	if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
+		return ;
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
 bool	display_minimap(t_data* data)
 {
 	int i;
 	int j;
 	int x;
 	int y;
+	int	temp_x;
+	int	temp_y;
 
 	i = 0;
 	j = 0;
@@ -49,20 +61,22 @@ bool	display_minimap(t_data* data)
 			if (data->map.grid[i][j] == '0')
 			{
 				if (i == data->map.hero_pos.x && j == data->map.hero_pos.y)
-					data->img = fill_image(data, ASSET_PLAYER);
+					fill_frame(data, ASSET_PLAYER, &temp_x, &temp_y);
 				else
-					data->img = fill_image(data, ASSET_TILE);
+					fill_frame(data, ASSET_TILE, &temp_x, &temp_y);
 			}
 			else if (data->map.grid[i][j] == '1')
-				data->img = fill_image(data, ASSET_BG);
-			mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.img, x, y);
+					fill_frame(data, ASSET_BG, &temp_x, &temp_y);
 			j++;
-			x += 32;
+			x += temp_x;
+			temp_x = 0;
 		}
 		x = 0;
-		y += 32;
+		y += temp_y;
+		temp_y = 0;
 		j = 0;
 		i++;
 	}
+	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.ptr, x, y);
 	return (true);
 }

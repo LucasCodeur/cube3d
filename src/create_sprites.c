@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 17:10:20 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/17 14:48:27 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:09:49 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,18 @@
  */
 // NOTE: x and y is the size of my image.
 // NOTE: mlx_xpm_file_to_image allow to read a file directly into a image object.
-t_img	fill_image(t_data* data, char *path_to_asset)
+t_img	fill_frame(t_data* data, char *path_to_asset, int* x, int* y)
 {
 	t_img	img;
-	int		x;
-	int		y;
 
-	// if (img.img)
-	// 	free(img.img);
-	img.img = mlx_xpm_file_to_image(data->mlx.ptr, path_to_asset, &x, &y);
-	if (!img.img)
+	img.ptr = mlx_xpm_file_to_image(data->mlx.ptr, path_to_asset, x, y);
+	if (!img.ptr)
+	{
+		perror("Error: Image not create\n");
+		exit(1);
+	}	
+	img.addr = (t_pixel* )mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
+	if (!img.addr)
 	{
 		perror("Error: Image not create\n");
 		exit(1);

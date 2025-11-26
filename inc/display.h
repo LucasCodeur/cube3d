@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/17 14:09:31 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:02:30 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,30 @@
 # define ASSET_PLAYER "/home/lud-adam/Documents/cube3d/assets/basic/player.xpm"
 
 #include <stdbool.h>
+#include <stdint.h>
+
+typedef struct s_rgb
+{
+	uint8_t a;
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
+}				t_rgb;
+
+typedef union s_pixel
+{
+	unsigned int	value;
+	t_rgb			rgb;
+	uint8_t			channels[4];
+}				t_pixel;
 
 typedef struct s_img
 {
-	void	*img;
-	char	*addr;
+	void				*ptr;
+	t_pixel				*addr;
 	int		bits_per_pixel;
 	int		line_length;
-	int		endian;
+	int					endian;
 }					t_img;
 
 typedef struct s_sprite
@@ -42,6 +58,7 @@ typedef struct s_sprite
 
 typedef struct s_mlx
 {
+	t_pixel* buf;
 	void	*ptr;
 	void	*win;
 	int		max_width;
@@ -75,6 +92,7 @@ typedef struct s_data
 	t_map	map;
 }				t_data;
 
+
 //MLX
 void		init_mlx(t_mlx *t_mlx);
 void		init_screen_mlx(t_data *data);
@@ -86,7 +104,7 @@ int			key_press(int keycode, void *param);
 int			close_win(void *param);
 
 //IMAGE
-t_img	fill_image(t_data* data, char *path_to_asset);
+t_img	fill_frame(t_data* data, char *path_to_asset, int* x, int* y);
 bool	display_minimap(t_data* data);
 int		move_hero(int keycode, t_data *data);
 void	update_maps(t_data* data);
