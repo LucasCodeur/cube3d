@@ -51,20 +51,20 @@ int move_hero(int keycode, t_data *data)
 	return (0);
 }
 
-int	key_press(int keycode, void *param)
-{
-	t_mlx	*mlx;
-
-	if (!param)
-		return (0);
-	mlx = (t_mlx *)param;
-	if (keycode == 65307)
-	{
-		free_img(mlx);
-		exit(0);
-	}
-	return (0);
-}
+// int	key_press(int keycode, void *param)
+// {
+// 	t_mlx	*mlx;
+//
+// 	if (!param)
+// 		return (0);
+// 	mlx = (t_mlx *)param;
+// 	if (keycode == 65307)
+// 	{
+// 		free_img(mlx);
+// 		exit(0);
+// 	}
+// 	return (0);
+// }
 
 int	close_win(void *param)
 {

@@ -13,8 +13,10 @@
 #ifndef DISPLAY_H 
 # define DISPLAY_H
 
-# define WIDTH 1250
-# define HEIGHT 1250
+# define WIDTH 1024
+# define HEIGHT 1024
+# define HEIGHT_MINIMAP 200 
+# define WIDTH_MINIMAP 200
 # define MAX_WIDTH 1250
 # define MAX_HEIGHT 1250
 # define SCALE_TILE	20
@@ -22,6 +24,14 @@
 # define ASSET_TILE "/home/lud-adam/Documents/cube3d/assets/basic/bg.xpm"
 # define ASSET_BG "/home/lud-adam/Documents/cube3d/assets/basic/end_bg.xpm"
 # define ASSET_PLAYER "/home/lud-adam/Documents/cube3d/assets/basic/player.xpm"
+# define BLACK 0x000000
+// # define GREEN 0x008000
+// # define RED 0xFF0000
+// # define BLUE 0x0000FF
+
+#define RED   0xFF0000FF
+#define GREEN 0xFF00FF00
+#define BLUE  0xFFFF0000
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -44,9 +54,9 @@ typedef union s_pixel
 typedef struct s_img
 {
 	void				*ptr;
-	t_pixel				*addr;
-	int		bits_per_pixel;
-	int		line_length;
+	char				*addr;
+	int					bits_per_pixel;
+	int					line_length;
 	int					endian;
 }					t_img;
 
@@ -108,5 +118,6 @@ t_img	fill_frame(t_data* data, char *path_to_asset, int* x, int* y);
 bool	display_minimap(t_data* data);
 int		move_hero(int keycode, t_data *data);
 void	update_maps(t_data* data);
+void	draw_scaled_asset(t_pixel *dest_pixels, int dest_w, int dest_h, t_pixel *src_pixels, int src_size);
 
 #endif

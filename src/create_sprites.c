@@ -34,7 +34,7 @@ t_img	fill_frame(t_data* data, char *path_to_asset, int* x, int* y)
 		perror("Error: Image not create\n");
 		exit(1);
 	}	
-	img.addr = (t_pixel* )mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
+	img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
 	if (!img.addr)
 	{
 		perror("Error: Image not create\n");

@@ -58,5 +58,85 @@
    ".obj/mlx.o"
   ],
   "file": "src/mlx.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-c",
+   "src/create_sprites.c",
+   "-o",
+   ".obj/create_sprites.o"
+  ],
+  "file": "src/create_sprites.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-c",
+   "src/minimap.c",
+   "-o",
+   ".obj/minimap.o"
+  ],
+  "file": "src/minimap.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-c",
+   "src/launcher.c",
+   "-o",
+   ".obj/launcher.o"
+  ],
+  "file": "src/launcher.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-c",
+   "src/debug.c",
+   "-o",
+   ".obj/debug.o"
+  ],
+  "file": "src/debug.c"
  }
 ]
