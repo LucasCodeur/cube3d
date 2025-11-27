@@ -30,21 +30,15 @@
 // 	d_print_grid(data->map);
 // }
 
-void	my_mlx_pixel_put_minimap(t_data *data, int x, int y, unsigned int color)
-{
-	unsigned int	*dst;
 
-	if (x < 0 || x > WIDTH_MINIMAP || y < 0 || y > HEIGHT_MINIMAP)
-		return ;
-	if (!data->img.ptr || !data->img.addr)
-	{
-		printf("ERROR: img ou addr NULL\n");
-		return ;
-	}
-	if (!data->img.addr)
-		printf("NULL\n");
-	dst = (unsigned int *)data->img.addr + (y * data->img.line_length + x * (data->img.bits_per_pixel / 8));
-	*dst = color;
+void my_mlx_pixel_put_minimap(t_data *data, int x, int y, t_pixel *color)
+{
+    t_pixel *dst;
+    if (x < 0 || x > WIDTH_MINIMAP || y < 0 || y > HEIGHT_MINIMAP) return;
+    if (!data->img.addr) return;
+    
+    dst = (t_pixel*)(data->img.addr + (y * data->img.line_length + x * 4));
+    *dst = *color;
 }
 
 bool	display_minimap(t_data* data)
@@ -59,22 +53,22 @@ bool	display_minimap(t_data* data)
 		tile_size = size_cols;
 	else
 		tile_size = size_rows;
-	unsigned int color;
+	t_pixel color;
 	for (int y = 0; y < data->map.rows; y++)
 		for (int x = 0; x < data->map.cols; x++)
 		{
 			if (data->map.grid[y][x] == '0')
-				color = RED;
+				color.value = RED;
 			else if (data->map.grid[y][x] == 'P')
-				color = GREEN;
+				color.value = GREEN;
 			else
-				color = BLUE;
+				color.value = BLUE;
 			int px_start = x * tile_size;
 			int py_start = y * tile_size;
 			
 			for (int py = 0; py < tile_size; py++)
 				for (int px = 0; px < tile_size; px++)
-					my_mlx_pixel_put_minimap(data, px_start + px, py_start + py, color);
+					my_mlx_pixel_put_minimap(data, px_start + px, py_start + py, &color);
 		}
 	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.ptr, 0, 0);
 	return (true);

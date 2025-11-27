@@ -38,10 +38,10 @@
 
 typedef struct s_rgb
 {
-	uint8_t a;
 	uint8_t r;
 	uint8_t g;
 	uint8_t b;
+	uint8_t a;
 }				t_rgb;
 
 typedef union s_pixel
@@ -54,7 +54,7 @@ typedef union s_pixel
 typedef struct s_img
 {
 	void				*ptr;
-	char				*addr;
+	char*				addr;
 	int					bits_per_pixel;
 	int					line_length;
 	int					endian;
@@ -68,7 +68,7 @@ typedef struct s_sprite
 
 typedef struct s_mlx
 {
-	t_pixel* buf;
+	char* buf;
 	void	*ptr;
 	void	*win;
 	int		max_width;
