@@ -14,12 +14,12 @@
 
 #include "vector.h"
 
-void 	num_args_test(void)
+void 	t_num_args(void)
 {
 	printf("%ld\n", NUMARGS(float, 1.0f, 2.0f, 3.0f));
 }
 
-void	vector_test(void)
+void	t_vector(void)
 {
 	// t_vec	v = vector(2.0f, -3.0f, 1.0f);
 	// t_vec	v = construct_empty_vector(5);
@@ -29,7 +29,7 @@ void	vector_test(void)
 	print(v2);
 }
 
-void	equals_vector_test(void)
+void	t_equals_vector(void)
 {
 	t_vec	v1 = construct_default_vector(5, 6.9f);
 	t_vec	v2 = copy(v1);
@@ -41,8 +41,42 @@ void	equals_vector_test(void)
 	printf("%d\n", equals(v1, v3));
 }
 
+void	t_scalar_multiplication(void)
+{
+	t_vec	v1 = construct_default_vector(5, 6.9f);
+	print(v1);
+	print(scalar_multiplication(v1, 1.2f));
+	return ;
+}
+
+void	t_scalar_multiplication_by(void)
+{
+	t_vec	v1 = construct_default_vector(5, 6.9f);
+	print(v1);
+	scalar_multiplication_by(&v1, 1.2f);
+	print(v1);
+	return ;
+}
+
+void	t_scalar_division(void)
+{
+	t_vec	v1 = construct_default_vector(5, 6.9f);
+	print(v1);
+	print(scalar_division(v1, 1.2f));
+	return ;
+}
+
+void	t_scalar_division_by(void)
+{
+	t_vec	v1 = construct_default_vector(5, 6.9f);
+	print(v1);
+	scalar_division_by(&v1, 1.2f);
+	print(v1);
+	return ;
+}
+
 int	main(void)
 {
-	equals_vector_test();
+	t_scalar_division_by();
 	return (0);
 }

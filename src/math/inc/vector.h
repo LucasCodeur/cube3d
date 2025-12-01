@@ -35,6 +35,14 @@ t_vec	scalar_multiplication(t_vec v, float k);
 void	scalar_multiplication_by(t_vec *v, float k);
 t_vec	scalar_division(t_vec v, float k);
 void	scalar_division_by(t_vec *v, float k);
+t_vec	add(t_vec v1, t_vec v2);
+bool	add_to(t_vec *v1, t_vec v2);
+t_vec	subtract(t_vec v1, t_vec v2);
+bool	subtract_from(t_vec *v1, t_vec v2);
+t_vec	multiply(t_vec v1, t_vec v2);
+bool	multiply_by(t_vec *v1, t_vec v2);
+t_vec	divide(t_vec v1, t_vec v2);
+bool	divide_by(t_vec *v1, t_vec v2);
 
 //WARN: have to take off
 t_vec	new_vector(unsigned int dim, ...);

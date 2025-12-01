@@ -14,6 +14,8 @@
 
 #include <stdlib.h>
 
+const t_vec	VEC_UNDEFINED = {0, NULL};
+
 t_vec	allocate(unsigned int dim)
 {
 	t_vec	ret;
@@ -158,3 +160,141 @@ void	scalar_division_by(t_vec *v, float k)
 		i++;
 	}
 }
+
+t_vec	add(t_vec v1, t_vec v2)
+{
+	if (v1.dim != v2.dim)
+		return (VEC_UNDEFINED);
+
+	t_vec			ret;
+	unsigned int	i;
+
+	ret = allocate(v1.dim);
+	i = 0;
+	while (i < ret.dim)
+	{
+		ret.elements[i] = v1.elements[i] + v2.elements[i];	
+		i++;
+	}
+	return (ret);
+}
+
+bool	add_to(t_vec *v1, t_vec v2)
+{
+	if (!v1 || v1->dim != v2.dim)
+		return (false);
+
+	unsigned int	i;
+
+	i = 0;
+	while (i < v1->dim)
+	{
+		v1->elements[i] += v2.elements[i];	
+		i++;
+	}
+	return (true);
+}
+
+t_vec	subtract(t_vec v1, t_vec v2)
+{
+	if (v1.dim != v2.dim)
+		return (VEC_UNDEFINED);
+
+	t_vec			ret;
+	unsigned int	i;
+
+	ret = allocate(v1.dim);
+	i = 0;
+	while (i < ret.dim)
+	{
+		ret.elements[i] = v1.elements[i] - v2.elements[i];	
+		i++;
+	}
+	return (ret);
+}
+
+bool	subtract_from(t_vec *v1, t_vec v2)
+{
+	if (!v1 || v1->dim != v2.dim)
+		return (false);
+
+	unsigned int	i;
+
+	i = 0;
+	while (i < v1->dim)
+	{
+		v1->elements[i] -= v2.elements[i];	
+		i++;
+	}
+	return (true);
+
+}
+
+t_vec	multiply(t_vec v1, t_vec v2)
+{
+	if (v1.dim != v2.dim)
+		return (VEC_UNDEFINED);
+
+	t_vec			ret;
+	unsigned int	i;
+
+	ret = allocate(v1.dim);
+	i = 0;
+	while (i < ret.dim)
+	{
+		ret.elements[i] = v1.elements[i] * v2.elements[i];	
+		i++;
+	}
+	return (ret);
+}
+
+bool	multiply_by(t_vec *v1, t_vec v2)
+{
+	if (!v1 || v1->dim != v2.dim)
+		return (false);
+
+	unsigned int	i;
+
+	i = 0;
+	while (i < v1->dim)
+	{
+		v1->elements[i] *= v2.elements[i];	
+		i++;
+	}
+	return (true);
+}
+
+t_vec	divide(t_vec v1, t_vec v2)
+{
+	if (v1.dim != v2.dim)
+		return (VEC_UNDEFINED);
+
+	t_vec			ret;
+	unsigned int	i;
+
+	ret = allocate(v1.dim);
+	i = 0;
+	while (i < ret.dim)
+	{
+		ret.elements[i] = v1.elements[i] / v2.elements[i];	
+		i++;
+	}
+	return (ret);
+}
+
+bool	divide_by(t_vec *v1, t_vec v2)
+{
+	if (!v1 || v1->dim != v2.dim)
+		return (false);
+
+	unsigned int	i;
+
+	i = 0;
+	while (i < v1->dim)
+	{
+		v1->elements[i] /= v2.elements[i];	
+		i++;
+	}
+	return (true);
+}
+
