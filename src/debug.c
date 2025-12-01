@@ -47,6 +47,7 @@ void	d_generate_map(t_data* data)
 		}
 		data->map.grid[i][data->map.cols] = '\0';
 	}
+	data->map.grid[3][2] = 'P';
 	data->map.hero_pos.x = 3;
 	data->map.hero_pos.y = 2;
 }

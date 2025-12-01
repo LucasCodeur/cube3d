@@ -36,7 +36,7 @@ int move_hero(int keycode, t_data *data)
 		data->map.hero_pos.y -= 1;
 		display = true;
 	}
-	else if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j ) && data->map.hero_pos.x > data->map.cols - 2)
+	else if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j ) && data->map.hero_pos.x < data->map.rows - 2)
 	{
 		data->map.hero_pos.x += 1;
 		display = true;
@@ -47,7 +47,10 @@ int move_hero(int keycode, t_data *data)
 		display = true;
 	}
 	if (display == true)
+	{
+		update_maps(data);
 		display_minimap(data);
+	}
 	return (0);
 }
 

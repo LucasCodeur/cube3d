@@ -16,19 +16,19 @@
 #include "debug.h"
 #include "display.h"
 
-// void	update_maps(t_data* data)
-// {
-// 	for (int i = 0; i < data->map.rows; i++)
-// 	{
-// 		for (int j = 0; j < data->map.rows; j++)
-// 		{
-// 			if (data->map.grid[i][j] == 'P')
-// 				data->map.grid[i][j] = '0';
-// 		}
-// 	}
-// 	data->map.grid[data->map.hero_pos.x][data->map.hero_pos.y] = 'P';
-// 	d_print_grid(data->map);
-// }
+void	update_maps(t_data* data)
+{
+	for (int i = 0; i < data->map.rows; i++)
+	{
+		for (int j = 0; j < data->map.rows; j++)
+		{
+			if (data->map.grid[i][j] == 'P')
+				data->map.grid[i][j] = '0';
+		}
+	}
+	data->map.grid[data->map.hero_pos.x][data->map.hero_pos.y] = 'P';
+	d_print_grid(data->map);
+}
 
 
 void my_mlx_pixel_put_minimap(t_data *data, int x, int y, t_pixel *color)
