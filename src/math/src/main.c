@@ -75,8 +75,107 @@ void	t_scalar_division_by(void)
 	return ;
 }
 
+void	t_subtract(void)
+{
+	t_vec	v1 = construct_default_vector(5, 6.9f);
+	t_vec	v2 = construct_default_vector(5, 6.9f);
+	print(v1);
+	print(v2);
+	print(subtract(v1, v2));
+	return ;
+}
+
+
+void	t_subtract_from(void)
+{
+	t_vec	v1 = construct_default_vector(5, 6.9f);
+	t_vec	v2 = construct_default_vector(5, 6.9f);
+	print(v1);
+	print(v2);
+	subtract_from(&v1, v2);
+	print(v1);
+	return ;
+}
+
+void	t_add(void)
+{
+	t_vec	v1 = construct_default_vector(5, 6.9f);
+	t_vec	v2 = construct_default_vector(5, 6.9f);
+	print(v1);
+	print(v2);
+	print(add(v1, v2));
+	return ;
+}
+
+
+void	t_add_from(void)
+{
+	t_vec	v1 = construct_default_vector(5, 6.9f);
+	t_vec	v2 = construct_default_vector(5, 6.9f);
+	print(v1);
+	print(v2);
+	add_to(&v1, v2);
+	print(v1);
+	return ;
+}
+
+void	t_multiply(void)
+{
+	t_vec	v1 = construct_default_vector(5, 6.9f);
+	t_vec	v2 = construct_default_vector(5, 6.9f);
+	print(v1);
+	print(v2);
+	print(multiply(v1, v2));
+	return ;
+}
+
+void	t_multiply_by(void)
+{
+	t_vec	v1 = construct_default_vector(5, 6.9f);
+	t_vec	v2 = construct_default_vector(5, 6.9f);
+	print(v1);
+	print(v2);
+	multiply_by(&v1, v2);
+	print(v1);
+	return ;
+}
+
+void	t_divide(void)
+{
+	t_vec	v1 = construct_default_vector(5, 6.9f);
+	t_vec	v2 = construct_default_vector(5, 6.9f);
+	print(v1);
+	print(v2);
+	print(divide(v1, v2));
+	return ;
+}
+
+void	t_divide_by(void)
+{
+	t_vec	v1 = construct_default_vector(5, 6.9f);
+	t_vec	v2 = construct_default_vector(5, 6.9f);
+	print(v1);
+	print(v2);
+	divide_by(&v1, v2);
+	print(v1);
+	return ;
+}
+
+void	t_orthogonal(void)
+{
+	t_vec	v1 = construct_default_vector(2, 1.0f);
+	t_vec	v2 = construct_default_vector(2, 1.0f);
+	v1.elements[0] = 4.0f;
+	v2.elements[0] = -2.0f;
+	v1.elements[1] = 1.0f;
+	v2.elements[1] = 10.0f;
+	print(v1);
+	print(v2);
+	printf("%d\n", orthogonal(v1, v2));
+}
+
 int	main(void)
 {
-	t_scalar_division_by();
+	t_orthogonal();
 	return (0);
 }

@@ -298,3 +298,40 @@ bool	divide_by(t_vec *v1, t_vec v2)
 	return (true);
 }
 
+float	dot(t_vec v1, t_vec v2)
+{
+	float	ret;	
+	unsigned int i;
+
+	i = 0;
+	ret = 0.0f;
+	if (v1.dim == v2.dim)
+	{
+		while (i < v1.dim)
+		{
+			ret += v1.elements[i] * v2.elements[i];
+			i++;
+		}
+	}
+	return (ret);
+}
+
+bool	orthogonal(t_vec v1, t_vec v2)
+{
+	if (v1.dim == v2.dim)
+		if (dot(v1, v2) == 0.0f)
+			return (true);
+	return (false);
+}
+
+t_vec	cross_product(t_vec v1, t_vec v2)
+{
+	if (v1.dim != 3 || v2.dim != 3)
+		return (VEC_UNDEFINED);
+
+	t_vec	ret;
+	ret.elements[0] = (v1.elements[1] * v2.elements[2] - (v1.elements[2] * v2.elements[1]));
+	ret.elements[1] = -1 * ((v1.elements[0] * v2.elements[2]) - (v1.elements[1] * v2.elements[0]));
+	ret.elements[2] = (v1.elements[0] * v2.elements[1] - (v1.elements[1] * v2.elements[0]));
+	return (ret);
+}

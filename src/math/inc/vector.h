@@ -43,6 +43,9 @@ t_vec	multiply(t_vec v1, t_vec v2);
 bool	multiply_by(t_vec *v1, t_vec v2);
 t_vec	divide(t_vec v1, t_vec v2);
 bool	divide_by(t_vec *v1, t_vec v2);
+bool	orthogonal(t_vec v1, t_vec v2);
+float	dot(t_vec v1, t_vec v2);
+t_vec	cross_product(t_vec v1, t_vec v2);
 
 //WARN: have to take off
 t_vec	new_vector(unsigned int dim, ...);
