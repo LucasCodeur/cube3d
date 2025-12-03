@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 12:16:18 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/01 13:30:52 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/03 15:12:01 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,8 +174,101 @@ void	t_orthogonal(void)
 	printf("%d\n", orthogonal(v1, v2));
 }
 
+void	t_normalized(void)
+{
+	t_vec	v1 = vector(2, 2.0f, 3.0f);
+	
+	print(v1);
+	t_vec	v2 = normalized(v1);
+	print(v2);
+	t_vec	v3 = power(v2, 2);
+	float ret = 0.0f;
+	for (unsigned int i = 0 ; i < 3; i++)
+	{
+		ret += v3.elements[i];
+	}
+	printf("%lf", ret);
+}
+
+void	t_normalize(void)
+{
+	t_vec	v1 = vector(2, 2.0f, 3.0f);
+	
+	print(v1);
+	normalize(&v1);
+	print(v1);
+	t_vec	v2 = power(v1, 2);
+	float ret = 0.0f;
+	for (unsigned int i = 0 ; i < 3; i++)
+	{
+		ret += v2.elements[i];
+	}
+	printf("%lf", ret);
+}
+
+void	t_magnitude_squared(void)
+{
+	t_vec	v1 = vector(2, 2.0f, 3.0f);
+
+	printf("%lf\n", magnitude_squared(v1));
+}
+
+void	t_magnitude(void)
+{
+	t_vec	v1 = vector(2, 2.0f, 3.0f);
+
+	printf("%lf\n", magnitude(v1));
+}
+
+void	t_power(void)
+{
+	t_vec	v1 = vector(2, 2.0f, 3.0f);
+
+	print(v1);
+	print(power(v1, 2));
+	print(power(v1, 3));
+	print(power(v1, 4));
+
+}
+
+void	t_power_of(void)
+{
+	t_vec	v1 = vector(2, 2.0f, 3.0f);
+	t_vec	v2 = vector(2, 2.0f, 3.0f);
+	t_vec	v3 = vector(2, 2.0f, 3.0f);
+
+	print(v1);
+	power_of(&v1, 2);
+	print(v1);
+	print(v2);
+	power_of(&v2, 3);
+	print(v2);
+	print(v3);
+	power_of(&v3, 4);
+	print(v3);
+}
+
+void	t_cross_product(void)
+{
+	t_vec	v1 = vector(3.0f, 4.0f, 5.0f);
+	t_vec	v2 = vector(3.0f, 4.0f, 5.0f);
+	t_vec	v3 = cross_product(v1, v2);
+	print(v1);
+	print(v2);
+	print(v3);
+}
+
+void	t_dot(void)
+{
+	t_vec	v1 = vector(3.0f, 4.0f, 5.0f);
+	t_vec	v2 = vector(3.0f, 4.0f, 5.0f);
+	print(v1);
+	print(v2);
+	printf("%lf\n", dot(v1, v2));
+}
+
 int	main(void)
 {
-	t_orthogonal();
+	t_dot();
 	return (0);
 }

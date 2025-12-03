@@ -6,7 +6,7 @@
 #    By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2025/12/01 12:24:07 by lud-adam         ###   ########.fr        #
+#    Updated: 2025/12/03 15:19:40 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,16 @@ P_OBJ = .obj/
 SRC = \
 	main.c \
 	vector.c \
-
+	power_vector.c \
+	add_vector_operation.c \
+	divide_vector_operation.c \
+	multiply_vector_operation.c \
+	subtract_vector_operation.c \
+	normalize_vector.c \
+	scalar_operation.c \
+	construct_vector.c \
+	magnitude_vector.c \
+	utils.c \
 
 LIBS = \
 
@@ -74,7 +83,7 @@ all:
 
 # Create $(NAME) executable
 $(NAME): $(OBJS)
-	@if $(CC) $(CFLAGS) $(DEPENDANCIES) -I $(P_INC) -o $(NAME) $(OBJS) $(LIBS); then \
+	@if $(CC) $(CFLAGS) -lm $(DEPENDANCIES) -I $(P_INC) -o $(NAME) $(OBJS) $(LIBS); then \
 		echo "$(Green)Creating executable $@$(Color_Off)"; \
 	else \
 		echo "$(Red)Error creating $@$(Color_Off)"; \

@@ -1,0 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   magnitude_vector.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/03 15:10:48 by lud-adam          #+#    #+#             */
+/*   Updated: 2025/12/03 15:33:36 by lud-adam         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "vector.h"
+
+#include <math.h>
+
+/**
+* @brief allow us to multiply each elements of a vector by itself and sum the result
+* @param v the vector to multiply by itself
+* @return the sum of the multiplication of each element
+*/
+float	magnitude_squared(t_vec v)
+{
+	float			ret;
+	unsigned int	i;
+
+	ret = 0.0f;
+	i = 0;
+	while (i < v.dim)
+	{
+		ret += v.elements[i] * v.elements[i];
+		i++;
+	}
+	return (ret);
+}
+
+/**
+* @brief allow us to square the result get by magnitude squared 
+* @param v the vector to compute the magnitude
+* @return the sum of the multiplication of each element squared
+*/
+float	magnitude(t_vec v)
+{
+	return (sqrt(magnitude_squared(v)));	
+}
