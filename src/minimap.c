@@ -20,13 +20,13 @@ void	update_maps(t_data* data)
 {
 	for (int i = 0; i < data->map.rows; i++)
 	{
-		for (int j = 0; j < data->map.rows; j++)
+		for (int j = 0; j < data->map.cols; j++)
 		{
 			if (data->map.grid[i][j] == 'P')
 				data->map.grid[i][j] = '0';
 		}
 	}
-	data->map.grid[data->map.hero_pos.x][data->map.hero_pos.y] = 'P';
+	data->map.grid[data->map.hero_pos.y][data->map.hero_pos.x] = 'P';
 	d_print_grid(data->map);
 }
 
@@ -34,9 +34,10 @@ void	update_maps(t_data* data)
 void my_mlx_pixel_put_minimap(t_data *data, int x, int y, t_pixel *color)
 {
     t_pixel *dst;
-    if (x < 0 || x > WIDTH_MINIMAP || y < 0 || y > HEIGHT_MINIMAP) return;
-    if (!data->img.addr) return;
-    
+    if (x < 0 || x > WIDTH_MINIMAP || y < 0 || y > HEIGHT_MINIMAP) 
+	return;
+    if (!data->img.addr) 
+	return;
     dst = (t_pixel*)(data->img.addr + (y * data->img.line_length + x * 4));
     *dst = *color;
 }

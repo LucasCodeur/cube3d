@@ -15,11 +15,13 @@
 
 # define WIDTH 1024
 # define HEIGHT 1024
-# define HEIGHT_MINIMAP 200 
-# define WIDTH_MINIMAP 200
+# define HEIGHT_MINIMAP 500 
+# define WIDTH_MINIMAP 500
 # define MAX_WIDTH 1250
 # define MAX_HEIGHT 1250
 # define SCALE_TILE	20
+# define SIZE_X	100
+# define SIZE_Y	30
 
 # define ASSET_TILE "/home/lud-adam/Documents/cube3d/assets/basic/bg.xpm"
 # define ASSET_BG "/home/lud-adam/Documents/cube3d/assets/basic/end_bg.xpm"
@@ -89,7 +91,7 @@ typedef struct s_minimap
 
 typedef	struct	s_map
 {
-	char	grid[5][6];
+	char	grid[SIZE_Y][SIZE_X + 1];
 	t_hero	hero_pos;
 	int		rows;
 	int		cols;

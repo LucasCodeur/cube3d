@@ -26,24 +26,24 @@
 int move_hero(int keycode, t_data *data)
 {
 	bool display = false;
-	if ((keycode == XK_d || keycode == XK_D || keycode == XK_l || keycode == XK_L) && data->map.hero_pos.y < data->map.rows - 2)
-	{
-		data->map.hero_pos.y += 1;
-		display = true;
-	}
-	else if ((keycode == XK_a || keycode == XK_A || keycode == XK_h || keycode == XK_H) && data->map.hero_pos.y > 1)
-	{
-		data->map.hero_pos.y -= 1;
-		display = true;
-	}
-	else if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j ) && data->map.hero_pos.x < data->map.rows - 2)
+	if ((keycode == XK_d || keycode == XK_D || keycode == XK_l || keycode == XK_L) && data->map.hero_pos.x < data->map.cols - 2)
 	{
 		data->map.hero_pos.x += 1;
 		display = true;
 	}
-	else if ((keycode == XK_w || keycode == XK_W || keycode == XK_k || keycode == XK_K) && data->map.hero_pos.x > 1)
+	else if ((keycode == XK_a || keycode == XK_A || keycode == XK_h || keycode == XK_H) && data->map.hero_pos.x > 1)
 	{
 		data->map.hero_pos.x -= 1;
+		display = true;
+	}
+	else if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j ) && data->map.hero_pos.y < data->map.rows - 2)
+	{
+		data->map.hero_pos.y += 1;
+		display = true;
+	}
+	else if ((keycode == XK_w || keycode == XK_W || keycode == XK_k || keycode == XK_K) && data->map.hero_pos.y > 1)
+	{
+		data->map.hero_pos.y -= 1;
 		display = true;
 	}
 	if (display == true)
@@ -69,13 +69,13 @@ int move_hero(int keycode, t_data *data)
 // 	return (0);
 // }
 
-int	close_win(void *param)
-{
-	t_mlx	*win;
-
-	if (!param)
-		return (0);
-	win = (t_mlx *)param;
-	// free_img(win);
-	exit(0);
-}
+// int	close_win(void *param)
+// {
+// 	t_mlx	*win;
+//
+// 	if (!param)
+// 		return (0);
+// 	win = (t_mlx *)param;
+// 	// free_img(win);
+// 	exit(0);
+// }

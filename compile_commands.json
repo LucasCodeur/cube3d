@@ -1,6 +1,6 @@
 [
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -20,27 +20,7 @@
   "file": "src/main.c"
  },
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
-  "arguments": [
-   "cc",
-   "-Wextra",
-   "-Wall",
-   "-Werror",
-   "-MMD",
-   "-MP",
-   "-I",
-   "inc/",
-   "-I",
-   "minilibx-linux/",
-   "-c",
-   "src/hooks.c",
-   "-o",
-   ".obj/hooks.o"
-  ],
-  "file": "src/hooks.c"
- },
- {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -60,7 +40,27 @@
   "file": "src/mlx.c"
  },
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-c",
+   "src/hooks.c",
+   "-o",
+   ".obj/hooks.o"
+  ],
+  "file": "src/hooks.c"
+ },
+ {
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -80,7 +80,7 @@
   "file": "src/create_sprites.c"
  },
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -100,7 +100,7 @@
   "file": "src/minimap.c"
  },
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -120,7 +120,7 @@
   "file": "src/launcher.c"
  },
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",

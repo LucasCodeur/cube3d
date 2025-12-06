@@ -24,8 +24,8 @@ int main(void)
 
 	data.mlx.max_height = HEIGHT;
 	data.mlx.max_width = WIDTH;
-	data.map.cols = 5;
-	data.map.rows = 5;
+	data.map.cols = SIZE_X;
+	data.map.rows = SIZE_Y;
 	d_generate_map(&data);
 	d_print_grid(data.map);
 	launcher(&data);
