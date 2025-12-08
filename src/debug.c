@@ -17,8 +17,8 @@ void	d_print_grid(t_map map)
 {
 	for (int i = 0; i < map.rows; i++)
 		printf("%s\n", map.grid[i]);
-	printf("x: %d\n", map.hero_pos.x);	
-	printf("y: %d\n", map.hero_pos.y);	
+	printf("x: %lf\n", map.hero_pos.x);	
+	printf("y: %lf\n", map.hero_pos.y);	
 }
 
 void	d_print_frame(t_img img, int* x, int* y)

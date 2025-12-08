@@ -1,0 +1,242 @@
+[
+ {
+  "directory": "/home/lud-adam/Documents/cube3d/src/math",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "test/inc/",
+   "-c",
+   "src/main.c",
+   "-o",
+   ".obj/main.o"
+  ],
+  "file": "src/main.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d/src/math",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "test/inc/",
+   "-c",
+   "src/vector/vector.c",
+   "-o",
+   ".obj/vector/vector.o"
+  ],
+  "file": "src/vector/vector.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d/src/math",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "test/inc/",
+   "-c",
+   "src/vector/power_vector.c",
+   "-o",
+   ".obj/vector/power_vector.o"
+  ],
+  "file": "src/vector/power_vector.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d/src/math",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "test/inc/",
+   "-c",
+   "src/vector/add_vector_operation.c",
+   "-o",
+   ".obj/vector/add_vector_operation.o"
+  ],
+  "file": "src/vector/add_vector_operation.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d/src/math",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "test/inc/",
+   "-c",
+   "src/vector/divide_vector_operation.c",
+   "-o",
+   ".obj/vector/divide_vector_operation.o"
+  ],
+  "file": "src/vector/divide_vector_operation.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d/src/math",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "test/inc/",
+   "-c",
+   "src/vector/multiply_vector_operation.c",
+   "-o",
+   ".obj/vector/multiply_vector_operation.o"
+  ],
+  "file": "src/vector/multiply_vector_operation.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d/src/math",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "test/inc/",
+   "-c",
+   "src/vector/subtract_vector_operation.c",
+   "-o",
+   ".obj/vector/subtract_vector_operation.o"
+  ],
+  "file": "src/vector/subtract_vector_operation.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d/src/math",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "test/inc/",
+   "-c",
+   "src/vector/normalize_vector.c",
+   "-o",
+   ".obj/vector/normalize_vector.o"
+  ],
+  "file": "src/vector/normalize_vector.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d/src/math",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "test/inc/",
+   "-c",
+   "src/vector/scalar_operation.c",
+   "-o",
+   ".obj/vector/scalar_operation.o"
+  ],
+  "file": "src/vector/scalar_operation.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d/src/math",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "test/inc/",
+   "-c",
+   "src/vector/construct_vector.c",
+   "-o",
+   ".obj/vector/construct_vector.o"
+  ],
+  "file": "src/vector/construct_vector.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d/src/math",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "test/inc/",
+   "-c",
+   "src/vector/magnitude_vector.c",
+   "-o",
+   ".obj/vector/magnitude_vector.o"
+  ],
+  "file": "src/vector/magnitude_vector.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d/src/math",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "test/inc/",
+   "-c",
+   "src/vector/utils.c",
+   "-o",
+   ".obj/vector/utils.o"
+  ],
+  "file": "src/vector/utils.c"
+ }
+]

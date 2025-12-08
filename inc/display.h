@@ -14,12 +14,12 @@
 # define DISPLAY_H
 
 # define WIDTH 1024
-# define HEIGHT 1024
-# define HEIGHT_MINIMAP 500 
-# define WIDTH_MINIMAP 500
-# define MAX_WIDTH 1250
-# define MAX_HEIGHT 1250
-# define SCALE_TILE	20
+# define HEIGHT 512
+# define HEIGHT_MINIMAP 1024 
+# define WIDTH_MINIMAP 512
+# define MAX_WIDTH 1024
+# define MAX_HEIGHT 512
+# define SCALE_TILE	100
 # define SIZE_X	100
 # define SIZE_Y	30
 
@@ -34,6 +34,7 @@
 #define RED   0xFF0000FF
 #define GREEN 0xFF00FF00
 #define BLUE  0xFFFF0000
+#define WHITE  0xFFFFFF0
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -55,12 +56,12 @@ typedef union s_pixel
 
 typedef struct s_img
 {
-	void				*ptr;
-	char*				addr;
-	int					bits_per_pixel;
-	int					line_length;
-	int					endian;
-}					t_img;
+	void	*ptr;
+	char*	addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_img;
 
 typedef struct s_sprite
 {
@@ -70,7 +71,7 @@ typedef struct s_sprite
 
 typedef struct s_mlx
 {
-	char* buf;
+	char*	buf;
 	void	*ptr;
 	void	*win;
 	int		max_width;
@@ -79,8 +80,14 @@ typedef struct s_mlx
 
 typedef struct	s_hero
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
+	float	dir_x;
+	float	dir_y;
+	float	plane_x;
+	float	plane_y;
+	float	time;
+	float	old_time;
 }				t_hero;
 
 typedef struct s_minimap

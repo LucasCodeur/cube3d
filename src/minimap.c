@@ -12,6 +12,7 @@
 
 #include <stdbool.h>
 #include  <mlx.h>
+#include  <math.h>
 
 #include "debug.h"
 #include "display.h"
@@ -26,7 +27,7 @@ void	update_maps(t_data* data)
 				data->map.grid[i][j] = '0';
 		}
 	}
-	data->map.grid[data->map.hero_pos.y][data->map.hero_pos.x] = 'P';
+	data->map.grid[(int)data->map.hero_pos.y][(int)data->map.hero_pos.x] = 'P';
 	d_print_grid(data->map);
 }
 
@@ -40,6 +41,20 @@ void my_mlx_pixel_put_minimap(t_data *data, int x, int y, t_pixel *color)
 	return;
     dst = (t_pixel*)(data->img.addr + (y * data->img.line_length + x * 4));
     *dst = *color;
+}
+
+void	t_cast_dir_vec(t_data* data, int tile_size, t_pixel color)
+{
+	float	c_x = data->map.hero_pos.x * tile_size + (tile_size * 0.5);
+	float	c_y = data->map.hero_pos.y * tile_size;
+	color.value = WHITE;
+	int i = 0;
+	while (i < 500)
+	{
+		c_y -= 0.1f;
+		my_mlx_pixel_put_minimap(data, c_x, c_y, &color);
+		i++;
+	}
 }
 
 bool	display_minimap(t_data* data)
@@ -66,11 +81,12 @@ bool	display_minimap(t_data* data)
 				color.value = BLUE;
 			int px_start = x * tile_size;
 			int py_start = y * tile_size;
-			
+
 			for (int py = 0; py < tile_size; py++)
 				for (int px = 0; px < tile_size; px++)
 					my_mlx_pixel_put_minimap(data, px_start + px, py_start + py, &color);
 		}
+	t_cast_dir_vec(data, tile_size, color);	
 	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.ptr, 0, 0);
 	return (true);
 }

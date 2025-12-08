@@ -81,7 +81,7 @@ all:
 
 # Create $(NAME) executable
 $(NAME): $(MLX_LIB) $(OBJS)
-	@if $(CC) $(CFLAGS) $(DEPENDANCIES) -I $(P_INC) -I $(P_MLX) -o $(NAME) $(OBJS) $(LIBS); then \
+	@if $(CC) -lm $(CFLAGS) $(DEPENDANCIES) -I $(P_INC) -I $(P_MLX) -o $(NAME) $(OBJS) $(LIBS); then \
 		echo "$(Green)Creating executable $@$(Color_Off)"; \
 	else \
 		echo "$(Red)Error creating $@$(Color_Off)"; \
