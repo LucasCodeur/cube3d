@@ -13,10 +13,10 @@
 #ifndef DISPLAY_H 
 # define DISPLAY_H
 
-# define WIDTH 1024
-# define HEIGHT 512
-# define HEIGHT_MINIMAP 1024 
-# define WIDTH_MINIMAP 512
+# define WIN_WIDTH 2048
+# define WIN_HEIGHT 1024
+# define HEIGHT_MINIMAP 3000 
+# define WIDTH_MINIMAP 1500
 # define MAX_WIDTH 1024
 # define MAX_HEIGHT 512
 # define SCALE_TILE	100
@@ -34,7 +34,7 @@
 #define RED   0xFF0000FF
 #define GREEN 0xFF00FF00
 #define BLUE  0xFFFF0000
-#define WHITE  0xFFFFFF0
+#define WHITE 0xFFFFFF00
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -80,14 +80,14 @@ typedef struct s_mlx
 
 typedef struct	s_hero
 {
-	float	x;
-	float	y;
-	float	dir_x;
-	float	dir_y;
-	float	plane_x;
-	float	plane_y;
-	float	time;
-	float	old_time;
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	time;
+	double	old_time;
 }				t_hero;
 
 typedef struct s_minimap

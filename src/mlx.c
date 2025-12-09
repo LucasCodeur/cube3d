@@ -21,13 +21,13 @@ void	init_screen_mlx(t_data *data)
 	if (!data->mlx.ptr)
 		return ;
 	mlx_get_screen_size(data->mlx.ptr, &data->mlx.max_width, &data->mlx.max_height);
-	data->mlx.win = mlx_new_window(data->mlx.ptr, WIDTH, HEIGHT, "cube3D");
-	if (!data->mlx.win || WIDTH > data->mlx.max_width || HEIGHT > data->mlx.max_height)
+	data->mlx.win = mlx_new_window(data->mlx.ptr, WIN_WIDTH, WIN_HEIGHT, "cube3D");
+	if (!data->mlx.win || WIN_WIDTH > data->mlx.max_width || WIN_HEIGHT > data->mlx.max_height)
 	{
 		free_img(data);
 		return ;
 	}
-	data->img.ptr = mlx_new_image(data->mlx.ptr, WIDTH, HEIGHT);
+	data->img.ptr = mlx_new_image(data->mlx.ptr, WIN_WIDTH, WIN_HEIGHT);
 	if (!data->img.ptr)
 	{
 		free_img(data);

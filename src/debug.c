@@ -47,7 +47,6 @@ void	d_generate_map(t_data* data)
 		}
 		data->map.grid[i][SIZE_X] = '\0';
 	}
-	data->map.grid[(SIZE_Y + 2) / 2][(SIZE_X + 2) / 2] = 'P';
-	data->map.hero_pos.x = (SIZE_X + 2) / 2;
-	data->map.hero_pos.y = (SIZE_Y + 2) / 2;
+	data->map.hero_pos.x = (SIZE_X + 2) * 0.5;
+	data->map.hero_pos.y = (SIZE_Y + 2) * 0.5;
 }

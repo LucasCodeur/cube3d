@@ -17,21 +17,6 @@
 #include "debug.h"
 #include "display.h"
 
-void	update_maps(t_data* data)
-{
-	for (int i = 0; i < data->map.rows; i++)
-	{
-		for (int j = 0; j < data->map.cols; j++)
-		{
-			if (data->map.grid[i][j] == 'P')
-				data->map.grid[i][j] = '0';
-		}
-	}
-	data->map.grid[(int)data->map.hero_pos.y][(int)data->map.hero_pos.x] = 'P';
-	d_print_grid(data->map);
-}
-
-
 void my_mlx_pixel_put_minimap(t_data *data, int x, int y, t_pixel *color)
 {
     t_pixel *dst;
@@ -46,7 +31,7 @@ void my_mlx_pixel_put_minimap(t_data *data, int x, int y, t_pixel *color)
 void	t_cast_dir_vec(t_data* data, int tile_size, t_pixel color)
 {
 	float	c_x = data->map.hero_pos.x * tile_size + (tile_size * 0.5);
-	float	c_y = data->map.hero_pos.y * tile_size;
+	float	c_y = data->map.hero_pos.y * tile_size + (tile_size * 0.5);
 	color.value = WHITE;
 	int i = 0;
 	while (i < 500)
@@ -55,6 +40,17 @@ void	t_cast_dir_vec(t_data* data, int tile_size, t_pixel color)
 		my_mlx_pixel_put_minimap(data, c_x, c_y, &color);
 		i++;
 	}
+}
+
+void	draw_hero(t_data* data, int tile_size)
+{
+	t_pixel	color;
+	int px_start = data->map.hero_pos.x * tile_size;
+	int py_start = data->map.hero_pos.y * tile_size;
+	color.value = GREEN;
+	for (int py = 0; py < tile_size; py++)
+		for (int px = 0; px < tile_size; px++)
+			my_mlx_pixel_put_minimap(data, px_start + px, py_start + py, &color);
 }
 
 bool	display_minimap(t_data* data)
@@ -75,8 +71,6 @@ bool	display_minimap(t_data* data)
 		{
 			if (data->map.grid[y][x] == '0')
 				color.value = RED;
-			else if (data->map.grid[y][x] == 'P')
-				color.value = GREEN;
 			else
 				color.value = BLUE;
 			int px_start = x * tile_size;
@@ -86,6 +80,7 @@ bool	display_minimap(t_data* data)
 				for (int px = 0; px < tile_size; px++)
 					my_mlx_pixel_put_minimap(data, px_start + px, py_start + py, &color);
 		}
+	draw_hero(data, tile_size);
 	t_cast_dir_vec(data, tile_size, color);	
 	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.ptr, 0, 0);
 	return (true);

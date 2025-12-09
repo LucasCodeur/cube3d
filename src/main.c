@@ -22,8 +22,8 @@ int main(void)
 {
 	t_data	data;
 
-	data.mlx.max_height = HEIGHT;
-	data.mlx.max_width = WIDTH;
+	data.mlx.max_height = WIN_HEIGHT;
+	data.mlx.max_width = WIN_WIDTH;
 	data.map.cols = SIZE_X;
 	data.map.rows = SIZE_Y;
 	d_generate_map(&data);
