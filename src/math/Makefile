@@ -6,7 +6,7 @@
 #    By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2025/12/08 12:58:07 by lud-adam         ###   ########.fr        #
+#    Updated: 2025/12/09 16:48:41 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ DEPENDANCIES = -MMD -MP
 NO_DIR = --no-print-directory
 
 MAKE := $(MAKE) -j $(NO_DIR)
-NAME = math
+NAME = libmath.a
+TEST_NAME = test_exec
 
 # Debugging flags
 CFLAGS_DEBUG = -Wall -Wextra -g3 -D DEBUG=1
@@ -61,6 +62,9 @@ SRC_VECTOR = \
 	magnitude_vector.c \
 	utils.c \
 
+SRC_MATRICE = \
+	matrice.c \
+
 SRC_TEST = \
 	t_vector.c
 
@@ -74,13 +78,13 @@ LIBS = \
 SRCS =	\
 	$(addprefix $(P_SRC), $(SRC)) \
 	$(addprefix $(P_VECTOR), $(SRC_VECTOR)) \
+	$(addprefix $(P_MATRICE), $(SRC_MATRICE)) \
 
 # List of object files (redirect to P_OBJ)
 OBJS =  \
 	$(subst $(P_SRC), $(P_OBJ), $(SRCS:.c=.o)) \
 
 
-TEST_NAME = test_exec
 SRC_TEST_FILES = $(addprefix $(P_SRC_TEST), $(SRC_TEST))
 OBJ_TEST_FILES = $(SRC_TEST_FILES:.c=.o)
 TEST_OBJS = $(patsubst %.c, $(P_OBJ)%.o, $(SRC_TEST_FILES))
@@ -97,7 +101,7 @@ all:
 	@$(MAKE) $(NAME)
 
 # Create $(NAME) executable
-$(NAME): $(OBJS)
+$(TEST_NAME): $(OBJS)
 	@if $(CC) $(CFLAGS) -lm $(DEPENDANCIES) -I $(P_INC) -I $(P_INC_TEST) -o $(NAME) $(OBJS) $(LIBS); then \
 		echo "$(Green)Creating executable $@$(Color_Off)"; \
 	else \
@@ -112,6 +116,9 @@ $(P_OBJ)%.o: $(P_SRC)%.c
 	else \
 		echo "$(Red)Error creating $@$(Color_Off)"; \
 	fi
+
+$(NAME): $(OBJS) 
+	ar -rcs $(NAME) $^
 
 test_exec: $(TEST_OBJS) $(OBJS)
 	@$(CC) $(CFLAGS) -lm -I $(P_INC) -I $(P_INC_TEST) -o $@ $^

@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 20:06:38 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/09 17:02:34 by lud-adam         ###   ########.fr       */
+/*   Created: 2025/12/09 15:00:17 by lud-adam          #+#    #+#             */
+/*   Updated: 2025/12/09 15:01:49 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "display.h"
-
 #include <stdio.h>
 
-
-#include "debug.h"
-#include "vector.h"
-
-int main(void)
+void	ft_bzero(void *s, size_t n)
 {
-	t_data	data;
+	unsigned char	value;
+	unsigned char	*p;
 
-	ft_bzero(&data, sizeof(t_data))	;
-	data.mlx.max_height = WIN_HEIGHT;
-	data.mlx.max_width = WIN_WIDTH;
-	data.map.cols = SIZE_X;
-	data.map.rows = SIZE_Y;
-	data.map.hero_pos.dir = new_vector(2, 1.0f, 1.0f);
-	print(data.map.hero_pos.dir);
-	d_generate_map(&data);
-	d_print_grid(data.map);
-	launcher(&data);
+	value = 0;
+	p = (unsigned char *)s;
+	while (n >= 2)
+	{
+		*p++ = value;
+		*p++ = value;
+		n -= 2;
+	}
+	if (n-- == 1)
+		*p++ = value;
 }

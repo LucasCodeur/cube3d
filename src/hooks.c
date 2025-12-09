@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:13:52 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/17 14:09:03 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/09 16:58:24 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <mlx.h>
 #include <stdlib.h>
 #include <X11/keysym.h>
+#include "matrice.h"
 
 /**
 * @brief allow to move inside the map and set asdw
@@ -44,6 +45,16 @@ int move_hero(int keycode, t_data *data)
 	else if ((keycode == XK_w || keycode == XK_W || keycode == XK_k || keycode == XK_K) && data->map.hero_pos.y > 1)
 	{
 		data->map.hero_pos.y -= 0.1f;
+		display = true;
+	}
+	else if (keycode == XK_q || keycode == XK_Q || keycode == XK_Left)
+	{
+		data->map.hero_pos.dir = rotate_vect(data->map.hero_pos.dir, 5);
+		display = true;
+	}
+	else if (keycode == XK_e || keycode == XK_E || keycode == XK_Right)
+	{
+		data->map.hero_pos.dir = rotate_vect(data->map.hero_pos.dir, 5);
 		display = true;
 	}
 	if (display == true)

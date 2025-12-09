@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/26 18:02:30 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/09 16:42:44 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@
 # define ASSET_TILE "/home/lud-adam/Documents/cube3d/assets/basic/bg.xpm"
 # define ASSET_BG "/home/lud-adam/Documents/cube3d/assets/basic/end_bg.xpm"
 # define ASSET_PLAYER "/home/lud-adam/Documents/cube3d/assets/basic/player.xpm"
+
 # define BLACK 0x000000
-// # define GREEN 0x008000
-// # define RED 0xFF0000
-// # define BLUE 0x0000FF
+# define RED   0xFF0000FF
+# define GREEN 0xFF00FF00
+# define BLUE  0xFFFF0000
+# define WHITE 0xFFFFFF00
 
-#define RED   0xFF0000FF
-#define GREEN 0xFF00FF00
-#define BLUE  0xFFFF0000
-#define WHITE 0xFFFFFF00
-
+#include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
+
+#include "vector.h"
 
 typedef struct s_rgb
 {
@@ -80,10 +80,9 @@ typedef struct s_mlx
 
 typedef struct	s_hero
 {
+	t_vec	dir;
 	double	x;
 	double	y;
-	double	dir_x;
-	double	dir_y;
 	double	plane_x;
 	double	plane_y;
 	double	time;
@@ -98,10 +97,12 @@ typedef struct s_minimap
 
 typedef	struct	s_map
 {
-	char	grid[SIZE_Y][SIZE_X + 1];
-	t_hero	hero_pos;
-	int		rows;
-	int		cols;
+	unsigned int		witdh;
+	unsigned int		height;
+	char				grid[SIZE_Y][SIZE_X + 1];
+	t_hero				hero_pos;
+	int					rows;
+	int					cols;
 }				t_map;
 
 typedef struct s_data
@@ -128,5 +129,8 @@ bool	display_minimap(t_data* data);
 int		move_hero(int keycode, t_data *data);
 void	update_maps(t_data* data);
 void	draw_scaled_asset(t_pixel *dest_pixels, int dest_w, int dest_h, t_pixel *src_pixels, int src_size);
+
+//UTILS
+void	ft_bzero(void *s, size_t n);
 
 #endif

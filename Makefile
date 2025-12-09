@@ -6,7 +6,7 @@
 #    By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2025/11/14 11:06:52 by lud-adam         ###   ########.fr        #
+#    Updated: 2025/12/09 16:49:23 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ P_SRC = src/
 P_INC = inc/
 P_MLX = minilibx-linux/
 P_OBJ = .obj/
+P_LIB_MATH = /home/lud-adam/Documents/cube3d/src/math/
+P_INC_MATH = /home/lud-adam/Documents/cube3d/src/math/inc
 
 #############################################################################################
 #                                                                                           #
@@ -47,13 +49,16 @@ SRC = \
 	create_sprites.c \
 	minimap.c \
 	launcher.c \
+	utils.c \
 	debug.c
 
 MLX_LIB = $(P_MLX)libmlx.a
+MATH_LIB = $(P_LIB_MATH)libmath.a
 
 LIBS = \
-	-L$(P_MLX) -lmlx -lXext -lX11 -lm -lz
-
+	-L$(P_MLX) -lmlx -lXext -lX11 -lm -lz \
+	-L$(P_LIB_MATH) -lmath \
+	
 #############################################################################################
 #                                                                                           #
 #                                        MANIPULATION                                       #
@@ -80,8 +85,8 @@ all:
 	@$(MAKE) $(NAME)
 
 # Create $(NAME) executable
-$(NAME): $(MLX_LIB) $(OBJS)
-	@if $(CC) -lm $(CFLAGS) $(DEPENDANCIES) -I $(P_INC) -I $(P_MLX) -o $(NAME) $(OBJS) $(LIBS); then \
+$(NAME): $(MLX_LIB) $(P_LIB_MATH)libmath.a $(OBJS)
+	@if $(CC) $(CFLAGS) $(DEPENDANCIES) -I $(P_INC) -I $(P_MLX) -I $(P_INC_MATH) -o $(NAME) $(OBJS) $(LIBS) -lm; then \
 		echo "$(Green)Creating executable $@$(Color_Off)"; \
 	else \
 		echo "$(Red)Error creating $@$(Color_Off)"; \
@@ -90,18 +95,23 @@ $(NAME): $(MLX_LIB) $(OBJS)
 # Custom rule to compilate all .c with there path
 $(P_OBJ)%.o: $(P_SRC)%.c $(INCS)
 	@mkdir -p $(dir $@)
-	@if $(CC) $(CFLAGS) $(DEPENDANCIES) -I $(P_INC) -I $(P_MLX) -c $< -o $@; then \
+	@if $(CC) $(CFLAGS) $(DEPENDANCIES) -I $(P_INC) -I $(P_MLX) -I $(P_INC_MATH) -c $< -o $@; then \
 		echo "$(Cyan)Compiling $<$(Color_Off)"; \
 	else \
 		echo "$(Red)Error creating $@$(Color_Off)"; \
 	fi
 
-force:
-
 $(MLX_LIB):
 	@echo "Compiling MinilibX..."
 	@$(MAKE) -C $(P_MLX)
 
+$(MATH_LIB):
+	echo "Compiling math.a..."
+	rm -f $(P_LIB_MATH)math.a
+	$(MAKE) -C $(P_LIB_MATH)
+
+$(P_LIB_MATH)math.a:
+	$(MAKE) -C $(P_LIB_MATH)
 #############################################################################################
 #                                                                                           #
 #                                      Other RULES                                          #
@@ -110,6 +120,7 @@ $(MLX_LIB):
 # Rules for clean up
 clean:
 	$(MAKE) -C $(P_MLX) clean
+	$(MAKE) -C $(P_LIB_MATH) clean
 	rm -rfd $(P_OBJ)
 	rm -rfd $(OBJS)
 	rm -rfd $(DEPS)
