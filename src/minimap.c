@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:06:40 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/09 16:57:45 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/10 14:34:56 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ void my_mlx_pixel_put_minimap(t_data *data, int x, int y, t_pixel *color)
 void	t_cast_dir_vec(t_data* data, int tile_size)
 {
 	t_pixel	color;
-	float	c_x = (data->map.hero_pos.x * tile_size + (tile_size * 0.5)) * data->map.hero_pos.dir.elements[0];
-	float	c_y = (data->map.hero_pos.y * tile_size + (tile_size * 0.5)) * data->map.hero_pos.dir.elements[1];
+	float	c_x = (data->map.player.pos.elements[0] * tile_size + (tile_size * 0.5)) * data->map.player.dir.elements[0];
+	float	c_y = (data->map.player.pos.elements[1] * tile_size + (tile_size * 0.5)) * data->map.player.dir.elements[1];
 	printf("c_x : %lf\n", c_x);
 	printf("c_y : %lf\n", c_y);
 	color.value = WHITE;
 	int i = 0;
 	while (i < 500)
 	{
-		c_y -= 0.1f;
 		my_mlx_pixel_put_minimap(data, c_x, c_y, &color);
+		c_y -= 0.1f;
 		i++;
 	}
 }
@@ -52,8 +52,8 @@ void	draw_hero(t_data* data, int tile_size)
 	int	py;
 	int	px;
 
-	px_start = data->map.hero_pos.x * tile_size;
-	py_start = data->map.hero_pos.y * tile_size;
+	px_start = data->map.player.pos.elements[0] * tile_size;
+	py_start = data->map.player.pos.elements[1] * tile_size;
 	color.value = GREEN;
 	py = 0;
 	px = 0;

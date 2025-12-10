@@ -81,8 +81,7 @@ typedef struct s_mlx
 typedef struct	s_hero
 {
 	t_vec	dir;
-	double	x;
-	double	y;
+	t_vec	pos;
 	double	plane_x;
 	double	plane_y;
 	double	time;
@@ -100,7 +99,7 @@ typedef	struct	s_map
 	unsigned int		witdh;
 	unsigned int		height;
 	char				grid[SIZE_Y][SIZE_X + 1];
-	t_hero				hero_pos;
+	t_hero				player;
 	int					rows;
 	int					cols;
 }				t_map;

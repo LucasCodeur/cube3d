@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:01:40 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/17 14:41:42 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/10 13:03:18 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	d_print_grid(t_map map)
 {
 	for (int i = 0; i < map.rows; i++)
 		printf("%s\n", map.grid[i]);
-	printf("x: %lf\n", map.hero_pos.x);	
-	printf("y: %lf\n", map.hero_pos.y);	
+	printf("x: %lf\n", map.player.pos.elements[0]);	
+	printf("y: %lf\n", map.player.pos.elements[1]);	
 }
 
 void	d_print_frame(t_img img, int* x, int* y)
@@ -47,6 +47,6 @@ void	d_generate_map(t_data* data)
 		}
 		data->map.grid[i][SIZE_X] = '\0';
 	}
-	data->map.hero_pos.x = (SIZE_X + 2) * 0.5;
-	data->map.hero_pos.y = (SIZE_Y + 2) * 0.5;
+	data->map.player.pos.elements[0] = (SIZE_X + 2) * 0.5;
+	data->map.player.pos.elements[1] = (SIZE_Y + 2) * 0.5;
 }

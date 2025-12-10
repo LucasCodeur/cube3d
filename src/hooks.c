@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:13:52 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/09 16:58:24 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/10 14:34:57 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,34 @@
 int move_hero(int keycode, t_data *data)
 {
 	bool display = false;
-	if ((keycode == XK_d || keycode == XK_D || keycode == XK_l || keycode == XK_L) && data->map.hero_pos.x < data->map.cols - 2)
+	if ((keycode == XK_d || keycode == XK_D || keycode == XK_l || keycode == XK_L) && data->map.player.pos.elements[0] < data->map.cols - 2)
 	{
-		data->map.hero_pos.x += 0.1f;
+		data->map.player.pos.elements[0] += 0.1f;
 		display = true;
 	}
-	else if ((keycode == XK_a || keycode == XK_A || keycode == XK_h || keycode == XK_H) && data->map.hero_pos.x > 1)
+	else if ((keycode == XK_a || keycode == XK_A || keycode == XK_h || keycode == XK_H) && data->map.player.pos.elements[0] > 1)
 	{
-		data->map.hero_pos.x -= 0.1f;
+		data->map.player.pos.elements[0] -= 0.1f;
 		display = true;
 	}
-	else if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j ) && data->map.hero_pos.y < data->map.rows - 2)
+	else if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j ) && data->map.player.pos.elements[1] < data->map.rows - 2)
 	{
-		data->map.hero_pos.y += 0.1f;
+		data->map.player.pos.elements[1] += 0.1f;
 		display = true;
 	}
-	else if ((keycode == XK_w || keycode == XK_W || keycode == XK_k || keycode == XK_K) && data->map.hero_pos.y > 1)
+	else if ((keycode == XK_w || keycode == XK_W || keycode == XK_k || keycode == XK_K) && data->map.player.pos.elements[0] > 1)
 	{
-		data->map.hero_pos.y -= 0.1f;
+		data->map.player.pos.elements[1] -= 0.1f;
 		display = true;
 	}
 	else if (keycode == XK_q || keycode == XK_Q || keycode == XK_Left)
 	{
-		data->map.hero_pos.dir = rotate_vect(data->map.hero_pos.dir, 5);
+		data->map.player.dir = rotate_vect(data->map.player.dir, 50);
 		display = true;
 	}
 	else if (keycode == XK_e || keycode == XK_E || keycode == XK_Right)
 	{
-		data->map.hero_pos.dir = rotate_vect(data->map.hero_pos.dir, 5);
+		data->map.player.dir = rotate_vect(data->map.player.dir, -50);
 		display = true;
 	}
 	if (display == true)
