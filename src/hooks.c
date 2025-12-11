@@ -14,6 +14,7 @@
 #include "display.h"
 
 #include <mlx.h>
+#include <math.h>
 #include <stdlib.h>
 #include <X11/keysym.h>
 #include "matrice.h"
@@ -49,12 +50,14 @@ int move_hero(int keycode, t_data *data)
 	}
 	else if (keycode == XK_q || keycode == XK_Q || keycode == XK_Left)
 	{
-		data->map.player.dir = rotate_vect(data->map.player.dir, 50);
+		data->map.player.dir.elements[0] = data->map.player.pos.elements[0] * cos(5) ;
+		data->map.player.dir.elements[1] = data->map.player.pos.elements[1] * sin(5) ;
 		display = true;
 	}
 	else if (keycode == XK_e || keycode == XK_E || keycode == XK_Right)
 	{
-		data->map.player.dir = rotate_vect(data->map.player.dir, -50);
+		data->map.player.dir.elements[0] = data->map.player.pos.elements[0] * cos(-5) ;
+		data->map.player.dir.elements[1] = data->map.player.pos.elements[1] * sin(-5) ;
 		display = true;
 	}
 	if (display == true)

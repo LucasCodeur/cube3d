@@ -30,8 +30,8 @@ void my_mlx_pixel_put_minimap(t_data *data, int x, int y, t_pixel *color)
 void	t_cast_dir_vec(t_data* data, int tile_size)
 {
 	t_pixel	color;
-	float	c_x = (data->map.player.pos.elements[0] * tile_size + (tile_size * 0.5)) * data->map.player.dir.elements[0];
-	float	c_y = (data->map.player.pos.elements[1] * tile_size + (tile_size * 0.5)) * data->map.player.dir.elements[1];
+	float	c_x = (data->map.player.pos.elements[0] + data->map.player.dir.elements[0]) * tile_size + (tile_size * 0.5);
+	float	c_y = (data->map.player.pos.elements[1] + data->map.player.dir.elements[1]) * tile_size + (tile_size * 0.5);
 	printf("c_x : %lf\n", c_x);
 	printf("c_y : %lf\n", c_y);
 	color.value = WHITE;
@@ -69,9 +69,39 @@ void	draw_hero(t_data* data, int tile_size)
 	}
 }
 
-bool	draw_map(t_data* data, int tile_size)
+void	fill_color(t_map map, int x, int y, t_pixel* color)
+{
+	if (map.grid[y][x] == '0')
+		color->value = RED;
+	else
+		color->value = BLUE;
+}
+
+static void convert_and_draw_map(t_data* data, int x, int y, int tile_size)
 {
 	t_pixel		color;
+	int		px_start; 
+	int		py_start;
+
+	fill_color(data->map, x, y, &color);	
+	px_start = x * tile_size;
+	py_start = y * tile_size;
+	int	py = 0;
+	int	px = 0;
+	while (py < tile_size)
+	{
+		while (px < tile_size)
+		{
+			my_mlx_pixel_put_minimap(data, px_start + px, py_start + py, &color);
+			px++;
+		}
+		py++;
+		px = 0;
+	}
+}
+
+bool	draw_map(t_data* data, int tile_size)
+{
 	int		y;
 	int		x;
 
@@ -81,16 +111,7 @@ bool	draw_map(t_data* data, int tile_size)
 	{
 		while (x < data->map.cols)
 		{
-			if (data->map.grid[y][x] == '0')
-				color.value = RED;
-			else
-				color.value = BLUE;
-			int px_start = x * tile_size;
-			int py_start = y * tile_size;
-
-			for (int py = 0; py < tile_size; py++)
-				for (int px = 0; px < tile_size; px++)
-					my_mlx_pixel_put_minimap(data, px_start + px, py_start + py, &color);
+			convert_and_draw_map(data, x, y, tile_size);		
 			x++;
 		}
 		x = 0;
