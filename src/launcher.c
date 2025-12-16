@@ -71,7 +71,7 @@ void	launcher(t_data *data)
 	// if (keys_status[INVENTORY])
 	// 	open_inventory
 	init_screen_mlx(data);
-	display_minimap(data);
+	display_map(data);
 	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, move_hero, data);
 	mlx_loop(data->mlx.ptr);
 }

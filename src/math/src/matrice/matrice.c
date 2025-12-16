@@ -21,7 +21,7 @@
 * @param rad radian the degre of rotate of the vector
 * @return new vec vector rotate
 */
-t_vec rotate_vect(t_vec v, int rad)
+t_vec rotate_vect(t_vec v, double rad)
 {
 	printf("INSIDE\n");
 	t_vec	new_vec; 

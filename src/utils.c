@@ -12,6 +12,12 @@
 
 #include <stdio.h>
 
+/**
+* @brief allow to put a value of 0 in each case of memory of *s
+* @param *s pointer of the memory case we have to reset
+* @param n the size of *s
+* @return
+*/
 void	ft_bzero(void *s, size_t n)
 {
 	unsigned char	value;

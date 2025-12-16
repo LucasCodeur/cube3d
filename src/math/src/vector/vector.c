@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:58:08 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/03 15:11:41 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/16 16:52:03 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ bool	equals(t_vec v1, t_vec v2)
 bool	orthogonal(t_vec v1, t_vec v2)
 {
 	if (v1.dim == v2.dim)
+	{
 		if (dot(v1, v2) == 0.0f)
 			return (true);
+	}
 	return (false);
 }

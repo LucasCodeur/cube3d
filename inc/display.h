@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/09 16:42:44 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/11 12:11:34 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define SCALE_TILE	100
 # define SIZE_X	100
 # define SIZE_Y	30
+# define FOV M_PI / 3.0
 
 # define ASSET_TILE "/home/lud-adam/Documents/cube3d/assets/basic/bg.xpm"
 # define ASSET_BG "/home/lud-adam/Documents/cube3d/assets/basic/end_bg.xpm"
@@ -82,8 +83,7 @@ typedef struct	s_hero
 {
 	t_vec	dir;
 	t_vec	pos;
-	double	plane_x;
-	double	plane_y;
+	t_vec	plane;
 	double	time;
 	double	old_time;
 }				t_hero;
@@ -116,7 +116,7 @@ typedef struct s_data
 void		init_mlx(t_mlx *t_mlx);
 void		init_screen_mlx(t_data *data);
 void		free_img(t_data *data);
-void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void		my_mlx_pixel_put_minimap(t_data *data, int x, int y, t_pixel *color);
 
 //HOOKS
 int			key_press(int keycode, void *param);
@@ -124,10 +124,11 @@ int			close_win(void *param);
 
 //IMAGE
 t_img	fill_frame(t_data* data, char *path_to_asset, int* x, int* y);
-bool	display_minimap(t_data* data);
+bool	display_map(t_data* data);
 int		move_hero(int keycode, t_data *data);
 void	update_maps(t_data* data);
-void	draw_scaled_asset(t_pixel *dest_pixels, int dest_w, int dest_h, t_pixel *src_pixels, int src_size);
+bool	draw_map(t_data* data, int tile_size);
+void	draw_hero(t_data* data, int tile_size);
 
 //UTILS
 void	ft_bzero(void *s, size_t n);

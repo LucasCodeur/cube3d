@@ -15,6 +15,11 @@
 #include <stdlib.h>
 #include <mlx.h>
 
+/**
+* @brief allow to init the mlx
+* @param data contains all information necessary to the project.
+* @return
+*/
 void	init_screen_mlx(t_data *data)
 {
 	data->mlx.ptr = mlx_init();
@@ -43,6 +48,11 @@ void	init_screen_mlx(t_data *data)
 	}
 }
 
+/**
+* @brief allow to free the different composants of the mlx
+* @param data contains all information necessary to the project.
+* @return
+*/
 void	free_img(t_data *data)
 {
 	if (!data)

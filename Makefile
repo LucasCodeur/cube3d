@@ -6,7 +6,7 @@
 #    By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2025/12/09 16:49:23 by lud-adam         ###   ########.fr        #
+#    Updated: 2025/12/16 14:17:18 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ P_MLX = minilibx-linux/
 P_OBJ = .obj/
 P_LIB_MATH = /home/lud-adam/Documents/cube3d/src/math/
 P_INC_MATH = /home/lud-adam/Documents/cube3d/src/math/inc
+P_SRC_DRAW = $(P_SRC)draw/
+P_SRC_TEST = $(P_SRC)test/
 
 #############################################################################################
 #                                                                                           #
@@ -52,6 +54,13 @@ SRC = \
 	utils.c \
 	debug.c
 
+SRC_DRAW = \
+	draw_map.c \
+	utils_draw.c
+
+SRC_TEST = \
+	t_fov.c \
+
 MLX_LIB = $(P_MLX)libmlx.a
 MATH_LIB = $(P_LIB_MATH)libmath.a
 
@@ -66,6 +75,8 @@ LIBS = \
 #############################################################################################
 SRCS =	\
 	$(addprefix $(P_SRC), $(SRC)) \
+	$(addprefix $(P_SRC_DRAW), $(SRC_DRAW)) \
+	$(addprefix $(P_SRC_TEST), $(SRC_TEST)) \
 
 # List of object files (redirect to P_OBJ)
 OBJS =  \
