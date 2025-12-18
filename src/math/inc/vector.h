@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:48:48 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/09 14:47:11 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/18 10:42:41 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ typedef struct s_vec
 
 } t_vec;
 
-
 t_vec	allocate(unsigned int dim);
+t_vec	new_vector_2D(double x, double y);
 t_vec	construct_default_vector(unsigned int dim, float val);
 t_vec	construct_empty_vector(unsigned int dim);
 t_vec	copy(t_vec v);

@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/16 14:19:44 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/18 16:58:38 by lud-adam         ###   ########.fr       */
+/*   Created: 2025/12/17 08:54:09 by lud-adam          #+#    #+#             */
+/*   Updated: 2025/12/17 08:56:26 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H 
-# define TEST_H
+#ifndef RAYCASTING_H 
+# define RAYCASTING_H
 
-#include "display.h"
+#include "vector.h"
 
-void t_cast_dir_vec(t_data *data, int tile_size);
-void t_draw_fov_vec(t_data *data, int tile_size);
-void t_plane_is_orthogonal_to_dir(t_vec v1, t_vec v2);
-void t_display_fov(t_data *data);
-void t_ray_casting_2D(t_data *data);
+typedef struct s_ray
+{
+	t_vec	dir;
+	t_vec	pos;
+}	t_ray;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:01:55 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/03 15:28:15 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/18 10:27:51 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ t_vec	construct_empty_vector(unsigned int dim)
 */
 t_vec	new_vector(unsigned int dim, ...)
 {
-	t_vec	ret;
-	va_list list;
+	t_vec				ret;
+	va_list				list;
 	unsigned int		i;
 
 	ret = allocate(dim);
@@ -80,5 +80,21 @@ t_vec	new_vector(unsigned int dim, ...)
 		ret.elements[i] = va_arg(list, double);
 		i++;
 	}
+	return (ret);
+}
+
+/**
+* @brief create a 2D vector on the heap.
+* @param x abcissa value of the vector
+* @param y ordinate value of the vector
+* @return a vector on the heap
+*/
+t_vec	new_vector_2D(double x, double y)
+{
+	t_vec	ret;
+
+	ret = allocate(2);
+	ret.elements[0] = x;
+	ret.elements[1] = y;
 	return (ret);
 }

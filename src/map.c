@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:06:40 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/16 14:50:32 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/18 16:58:56 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ bool	display_map(t_data* data)
 {
 	int size_cols; 
 	int size_rows;
-	int tile_size;
 	
-	size_cols = WIDTH_MINIMAP / data->map.cols;
-	size_rows = HEIGHT_MINIMAP / data->map.rows;
+	size_cols = WIDTH / data->map.cols;
+	size_rows = HEIGHT / data->map.rows;
 	if (size_cols <= size_rows)
-		tile_size = size_cols;
+		data->tile_size = size_cols;
 	else
-		tile_size = size_rows;
-	draw_map(data, tile_size);
-	draw_hero(data, tile_size);
-	t_cast_dir_vec(data, tile_size);	
+		data->tile_size = size_rows;
+	clear_img(&data->img);
+	draw_map(data, data->tile_size);
+	draw_hero(data, data->tile_size);
+	t_ray_casting_2D(data);
 	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.ptr, 0, 0);
 	return (true);
 }

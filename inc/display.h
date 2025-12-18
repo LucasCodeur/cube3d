@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/11 12:11:34 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/18 15:23:22 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 # define WIN_WIDTH 2048
 # define WIN_HEIGHT 1024
-# define HEIGHT_MINIMAP 3000 
-# define WIDTH_MINIMAP 1500
+# define HEIGHT 3000 
+# define WIDTH 1500
 # define MAX_WIDTH 1024
 # define MAX_HEIGHT 512
-# define SCALE_TILE	100
+# define SCALE_TILE	64
 # define SIZE_X	100
 # define SIZE_Y	30
 # define FOV M_PI / 3.0
@@ -32,6 +32,7 @@
 # define RED   0xFF0000FF
 # define GREEN 0xFF00FF00
 # define BLUE  0xFFFF0000
+# define YELLOW 0xFFFF000
 # define WHITE 0xFFFFFF00
 
 #include <stdio.h>
@@ -79,11 +80,17 @@ typedef struct s_mlx
 	int		max_height;
 }				t_mlx;
 
-typedef struct	s_hero
+typedef struct s_ray
 {
 	t_vec	dir;
 	t_vec	pos;
+}	t_ray;
+
+typedef struct	s_hero
+{
+	t_ray	ray;
 	t_vec	plane;
+	t_vec	camera;
 	double	time;
 	double	old_time;
 }				t_hero;
@@ -109,14 +116,17 @@ typedef struct s_data
 	t_mlx	mlx;
 	t_img	img;
 	t_map	map;
+	int		tile_size;
 }				t_data;
 
+
+void	launcher(t_data *data);
 
 //MLX
 void		init_mlx(t_mlx *t_mlx);
 void		init_screen_mlx(t_data *data);
 void		free_img(t_data *data);
-void		my_mlx_pixel_put_minimap(t_data *data, int x, int y, t_pixel *color);
+void		my_mlx_pixel_put(t_data *data, int x, int y, t_pixel *color);
 
 //HOOKS
 int			key_press(int keycode, void *param);
@@ -129,6 +139,7 @@ int		move_hero(int keycode, t_data *data);
 void	update_maps(t_data* data);
 bool	draw_map(t_data* data, int tile_size);
 void	draw_hero(t_data* data, int tile_size);
+void	clear_img(t_img *img);
 
 //UTILS
 void	ft_bzero(void *s, size_t n);

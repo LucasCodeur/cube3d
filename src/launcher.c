@@ -6,12 +6,11 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 17:28:43 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/17 17:07:28 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/18 10:45:25 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
-
 
 #include <mlx.h>
 #include <X11/keysym.h>
