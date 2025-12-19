@@ -40,3 +40,22 @@ t_vec rotate_vect(t_vec v, double rad)
 	print(new_vec);
 	return (new_vec);
 }
+
+/**
+* @brief allow to rotate the vector
+* @param v the vector to rotate
+* @param rad radian the degre of rotate of the vector
+* @return new vec vector rotate
+*/
+void rotate_vect_by_p(t_vec *v, double rad)
+{
+	double c; 
+	double s; 
+	double temp;
+
+	temp = v->elements[0];
+	c = cos(rad);
+	s = sin(rad);
+	v->elements[0] = v->elements[0] * c + v->elements[1] * -s;
+	v->elements[1] = temp * s + v->elements[1] * c;
+}

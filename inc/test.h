@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H 
-# define TEST_H
+#ifndef TEST_H
+#define TEST_H
 
 #include "display.h"
 
@@ -20,5 +20,8 @@ void t_draw_fov_vec(t_data *data, int tile_size);
 void t_plane_is_orthogonal_to_dir(t_vec v1, t_vec v2);
 void t_display_fov(t_data *data);
 void t_ray_casting_2D(t_data *data);
+void t_ray_casting_2D_pos(t_data *data);
+void t_ray_casting_2D_neg(t_data *data);
+void t_cast_plane_vec(t_data *data, int tile_size);
 
 #endif

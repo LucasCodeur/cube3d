@@ -35,7 +35,12 @@ bool	display_map(t_data* data)
 	clear_img(&data->img);
 	draw_map(data, data->tile_size);
 	draw_hero(data, data->tile_size);
+	// t_display_fov(data);
+	// t_cast_plane_vec(data, data->tile_size);
+	// t_ray_casting_2D_neg(data);
+	// t_ray_casting_2D_pos(data);
 	t_ray_casting_2D(data);
+	t_cast_dir_vec(data, data->tile_size);
 	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.ptr, 0, 0);
 	return (true);
 }

@@ -54,10 +54,12 @@ static int	rotate_hook(t_data* data, int keycode)
 	if (keycode == XK_q || keycode == XK_Q || keycode == XK_Left)
 	{
 		data->map.player.ray.dir = rotate_vect(data->map.player.ray.dir, -10.0 * (M_PI / 180));
+		data->map.player.plane = rotate_vect(data->map.player.plane, -10.0 * (M_PI / 180));
 	}
 	else if (keycode == XK_e || keycode == XK_E || keycode == XK_Right)
 	{
 		data->map.player.ray.dir = rotate_vect(data->map.player.ray.dir, 10.0 * (M_PI / 180));
+		data->map.player.plane = rotate_vect(data->map.player.plane, 10.0 * (M_PI / 180));
 	}
 	return (true);
 }

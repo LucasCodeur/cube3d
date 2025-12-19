@@ -16,5 +16,6 @@
 #include "vector.h"
 
 t_vec rotate_vect(t_vec v, double rad);
+void rotate_vect_by_p(t_vec *v, double rad);
 
 #endif
