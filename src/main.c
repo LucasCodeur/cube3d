@@ -26,13 +26,13 @@ bool	ininitialize_values(t_data* data)
 	data->map.player.ray.pos = new_vector_2D(1.0f, 1.0f);
 	if (!data->map.player.ray.pos.elements)
 		return (false);
-	data->map.player.ray.dir = new_vector_2D(0.0f, 1.0f);
+	data->map.player.ray.dir = new_vector_2D(1.0f, 0.0f);
 	if (!data->map.player.ray.dir.elements)
 	{
 		free(data->map.player.ray.pos.elements);
 		return (false);
 	}
-	data->map.player.plane = new_vector_2D(0.0f, .66f);
+	data->map.player.plane = new_vector_2D(0.0f, 0.66f);
 	if (!data->map.player.plane.elements)
 	{
 		free(data->map.player.ray.pos.elements);

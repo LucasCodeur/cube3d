@@ -96,10 +96,10 @@ void draw_ray(t_data* data, double pos_x, double pos_y,
         int screen_x = (int)(test_x * data->tile_size + data->tile_size / 2);
         int screen_y = (int)(test_y * data->tile_size + data->tile_size / 2);
         
-        if ((screen_x >= 0 && screen_x < WIDTH &&
-            screen_y >= 0 && screen_y < HEIGHT &&
-            map_x >= 0 && map_x < WIDTH &&
-            map_y >= 0 && map_y < HEIGHT) && (data->map.grid[map_y][map_x] == '0'))
+        if ((screen_x >= 0 && screen_x < WIN_WIDTH &&
+            screen_y >= 0 && screen_y < WIN_HEIGHT &&
+            map_x >= 0 && map_x < WIN_WIDTH &&
+            map_y >= 0 && map_y < WIN_HEIGHT) && (data->map.grid[map_y][map_x] == '0'))
         {
             my_mlx_pixel_put(data, screen_x, screen_y, &color);
         }

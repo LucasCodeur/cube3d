@@ -16,7 +16,7 @@ void my_mlx_pixel_put(t_data *data, int x, int y, t_pixel *color)
 {
     t_pixel *dst;
 
-    if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT) 
+    if (x < 0 || x > WIN_WIDTH || y < 0 || y > WIN_HEIGHT) 
 	return ;
     if (!data->img.addr) 
 	return ;
@@ -29,7 +29,7 @@ void clear_img(t_img *img)
     int i;
 
     i = 0;
-    while (i < WIDTH * HEIGHT)
+    while (i < WIN_WIDTH * WIN_HEIGHT)
     {
         img->addr[i++] = 0x000000;
         img->addr[i++] = 0x000000;

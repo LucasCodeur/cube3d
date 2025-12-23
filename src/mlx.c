@@ -29,22 +29,25 @@ void	init_screen_mlx(t_data *data)
 	data->mlx.win = mlx_new_window(data->mlx.ptr, WIN_WIDTH, WIN_HEIGHT, "cube3D");
 	if (!data->mlx.win || WIN_WIDTH > data->mlx.max_width || WIN_HEIGHT > data->mlx.max_height)
 	{
+		perror("mlx win:");
 		free_img(data);
-		return ;
+		exit(1);
 	}
 	data->img.ptr = mlx_new_image(data->mlx.ptr, WIN_WIDTH, WIN_HEIGHT);
 	if (!data->img.ptr)
 	{
+		perror("mlx img ptr:");
 		free_img(data);
-		return ;
+		exit(1);
 	}
 
 	data->img.addr = mlx_get_data_addr(data->img.ptr, &data->img.bits_per_pixel,
 			&data->img.line_length, &data->img.endian);
 	if (!data->img.addr)
 	{
+		perror("mlx img addr:");
 		free_img(data);
-		return ;
+		exit(1);
 	}
 }
 

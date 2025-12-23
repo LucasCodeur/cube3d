@@ -13,16 +13,13 @@
 #ifndef DISPLAY_H 
 # define DISPLAY_H
 
-# define WIN_WIDTH 2048
-# define WIN_HEIGHT 1024
-# define HEIGHT 3000 
-# define WIDTH 1500
-# define MAX_WIDTH 1024
-# define MAX_HEIGHT 512
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 800
 # define SCALE_TILE	64
 # define SIZE_X	100
 # define SIZE_Y	30
 # define FOV M_PI / 3.0
+# define SCALE 48
 
 # define ASSET_TILE "/home/lud-adam/Documents/cube3d/assets/basic/bg.xpm"
 # define ASSET_BG "/home/lud-adam/Documents/cube3d/assets/basic/end_bg.xpm"
