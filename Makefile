@@ -33,8 +33,8 @@ P_SRC = src/
 P_INC = inc/
 P_MLX = minilibx-linux/
 P_OBJ = .obj/
-P_LIB_MATH = /home/lud-adam/Documents/cube3d/src/math/
-P_INC_MATH = /home/lud-adam/Documents/cube3d/src/math/inc
+P_LIB_MATH = $(P_SRC)math/
+P_INC_MATH = $(P_SRC)/math/inc/
 P_SRC_DRAW = $(P_SRC)draw/
 P_SRC_TEST = $(P_SRC)test/
 

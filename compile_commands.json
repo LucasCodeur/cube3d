@@ -1,6 +1,6 @@
 [
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -11,7 +11,9 @@
    "-I",
    "inc/",
    "-I",
-   "test/inc/",
+   "minilibx-linux/",
+   "-I",
+   "/home/lud-adam/Documents/cube3d/src/math/inc/",
    "-c",
    "src/main.c",
    "-o",
@@ -20,7 +22,7 @@
   "file": "src/main.c"
  },
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -33,7 +35,7 @@
    "-I",
    "minilibx-linux/",
    "-I",
-   "/home/lud-adam/Documents/cube3d/src/math/inc",
+   "/home/lud-adam/Documents/cube3d/src/math/inc/",
    "-c",
    "src/mlx.c",
    "-o",
@@ -42,7 +44,7 @@
   "file": "src/mlx.c"
  },
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -55,7 +57,7 @@
    "-I",
    "minilibx-linux/",
    "-I",
-   "/home/lud-adam/Documents/cube3d/src/math/inc",
+   "/home/lud-adam/Documents/cube3d/src/math/inc/",
    "-c",
    "src/hooks.c",
    "-o",
@@ -64,7 +66,7 @@
   "file": "src/hooks.c"
  },
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -77,7 +79,7 @@
    "-I",
    "minilibx-linux/",
    "-I",
-   "/home/lud-adam/Documents/cube3d/src/math/inc",
+   "/home/lud-adam/Documents/cube3d/src/math/inc/",
    "-c",
    "src/create_sprites.c",
    "-o",
@@ -86,7 +88,7 @@
   "file": "src/create_sprites.c"
  },
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -99,16 +101,16 @@
    "-I",
    "minilibx-linux/",
    "-I",
-   "/home/lud-adam/Documents/cube3d/src/math/inc",
+   "/home/lud-adam/Documents/cube3d/src/math/inc/",
    "-c",
-   "src/minimap.c",
+   "src/map.c",
    "-o",
-   ".obj/minimap.o"
+   ".obj/map.o"
   ],
-  "file": "src/minimap.c"
+  "file": "src/map.c"
  },
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -121,7 +123,7 @@
    "-I",
    "minilibx-linux/",
    "-I",
-   "/home/lud-adam/Documents/cube3d/src/math/inc",
+   "/home/lud-adam/Documents/cube3d/src/math/inc/",
    "-c",
    "src/launcher.c",
    "-o",
@@ -130,7 +132,7 @@
   "file": "src/launcher.c"
  },
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -143,7 +145,7 @@
    "-I",
    "minilibx-linux/",
    "-I",
-   "/home/lud-adam/Documents/cube3d/src/math/inc",
+   "/home/lud-adam/Documents/cube3d/src/math/inc/",
    "-c",
    "src/utils.c",
    "-o",
@@ -152,7 +154,7 @@
   "file": "src/utils.c"
  },
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -165,7 +167,7 @@
    "-I",
    "minilibx-linux/",
    "-I",
-   "/home/lud-adam/Documents/cube3d/src/math/inc",
+   "/home/lud-adam/Documents/cube3d/src/math/inc/",
    "-c",
    "src/debug.c",
    "-o",
@@ -174,7 +176,7 @@
   "file": "src/debug.c"
  },
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -187,7 +189,7 @@
    "-I",
    "minilibx-linux/",
    "-I",
-   "/home/lud-adam/Documents/cube3d/src/math/inc",
+   "/home/lud-adam/Documents/cube3d/src/math/inc/",
    "-c",
    "src/draw/draw_map.c",
    "-o",
@@ -196,7 +198,7 @@
   "file": "src/draw/draw_map.c"
  },
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -209,7 +211,7 @@
    "-I",
    "minilibx-linux/",
    "-I",
-   "/home/lud-adam/Documents/cube3d/src/math/inc",
+   "/home/lud-adam/Documents/cube3d/src/math/inc/",
    "-c",
    "src/draw/utils_draw.c",
    "-o",
@@ -218,7 +220,7 @@
   "file": "src/draw/utils_draw.c"
  },
  {
-  "directory": "/home/lud-adam/Documents/cube3d",
+  "directory": "/home/eveil/code/42_projects/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -231,7 +233,7 @@
    "-I",
    "minilibx-linux/",
    "-I",
-   "/home/lud-adam/Documents/cube3d/src/math/inc",
+   "/home/lud-adam/Documents/cube3d/src/math/inc/",
    "-c",
    "src/test/t_fov.c",
    "-o",
