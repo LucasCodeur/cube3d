@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/18 15:23:22 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/26 18:06:04 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,18 @@ typedef struct s_mlx
 
 typedef struct s_ray
 {
-	t_vec	dir;
-	t_vec	pos;
+	double	test_x;
+	double	test_y;
+	int		map_x;
+	int		map_y;
+	int		screen_x;
+	int		screen_y;
 }	t_ray;
 
 typedef struct	s_hero
 {
-	t_ray	ray;
+	t_vec	dir;
+	t_vec	pos;
 	t_vec	plane;
 	t_vec	camera;
 	double	time;
@@ -113,6 +118,7 @@ typedef struct s_data
 	t_mlx	mlx;
 	t_img	img;
 	t_map	map;
+	t_ray	ray;
 	int		tile_size;
 }				t_data;
 
@@ -136,6 +142,7 @@ int		move_hero(int keycode, t_data *data);
 void	update_maps(t_data* data);
 bool	draw_map(t_data* data, int tile_size);
 void	draw_hero(t_data* data, int tile_size);
+void	draw_ray(t_data* data, double ray_dir_x, double ray_dir_y, int hex_color);
 void	clear_img(t_img *img);
 
 //UTILS

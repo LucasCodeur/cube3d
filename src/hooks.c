@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:13:52 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/18 16:02:51 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/26 18:08:33 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <math.h>
 #include <X11/keysym.h>
 
+//WARN: have to take off
+	#include "test.h"
 
 static int	rotate_hook(t_data* data, int keycode);
 
@@ -28,18 +30,19 @@ static int	rotate_hook(t_data* data, int keycode);
 */
 int move_hero(int keycode, t_data *data)
 {
-	if ((keycode == XK_d || keycode == XK_D || keycode == XK_l || keycode == XK_L) && data->map.player.ray.pos.elements[0] < data->map.cols - 2)
-		data->map.player.ray.pos.elements[0] += 0.2f;
-	else if ((keycode == XK_a || keycode == XK_A || keycode == XK_h || keycode == XK_H) && data->map.player.ray.pos.elements[0] > 1)
-		data->map.player.ray.pos.elements[0] -= 0.2f;
-	else if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j ) && data->map.player.ray.pos.elements[1] < data->map.rows - 2)
-		data->map.player.ray.pos.elements[1] += 0.2f;
-	else if ((keycode == XK_w || keycode == XK_W || keycode == XK_k || keycode == XK_K) && data->map.player.ray.pos.elements[0] > 1)
-		data->map.player.ray.pos.elements[1] -= 0.2f;
+	if ((keycode == XK_d || keycode == XK_D || keycode == XK_l || keycode == XK_L) && data->map.player.pos.elements[0] < data->map.cols - 2)
+		data->map.player.pos.elements[0] += 0.2f;
+	else if ((keycode == XK_a || keycode == XK_A || keycode == XK_h || keycode == XK_H) && data->map.player.pos.elements[0] > 1)
+		data->map.player.pos.elements[0] -= 0.2f;
+	else if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j ) && data->map.player.pos.elements[1] < data->map.rows - 2)
+		data->map.player.pos.elements[1] += 0.2f;
+	else if ((keycode == XK_w || keycode == XK_W || keycode == XK_k || keycode == XK_K) && data->map.player.pos.elements[0] > 1)
+		data->map.player.pos.elements[1] -= 0.2f;
 	else
 		rotate_hook(data, keycode);
 	clear_img(&data->img);
-	display_map(data);
+	//WARN: have to change
+		t_display_map_2D(data);
 	return (true);
 }
 
@@ -53,12 +56,12 @@ static int	rotate_hook(t_data* data, int keycode)
 {
 	if (keycode == XK_q || keycode == XK_Q || keycode == XK_Left)
 	{
-		data->map.player.ray.dir = rotate_vect(data->map.player.ray.dir, -10.0 * (M_PI / 180));
+		data->map.player.dir = rotate_vect(data->map.player.dir, -10.0 * (M_PI / 180));
 		data->map.player.plane = rotate_vect(data->map.player.plane, -10.0 * (M_PI / 180));
 	}
 	else if (keycode == XK_e || keycode == XK_E || keycode == XK_Right)
 	{
-		data->map.player.ray.dir = rotate_vect(data->map.player.ray.dir, 10.0 * (M_PI / 180));
+		data->map.player.dir = rotate_vect(data->map.player.dir, 10.0 * (M_PI / 180));
 		data->map.player.plane = rotate_vect(data->map.player.plane, 10.0 * (M_PI / 180));
 	}
 	return (true);

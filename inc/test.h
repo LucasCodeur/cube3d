@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 14:19:44 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/18 16:58:38 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/26 18:06:02 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void t_ray_casting_2D(t_data *data);
 void t_ray_casting_2D_pos(t_data *data);
 void t_ray_casting_2D_neg(t_data *data);
 void t_cast_plane_vec(t_data *data, int tile_size);
+bool t_display_map_2D(t_data* data);
 
 #endif

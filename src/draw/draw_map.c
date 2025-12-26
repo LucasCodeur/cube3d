@@ -57,8 +57,8 @@ void	draw_hero(t_data* data, int tile_size)
 	int	py;
 	int	px;
 
-	px_start = data->map.player.ray.pos.elements[0] * tile_size;
-	py_start = data->map.player.ray.pos.elements[1] * tile_size;
+	px_start = data->map.player.pos.elements[0] * tile_size;
+	py_start = data->map.player.pos.elements[1] * tile_size;
 	color.value = GREEN;
 	py = 0;
 	px = 0;

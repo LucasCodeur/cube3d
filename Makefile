@@ -6,7 +6,7 @@
 #    By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2025/12/18 14:45:55 by lud-adam         ###   ########.fr        #
+#    Updated: 2025/12/26 18:03:22 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,10 +56,12 @@ SRC = \
 
 SRC_DRAW = \
 	draw_map.c \
+	draw_ray.c \
 	utils_draw.c
 
 SRC_TEST = \
 	t_fov.c \
+	t_map_2D.c \
 
 MLX_LIB = $(P_MLX)libmlx.a
 MATH_LIB = $(P_LIB_MATH)libmath.a

@@ -17,8 +17,8 @@ void	d_print_grid(t_map map)
 {
 	for (int i = 0; i < map.rows; i++)
 		printf("%s\n", map.grid[i]);
-	printf("x: %lf\n", map.player.ray.pos.elements[0]);	
-	printf("y: %lf\n", map.player.ray.pos.elements[1]);	
+	printf("x: %lf\n", map.player.pos.elements[0]);	
+	printf("y: %lf\n", map.player.pos.elements[1]);	
 }
 
 void	d_print_frame(t_img img, int* x, int* y)
@@ -47,11 +47,11 @@ void	d_generate_map(t_data* data)
 		}
 		data->map.grid[i][SIZE_X] = '\0';
 	}
-	data->map.player.ray.pos.elements[0] = (SIZE_X + 2) * 0.5;
-	data->map.player.ray.pos.elements[1] = (SIZE_Y + 2) * 0.5;
+	data->map.player.pos.elements[0] = (SIZE_X + 2) * 0.5;
+	data->map.player.pos.elements[1] = (SIZE_Y + 2) * 0.5;
 }
 
 void	d_print_values(t_data* data)
 {
-	printf("POS:%.2f,%.2f | DIR:%.2f,%.2f | PLANE:%.2f,%.2f\n", data->map.player.ray.pos.elements[0], data->map.player.ray.pos.elements[1], data->map.player.ray.dir.elements[0], data->map.player.ray.dir.elements[0], data->map.player.plane.elements[0], data->map.player.plane.elements[1]);
+	printf("POS:%.2f,%.2f | DIR:%.2f,%.2f | PLANE:%.2f,%.2f\n", data->map.player.pos.elements[0], data->map.player.pos.elements[1], data->map.player.dir.elements[0], data->map.player.dir.elements[0], data->map.player.plane.elements[0], data->map.player.plane.elements[1]);
 }

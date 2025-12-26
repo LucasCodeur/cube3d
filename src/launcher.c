@@ -6,11 +6,14 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 17:28:43 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/18 10:45:25 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/26 18:05:44 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
+
+//WARN: have to take off
+#include "test.h"
 
 #include <mlx.h>
 #include <X11/keysym.h>
@@ -70,7 +73,7 @@ void	launcher(t_data *data)
 	// if (keys_status[INVENTORY])
 	// 	open_inventory
 	init_screen_mlx(data);
-	display_map(data);
+	t_display_map_2D(data);
 	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, move_hero, data);
 	mlx_loop(data->mlx.ptr);
 }

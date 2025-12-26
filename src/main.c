@@ -23,27 +23,27 @@ bool	ininitialize_values(t_data* data)
 	data->mlx.max_width = WIN_WIDTH;
 	data->map.cols = SIZE_X;
 	data->map.rows = SIZE_Y;
-	data->map.player.ray.pos = new_vector_2D(1.0f, 1.0f);
-	if (!data->map.player.ray.pos.elements)
+	data->map.player.pos = new_vector_2D(1.0f, 1.0f);
+	if (!data->map.player.pos.elements)
 		return (false);
-	data->map.player.ray.dir = new_vector_2D(1.0f, 0.0f);
-	if (!data->map.player.ray.dir.elements)
+	data->map.player.dir = new_vector_2D(1.0f, 0.0f);
+	if (!data->map.player.dir.elements)
 	{
-		free(data->map.player.ray.pos.elements);
+		free(data->map.player.pos.elements);
 		return (false);
 	}
 	data->map.player.plane = new_vector_2D(0.0f, 0.66f);
 	if (!data->map.player.plane.elements)
 	{
-		free(data->map.player.ray.pos.elements);
-		free(data->map.player.ray.dir.elements);
+		free(data->map.player.pos.elements);
+		free(data->map.player.dir.elements);
 		return (false);
 	}
 	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
 	if (!data->map.player.camera.elements)
 	{
-		free(data->map.player.ray.pos.elements);
-		free(data->map.player.ray.dir.elements);
+		free(data->map.player.pos.elements);
+		free(data->map.player.dir.elements);
 		free(data->map.player.plane.elements);
 		return (false);
 	}
@@ -52,8 +52,8 @@ bool	ininitialize_values(t_data* data)
 
 bool	free_mallocs(t_data *data)
 {
-	free(data->map.player.ray.pos.elements);
-	free(data->map.player.ray.dir.elements);
+	free(data->map.player.pos.elements);
+	free(data->map.player.dir.elements);
 	free(data->map.player.plane.elements);
 	free(data->map.player.camera.elements);
 	return (true);
@@ -64,7 +64,7 @@ int main(void)
 	t_data	data;
 
 	ininitialize_values(&data);
-	print(data.map.player.ray.dir);
+	print(data.map.player.dir);
 	d_generate_map(&data);
 	d_print_grid(data.map);
 	launcher(&data);
