@@ -22,8 +22,7 @@ static void    set_value(t_data* data, int* map_x, int* map_y);
 * @param hex_color color of the ray 
 * @return
 */
-void draw_ray(t_data* data, 
-              double ray_dir_x, double ray_dir_y, int hex_color)
+void draw_ray(t_data* data, t_vec ray_dir, int hex_color)
 {
     t_pixel     color;
     double	dist;
@@ -32,10 +31,10 @@ void draw_ray(t_data* data,
     
     color.value = hex_color;
     dist = 0;
-    while (dist < 30.0)
+    while (dist < 300.0)
     { 
-        data->ray.test_x = data->map.player.pos.elements[0] + ray_dir_x * dist;
-        data->ray.test_y = data->map.player.pos.elements[1] + ray_dir_y * dist;
+        data->ray.test_x = data->map.player.pos.elements[0] + ray_dir.elements[0] * dist;
+        data->ray.test_y = data->map.player.pos.elements[1] + ray_dir.elements[1] * dist;
         set_value(data, &map_x, &map_y);
         if ((data->ray.screen_x >= 0 && data->ray.screen_x < WIN_WIDTH &&
             data->ray.screen_y >= 0 && data->ray.screen_y < WIN_HEIGHT &&

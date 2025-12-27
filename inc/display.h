@@ -142,7 +142,7 @@ int		move_hero(int keycode, t_data *data);
 void	update_maps(t_data* data);
 bool	draw_map(t_data* data, int tile_size);
 void	draw_hero(t_data* data, int tile_size);
-void	draw_ray(t_data* data, double ray_dir_x, double ray_dir_y, int hex_color);
+void	draw_ray(t_data* data, t_vec ray_dir, int hex_color);
 void	clear_img(t_img *img);
 
 //UTILS

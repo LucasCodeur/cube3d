@@ -80,38 +80,23 @@ void t_plane_is_orthogonal_to_dir(t_vec v1, t_vec v2)
 void    t_display_fov(t_data *data)
 {
         t_vec   ray_dir_left = new_vector_2D(data->map.player.dir.elements[0] + data->map.player.plane.elements[0] * (-1), data->map.player.dir.elements[1] + data->map.player.plane.elements[1] * (-1));
+        t_vec   ray_dir_left_2 = new_vector_2D(data->map.player.dir.elements[0] + data->map.player.plane.elements[0] * -0.33, data->map.player.dir.elements[1] + data->map.player.plane.elements[1] * -0.33);
         t_vec   ray_dir_right = new_vector_2D(data->map.player.dir.elements[0] + data->map.player.plane.elements[0] * (1), data->map.player.dir.elements[1] + data->map.player.plane.elements[1] * (1));
-
-        printf("BEFORE NORMALIZE\n");
-        printf("ray_dir_left_x : %lf, ray_dir_left_y : %lf\nray_dir_right_x : %lf, ray_dir_right_y : %lf\n", ray_dir_left.elements[0], ray_dir_left.elements[1], ray_dir_right.elements[0], ray_dir_right.elements[1]);
-        normalize(&ray_dir_left);
-        normalize(&ray_dir_right);
-        printf("AFTER NORMALIZE\n");
-        printf("ray_dir_left_x : %lf, ray_dir_left_y : %lf\nray_dir_right_x : %lf, ray_dir_right_y : %lf\n", ray_dir_left.elements[0], ray_dir_left.elements[1], ray_dir_right.elements[0], ray_dir_right.elements[1]);
-        d_print_values(data);
-        draw_ray(data, ray_dir_left.elements[0], ray_dir_left.elements[1], WHITE); 
-        draw_ray(data, ray_dir_right.elements[0], ray_dir_right.elements[1], YELLOW);
+        t_vec   ray_dir_right_2 = new_vector_2D(data->map.player.dir.elements[0] + data->map.player.plane.elements[0] * 0.33, data->map.player.dir.elements[1] + data->map.player.plane.elements[1] * 0.33);
+        draw_ray(data, ray_dir_left, WHITE); 
+        draw_ray(data, ray_dir_left_2, WHITE); 
+        draw_ray(data, ray_dir_right, YELLOW);
+        draw_ray(data, ray_dir_right_2, YELLOW);
 }
 
 void    t_ray_casting_2D(t_data *data)
 {
-//         t_vec   ray_dir_left = new_vector_2D(data->map.player.dir.elements[0] + data->map.player.plane.elements[0] * (-1), data->map.player.dir.elements[1] + data->map.player.plane.elements[1] * (-1));
-//         t_vec   ray_dir_right = new_vector_2D(data->map.player.dir.elements[0] + data->map.player.plane.elements[0] * (1), data->map.player.dir.elements[1] + data->map.player.plane.elements[1] * (1));
-
-        // normalize(&ray_dir_left);
-        // normalize(&ray_dir_right);
-        // printf("BEFORE NORMALIZE\n");
-        // printf("ray_dir_left_x : %lf, ray_dir_left_y : %lf\nray_dir_right_x : %lf, ray_dir_right_y : %lf\n", ray_dir_left.elements[0], ray_dir_left.elements[1], ray_dir_right.elements[0], ray_dir_right.elements[1]);
-
-        t_vec ray = new_vector_2D(data->map.player.dir.elements[0], data->map.player.dir.elements[1]);
-        printf("ray_x : %lf, ray_y : %lf\n", ray.elements[0], ray.elements[1]);
-        normalize(&ray);
-        int i = 0;
-        while (i < 500)
+        t_vec   ray = new_vector_2D(data->map.player.dir.elements[0] + data->map.player.plane.elements[0] * (-1), data->map.player.dir.elements[1] + data->map.player.plane.elements[1] * (-1));
+        double i = -1.0f;
+        while (i < 1.0f)
         {
-            draw_ray(data, ray.elements[0], ray.elements[1], WHITE); 
-            rotate_vect_by_p(&ray, -10 * (M_PI / 180));
-            printf("ray_x : %lf, ray_y : %lf\n", ray.elements[0], ray.elements[1]);
-            i++;
+            i += 0.005f;
+            draw_ray(data, ray, WHITE); 
+            ray = new_vector_2D(data->map.player.dir.elements[0] + data->map.player.plane.elements[0] * (i), data->map.player.dir.elements[1] + data->map.player.plane.elements[1] * (i));
         }
 }

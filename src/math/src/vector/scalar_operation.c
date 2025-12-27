@@ -23,8 +23,8 @@ t_vec	scalar_multiplication(t_vec v, float k)
 	t_vec	ret;
 	unsigned int	i;
 
-	ret = allocate(v.dim);
 	i = 0;
+	ret.dim = 2;
 	while (i < ret.dim)
 	{
 		ret.elements[i] = v.elements[i] * k;
@@ -59,11 +59,11 @@ void	scalar_multiplication_by(t_vec *v, float k)
 */
 t_vec	scalar_division(t_vec v, float k)
 {
-	t_vec	ret;
+	t_vec			ret;
 	unsigned int	i;
 
-	ret = allocate(v.dim);
 	i = 0;
+	ret.dim = 2;
 	while (i < ret.dim)
 	{
 		ret.elements[i] = v.elements[i] / k;
