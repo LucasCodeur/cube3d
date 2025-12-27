@@ -6,13 +6,11 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:07:03 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/16 15:58:57 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/27 11:17:54 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
-
-static const t_vec	g_VEC_UNDEFINED = {0, NULL};
 
 /**
 * @brief allow to multiply two vectors together and produce a new one
@@ -22,14 +20,11 @@ static const t_vec	g_VEC_UNDEFINED = {0, NULL};
 */
 t_vec	multiply(t_vec v1, t_vec v2)
 {
-	if (v1.dim != v2.dim)
-		return (g_VEC_UNDEFINED);
-
 	t_vec			ret;
 	unsigned int	i;
 
-	ret = allocate(v1.dim);
 	i = 0;
+	ret.dim = 2;
 	while (i < ret.dim)
 	{
 		ret.elements[i] = v1.elements[i] * v2.elements[i];	
@@ -84,24 +79,5 @@ float	dot(t_vec v1, t_vec v2)
 			i++;
 		}
 	}
-	return (ret);
-}
-
-/**
-* @brief allows you to do a vectorial product
-* @param v1 the first vector
-* @param v2 the second vector
-* @return a new vector perpendicular of the twos vectors
-*/
-t_vec	cross_product(t_vec v1, t_vec v2)
-{
-	if (v1.dim != 3 || v2.dim != 3)
-		return (g_VEC_UNDEFINED);
-	t_vec	ret;
-
-	ret = allocate(3);
-	ret.elements[0] = (v1.elements[1] * v2.elements[2] - (v1.elements[2] * v2.elements[1]));
-	ret.elements[1] = -1 * ((v1.elements[0] * v2.elements[2]) - (v1.elements[2] * v2.elements[0]));
-	ret.elements[2] = (v1.elements[0] * v2.elements[1] - (v1.elements[1] * v2.elements[0]));
 	return (ret);
 }

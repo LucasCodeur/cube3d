@@ -6,13 +6,11 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:06:25 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/03 15:33:21 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/27 11:17:23 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
-
-static const t_vec	g_VEC_UNDEFINED = {0, NULL};
 
 /**
 * @brief allow to subtract two vectors together and produce a new one
@@ -22,14 +20,11 @@ static const t_vec	g_VEC_UNDEFINED = {0, NULL};
 */
 t_vec	subtract(t_vec v1, t_vec v2)
 {
-	if (v1.dim != v2.dim)
-		return (g_VEC_UNDEFINED);
-
 	t_vec			ret;
 	unsigned int	i;
 
-	ret = allocate(v1.dim);
 	i = 0;
+	ret.dim = 2;
 	while (i < ret.dim)
 	{
 		ret.elements[i] = v1.elements[i] - v2.elements[i];	

@@ -6,7 +6,7 @@
 #    By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2025/12/26 18:03:22 by lud-adam         ###   ########.fr        #
+#    Updated: 2025/12/27 11:28:15 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,6 +130,10 @@ $(P_LIB_MATH)math.a:
 #                                      Other RULES                                          #
 #                                                                                           #
 #############################################################################################
+
+make:
+	$(P_LIB_MATH) make
+
 # Rules for clean up
 clean:
 	$(MAKE) -C $(P_MLX) clean
@@ -143,6 +147,8 @@ clean-bin:
 
 clean-obj:
 	@$(MAKE) clean
+	$(MAKE) -C $(P_MLX) clean
+	$(MAKE) -C $(P_LIB_MATH) clean
 
 fclean:
 	@$(MAKE) clean-obj

@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:01:40 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/18 14:55:09 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/27 10:35:01 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ void	d_generate_map(t_data* data)
 		}
 		data->map.grid[i][SIZE_X] = '\0';
 	}
+	data->map.grid[10][60] = '1';
+	data->map.grid[11][60] = '1';
+	data->map.grid[12][60] = '1';
+	data->map.grid[13][60] = '1';
 	data->map.player.pos.elements[0] = (SIZE_X + 2) * 0.5;
 	data->map.player.pos.elements[1] = (SIZE_Y + 2) * 0.5;
 }

@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:48:48 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/18 10:42:41 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/27 10:58:08 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 typedef struct s_vec
 {
 	unsigned int dim;
-	float	*elements;
+	double	elements[2];
 
 } t_vec;
 

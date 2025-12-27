@@ -136,6 +136,7 @@ $(P_OBJ)%.o: %.c
 # Rules for clean up
 clean:
 	rm -rfd $(P_OBJ)
+	rm -rfd $(NAME)
 	rm -rfd $(OBJS)
 	rm -rfd $(DEPS)
 

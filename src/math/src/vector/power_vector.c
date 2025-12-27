@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:08:50 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/03 15:29:05 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/27 11:18:53 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_vec	power(t_vec v, float k)
 	t_vec			ret;
 	unsigned int	i;
 
-	ret = allocate(v.dim);
 	i = 0;
+	ret.dim = 2;
 	while (i < ret.dim)
 	{
 		ret.elements[i] = powf(v.elements[i], k);

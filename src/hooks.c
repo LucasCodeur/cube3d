@@ -6,12 +6,13 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:13:52 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/26 18:08:33 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/27 11:07:24 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 #include "matrice.h"
+#include "vector.h"
 
 #include <mlx.h>
 #include <math.h>
@@ -30,16 +31,24 @@ static int	rotate_hook(t_data* data, int keycode);
 */
 int move_hero(int keycode, t_data *data)
 {
+	t_vec	value; 
+
+	value = new_vector_2D(0.0f, 0.0f);
 	if ((keycode == XK_d || keycode == XK_D || keycode == XK_l || keycode == XK_L) && data->map.player.pos.elements[0] < data->map.cols - 2)
-		data->map.player.pos.elements[0] += 0.2f;
+		value.elements[0] = 0.2f;
 	else if ((keycode == XK_a || keycode == XK_A || keycode == XK_h || keycode == XK_H) && data->map.player.pos.elements[0] > 1)
-		data->map.player.pos.elements[0] -= 0.2f;
+		value.elements[0] = -0.2f;
 	else if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j ) && data->map.player.pos.elements[1] < data->map.rows - 2)
-		data->map.player.pos.elements[1] += 0.2f;
+		value.elements[1] = 0.2f;
 	else if ((keycode == XK_w || keycode == XK_W || keycode == XK_k || keycode == XK_K) && data->map.player.pos.elements[0] > 1)
-		data->map.player.pos.elements[1] -= 0.2f;
+		value.elements[1] = -0.2f;
 	else
 		rotate_hook(data, keycode);
+	if ((value.elements[0] != 0.0f || value.elements[1] != 0.0f) && data->map.grid[(int)(value.elements[1] + data->map.player.pos.elements[1])][(int)(value.elements[0] + data->map.player.pos.elements[0])] == '0')
+	{
+		data->map.player.pos.elements[0] += value.elements[0];
+		data->map.player.pos.elements[1] += value.elements[1];
+	}
 	clear_img(&data->img);
 	//WARN: have to change
 		t_display_map_2D(data);

@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:09:23 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/18 15:06:26 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/27 11:21:22 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_vec	normalized(t_vec v)
 	float			mag;
 	unsigned int	i;
 
-	ret = allocate(v.dim);
 	i = 0;
 	mag = magnitude(v);
 	while (i < ret.dim)
