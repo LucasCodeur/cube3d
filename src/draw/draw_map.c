@@ -13,7 +13,7 @@
 #include "display.h"
 
 /**
- * @brief fill draw_start and draw_end, that the born of the line to draw to display * the walls.
+ * @brief fill draw_start and draw_end, that the born of the line in order to display the walls.
  * @param data all information about the program.
  * @param draw_start the beginning of the line to draw in order to display the wall.
  * @param draw_end the ending of the line to draw in order to display the wall.

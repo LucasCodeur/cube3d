@@ -34,14 +34,23 @@ int move_hero(int keycode, t_data *data)
 	t_vec	value; 
 
 	value = new_vector_2D(0.0f, 0.0f);
-	if ((keycode == XK_d || keycode == XK_D || keycode == XK_l || keycode == XK_L) && data->map.player.pos.elements[0] < data->map.cols - 2)
-		value.elements[0] = 0.2f;
-	else if ((keycode == XK_a || keycode == XK_A || keycode == XK_h || keycode == XK_H) && data->map.player.pos.elements[0] > 1)
-		value.elements[0] = -0.2f;
-	else if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j ) && data->map.player.pos.elements[1] < data->map.rows - 2)
-		value.elements[1] = 0.2f;
-	else if ((keycode == XK_w || keycode == XK_W || keycode == XK_k || keycode == XK_K) && data->map.player.pos.elements[0] > 1)
-		value.elements[1] = -0.2f;
+	// if ((keycode == XK_d || keycode == XK_D || keycode == XK_l || keycode == XK_L) && data->map.grid[(int)data->map.player.pos.elements[1]][(int)data->map.player.pos.elements[0]])
+	// {
+	// 	value.elements[0] = 0.2f * data->map.player.pos.elements[0];
+	// }
+	// if ((keycode == XK_a || keycode == XK_A || keycode == XK_h || keycode == XK_H) && data->map.player.pos.elements[0] > 1)
+	// 	value.elements[0] = -0.2f * data->map.player.pos.elements[0];
+	if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j )/* && data->map.grid[(int)data->map.player.pos.elements[1]][(int)(data->map.player.pos.elements[0] * 0.2f)]*/)
+	{
+		value.elements[0] = -0.2f * data->map.player.dir.elements[0];
+		value.elements[1] = -0.2f * data->map.player.dir.elements[1];
+	}
+	else if ((keycode == XK_w || keycode == XK_W || keycode == XK_k || keycode == XK_K) /*&& data->map.grid[(int)data->map.player.pos.elements[1]][(int)(data->map.player.pos.elements[0] * -0.2f)]*/)
+	{
+
+		value.elements[0] = 0.2f * data->map.player.dir.elements[0];
+		value.elements[1] = 0.2f * data->map.player.dir.elements[1];
+	}
 	else
 		rotate_hook(data, keycode);
 	if ((value.elements[0] != 0.0f || value.elements[1] != 0.0f) && data->map.grid[(int)(value.elements[1] + data->map.player.pos.elements[1])][(int)(value.elements[0] + data->map.player.pos.elements[0])] == '0')
@@ -49,7 +58,6 @@ int move_hero(int keycode, t_data *data)
 		data->map.player.pos.elements[0] += value.elements[0];
 		data->map.player.pos.elements[1] += value.elements[1];
 	}
-	clear_img(&data->img);
 	//WARN: have to change
 		draw_map(data);
 	return (true);
