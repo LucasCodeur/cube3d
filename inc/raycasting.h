@@ -14,11 +14,6 @@
 # define RAYCASTING_H
 
 #include "vector.h"
-
-typedef struct s_ray
-{
-	t_vec	dir;
-	t_vec	pos;
-}	t_ray;
+#include "display.h"
 
 #endif

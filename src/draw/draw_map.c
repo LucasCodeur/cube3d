@@ -10,115 +10,81 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "display.h"
 
-static void	fill_color(t_map map, int x, int y, t_pixel* color);
-static void convert_and_draw_map(t_data* data, int x, int y, int tile_size);
+/**
+ * @brief fill draw_start and draw_end, that the born of the line to draw to display * the walls.
+ * @param data all information about the program.
+ * @param draw_start the beginning of the line to draw in order to display the wall.
+ * @param draw_end the ending of the line to draw in order to display the wall.
+ * @return
+ */
+void compute_height_of_line(t_data* data, int* draw_start, int* draw_end)
+	{
+	int	line_height;
+	double	dist;
+
+	dist = compute_dist(data, data->ray.dir);
+	line_height = (int)(WIN_HEIGHT / dist);
+	*draw_start = -line_height / 2 + WIN_HEIGHT / 2;
+	if (*draw_start < 0)
+		*draw_start = 0;
+	*draw_end = line_height / 2 + WIN_HEIGHT / 2;
+	if (*draw_end >= WIN_HEIGHT)
+		*draw_end = WIN_HEIGHT - 1;
+}
 
 /**
-* @brief allow to draw the map
-* @param data all information about the program
-* @param tile_size size of the pixel to draw
-* @return true if success false if not
+* @brief define camera according x 
+* @param x position on the abscisse
+* @return the value of camera that correspond at of percentage of the fov
 */
-bool	draw_map(t_data* data, int tile_size)
+t_vec define_percentage_of_fov(int x)
 {
-	int		y;
-	int		x;
+	t_vec camera;
+
+	camera.elements[0] = 2 * x / (double)WIN_WIDTH - 1;
+	camera.elements[1] = 0.0f;
+	return (camera);
+}
+
+/**
+* @brief define the ray to cast
+* @param data all information about the program
+* @return the ray
+*/
+t_vec define_ray(t_data* data)
+{
+	t_vec ret;
+
+	ret.elements[0] = data->map.player.dir.elements[0] + data->map.player.plane.elements[0] * data->map.player.camera.elements[0];
+	ret.elements[1] = data->map.player.dir.elements[1] + data->map.player.plane.elements[1] * data->map.player.camera.elements[0];
+	return (ret);
+}
+
+/**
+* @brief draw the line define by x, the sky and the sol.
+* @param data all information about the program.
+* @param draw_start begin of the line to draw.
+* @param draw_end end of the line to draw.
+* @return
+*/
+void draw_line(t_data* data, int draw_start, int draw_end, int x)
+{
+	t_pixel color;
+	int	y;
 
 	y = 0;
-	x = 0;
-	while (y < data->map.rows)
-	{
-		while (x < data->map.cols)
-		{
-			convert_and_draw_map(data, x, y, tile_size);		
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-		
-	return (true);
-}
-
-/**
-* @brief allow to draw the hero on the map
-* @param data all information about the program
-* @param tile_size size of the pixel to draw
-* @return 
-*/
-void	draw_hero(t_data* data, int tile_size)
-{
-	t_pixel	color;
-	int	px_start; 
-	int	py_start; 
-	int	py;
-	int	px;
-
-	px_start = data->map.player.pos.elements[0] * tile_size;
-	py_start = data->map.player.pos.elements[1] * tile_size;
+	color.value = YELLOW;
+	while (y++ < draw_start)
+		my_mlx_pixel_put(data, x, y, &color);
+	color.value = ORANGE;
+	y = draw_start;
+	while (y++ < draw_end)
+		my_mlx_pixel_put(data, x, y, &color);
 	color.value = GREEN;
-	py = 0;
-	px = 0;
-	while (py < tile_size)
-	{
-		py++;
-		while (px < tile_size)
-		{
-			my_mlx_pixel_put(data, px_start + px, py_start + py, &color);
-			px++;
-		}
-		px = 0;
-	}
-}
-
-/**
-	* @brief allow to choose the color according the case of the 2D map
-	* @param map 2D array of the map
-	* @param int x ray.pos on the line
-	* @param int y ray.pos of the line
-	* @param color structure we have to fill know the color to display
-	* @return
-*/
-static void	fill_color(t_map map, int x, int y, t_pixel* color)
-{
-	if (map.grid[y][x] == '0')
-		color->value = RED;
-	else
-		color->value = BLUE;
-}
-
-/**
-	* @brief allow to draw the pixel with a conversion of x and y in order to draw correctly
-	* @param data all information about the program
-	* @param int x ray.pos on the line
-	* @param int y ray.pos of the line
-	* @param tile_size size of the pixel to draw
-	* @return
-*/
-static void convert_and_draw_map(t_data* data, int x, int y, int tile_size)
-{
-	t_pixel	color;
-	int		px_start; 
-	int		py_start;
-	int		py;
-	int		px;
-
-	fill_color(data->map, x, y, &color);	
-	px_start = x * tile_size;
-	py_start = y * tile_size;
-	px = 0;
-	py = 0;
-	while (py < tile_size)
-	{
-		while (px < tile_size)
-		{
-			my_mlx_pixel_put(data, px_start + px, py_start + py, &color);
-			px++;
-		}
-		py++;
-		px = 0;
-	}
+	y = draw_end;
+	while (y++ < WIN_HEIGHT)
+		my_mlx_pixel_put(data, x, y, &color);
+	return ;
 }

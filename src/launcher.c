@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 17:28:43 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/26 18:05:44 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/27 17:14:54 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	launcher(t_data *data)
 	// if (keys_status[INVENTORY])
 	// 	open_inventory
 	init_screen_mlx(data);
-	t_display_map_2D(data);
+	draw_map(data);
 	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, move_hero, data);
 	mlx_loop(data->mlx.ptr);
 }

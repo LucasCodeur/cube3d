@@ -6,7 +6,7 @@
 #    By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2025/12/27 11:28:15 by lud-adam         ###   ########.fr        #
+#    Updated: 2025/12/27 17:12:18 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRC = \
 	mlx.c \
 	hooks.c \
 	create_sprites.c \
+	compute_distance.c \
 	map.c \
 	launcher.c \
 	utils.c \

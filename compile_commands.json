@@ -238,5 +238,71 @@
    ".obj/test/t_fov.o"
   ],
   "file": "src/test/t_fov.c"
+ },
+ {
+  "directory": "/home/eveil/code/42_projects/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-I",
+   "src//math/inc/",
+   "-c",
+   "src/compute_distance.c",
+   "-o",
+   ".obj/compute_distance.o"
+  ],
+  "file": "src/compute_distance.c"
+ },
+ {
+  "directory": "/home/eveil/code/42_projects/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-I",
+   "src//math/inc/",
+   "-c",
+   "src/draw/draw_ray.c",
+   "-o",
+   ".obj/draw/draw_ray.o"
+  ],
+  "file": "src/draw/draw_ray.c"
+ },
+ {
+  "directory": "/home/eveil/code/42_projects/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-I",
+   "src//math/inc/",
+   "-c",
+   "src/test/t_map_2D.c",
+   "-o",
+   ".obj/test/t_map_2D.o"
+  ],
+  "file": "src/test/t_map_2D.c"
  }
 ]

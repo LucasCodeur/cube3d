@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:13:52 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/27 11:07:24 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/12/27 17:16:47 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int move_hero(int keycode, t_data *data)
 	}
 	clear_img(&data->img);
 	//WARN: have to change
-		t_display_map_2D(data);
+		draw_map(data);
 	return (true);
 }
 
