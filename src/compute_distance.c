@@ -35,5 +35,5 @@ double compute_dist(t_data* data, t_vec ray_dir)
             break;
         dist += 0.05;
     }
-	return (dist);
+    return (dist);
 }

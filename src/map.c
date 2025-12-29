@@ -13,7 +13,6 @@
 #include  <mlx.h>
 
 #include "display.h"
-#include "raycasting.h"
 
 /**
 * @brief allow to display the map

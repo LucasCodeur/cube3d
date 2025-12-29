@@ -6,7 +6,7 @@
 #    By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2025/12/09 16:48:41 by lud-adam         ###   ########.fr        #
+#    Updated: 2025/12/29 15:46:09 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ P_INC_TEST = $(P_TEST)inc/
 
 SRC = \
 	main.c \
+	utils_maths.c \
 
 SRC_VECTOR = \
 	vector.c \

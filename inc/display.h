@@ -16,8 +16,8 @@
 # define WIN_WIDTH 500
 # define WIN_HEIGHT 400
 # define SCALE_TILE	64
-# define SIZE_X	10
-# define SIZE_Y	10
+# define SIZE_X	50
+# define SIZE_Y	50
 # define FOV M_PI / 3.0
 # define SCALE 48
 
