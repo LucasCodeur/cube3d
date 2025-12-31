@@ -21,15 +21,15 @@
  */
 void compute_height_of_line(t_data* data, int* draw_start, int* draw_end)
 {
-	double	line_height;
+	int	line_height;
 	double	dist;
 
-	dist = compute_dist(data, data->ray.dir);
+	dist = compute_dist(data, data->ray_dir);
 	line_height = (int)(WIN_HEIGHT / dist);
-	*draw_start = -line_height / 2 + (double)WIN_HEIGHT / 2 + 0.5f;
+	*draw_start = -line_height / 2 + WIN_HEIGHT / 2;
 	if (*draw_start < 0)
 		*draw_start = 0;
-	*draw_end = line_height / 2 + (double)WIN_HEIGHT / 2 + 0.5f;
+	*draw_end = line_height / 2 + WIN_HEIGHT / 2;
 	if (*draw_end >= WIN_HEIGHT)
 		*draw_end = WIN_HEIGHT - 1;
 }

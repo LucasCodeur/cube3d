@@ -19,9 +19,9 @@
 * @param v the vector to multiply by itself
 * @return the sum of the multiplication of each element
 */
-float	magnitude_squared(t_vec v)
+double	magnitude_squared(t_vec v)
 {
-	float			ret;
+	double			ret;
 	unsigned int	i;
 
 	ret = 0.0f;
@@ -39,7 +39,7 @@ float	magnitude_squared(t_vec v)
 * @param v the vector to compute the magnitude
 * @return the sum of the multiplication of each element squared
 */
-float	magnitude(t_vec v)
+double	magnitude(t_vec v)
 {
 	return (sqrt(magnitude_squared(v)));	
 }

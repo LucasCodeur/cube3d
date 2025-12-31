@@ -30,7 +30,7 @@ bool	draw_map(t_data* data)
 	while (x < WIN_WIDTH)
 	{
 		data->map.player.camera = define_percentage_of_fov(x);
-		data->ray.dir = define_ray(data);
+		data->ray_dir = define_ray(data);
 		compute_height_of_line(data, &draw_start, &draw_end);	
 		draw_line(data, draw_start, draw_end, x);
 		x++;

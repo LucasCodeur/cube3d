@@ -47,7 +47,7 @@ bool	t_display_map_2D(t_data* data)
 	return (true);
 }
 
-static void    t_set_value(t_data* data, int* map_x, int* map_y);
+static void    t_set_value(t_data* data, int* map_x, int* map_y, int* screen_x, int* screen_y, int test_x, int test_y);
 
 /**
 * @brief allow to draw any ray on the screen
@@ -59,29 +59,33 @@ static void    t_set_value(t_data* data, int* map_x, int* map_y);
 */
 void t_draw_ray(t_data* data, t_vec ray_dir, int hex_color)
 {
-    t_pixel     color;
-    double	dist;
-    int		map_x; 
-    int		map_y;
-    
-    color.value = hex_color;
-    dist = 0;
-    while (dist < 300.0)
-    { 
-        data->ray.test_x = data->map.player.pos.elements[0] + ray_dir.elements[0] * dist;
-        data->ray.test_y = data->map.player.pos.elements[1] + ray_dir.elements[1] * dist;
-        t_set_value(data, &map_x, &map_y);
-        if ((data->ray.screen_x >= 0 && data->ray.screen_x < WIN_WIDTH &&
-            data->ray.screen_y >= 0 && data->ray.screen_y < WIN_HEIGHT &&
-            (int)data->ray.test_x >= 0 && (int)data->ray.test_x < WIN_WIDTH &&
-            (int)data->ray.test_y >= 0 && (int)data->ray.test_y < WIN_HEIGHT) && (data->map.grid[map_y][map_x] == '0'))
-        {
-            my_mlx_pixel_put(data, data->ray.screen_x, data->ray.screen_y, &color);
-        }
-        else
-            break;
-        dist += 0.05;
-    }
+	t_pixel		color;
+	double		dist;
+	int		map_x; 
+	int		map_y;
+	int		screen_x;
+	int		screen_y;
+	int		test_x;
+	int		test_y;
+
+	color.value = hex_color;
+	dist = 0;
+	while (dist < 300.0)
+	{ 
+	test_x = data->map.player.pos.elements[0] + ray_dir.elements[0] * dist;
+	test_y = data->map.player.pos.elements[1] + ray_dir.elements[1] * dist;
+	t_set_value(data, &map_x, &map_y, &screen_x, &screen_y, test_x, test_y);
+	if ((screen_x >= 0 && screen_x < WIN_WIDTH &&
+	    screen_y >= 0 && screen_y < WIN_HEIGHT &&
+	    test_x >= 0 && test_x < WIN_WIDTH &&
+	    test_y >= 0 && test_y < WIN_HEIGHT) && (data->map.grid[map_y][map_x] == '0'))
+	{
+	    my_mlx_pixel_put(data, screen_x, screen_y, &color);
+	}
+	else
+	    break;
+	dist += 0.05;
+	}
 }
 
 /**
@@ -91,14 +95,14 @@ void t_draw_ray(t_data* data, t_vec ray_dir, int hex_color)
 * @param map_y index to access in the map in order to check if we are on a wall or not
 * @return
 */
-static void    t_set_value(t_data* data, int* map_x, int* map_y)
+static void    t_set_value(t_data* data, int* map_x, int* map_y, int* screen_x, int* screen_y, int test_x, int test_y)
 {
         
-        *map_x = (int)data->ray.test_x;
-        *map_y = (int)data->ray.test_y;
+        *map_x = test_x;
+        *map_y = test_y;
         
-        data->ray.screen_x = (int)(data->ray.test_x * data->tile_size + data->tile_size / 2);
-        data->ray.screen_y = (int)(data->ray.test_y * data->tile_size + data->tile_size / 2);
+        *screen_x = test_x * data->tile_size + data->tile_size / 2;
+	*screen_y = test_y * data->tile_size + data->tile_size / 2;
 }
 
 static void	fill_color(t_map map, int x, int y, t_pixel* color);

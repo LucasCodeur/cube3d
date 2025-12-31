@@ -16,8 +16,8 @@
 # define WIN_WIDTH 500
 # define WIN_HEIGHT 400
 # define SCALE_TILE	64
-# define SIZE_X	50
-# define SIZE_Y	50
+# define SIZE_X	20
+# define SIZE_Y	20
 # define FOV M_PI / 3.0
 # define SCALE 48
 
@@ -104,24 +104,13 @@ typedef	struct	s_map
 	t_hero	player;
 }				t_map;
 
-typedef struct s_ray
-{
-	t_vec	dir;
-	double	test_x;
-	double	test_y;
-	int		map_x;
-	int		map_y;
-	int		screen_x;
-	int		screen_y;
-}	t_ray;
-
 typedef struct s_data
 {
 	int		tile_size;
 	t_mlx	mlx;
 	t_img	img;
 	t_map	map;
-	t_ray	ray;
+	t_vec	ray_dir;
 }				t_data;
 
 
