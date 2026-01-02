@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:13:52 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/27 17:16:47 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/02 15:05:19 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int move_hero(int keycode, t_data *data)
 		data->map.player.pos.elements[1] += value.elements[1];
 	}
 	//WARN: have to change
-		draw_map(data);
+	draw_map(data);
+	t_display_map_2D(data);
 	return (true);
 }
 
@@ -73,13 +74,13 @@ static int	rotate_hook(t_data* data, int keycode)
 {
 	if (keycode == XK_q || keycode == XK_Q || keycode == XK_Left)
 	{
-		data->map.player.dir = rotate_vect(data->map.player.dir, -10.0 * (M_PI / 180));
-		data->map.player.plane = rotate_vect(data->map.player.plane, -10.0 * (M_PI / 180));
+		data->map.player.dir = rotate_vect(data->map.player.dir, -5.0 * (M_PI / 180));
+		data->map.player.plane = rotate_vect(data->map.player.plane, -5.0 * (M_PI / 180));
 	}
 	else if (keycode == XK_e || keycode == XK_E || keycode == XK_Right)
 	{
-		data->map.player.dir = rotate_vect(data->map.player.dir, 10.0 * (M_PI / 180));
-		data->map.player.plane = rotate_vect(data->map.player.plane, 10.0 * (M_PI / 180));
+		data->map.player.dir = rotate_vect(data->map.player.dir, 5.0 * (M_PI / 180));
+		data->map.player.plane = rotate_vect(data->map.player.plane, 5.0 * (M_PI / 180));
 	}
 	return (true);
 }

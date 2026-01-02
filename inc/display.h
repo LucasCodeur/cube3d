@@ -6,15 +6,15 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/27 17:17:47 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/02 15:14:32 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DISPLAY_H 
 # define DISPLAY_H
 
-# define WIN_WIDTH 500
-# define WIN_HEIGHT 400
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 800
 # define SCALE_TILE	64
 # define SIZE_X	20
 # define SIZE_Y	20
@@ -102,6 +102,8 @@ typedef	struct	s_map
 	int		rows;
 	int		cols;
 	t_hero	player;
+	int		x;
+	int		y;
 }				t_map;
 
 typedef struct s_data
@@ -112,7 +114,6 @@ typedef struct s_data
 	t_map	map;
 	t_vec	ray_dir;
 }				t_data;
-
 
 void	launcher(t_data *data);
 double	compute_dist(t_data* data, t_vec ray_dir);

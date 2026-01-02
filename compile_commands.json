@@ -1,6 +1,6 @@
 [
  {
-  "directory": "/home/eveil/code/42_projects/cube3d",
+  "directory": "/home/lud-adam/Documents/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -20,7 +20,7 @@
   "file": "src/main.c"
  },
  {
-  "directory": "/home/eveil/code/42_projects/cube3d",
+  "directory": "/home/lud-adam/Documents/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -42,7 +42,7 @@
   "file": "src/mlx.c"
  },
  {
-  "directory": "/home/eveil/code/42_projects/cube3d",
+  "directory": "/home/lud-adam/Documents/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -64,7 +64,7 @@
   "file": "src/hooks.c"
  },
  {
-  "directory": "/home/eveil/code/42_projects/cube3d",
+  "directory": "/home/lud-adam/Documents/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -86,161 +86,7 @@
   "file": "src/create_sprites.c"
  },
  {
-  "directory": "/home/eveil/code/42_projects/cube3d",
-  "arguments": [
-   "cc",
-   "-Wextra",
-   "-Wall",
-   "-Werror",
-   "-MMD",
-   "-MP",
-   "-I",
-   "inc/",
-   "-I",
-   "minilibx-linux/",
-   "-I",
-   "src//math/inc/",
-   "-c",
-   "src/map.c",
-   "-o",
-   ".obj/map.o"
-  ],
-  "file": "src/map.c"
- },
- {
-  "directory": "/home/eveil/code/42_projects/cube3d",
-  "arguments": [
-   "cc",
-   "-Wextra",
-   "-Wall",
-   "-Werror",
-   "-MMD",
-   "-MP",
-   "-I",
-   "inc/",
-   "-I",
-   "minilibx-linux/",
-   "-I",
-   "src//math/inc/",
-   "-c",
-   "src/launcher.c",
-   "-o",
-   ".obj/launcher.o"
-  ],
-  "file": "src/launcher.c"
- },
- {
-  "directory": "/home/eveil/code/42_projects/cube3d",
-  "arguments": [
-   "cc",
-   "-Wextra",
-   "-Wall",
-   "-Werror",
-   "-MMD",
-   "-MP",
-   "-I",
-   "inc/",
-   "-I",
-   "minilibx-linux/",
-   "-I",
-   "src//math/inc/",
-   "-c",
-   "src/utils.c",
-   "-o",
-   ".obj/utils.o"
-  ],
-  "file": "src/utils.c"
- },
- {
-  "directory": "/home/eveil/code/42_projects/cube3d",
-  "arguments": [
-   "cc",
-   "-Wextra",
-   "-Wall",
-   "-Werror",
-   "-MMD",
-   "-MP",
-   "-I",
-   "inc/",
-   "-I",
-   "minilibx-linux/",
-   "-I",
-   "src//math/inc/",
-   "-c",
-   "src/debug.c",
-   "-o",
-   ".obj/debug.o"
-  ],
-  "file": "src/debug.c"
- },
- {
-  "directory": "/home/eveil/code/42_projects/cube3d",
-  "arguments": [
-   "cc",
-   "-Wextra",
-   "-Wall",
-   "-Werror",
-   "-MMD",
-   "-MP",
-   "-I",
-   "inc/",
-   "-I",
-   "minilibx-linux/",
-   "-I",
-   "src//math/inc/",
-   "-c",
-   "src/draw/draw_map.c",
-   "-o",
-   ".obj/draw/draw_map.o"
-  ],
-  "file": "src/draw/draw_map.c"
- },
- {
-  "directory": "/home/eveil/code/42_projects/cube3d",
-  "arguments": [
-   "cc",
-   "-Wextra",
-   "-Wall",
-   "-Werror",
-   "-MMD",
-   "-MP",
-   "-I",
-   "inc/",
-   "-I",
-   "minilibx-linux/",
-   "-I",
-   "src//math/inc/",
-   "-c",
-   "src/draw/utils_draw.c",
-   "-o",
-   ".obj/draw/utils_draw.o"
-  ],
-  "file": "src/draw/utils_draw.c"
- },
- {
-  "directory": "/home/eveil/code/42_projects/cube3d",
-  "arguments": [
-   "cc",
-   "-Wextra",
-   "-Wall",
-   "-Werror",
-   "-MMD",
-   "-MP",
-   "-I",
-   "inc/",
-   "-I",
-   "minilibx-linux/",
-   "-I",
-   "src//math/inc/",
-   "-c",
-   "src/test/t_fov.c",
-   "-o",
-   ".obj/test/t_fov.o"
-  ],
-  "file": "src/test/t_fov.c"
- },
- {
-  "directory": "/home/eveil/code/42_projects/cube3d",
+  "directory": "/home/lud-adam/Documents/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -262,7 +108,117 @@
   "file": "src/compute_distance.c"
  },
  {
-  "directory": "/home/eveil/code/42_projects/cube3d",
+  "directory": "/home/lud-adam/Documents/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-I",
+   "src//math/inc/",
+   "-c",
+   "src/map.c",
+   "-o",
+   ".obj/map.o"
+  ],
+  "file": "src/map.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-I",
+   "src//math/inc/",
+   "-c",
+   "src/launcher.c",
+   "-o",
+   ".obj/launcher.o"
+  ],
+  "file": "src/launcher.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-I",
+   "src//math/inc/",
+   "-c",
+   "src/utils.c",
+   "-o",
+   ".obj/utils.o"
+  ],
+  "file": "src/utils.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-I",
+   "src//math/inc/",
+   "-c",
+   "src/debug.c",
+   "-o",
+   ".obj/debug.o"
+  ],
+  "file": "src/debug.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-I",
+   "src//math/inc/",
+   "-c",
+   "src/draw/draw_map.c",
+   "-o",
+   ".obj/draw/draw_map.o"
+  ],
+  "file": "src/draw/draw_map.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d",
   "arguments": [
    "cc",
    "-Wextra",
@@ -284,7 +240,51 @@
   "file": "src/draw/draw_ray.c"
  },
  {
-  "directory": "/home/eveil/code/42_projects/cube3d",
+  "directory": "/home/lud-adam/Documents/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-I",
+   "src//math/inc/",
+   "-c",
+   "src/draw/utils_draw.c",
+   "-o",
+   ".obj/draw/utils_draw.o"
+  ],
+  "file": "src/draw/utils_draw.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-I",
+   "src//math/inc/",
+   "-c",
+   "src/test/t_fov.c",
+   "-o",
+   ".obj/test/t_fov.o"
+  ],
+  "file": "src/test/t_fov.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d",
   "arguments": [
    "cc",
    "-Wextra",

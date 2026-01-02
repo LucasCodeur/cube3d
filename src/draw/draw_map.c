@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:51:45 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/18 13:41:47 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/02 16:05:03 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_vec define_percentage_of_fov(int x)
 {
 	t_vec camera;
 
-	camera.elements[0] = 2 * x / (double)WIN_WIDTH - 1;
+	camera.elements[0] = x * 2 / (double)WIN_WIDTH - 1;
 	camera.elements[1] = 0.0f;
 	return (camera);
 }
