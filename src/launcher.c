@@ -74,7 +74,7 @@ void	launcher(t_data *data)
 	// 	open_inventory
 	init_screen_mlx(data);
 	draw_map(data);
-	t_display_map_2D(data);
+	// t_display_map_2D(data);
 	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, move_hero, data);
 	mlx_loop(data->mlx.ptr);
 }

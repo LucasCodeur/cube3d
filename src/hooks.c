@@ -53,7 +53,7 @@ int move_hero(int keycode, t_data *data)
 	}
 	//WARN: have to change
 	draw_map(data);
-	// t_display_map_2D(data);
+	t_display_map_2D(data);
 	return (true);
 }
 

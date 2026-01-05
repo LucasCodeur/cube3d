@@ -29,8 +29,8 @@ bool	t_display_map_2D(t_data* data)
 	int size_cols; 
 	int size_rows;
 	
-	size_cols = WIN_WIDTH / data->map.cols;
-	size_rows = WIN_HEIGHT / data->map.rows;
+	size_cols = (WIN_WIDTH / 2) / data->map.cols;
+	size_rows = (WIN_HEIGHT / 2) / data->map.rows;
 	if (size_cols <= size_rows)
 		data->tile_size = size_cols;
 	else
