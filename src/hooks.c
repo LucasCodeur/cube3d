@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:13:52 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/02 15:05:19 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/02 18:00:27 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 //WARN: have to take off
 	#include "test.h"
 
-static int	rotate_hook(t_data* data, int keycode);
-
 /**
 * @brief allow to move inside the map and set different keyhook like aswd
 * @param data contains all information necessary to the project.
@@ -31,57 +29,31 @@ static int	rotate_hook(t_data* data, int keycode);
 */
 int move_hero(int keycode, t_data *data)
 {
-	t_vec	value; 
-
-	value = new_vector_2D(0.0f, 0.0f);
-	// if ((keycode == XK_d || keycode == XK_D || keycode == XK_l || keycode == XK_L) && data->map.grid[(int)data->map.player.pos.elements[1]][(int)data->map.player.pos.elements[0]])
-	// {
-	// 	value.elements[0] = 0.2f * data->map.player.pos.elements[0];
-	// }
-	// if ((keycode == XK_a || keycode == XK_A || keycode == XK_h || keycode == XK_H) && data->map.player.pos.elements[0] > 1)
-	// 	value.elements[0] = -0.2f * data->map.player.pos.elements[0];
-	if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j )/* && data->map.grid[(int)data->map.player.pos.elements[1]][(int)(data->map.player.pos.elements[0] * 0.2f)]*/)
+	if (keycode == XK_d || keycode == XK_D || keycode == XK_l || keycode == XK_L)
 	{
-		value.elements[0] = -0.2f * data->map.player.dir.elements[0];
-		value.elements[1] = -0.2f * data->map.player.dir.elements[1];
+		data->map.player.dir = rotate_vect(data->map.player.dir, 10.0 * (M_PI / 180));
+		data->map.player.plane = rotate_vect(data->map.player.plane, 10.0 * (M_PI / 180));
 	}
-	else if ((keycode == XK_w || keycode == XK_W || keycode == XK_k || keycode == XK_K) /*&& data->map.grid[(int)data->map.player.pos.elements[1]][(int)(data->map.player.pos.elements[0] * -0.2f)]*/)
+	else if (keycode == XK_a || keycode == XK_A || keycode == XK_h || keycode == XK_H)
 	{
-
-		value.elements[0] = 0.2f * data->map.player.dir.elements[0];
-		value.elements[1] = 0.2f * data->map.player.dir.elements[1];
+		data->map.player.dir = rotate_vect(data->map.player.dir, -10.0 * (M_PI / 180));
+		data->map.player.plane = rotate_vect(data->map.player.plane, -10.0 * (M_PI / 180));
 	}
-	else
-		rotate_hook(data, keycode);
-	if ((value.elements[0] != 0.0f || value.elements[1] != 0.0f) && data->map.grid[(int)(value.elements[1] + data->map.player.pos.elements[1])][(int)(value.elements[0] + data->map.player.pos.elements[0])] == '0')
+	else if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j) &&
+		data->map.grid[(int)(data->map.player.pos.elements[1] - 0.5f * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] - 0.5f * data->map.player.dir.elements[0])] == '0')
 	{
-		data->map.player.pos.elements[0] += value.elements[0];
-		data->map.player.pos.elements[1] += value.elements[1];
+		data->map.player.pos.elements[0] -= 0.5f * data->map.player.dir.elements[0];
+		data->map.player.pos.elements[1] -= 0.5f * data->map.player.dir.elements[1];
+	}
+	else if ((keycode == XK_w || keycode == XK_W || keycode == XK_k || keycode == XK_K) && 
+		data->map.grid[(int)(data->map.player.pos.elements[1] + 0.5f * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] + 0.5f * data->map.player.dir.elements[0])] == '0')
+	{
+		data->map.player.pos.elements[0] += 0.5f * data->map.player.dir.elements[0];
+		data->map.player.pos.elements[1] += 0.5f * data->map.player.dir.elements[1];
 	}
 	//WARN: have to change
 	draw_map(data);
-	t_display_map_2D(data);
-	return (true);
-}
-
-/**
-* @brief allow to setup the key hook of the rotation 
-* @param data contains all information necessary to the project.
-* @param keycode, link keybind to an effect
-* @return true if success
-*/
-static int	rotate_hook(t_data* data, int keycode)
-{
-	if (keycode == XK_q || keycode == XK_Q || keycode == XK_Left)
-	{
-		data->map.player.dir = rotate_vect(data->map.player.dir, -5.0 * (M_PI / 180));
-		data->map.player.plane = rotate_vect(data->map.player.plane, -5.0 * (M_PI / 180));
-	}
-	else if (keycode == XK_e || keycode == XK_E || keycode == XK_Right)
-	{
-		data->map.player.dir = rotate_vect(data->map.player.dir, 5.0 * (M_PI / 180));
-		data->map.player.plane = rotate_vect(data->map.player.plane, 5.0 * (M_PI / 180));
-	}
+	// t_display_map_2D(data);
 	return (true);
 }
 
