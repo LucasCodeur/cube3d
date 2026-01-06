@@ -29,13 +29,12 @@ bool	t_display_map_2D(t_data* data)
 	int size_cols; 
 	int size_rows;
 	
-	size_cols = (WIN_WIDTH / 2) / data->map.cols;
-	size_rows = (WIN_HEIGHT / 2) / data->map.rows;
+	size_cols = (WIN_WIDTH / 4) / data->map.cols;
+	size_rows = (WIN_HEIGHT / 4) / data->map.rows;
 	if (size_cols <= size_rows)
 		data->tile_size = size_cols;
 	else
 		data->tile_size = size_rows;
-	clear_img(&data->img);
 	t_draw_map(data, data->tile_size);
 	t_draw_hero(data, data->tile_size);
 	// t_display_fov(data);
@@ -97,7 +96,6 @@ void t_draw_ray(t_data* data, t_vec ray_dir, int hex_color)
 */
 static void    t_set_value(t_data* data, int* map_x, int* map_y, int* screen_x, int* screen_y, int test_x, int test_y)
 {
-        
         *map_x = test_x;
         *map_y = test_y;
         
@@ -177,9 +175,9 @@ void	t_draw_hero(t_data* data, int tile_size)
 static void	fill_color(t_map map, int x, int y, t_pixel* color)
 {
 	if (map.grid[y][x] == '0')
-		color->value = RED;
-	else
 		color->value = BLUE;
+	else
+		color->value = RED;
 }
 
 /**

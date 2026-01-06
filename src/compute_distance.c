@@ -12,7 +12,9 @@
 
 #include "display.h"
 #include "vector.h"
+
 #include <math.h>
+#include <float.h>
 
 static t_vec compute_gradient(t_vec ray_dir);
 static t_vec define_first_step(t_data* data, t_vec ray_dir, t_vec *ray_len, t_vec delta_dist);
@@ -29,12 +31,12 @@ double compute_dist(t_data* data, t_vec ray_dir)
     t_vec   ray_len;
     t_vec   delta_dist;
     t_vec   step;
+    double  perp_wall_dist;
 
     delta_dist = compute_gradient(ray_dir);
     data->map.x = (int)data->map.player.pos.elements[0];
     data->map.y = (int)data->map.player.pos.elements[1];
     step = define_first_step(data, ray_dir, &ray_len, delta_dist);
-        double  perp_wall_dist;
     if (size_ray(data, &ray_len, delta_dist, step) == 0)
         perp_wall_dist = (ray_len.elements[0] - delta_dist.elements[0]);
     else
@@ -51,11 +53,11 @@ static t_vec compute_gradient(t_vec ray_dir)
 {
     t_vec   ret;
     if (ray_dir.elements[0] == 0)
-        ret.elements[0] = 1e30;
+        ret.elements[0] = DBL_MAX;
     else
         ret.elements[0] = fabs(1 / ray_dir.elements[0]);
     if (ray_dir.elements[1] == 0)
-        ret.elements[1] = 1e30;
+        ret.elements[1] = DBL_MAX;
     else
         ret.elements[1] = fabs(1 / ray_dir.elements[1]);
     return (ret);
@@ -72,29 +74,29 @@ static t_vec compute_gradient(t_vec ray_dir)
 */
 static t_vec define_first_step(t_data* data, t_vec ray_dir, t_vec *ray_len, t_vec delta_dist)
 {
-    t_vec   ret;
+    t_vec   step;
 
-    if (ray_dir.elements[0] < 0)
+    if (ray_dir.elements[0] <= 0)
     {
-        ret.elements[0] = -1;
+        step.elements[0] = -1;
         ray_len->elements[0] = (data->map.player.pos.elements[0] - (double)data->map.x) * delta_dist.elements[0];
     }
     else
     {
-        ret.elements[0] = 1;
+        step.elements[0] = 1;
         ray_len->elements[0] = ((double)data->map.x + 1.0 - data->map.player.pos.elements[0]) * delta_dist.elements[0];
     }
-    if (ray_dir.elements[1] < 0)
+    if (ray_dir.elements[1] <= 0)
     {
-        ret.elements[1] = -1;
+        step.elements[1] = -1;
         ray_len->elements[1] = (data->map.player.pos.elements[1] - (double)data->map.y) * delta_dist.elements[1];
     }
     else
     {
-        ret.elements[1] = 1;
-        ray_len->elements[1] = ((double)data->map.y + 1.0 - data->map.player.pos.elements[1] ) * delta_dist.elements[1];
+        step.elements[1] = 1;
+        ray_len->elements[1] = ((double)data->map.y + 1.0 - data->map.player.pos.elements[1]) * delta_dist.elements[1];
     }
-    return (ret);
+    return (step);
 }
 
 /**
@@ -106,33 +108,20 @@ static t_vec define_first_step(t_data* data, t_vec ray_dir, t_vec *ray_len, t_ve
 */
 static  int  size_ray(t_data* data, t_vec *ray_len, t_vec delta_dist, t_vec step)
 {
-    int     side;
-    bool    wall_found;
-    double  distance;
-    double  max_distance;
-
-    wall_found = false;
-    distance = 0.0f;
-    max_distance = 100.0f;
-    side = 0;
-    while (wall_found == false && distance < max_distance)
+    while (data->map.grid[data->map.y][data->map.x] == '0')
     {
-        if (ray_len->elements[0] < ray_len->elements[1])
+        if (ray_len->elements[0] <= ray_len->elements[1])
         {
             data->map.x += (int)step.elements[0];
-            distance += ray_len->elements[0];
             ray_len->elements[0] += delta_dist.elements[0];
-            side = 0;
+            data->side = 0;
         }
         else
         {
             data->map.y += (int)step.elements[1];
-            distance += ray_len->elements[1];
             ray_len->elements[1] += delta_dist.elements[1];
-            side = 1;
+            data->side = 1;
         }
-        if (data->map.grid[data->map.y][data->map.x] != '0')
-            wall_found = true;
     }
-    return (side);
+    return (data->side);
 }

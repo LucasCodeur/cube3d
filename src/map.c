@@ -14,7 +14,6 @@
 
 #include "display.h"
 
-
 /**
  * @brief function allows to create an image with an xpm.
  * @param data contains all information necessary to the project.
@@ -34,7 +33,13 @@ t_img	fill_image(t_data* data, char *path_to_asset)
 	if (!img.ptr)
 	{
 		perror("Error: Image not create\n");
-		exit(1);
+		// exit(1);
+	}
+	img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
+	if (!img.addr)
+	{
+		perror("Error: addr not create\n");
+		// exit(1);
 	}
 	return (img);
 }
@@ -49,10 +54,11 @@ void	load_imgs(t_data *data)
 
 	data->imgs.ground = fill_image(data, ASSET_TILE);
 	data->imgs.wall_east = fill_image(data, ASSET_W_EAST);
-	data->imgs.wall_east = fill_image(data, ASSET_W_WEST);
+	data->imgs.wall_west = fill_image(data, ASSET_W_WEST);
 	data->imgs.wall_north = fill_image(data, ASSET_W_NORTH);
-	data->imgs.wall_north = fill_image(data, ASSET_W_SOUTH);
+	data->imgs.wall_south = fill_image(data, ASSET_W_SOUTH);
 }
+
 /**
 * @brief allow to display the map
 * @param data contains all information necessary to the project.
@@ -74,7 +80,6 @@ bool	draw_map(t_data* data)
 		draw_line(data, draw_start, draw_end, x);
 		x++;
 	}
-	// load_imgs(data);
-	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.ptr , 0, 0);
+	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.ptr, 0, 0);
 	return (true);
 }

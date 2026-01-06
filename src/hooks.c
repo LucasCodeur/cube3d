@@ -52,6 +52,7 @@ int move_hero(int keycode, t_data *data)
 		data->map.player.pos.elements[1] += 0.5f * data->map.player.dir.elements[1];
 	}
 	//WARN: have to change
+	clear_img(&data->img);
 	draw_map(data);
 	t_display_map_2D(data);
 	return (true);

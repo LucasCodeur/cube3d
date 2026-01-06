@@ -96,7 +96,7 @@ void    t_ray_casting_2D(t_data *data)
         double i = -1.0f;
         while (i < 1.0f)
         {
-            i += 0.005f;
+            i += 0.1f;
             t_draw_ray(data, ray, WHITE);
             ray = new_vector_2D(data->map.player.dir.elements[0] + data->map.player.plane.elements[0] * (i), data->map.player.dir.elements[1] + data->map.player.plane.elements[1] * (i));
         }
