@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:51:45 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/02 16:05:03 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/06 19:55:52 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "display.h"
 
+static int	compute_x_y_text(t_data *data, int text_size, bool x);
 t_img choose_texture(t_data *data);
 /**
  * @brief fill draw_start and draw_end, that the born of the line in order to display the walls.
@@ -34,10 +35,10 @@ void compute_height_of_line(t_data* data, int* draw_start, int* draw_end)
 		data->wall_x = data->map.player.pos.elements[0] + dist * data->ray_dir.elements[0];
 	data->wall_x -= floor(data->wall_x);
 	line_height = (int)(WIN_HEIGHT / dist);
-	*draw_start = -line_height / 2 + WIN_HEIGHT / 2;
+	*draw_start = -line_height * 0.5 + WIN_HEIGHT * 0.5;
 	if (*draw_start < 0)
 		*draw_start = 0;
-	*draw_end = line_height / 2 + WIN_HEIGHT / 2;
+	*draw_end = line_height * 0.5 + WIN_HEIGHT * 0.5;
 	if (*draw_end > WIN_HEIGHT)
 		*draw_end = WIN_HEIGHT - 1;
 }
@@ -87,52 +88,41 @@ void draw_line(t_data* data, int draw_start, int draw_end, int x)
 
 	y = 0;
 	text = choose_texture(data);
-	color.value = YELLOW;
-	tex_x = (int)(data->wall_x * 64);
-	if (tex_x < 0)
-		tex_x = 0;
-	else if (tex_x > 64)
-		tex_x = 64;
+	text.size = text.line_length * 0.25;
+	color.value = BLACK;
 	while (y < draw_start)
 		my_mlx_pixel_put(data, x, y++, &color);
-	y = draw_start;
+	tex_x = compute_x_y_text(data, text.size, true);
 	while (y < draw_end)
 	{
 		data->wall_y = (double)(y - draw_start) / (draw_end - draw_start);
-		tex_y = (int)(data->wall_y * 64);
-		if (tex_y < 0)
-			tex_y = 0;
-		else if (tex_y > 64)
-			tex_y = 64;
+		tex_y = compute_x_y_text(data, text.size, false);
 		color.value = *(int *)(text.addr + tex_y * text.line_length + tex_x * (text.bits_per_pixel / 8));
 		my_mlx_pixel_put(data, x, y++, &color);
 	}
-	color.value = GREEN;
-	y = draw_end;
+	color.value = WHITE;
 	while (y < WIN_HEIGHT)
 		my_mlx_pixel_put(data, x, y++, &color);
-	return ;
 }
 
 /**
-* @brief allow to choose which texture according side and the direction of the ray
-* @param all informatio about the program
-* @return the texture to display
+* @brief allow to compute x and y of the texture
+* @param data all information about the program.
+* @param text_size size of the texture
+* @param x boolean to know if I have to compute x or y of the texture 
+* @return x or y of the texture
 */
-t_img choose_texture(t_data *data)
+static int	compute_x_y_text(t_data *data, int text_size, bool x)
 {
-	if (data->side == 0)
-	{
-		if (data->ray_dir.elements[0] >= 0)
-			return (data->imgs.wall_east);
-		else
-			return (data->imgs.wall_west);
-	}
+	int	tex_x_or_y;
+
+	if (x == true)
+		tex_x_or_y = (int)(data->wall_x * text_size);
 	else
-	{
-		if (data->ray_dir.elements[1] >= 0)
-			return (data->imgs.wall_south);
-		else
-			return (data->imgs.wall_north);
-	}
+		tex_x_or_y = (int)(data->wall_y * text_size);
+	if (tex_x_or_y < 0)
+		tex_x_or_y = 0;
+	else if (tex_x_or_y > text_size)
+		tex_x_or_y = text_size - 1;
+	return (tex_x_or_y);
 }

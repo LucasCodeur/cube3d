@@ -6,7 +6,7 @@
 #    By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2025/12/27 17:12:18 by lud-adam         ###   ########.fr        #
+#    Updated: 2026/01/06 19:57:26 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ P_LIB_MATH = $(P_SRC)math/
 P_INC_MATH = $(P_SRC)/math/inc/
 P_SRC_DRAW = $(P_SRC)draw/
 P_SRC_TEST = $(P_SRC)test/
+P_SRC_SPRITES = $(P_SRC)sprites/
 
 #############################################################################################
 #                                                                                           #
@@ -48,12 +49,15 @@ SRC = \
 	main.c \
 	mlx.c \
 	hooks.c \
-	create_sprites.c \
 	compute_distance.c \
 	map.c \
 	launcher.c \
 	utils.c \
 	debug.c
+
+SRC_SPRITES = \
+	create_sprites.c \
+	texture.c \
 
 SRC_DRAW = \
 	draw_map.c \
@@ -79,6 +83,7 @@ LIBS = \
 SRCS =	\
 	$(addprefix $(P_SRC), $(SRC)) \
 	$(addprefix $(P_SRC_DRAW), $(SRC_DRAW)) \
+	$(addprefix $(P_SRC_SPRITES), $(SRC_SPRITES)) \
 	$(addprefix $(P_SRC_TEST), $(SRC_TEST)) \
 
 # List of object files (redirect to P_OBJ)

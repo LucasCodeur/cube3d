@@ -47,10 +47,10 @@ void	d_generate_map(t_data* data)
 		}
 		data->map.grid[i][SIZE_X] = '\0';
 	}
-	// data->map.grid[10][60] = '1';
-	// data->map.grid[11][60] = '1';
-	// data->map.grid[12][60] = '1';
-	// data->map.grid[13][60] = '1';
+	data->map.grid[6][5] = '1';
+	data->map.grid[7][5] = '1';
+	data->map.grid[8][5] = '1';
+	data->map.grid[9][5] = '1';
 	data->map.player.pos.elements[0] = (SIZE_X + 2) * 0.5;
 	data->map.player.pos.elements[1] = (SIZE_Y + 2) * 0.5;
 }
