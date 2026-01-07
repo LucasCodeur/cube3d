@@ -34,6 +34,10 @@ double compute_dist(t_data* data, t_vec ray_dir)
     double  perp_wall_dist;
 
     delta_dist = compute_gradient(ray_dir);
+    if (isinf(delta_dist.elements[0]))
+        delta_dist.elements[0] = 1e6;
+    if (isinf(delta_dist.elements[1]))
+        delta_dist.elements[1] = 1e6;
     data->map.x = (int)data->map.player.pos.elements[0];
     data->map.y = (int)data->map.player.pos.elements[1];
     step = define_first_step(data, ray_dir, &ray_len, delta_dist);
@@ -53,11 +57,11 @@ static t_vec compute_gradient(t_vec ray_dir)
 {
     t_vec   ret;
     if (ray_dir.elements[0] == 0)
-        ret.elements[0] = DBL_MAX;
+        ret.elements[0] = INFINITY;
     else
         ret.elements[0] = fabs(1 / ray_dir.elements[0]);
     if (ray_dir.elements[1] == 0)
-        ret.elements[1] = DBL_MAX;
+        ret.elements[1] = INFINITY;
     else
         ret.elements[1] = fabs(1 / ray_dir.elements[1]);
     return (ret);

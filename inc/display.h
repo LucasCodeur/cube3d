@@ -13,23 +13,25 @@
 #ifndef DISPLAY_H 
 # define DISPLAY_H
 
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <math.h>
+
+#include "vector.h"
+
 # define WIN_WIDTH 2000
 # define WIN_HEIGHT 1600
-# define SCALE_TILE	64
 # define SIZE_X	20
 # define SIZE_Y	20
-# define FOV M_PI / 3.0
-# define SCALE 48
 
-# define ASSET_TILE "/home/lud-adam/Documents/cube3d/assets/basic/bg.xpm"
-# define ASSET_BG "/home/lud-adam/Documents/cube3d/assets/basic/end_bg.xpm"
 # define ASSET_PLAYER "/home/lud-adam/Documents/cube3d/assets/basic/player.xpm"
 # define ASSET_W_EAST "/home/lud-adam/Documents/cube3d/assets/textures/east.xpm"
 # define ASSET_W_NORTH "/home/lud-adam/Documents/cube3d/assets/textures/north.xpm"
 # define ASSET_W_WEST "/home/lud-adam/Documents/cube3d/assets/textures/west.xpm"
 # define ASSET_W_SOUTH "/home/lud-adam/Documents/cube3d/assets/textures/south.xpm"
 
-# define BLACK 0x000000
+# define BLACK 0x2c2c2c
 # define RED   0xFF0000FF
 # define ORANGE 0xFF6347
 # define GREEN 0xFF00FF00
@@ -37,11 +39,8 @@
 # define YELLOW 0xFFFF000
 # define WHITE 0xFFFFFF00
 
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
-
-#include "vector.h"
+# define ADD_SPEED 5.0 * (M_PI / 180)
+# define SUBT_SPEED -5.0 * (M_PI / 180)
 
 typedef struct s_rgb
 {
@@ -67,6 +66,7 @@ typedef struct s_img
 	int		endian;
 	int		height;
 	int		width;
+	t_pixel	color;
 }			t_img;
 
 typedef struct s_sprite
@@ -132,7 +132,6 @@ void	launcher(t_data *data);
 double	compute_dist(t_data* data, t_vec ray_dir);
 t_vec	define_ray(t_data* data);
 t_vec	define_percentage_of_fov(int x);
-void	draw_line(t_data* data, int draw_start, int draw_end, int x);
 void	compute_height_of_line(t_data* data, int* draw_start, int* draw_end);
 bool	draw_map(t_data* data);
 void	load_imgs(t_data *data);
@@ -146,11 +145,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, t_pixel *color);
 //HOOKS
 int		key_press(int keycode, void *param);
 int		close_win(void *param);
+int		move_hero(int keycode, t_data *data);
 
 //IMAGE
 t_img	fill_frame(t_data* data, char *path_to_asset, int* x, int* y);
 bool	display_map(t_data* data);
-int		move_hero(int keycode, t_data *data);
 void	update_maps(t_data* data);
 bool	draw_map(t_data* data);
 void	draw_hero(t_data* data, int tile_size);

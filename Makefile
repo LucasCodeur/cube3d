@@ -46,22 +46,20 @@ P_SRC_SPRITES = $(P_SRC)sprites/
 #############################################################################################
 
 SRC = \
-	main.c \
 	mlx.c \
 	hooks.c \
 	compute_distance.c \
 	map.c \
-	launcher.c \
 	utils.c \
-	debug.c
+	raycasting.c \
+	main.c \
+	debug.c \
 
 SRC_SPRITES = \
 	create_sprites.c \
 	texture.c \
 
 SRC_DRAW = \
-	draw_map.c \
-	draw_ray.c \
 	utils_draw.c
 
 SRC_TEST = \

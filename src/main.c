@@ -10,11 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "display.h"
 #include "debug.h"
 #include "test.h"
+
+#include <mlx.h>
+#include <X11/keysym.h>
+#include <X11/X.h>
 
 bool	ininitialize_values(t_data* data)
 {
@@ -30,14 +32,22 @@ bool	ininitialize_values(t_data* data)
 	return (true);
 }
 
+void	launcher(t_data *data)
+{
+	init_screen_mlx(data);
+	load_imgs(data);
+	draw_map(data);
+	t_display_map_2D(data);
+	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, move_hero, data);
+	mlx_loop(data->mlx.ptr);
+}
+
 int main(void)
 {
 	t_data	data;
 
 	ininitialize_values(&data);
-	// print(data.map.player.dir);
 	d_generate_map(&data);
-	d_print_grid(data.map);
 	launcher(&data);
 	return (0);
 }

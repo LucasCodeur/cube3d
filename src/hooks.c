@@ -21,27 +21,17 @@
 //WARN: have to take off
 	#include "test.h"
 
+void	rotate_hero(t_data *data, int keycode);
+
 /**
 * @brief allow to move inside the map and set different keyhook like aswd
 * @param data contains all information necessary to the project.
 * @param keycode, link keybind to an effect
-* @return 0 if success
+* @return
 */
 int move_hero(int keycode, t_data *data)
 {
-	if (keycode == XK_d || keycode == XK_D || keycode == XK_l || keycode == XK_L)
-	{
-		data->map.player.dir = rotate_vect(data->map.player.dir, 10.0 * (M_PI / 180));
-		data->map.player.plane = rotate_vect(data->map.player.plane, 10.0 * (M_PI / 180));
-		draw_map(data);
-	}
-	else if (keycode == XK_a || keycode == XK_A || keycode == XK_h || keycode == XK_H)
-	{
-		data->map.player.dir = rotate_vect(data->map.player.dir, -10.0 * (M_PI / 180));
-		data->map.player.plane = rotate_vect(data->map.player.plane, -10.0 * (M_PI / 180));
-		draw_map(data);
-	}
-	else if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j) &&
+	if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j) &&
 		data->map.grid[(int)(data->map.player.pos.elements[1] - 0.5f * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] - 0.5f * data->map.player.dir.elements[0])] == '0')
 	{
 		data->map.player.pos.elements[0] -= 0.5f * data->map.player.dir.elements[0];
@@ -55,31 +45,28 @@ int move_hero(int keycode, t_data *data)
 		data->map.player.pos.elements[1] += 0.5f * data->map.player.dir.elements[1];
 		draw_map(data);
 	}
-	return (true);
+	rotate_hero(data, keycode);
+	return (0);
 }
 
-// int	key_press(int keycode, void *param)
-// {
-// 	t_mlx	*mlx;
-//
-// 	if (!param)
-// 		return (0);
-// 	mlx = (t_mlx *)param;
-// 	if (keycode == 65307)
-// 	{
-// 		free_img(mlx);
-// 		exit(0);
-// 	}
-// 	return (0);
-// }
-
-// int	close_win(void *param)
-// {
-// 	t_mlx	*win;
-//
-// 	if (!param)
-// 		return (0);
-// 	win = (t_mlx *)param;
-// 	// free_img(win);
-// 	exit(0);
-// }
+/**
+* @brief allow to rotate the hero according keycode
+* @param data contains all information necessary to the project.
+* @param keycode, link keybind to an effect
+* @return
+*/
+void	rotate_hero(t_data *data, int keycode)
+{
+	if (keycode == XK_d || keycode == XK_D || keycode == XK_l || keycode == XK_L)
+	{
+		data->map.player.dir = rotate_vect(data->map.player.dir, ADD_SPEED);
+		data->map.player.plane = rotate_vect(data->map.player.plane, ADD_SPEED);
+		draw_map(data);
+	}
+	else if (keycode == XK_a || keycode == XK_A || keycode == XK_h || keycode == XK_H)
+	{
+		data->map.player.dir = rotate_vect(data->map.player.dir, SUBT_SPEED);
+		data->map.player.plane = rotate_vect(data->map.player.plane, SUBT_SPEED);
+		draw_map(data);
+	}
+}
