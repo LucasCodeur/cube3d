@@ -33,28 +33,28 @@ int move_hero(int keycode, t_data *data)
 	{
 		data->map.player.dir = rotate_vect(data->map.player.dir, 10.0 * (M_PI / 180));
 		data->map.player.plane = rotate_vect(data->map.player.plane, 10.0 * (M_PI / 180));
+		draw_map(data);
 	}
 	else if (keycode == XK_a || keycode == XK_A || keycode == XK_h || keycode == XK_H)
 	{
 		data->map.player.dir = rotate_vect(data->map.player.dir, -10.0 * (M_PI / 180));
 		data->map.player.plane = rotate_vect(data->map.player.plane, -10.0 * (M_PI / 180));
+		draw_map(data);
 	}
 	else if ((keycode == XK_s || keycode == XK_S || keycode == XK_J || keycode == XK_j) &&
 		data->map.grid[(int)(data->map.player.pos.elements[1] - 0.5f * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] - 0.5f * data->map.player.dir.elements[0])] == '0')
 	{
 		data->map.player.pos.elements[0] -= 0.5f * data->map.player.dir.elements[0];
 		data->map.player.pos.elements[1] -= 0.5f * data->map.player.dir.elements[1];
+		draw_map(data);
 	}
 	else if ((keycode == XK_w || keycode == XK_W || keycode == XK_k || keycode == XK_K) && 
 		data->map.grid[(int)(data->map.player.pos.elements[1] + 0.5f * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] + 0.5f * data->map.player.dir.elements[0])] == '0')
 	{
 		data->map.player.pos.elements[0] += 0.5f * data->map.player.dir.elements[0];
 		data->map.player.pos.elements[1] += 0.5f * data->map.player.dir.elements[1];
+		draw_map(data);
 	}
-	//WARN: have to change
-	clear_img(&data->img);
-	draw_map(data);
-	t_display_map_2D(data);
 	return (true);
 }
 

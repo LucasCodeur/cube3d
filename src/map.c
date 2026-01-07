@@ -24,12 +24,10 @@
 t_img	fill_image(t_data* data, char *path_to_asset)
 {
 	t_img	img;
-	int		x;
-	int		y;
 
 	// if (img.img)
 	// 	free(img.img);
-	img.ptr = mlx_xpm_file_to_image(data->mlx.ptr, path_to_asset, &x, &y);
+	img.ptr = mlx_xpm_file_to_image(data->mlx.ptr, path_to_asset, &img.width, &img.height);
 	if (!img.ptr)
 	{
 		perror("Error: Image not create\n");
@@ -58,6 +56,7 @@ void	load_imgs(t_data *data)
 	data->imgs.wall_north = fill_image(data, ASSET_W_NORTH);
 	data->imgs.wall_south = fill_image(data, ASSET_W_SOUTH);
 }
+
 
 /**
 * @brief allow to display the map

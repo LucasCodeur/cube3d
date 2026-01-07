@@ -65,7 +65,8 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		size;
+	int		height;
+	int		width;
 }			t_img;
 
 typedef struct s_sprite

@@ -29,20 +29,22 @@ void compute_height_of_line(t_data* data, int* draw_start, int* draw_end)
 	double	dist;
 
 	dist = compute_dist(data, data->ray_dir);
-	if (dist < 1)
+	if (dist < 0)
 		dist = 1;
 	if (data->side == 0)
+	{
 		data->wall_x = data->map.player.pos.elements[1] + dist * data->ray_dir.elements[1];
+		data->wall_y = data->map.player.pos.elements[0] + dist * data->ray_dir.elements[0];
+	}
 	else
+	{
 		data->wall_x = data->map.player.pos.elements[0] + dist * data->ray_dir.elements[0];
+		data->wall_y = data->map.player.pos.elements[1] + dist * data->ray_dir.elements[1];
+	}
 	data->wall_x -= floor(data->wall_x);
 	line_height = (int)(WIN_HEIGHT / dist);
 	*draw_start = -line_height * 0.5 + WIN_HEIGHT * 0.5;
-	if (*draw_start < 0)
-		*draw_start = 0;
 	*draw_end = line_height * 0.5 + WIN_HEIGHT * 0.5;
-	if (*draw_end > WIN_HEIGHT)
-		*draw_end = WIN_HEIGHT - 1;
 }
 
 /**
@@ -80,30 +82,35 @@ t_vec define_ray(t_data* data)
 * @param draw_end end of the line to draw.
 * @return
 */
-void draw_line(t_data* data, int draw_start, int draw_end, int x)
+void draw_line(t_data* data, int top_wall, int bottom_wall, int x)
 {
 	t_pixel color;
 	t_img	text;
-	int		tex_y;
 	int		tex_x;
+	double	tex_y;
 	int		y;
 
 	y = 0;
 	text = choose_texture(data);
-	text.size = text.line_length * 0.25;
 	color.value = BLACK;
-	while (y < draw_start)
+	while (y < top_wall)
 		my_mlx_pixel_put(data, x, y++, &color);
-	tex_x = compute_x_y_text(data, text.size, true);
-	while (y < draw_end)
+	tex_x = compute_x_y_text(data, text.height, true);
+	double	step =  (double)text.height / (double)(bottom_wall - top_wall);
+	if (top_wall < 0)
+		tex_y = (y - top_wall) * step;
+	else
+		tex_y = 0;
+	while (y < bottom_wall)
 	{
-		data->wall_y = (double)(y - draw_start) / (draw_end - draw_start);
-		tex_y = compute_x_y_text(data, text.size, false);
-		color.value = *(int *)(text.addr + tex_y * text.line_length + tex_x * (text.bits_per_pixel / 8));
+		color.value = *(int *)(text.addr + (int)tex_y * text.line_length + tex_x * (text.bits_per_pixel / 8));
 		my_mlx_pixel_put(data, x, y++, &color);
+		tex_y += step;
+		if (tex_y > text.height)
+			tex_y = (double)text.height;
 	}
 	color.value = WHITE;
-	while (y < WIN_HEIGHT)
+	while (y < WIN_HEIGHT - 1)
 		my_mlx_pixel_put(data, x, y++, &color);
 }
 
@@ -123,7 +130,7 @@ static int	compute_x_y_text(t_data *data, int text_size, bool x)
 	else
 		tex_x_or_y = (int)(data->wall_y * text_size);
 	if (tex_x_or_y < 0)
-		tex_x_or_y = 0;
+		tex_x_or_y = 1;
 	else if (tex_x_or_y > text_size)
 		tex_x_or_y = text_size - 1;
 	return (tex_x_or_y);
