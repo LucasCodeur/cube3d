@@ -6,15 +6,15 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/02 15:14:32 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/06 19:56:51 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DISPLAY_H 
 # define DISPLAY_H
 
-# define WIN_WIDTH 1000
-# define WIN_HEIGHT 800
+# define WIN_WIDTH 2000
+# define WIN_HEIGHT 1600
 # define SCALE_TILE	64
 # define SIZE_X	20
 # define SIZE_Y	20
@@ -24,6 +24,10 @@
 # define ASSET_TILE "/home/lud-adam/Documents/cube3d/assets/basic/bg.xpm"
 # define ASSET_BG "/home/lud-adam/Documents/cube3d/assets/basic/end_bg.xpm"
 # define ASSET_PLAYER "/home/lud-adam/Documents/cube3d/assets/basic/player.xpm"
+# define ASSET_W_EAST "/home/lud-adam/Documents/cube3d/assets/textures/east.xpm"
+# define ASSET_W_NORTH "/home/lud-adam/Documents/cube3d/assets/textures/north.xpm"
+# define ASSET_W_WEST "/home/lud-adam/Documents/cube3d/assets/textures/west.xpm"
+# define ASSET_W_SOUTH "/home/lud-adam/Documents/cube3d/assets/textures/south.xpm"
 
 # define BLACK 0x000000
 # define RED   0xFF0000FF
@@ -61,12 +65,16 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		size;
 }			t_img;
 
 typedef struct s_sprite
 {
 	t_img	ground;
-	t_img	wall;
+	t_img	wall_east;
+	t_img	wall_north;
+	t_img	wall_west;
+	t_img	wall_south;
 }				t_sprite;
 
 typedef struct s_mlx
@@ -101,18 +109,22 @@ typedef	struct	s_map
 	char	grid[SIZE_Y][SIZE_X + 1];
 	int		rows;
 	int		cols;
-	t_hero	player;
 	int		x;
 	int		y;
+	t_hero	player;
 }				t_map;
 
 typedef struct s_data
 {
-	int		tile_size;
-	t_mlx	mlx;
-	t_img	img;
-	t_map	map;
-	t_vec	ray_dir;
+	int			side;
+	int			tile_size;
+	double		wall_x;
+	double		wall_y;
+	t_mlx		mlx;
+	t_img		img;
+	t_sprite	imgs;
+	t_map		map;
+	t_vec		ray_dir;
 }				t_data;
 
 void	launcher(t_data *data);
@@ -122,6 +134,7 @@ t_vec	define_percentage_of_fov(int x);
 void	draw_line(t_data* data, int draw_start, int draw_end, int x);
 void	compute_height_of_line(t_data* data, int* draw_start, int* draw_end);
 bool	draw_map(t_data* data);
+void	load_imgs(t_data *data);
 
 //MLX
 void	init_mlx(t_mlx *t_mlx);
@@ -141,6 +154,7 @@ void	update_maps(t_data* data);
 bool	draw_map(t_data* data);
 void	draw_hero(t_data* data, int tile_size);
 void	clear_img(t_img *img);
+t_img	choose_texture(t_data *data);
 
 //UTILS
 void	ft_bzero(void *s, size_t n);

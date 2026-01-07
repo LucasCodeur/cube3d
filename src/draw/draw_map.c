@@ -29,6 +29,8 @@ void compute_height_of_line(t_data* data, int* draw_start, int* draw_end)
 	double	dist;
 
 	dist = compute_dist(data, data->ray_dir);
+	if (dist < 1)
+		dist = 1;
 	if (data->side == 0)
 		data->wall_x = data->map.player.pos.elements[1] + dist * data->ray_dir.elements[1];
 	else

@@ -35,7 +35,7 @@ int main(void)
 	t_data	data;
 
 	ininitialize_values(&data);
-	print(data.map.player.dir);
+	// print(data.map.player.dir);
 	d_generate_map(&data);
 	d_print_grid(data.map);
 	launcher(&data);
