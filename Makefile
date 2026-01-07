@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/05 13:04:53 by prigaudi          #+#    #+#              #
-#    Updated: 2025/11/18 15:18:03 by prigaudi         ###   ########.fr        #
+#    Updated: 2026/01/07 14:49:12 by prigaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,16 @@ NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g3
 
+MLX_DIR = minilibx
+MLX = $(MLX_DIR)/libmlx.a
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11
+
 SRC_DIR = sources
 SRC = 		$(SRC_DIR)/main.c						\
-			$(SRC_DIR)/init/init_config_data.c		\
+			$(SRC_DIR)/init/init_data.c				\
+			$(SRC_DIR)/init/mlx_utils.c				\
+			$(SRC_DIR)/map/map.c					\
+			$(SRC_DIR)/minimap/minimap.c			\
 			$(SRC_DIR)/parsing/argument.c			\
 			$(SRC_DIR)/parsing/check_element_line.c	\
 			$(SRC_DIR)/parsing/check_extract_rgb.c	\
@@ -53,11 +60,14 @@ OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) -o $(NAME)
 	
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c ./includes/cub3d.h Makefile | $(OBJ_DIR)
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(MLX):
+	make -C $(MLX_DIR) --no-print-directory
 
 clean:
 	find . -name "*.o" -type f -delete

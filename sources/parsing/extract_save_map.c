@@ -6,25 +6,25 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:22:08 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/21 10:47:38 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/12/16 10:41:55 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	extract_map_line(char *line, t_config_data *config_data)
+static int	extract_map_line(char *line, t_data *data)
 {
 	int	i;
 
-	if (!ft_strncmp(line, "\n", 1) && config_data->map->height)
+	if (!ft_strncmp(line, "\n", 1) && data->map->height)
 	{
-		config_data->map->map_finished = 1;
+		data->map->map_finished = 1;
 		return (0);
 	}
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
-		if (config_data->map->map_finished)
+		if (data->map->map_finished)
 		{
 			printf("Error\nEmpty line in map structure\n");
 			return (1);
@@ -41,16 +41,14 @@ static int	extract_map_line(char *line, t_config_data *config_data)
 	return (0);
 }
 
-static int	loop_new_map(char **new_map_lines, char *line,
-		t_config_data *config_data)
+static int	loop_new_map(char **new_map_lines, char *line, t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while (config_data->map->map_lines && config_data->map->map_lines[i])
+	while (data->map->map_lines && data->map->map_lines[i])
 	{
-		new_map_lines[i] = ft_strdup(config_data,
-				config_data->map->map_lines[i]);
+		new_map_lines[i] = ft_strdup(data, data->map->map_lines[i]);
 		if (!new_map_lines[i])
 		{
 			printf("Error\nProblem with ft_strdup in save_map_line\n");
@@ -58,7 +56,7 @@ static int	loop_new_map(char **new_map_lines, char *line,
 		}
 		i++;
 	}
-	new_map_lines[i] = ft_strdup(config_data, line);
+	new_map_lines[i] = ft_strdup(data, line);
 	if (!new_map_lines[i])
 	{
 		printf("Error\nProblem with ft_strdup in save_map_line\n");
@@ -68,31 +66,31 @@ static int	loop_new_map(char **new_map_lines, char *line,
 	return (0);
 }
 
-static int	save_map_line(char *line, t_config_data *config_data)
+static int	save_map_line(char *line, t_data *data)
 {
 	char	**new_map_lines;
 
-	new_map_lines = ft_malloc(&config_data->garbage, sizeof(char *)
-			* (config_data->map->height + 2));
+	new_map_lines = ft_malloc(&data->garbage, sizeof(char *)
+			* (data->map->height + 2));
 	if (!new_map_lines)
 	{
 		printf("Error\nMalloc of new_map_lines failed\n");
 		return (1);
 	}
-	if (loop_new_map(new_map_lines, line, config_data))
+	if (loop_new_map(new_map_lines, line, data))
 		return (1);
-	config_data->map->map_lines = new_map_lines;
-	if ((int)ft_strlen(line) - 1 > config_data->map->width)
-		config_data->map->width = ft_strlen(line) - 1;
-	config_data->map->height++;
+	data->map->map_lines = new_map_lines;
+	if ((int)ft_strlen(line) - 1 > data->map->width)
+		data->map->width = ft_strlen(line) - 1;
+	data->map->height++;
 	return (0);
 }
 
-int	extract_save_map(char *line, t_config_data *config_data)
+int	extract_save_map(char *line, t_data *data)
 {
-	if (extract_map_line(line, config_data))
+	if (extract_map_line(line, data))
 		return (1);
-	if (ft_strncmp(line, "\n", 1) && save_map_line(line, config_data))
+	if (ft_strncmp(line, "\n", 1) && save_map_line(line, data))
 		return (1);
 	return (0);
 }

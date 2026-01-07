@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 09:09:51 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/18 13:45:55 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/12/16 10:40:25 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	check_argument_number(int argc)
 	return (0);
 }
 
-static int	check_file_extension(char *path, t_config_data *config_data)
+static int	check_file_extension(char *path, t_data *data)
 {
 	char	*extension;
 	size_t	len;
@@ -30,7 +30,7 @@ static int	check_file_extension(char *path, t_config_data *config_data)
 	len = ft_strlen(path);
 	if (len >= 5)
 	{
-		extension = ft_substr(config_data, path, len - 4, len);
+		extension = ft_substr(data, path, len - 4, len);
 		if (!extension)
 			return (1);
 		if (ft_strncmp(extension, ".cub", 4))
@@ -47,11 +47,11 @@ static int	check_file_extension(char *path, t_config_data *config_data)
 	return (0);
 }
 
-int	check_argument(int argc, char **argv, t_config_data *config_data)
+int	check_argument(int argc, char **argv, t_data *data)
 {
 	if (check_argument_number(argc))
 		return (1);
-	if (check_file_extension(argv[1], config_data))
+	if (check_file_extension(argv[1], data))
 		return (1);
 	return (0);
 }

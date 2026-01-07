@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:14:23 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/21 14:03:41 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/12/16 10:41:13 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,22 @@ static int	check_map_opened(char **map_test, int i, int j)
 	return (0);
 }
 
-static char	**map_copy(t_config_data *config_data)
+static char	**map_copy(t_data *data)
 {
 	char	**map_copy;
 	int		i;
 
-	map_copy = ft_malloc(&config_data->garbage, sizeof(char *)
-			* (config_data->map->height + 1));
+	map_copy = ft_malloc(&data->garbage, sizeof(char *) * (data->map->height
+				+ 1));
 	if (!map_copy)
 	{
 		printf("Error\nMalloc of map_copy\n");
 		return (NULL);
 	}
 	i = 0;
-	while (config_data->map->map_lines[i])
+	while (data->map->map_lines[i])
 	{
-		map_copy[i] = ft_strdup(config_data, config_data->map->map_lines[i]);
+		map_copy[i] = ft_strdup(data, data->map->map_lines[i]);
 		if (!map_copy[i])
 		{
 			printf("Error\nProblem with ft_strdup in map_copy\n");
@@ -64,39 +64,39 @@ static char	**map_copy(t_config_data *config_data)
 	return (map_copy);
 }
 
-static int	recursive(char **map_test, int i, int j, t_config_data *config_data)
+static int	recursive(char **map_test, int i, int j, t_data *data)
 {
-	if (i == 0 || j == 0 || i == config_data->map->height - 1
-		|| j == config_data->map->width - 1)
+	if (i == 0 || j == 0 || i == data->map->height - 1 || j == data->map->width
+		- 1)
 	{
 		printf("Error\nMap open\n");
 		return (1);
 	}
 	if (check_map_opened(map_test, i, j))
 		return (1);
-	if (j != config_data->map->width - 1 && (map_test[i][j + 1] == '0'
-			|| map_test[i][j + 1] == config_data->hero->orientation))
+	if (j != data->map->width - 1 && (map_test[i][j + 1] == '0' || map_test[i][j
+			+ 1] == data->hero->orientation))
 	{
 		map_test[i][j + 1] = '1';
-		if (recursive(map_test, i, j + 1, config_data))
+		if (recursive(map_test, i, j + 1, data))
 			return (1);
 	}
-	if (i != config_data->map->height - 1 && map_test[i + 1][j] == '0')
+	if (i != data->map->height - 1 && map_test[i + 1][j] == '0')
 	{
 		map_test[i + 1][j] = '1';
-		if (recursive(map_test, i + 1, j, config_data))
+		if (recursive(map_test, i + 1, j, data))
 			return (1);
 	}
 	return (0);
 }
 
-int	check_map_structure(t_config_data *config_data)
+int	check_map_structure(t_data *data)
 {
 	char	**map_test;
 	int		i;
 	int		j;
 
-	map_test = map_copy(config_data);
+	map_test = map_copy(data);
 	if (!map_test)
 		return (1);
 	i = -1;
@@ -108,7 +108,7 @@ int	check_map_structure(t_config_data *config_data)
 			if (map_test[i][j] == '0')
 			{
 				map_test[i][j] = '1';
-				if (recursive(map_test, i, j, config_data))
+				if (recursive(map_test, i, j, data))
 					return (1);
 			}
 			j++;

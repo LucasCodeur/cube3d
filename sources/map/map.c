@@ -1,0 +1,110 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/18 10:59:23 by prigaudi          #+#    #+#             */
+/*   Updated: 2026/01/07 16:53:54 by prigaudi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/cub3d.h"
+
+// // return pixel color in (x,y)
+// unsigned int	get_pixel(t_img *img, int x, int y)
+// {
+// 	char	*pixel;
+
+// 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+// 	return (*(unsigned int *)pixel);
+// }
+
+// void	put_pixel(t_img *img, int x, int y, unsigned int color)
+// {
+// 	char	*pixel;
+
+// 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+// 	*(unsigned int *)pixel = color;
+// }
+
+// Create sprite 8x8 with image 32x32
+static t_img	*get_wall(t_data *data)
+{
+	t_img	*wall32;
+
+	wall32 = malloc(sizeof(t_img));
+	wall32->img = mlx_xpm_file_to_image(data->mlx_ptr, "./assets/wall.xpm",
+			&wall32->width, &wall32->height);
+	wall32->addr = mlx_get_data_addr(wall32->img, &wall32->bpp,
+			&wall32->line_len, &wall32->endian);
+	return (wall32);
+}
+
+static void	wall_to_map(t_data *data, t_img *wall, t_img *map, int x, int y)
+{
+	int				i;
+	int				j;
+	unsigned int	color;
+	int				map_x;
+	int				map_y;
+
+	j = 0;
+	while (j < wall->height)
+	{
+		i = 0;
+		while (i < wall->width)
+		{
+			map_x = x + i;
+			map_y = y + j;
+			if (map_x >= 0 && map_x < (data->map->width) * 32 && map_y >= 0
+				&& map_y < (data->map->height) * 32)
+			{
+				color = *(int *)(wall->addr + j * wall->line_len + i * 4);
+				if (color != 0xFF000000)
+				{
+					*(int *)(map->addr + map_y * map->line_len + map_x
+							* 4) = color;
+				}
+			}
+			i++;
+		}
+		j++;
+	}
+}
+
+// wall = 8*8px
+int	display_map(t_data *data)
+{
+	t_img *map;
+	t_img *wall;
+	int x;
+	int y;
+
+	wall = get_wall(data);
+
+	map = malloc(sizeof(t_img));
+	map->img = mlx_new_image(data->mlx_ptr, (data->map->width) * 32,
+			(data->map->height) * 32);
+	map->addr = mlx_get_data_addr(map->img, &map->bpp, &map->line_len,
+			&map->endian);
+	y = 0;
+	while (y < data->map->height)
+	{
+		x = 0;
+		while (x < data->map->width)
+		{
+			if (data->map->map_lines[y][x] == '1')
+			{
+				wall_to_map(data, wall, map, x * 32, y * 32);
+			}
+			x++;
+		}
+		y++;
+	}
+
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, map->img, 0, 0);
+
+	return (0);
+}

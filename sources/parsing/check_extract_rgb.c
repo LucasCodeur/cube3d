@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 13:54:18 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/21 15:02:56 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/12/16 10:40:55 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ static int	is_digit_or_space(char **rgb_str)
 	return (0);
 }
 
-int	*check_extract_rgb(t_config_data *config_data, char *info)
+int	*check_extract_rgb(t_data *data, char *info)
 {
 	char	**rgb_str;
 	int		*rgb_int;
 
-	rgb_str = ft_split(config_data, info, ',');
+	rgb_str = ft_split(data, info, ',');
 	if (!rgb_str)
 	{
 		printf("Error\nProblem with split in check_extract_rgb\n");
@@ -102,7 +102,7 @@ int	*check_extract_rgb(t_config_data *config_data, char *info)
 	}
 	if (is_digit_or_space(rgb_str))
 		return (NULL);
-	rgb_int = ft_malloc(&config_data->garbage, sizeof(int) * (3 + 1));
+	rgb_int = ft_malloc(&data->garbage, sizeof(int) * (3 + 1));
 	if (!rgb_int)
 	{
 		printf("Error\nProblem with malloc in check_extract_rgb\n");

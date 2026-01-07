@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:35:12 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/11/18 14:59:54 by prigaudi         ###   ########.fr       */
+/*   Updated: 2025/12/16 10:44:41 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ static void	free_malloc(char **split, int j)
 	free(split);
 }
 
-static char	*extract(t_config_data *config_data, char const *s, int start,
-		int end)
+static char	*extract(t_data *config_data, char const *s, int start, int end)
 {
 	int		i;
 	char	*extracted_str;
@@ -73,7 +72,7 @@ static char	*test_str(char **split, int j)
 	return (split[j]);
 }
 
-char	**ft_split(t_config_data *cd, char const *s, char c)
+char	**ft_split(t_data *cd, char const *s, char c)
 {
 	char	**split;
 	int		start;
