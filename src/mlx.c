@@ -35,14 +35,14 @@ void	init_screen_mlx(t_data *data)
 		free_img(data);
 		exit(1);
 	}
-	data->img.ptr = mlx_new_image(data->mlx.ptr, WIN_WIDTH, WIN_HEIGHT);
-	if (!data->img.ptr)
+	data->img.img = mlx_new_image(data->mlx.ptr, WIN_WIDTH, WIN_HEIGHT);
+	if (!data->img.img)
 	{
 		perror("mlx img ptr:");
 		free_img(data);
 		exit(1);
 	}
-	data->img.addr = mlx_get_data_addr(data->img.ptr, &data->img.bits_per_pixel,
+	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
 			&data->img.line_length, &data->img.endian);
 	if (!data->img.addr)
 	{
@@ -61,10 +61,10 @@ void	free_img(t_data *data)
 {
 	if (!data)
 		return ;
-	if (data->img.ptr)
+	if (data->img.img)
 	{
-		mlx_destroy_image(data->mlx.ptr, data->img.ptr);
-		data->img.ptr = NULL;
+		mlx_destroy_image(data->mlx.ptr, data->img.img);
+		data->img.img = NULL;
 	}
 	if (data->img.addr)
 		data->img.addr = NULL;

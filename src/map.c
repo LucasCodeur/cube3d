@@ -40,8 +40,8 @@ bool	draw_map(t_data* data)
 		draw_line(data, draw_start, draw_end, x);
 		x++;
 	}
-	t_display_map_2D(data);
-	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.ptr, 0, 0);
+	// t_display_map_2D(data);
+	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.img, 0, 0);
 	return (true);
 }
 

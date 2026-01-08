@@ -22,7 +22,7 @@
 bool	ininitialize_values(t_data *data, t_parsing *parsing_data)
 {
 	ft_bzero(data, sizeof(t_data));
-	ft_bzero(parsing_data, sizeof(t_parsing *));
+	ft_bzero(parsing_data, sizeof(t_parsing));
 	data->mlx.max_height = WIN_HEIGHT;
 	data->mlx.max_width = WIN_WIDTH;
 	data->map.cols = SIZE_X;
@@ -30,8 +30,8 @@ bool	ininitialize_values(t_data *data, t_parsing *parsing_data)
 	data->map.player.pos = new_vector_2D(1.0f, 1.0f);
 	data->map.player.dir = new_vector_2D(1.0f, 0.0f);
 	data->map.player.plane = new_vector_2D(0.0f, 0.66f);
-	parsing_data->map = &data->map;
 	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
+	parsing_data->map = &data->map;
 	return (true);
 }
 
@@ -43,7 +43,7 @@ void	launcher(t_data *data)
 	init_screen_mlx(data);
 	load_imgs(data);
 	draw_map(data);
-	t_display_map_2D(data);
+	// t_display_map_2D(data);
 	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, move_hero, data);
 	mlx_loop(data->mlx.ptr);
 }

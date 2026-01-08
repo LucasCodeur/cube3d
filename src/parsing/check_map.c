@@ -12,7 +12,7 @@
 
 #include "parsing.h" 
 
-static int	hero_on_limit(t_data *data, int i, int *j)
+static int	hero_on_limit(t_parsing *data, int i, int *j)
 {
 	if (i == 0 || i == data->map->height - 1 || *j == 0
 		|| *j == data->map->width - 1)
@@ -23,7 +23,7 @@ static int	hero_on_limit(t_data *data, int i, int *j)
 	return (0);
 }
 
-static int	hero_on_map(t_data *data, int i, int *j)
+static int	hero_on_map(t_parsing *data, int i, int *j)
 {
 	int	k;
 	int	l;
@@ -47,7 +47,7 @@ static int	hero_on_map(t_data *data, int i, int *j)
 	return (0);
 }
 
-static int	loop_tests(t_data *data, int i, int *j)
+static int	loop_tests(t_parsing *data, int i, int *j)
 {
 	while (data->map->map_lines[i][*j])
 	{
@@ -56,7 +56,7 @@ static int	loop_tests(t_data *data, int i, int *j)
 			|| data->map->map_lines[i][*j] == 'E'
 			|| data->map->map_lines[i][*j] == 'W')
 		{
-			if (data->hero->orientation != '\0')
+			if (data->map->player.orientation != '\0')
 			{
 				printf("Error\nYou must have just one hero on the map\n");
 				return (1);
@@ -65,16 +65,16 @@ static int	loop_tests(t_data *data, int i, int *j)
 				return (1);
 			if (hero_on_map(data, i, j))
 				return (1);
-			data->hero->x = *j;
-			data->hero->y = i;
-			data->hero->orientation = data->map->map_lines[i][*j];
+			data->map->player.x = *j;
+			data->map->player.y = i;
+			data->map->player.orientation = data->map->map_lines[i][*j];
 		}
 		(*j)++;
 	}
 	return (0);
 }
 
-static int	check_save_hero(t_data *data)
+static int	check_save_hero(t_parsing *data)
 {
 	int	i;
 	int	j;
@@ -90,7 +90,7 @@ static int	check_save_hero(t_data *data)
 		}
 		i++;
 	}
-	if (data->hero->orientation == '\0')
+	if (data->map->player.orientation == '\0')
 	{
 		printf("Error\nNo hero on your map\n");
 		return (1);
@@ -98,7 +98,7 @@ static int	check_save_hero(t_data *data)
 	return (0);
 }
 
-int	check_map(t_data *data)
+int	check_map(t_parsing *data)
 {
 	if (check_save_hero(data))
 		return (1);

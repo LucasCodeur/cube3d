@@ -82,7 +82,7 @@ int							check_map(t_parsing *config_parsing);
 int							check_map_structure(t_parsing *config_parsing);
 
 //========== UTILS ===========
-void						free_all(t_parsing *parsing);
+void						free_all(t_parsing *data);
 int							ft_atoi(const char *str);
 void						*ft_calloc(size_t elementCount, size_t elementSize);
 void						ft_lstadd_front(t_garbage **lst, t_garbage *new);

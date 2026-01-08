@@ -42,7 +42,7 @@ bool	t_display_map_2D(t_data* data)
 	t_ray_casting_2D(data);
 	t_cast_dir_vec(data, data->tile_size);
 
-	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.ptr, 0, 0);
+	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.img, 0, 0);
 	return (true);
 }
 

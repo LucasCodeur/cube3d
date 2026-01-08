@@ -1,0 +1,8 @@
+.obj/parsing/check_extract_rgb.o: src/parsing/check_extract_rgb.c \
+  inc/parsing.h inc/display.h src//math/inc/vector.h
+
+inc/parsing.h:
+
+inc/display.h:
+
+src//math/inc/vector.h:

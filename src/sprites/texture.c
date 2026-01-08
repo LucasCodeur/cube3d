@@ -49,13 +49,13 @@ t_img	fill_image(t_data* data, char *path_to_asset)
 
 	// if (img.img)
 	// 	free(img.img);
-	img.ptr = mlx_xpm_file_to_image(data->mlx.ptr, path_to_asset, &img.width, &img.height);
-	if (!img.ptr)
+	img.img = mlx_xpm_file_to_image(data->mlx.ptr, path_to_asset, &img.width, &img.height);
+	if (!img.img)
 	{
 		perror("Error: Image not create\n");
 		// exit(1);
 	}
-	img.addr = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_length, &img.endian);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	if (!img.addr)
 	{
 		perror("Error: addr not create\n");
@@ -71,10 +71,10 @@ t_img	fill_image(t_data* data, char *path_to_asset)
 */
 void	load_imgs(t_data *data)
 {
-	data->imgs.wall_east.ptr = mlx_new_image(data->mlx.ptr, WIN_WIDTH, WIN_HEIGHT);
-	data->imgs.wall_west.ptr = mlx_new_image(data->mlx.ptr, WIN_WIDTH, WIN_HEIGHT);
-	data->imgs.wall_north.ptr = mlx_new_image(data->mlx.ptr, WIN_WIDTH, WIN_HEIGHT);
-	data->imgs.wall_south.ptr = mlx_new_image(data->mlx.ptr, WIN_WIDTH, WIN_HEIGHT);
+	data->imgs.wall_east.img = mlx_new_image(data->mlx.ptr, WIN_WIDTH, WIN_HEIGHT);
+	data->imgs.wall_west.img = mlx_new_image(data->mlx.ptr, WIN_WIDTH, WIN_HEIGHT);
+	data->imgs.wall_north.img = mlx_new_image(data->mlx.ptr, WIN_WIDTH, WIN_HEIGHT);
+	data->imgs.wall_south.img = mlx_new_image(data->mlx.ptr, WIN_WIDTH, WIN_HEIGHT);
 
 	data->imgs.wall_east = fill_image(data, ASSET_W_EAST);
 	data->imgs.wall_west = fill_image(data, ASSET_W_WEST);

@@ -12,7 +12,7 @@
 
 #include "parsing.h" 
 
-static int	extract_map_line(char *line, t_data *data)
+static int	extract_map_line(char *line, t_parsing *data)
 {
 	int	i;
 
@@ -41,7 +41,7 @@ static int	extract_map_line(char *line, t_data *data)
 	return (0);
 }
 
-static int	loop_new_map(char **new_map_lines, char *line, t_data *data)
+static int	loop_new_map(char **new_map_lines, char *line, t_parsing *data)
 {
 	int	i;
 
@@ -66,7 +66,7 @@ static int	loop_new_map(char **new_map_lines, char *line, t_data *data)
 	return (0);
 }
 
-static int	save_map_line(char *line, t_data *data)
+static int	save_map_line(char *line, t_parsing *data)
 {
 	char	**new_map_lines;
 
@@ -86,7 +86,7 @@ static int	save_map_line(char *line, t_data *data)
 	return (0);
 }
 
-int	extract_save_map(char *line, t_data *data)
+int	extract_save_map(char *line, t_parsing *data)
 {
 	if (extract_map_line(line, data))
 		return (1);

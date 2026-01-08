@@ -12,7 +12,7 @@
 
 #include "parsing.h" 
 
-static char	*choose_id(char *substr, t_data *data, int *i)
+static char	*choose_id(char *substr, t_parsing *data, int *i)
 {
 	char	*id;
 
@@ -36,7 +36,7 @@ static char	*choose_id(char *substr, t_data *data, int *i)
 	return (id);
 }
 
-static char	*extract_id(t_data *data, char *line, int *i)
+static char	*extract_id(t_parsing *data, char *line, int *i)
 {
 	char	*id;
 	char	*substr;
@@ -54,7 +54,7 @@ static char	*extract_id(t_data *data, char *line, int *i)
 	return (id);
 }
 
-static char	*extract_infos(t_data *data, char *line, int *i)
+static char	*extract_infos(t_parsing *data, char *line, int *i)
 {
 	char	*info_brut;
 	char	*info_clean;
@@ -78,7 +78,7 @@ static char	*extract_infos(t_data *data, char *line, int *i)
 	return (info_clean);
 }
 
-int	check_element_line(char *line, t_data *data)
+int	check_element_line(char *line, t_parsing *data)
 {
 	char	*id;
 	char	*info;

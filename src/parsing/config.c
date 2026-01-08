@@ -12,7 +12,7 @@
 
 #include "parsing.h" 
 
-static int	check_line(char *line, t_data *data)
+static int	check_line(char *line, t_parsing *data)
 {
 	if (data->nb_valid_elements < 6 && *line != '\n')
 	{
@@ -39,7 +39,7 @@ static int	check_file_opening(char *path, int *fd)
 	return (0);
 }
 
-int	config(char *path, t_data *data)
+int	config(char *path, t_parsing *data)
 {
 	int		fd;
 	char	*line;
@@ -85,9 +85,9 @@ int	config(char *path, t_data *data)
 		i++;
 	}
 	printf("HERO:\n");
-	printf("pos x=%d\n", data->hero->x);
-	printf("pos y=%d\n", data->hero->y);
-	printf("orientation=%c\n", data->hero->orientation);
+	printf("pos x=%d\n", data->map->player.x);
+	printf("pos y=%d\n", data->map->player.y);
+	printf("orientation=%c\n", data->map->player.orientation);
 	/*A SUPPRIMER*/
 	return (0);
 }

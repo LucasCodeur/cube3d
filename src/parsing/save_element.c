@@ -12,7 +12,7 @@
 
 #include "parsing.h"
 
-static int	save_west_east(char *id, char *info, t_data *data)
+static int	save_west_east(char *id, char *info, t_parsing *data)
 {
 	if (!ft_strncmp(id, "WE", 2) && !data->west_texture)
 	{
@@ -29,7 +29,7 @@ static int	save_west_east(char *id, char *info, t_data *data)
 	return (1);
 }
 
-static int	save_north_south(char *id, char *info, t_data *data)
+static int	save_north_south(char *id, char *info, t_parsing *data)
 {
 	if (!ft_strncmp(id, "NO", 2) && !data->north_texture)
 	{
@@ -46,7 +46,7 @@ static int	save_north_south(char *id, char *info, t_data *data)
 	return (1);
 }
 
-static int	save_compass_element(char *id, char *info, t_data *data)
+static int	save_compass_element(char *id, char *info, t_parsing *data)
 {
 	if (!save_north_south(id, info, data))
 		return (0);
@@ -56,7 +56,7 @@ static int	save_compass_element(char *id, char *info, t_data *data)
 	return (1);
 }
 
-static int	save_ceiling_floor(char *id, char *info, t_data *data)
+static int	save_ceiling_floor(char *id, char *info, t_parsing *data)
 {
 	if (!ft_strncmp(id, "F", 1) && !data->floor_rgb_color)
 	{
@@ -77,7 +77,7 @@ static int	save_ceiling_floor(char *id, char *info, t_data *data)
 	return (0);
 }
 
-int	save_element(char *id, char *info, t_data *data)
+int	save_element(char *id, char *info, t_parsing *data)
 {
 	if (!ft_strncmp(id, "NO", 2) || !ft_strncmp(id, "SO", 2) || !ft_strncmp(id,
 			"WE", 2) || !ft_strncmp(id, "EA", 2))

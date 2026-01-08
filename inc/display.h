@@ -59,7 +59,7 @@ typedef union s_pixel
 
 typedef struct s_img
 {
-	void	*ptr;
+	void	*img;
 	char*	addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -89,14 +89,15 @@ typedef struct s_mlx
 
 typedef struct	s_hero
 {
-	int		x;
-	int		y;
+	char	orientation;
 	t_vec	dir;
 	t_vec	pos;
 	t_vec	plane;
 	t_vec	camera;
 	double	time;
 	double	old_time;
+	int		x;
+	int		y;
 }				t_hero;
 
 typedef	struct	s_map
@@ -107,7 +108,9 @@ typedef	struct	s_map
 	char	grid[SIZE_Y][SIZE_X + 1];
 	int		rows;
 	int		cols;
-	int						map_finished;
+	int		map_finished;
+	int		x;
+	int		y;
 	t_hero	player;
 }				t_map;
 

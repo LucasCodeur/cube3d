@@ -37,7 +37,7 @@ static int	check_map_opened(char **map_test, int i, int j)
 	return (0);
 }
 
-static char	**map_copy(t_data *data)
+static char	**map_copy(t_parsing *data)
 {
 	char	**map_copy;
 	int		i;
@@ -64,7 +64,7 @@ static char	**map_copy(t_data *data)
 	return (map_copy);
 }
 
-static int	recursive(char **map_test, int i, int j, t_data *data)
+static int	recursive(char **map_test, int i, int j, t_parsing *data)
 {
 	if (i == 0 || j == 0 || i == data->map->height - 1 || j == data->map->width
 		- 1)
@@ -75,7 +75,7 @@ static int	recursive(char **map_test, int i, int j, t_data *data)
 	if (check_map_opened(map_test, i, j))
 		return (1);
 	if (j != data->map->width - 1 && (map_test[i][j + 1] == '0' || map_test[i][j
-			+ 1] == data->hero->orientation))
+			+ 1] == data->map->player.orientation))
 	{
 		map_test[i][j + 1] = '1';
 		if (recursive(map_test, i, j + 1, data))
@@ -90,7 +90,7 @@ static int	recursive(char **map_test, int i, int j, t_data *data)
 	return (0);
 }
 
-int	check_map_structure(t_data *data)
+int	check_map_structure(t_parsing *data)
 {
 	char	**map_test;
 	int		i;

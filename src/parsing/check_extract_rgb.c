@@ -89,7 +89,7 @@ static int	is_digit_or_space(char **rgb_str)
 	return (0);
 }
 
-int	*check_extract_rgb(t_data *data, char *info)
+int	*check_extract_rgb(t_parsing *data, char *info)
 {
 	char	**rgb_str;
 	int		*rgb_int;
