@@ -53,8 +53,8 @@ SRC = \
 	map.c \
 	utils.c \
 	raycasting.c \
-	main.c \
 	debug.c \
+	main.c \
 
 SRC_SPRITES = \
 	create_sprites.c \

@@ -17,8 +17,8 @@
 #include <float.h>
 
 static t_vec compute_gradient(t_vec ray_dir);
-static t_vec define_first_step(t_data* data, t_vec ray_dir, t_vec *ray_len, t_vec delta_dist);
-static  int  size_ray(t_data* data, t_vec *ray_len, t_vec delta_dist, t_vec step);
+static void define_first_step(t_data* data, t_vec ray_dir, t_vec *ray_len, t_vec delta_dist);
+static int  size_ray(t_data* data, t_vec *ray_len, t_vec delta_dist);
 
 /**
 * @brief allow to compute the distance when we encounter a wall
@@ -30,21 +30,24 @@ double compute_dist(t_data* data, t_vec ray_dir)
 {
     t_vec   ray_len;
     t_vec   delta_dist;
-    t_vec   step;
     double  perp_wall_dist;
 
-    delta_dist = compute_gradient(ray_dir);
-    if (isinf(delta_dist.elements[0]))
-        delta_dist.elements[0] = 1e6;
-    if (isinf(delta_dist.elements[1]))
-        delta_dist.elements[1] = 1e6;
-    data->map.x = (int)data->map.player.pos.elements[0];
-    data->map.y = (int)data->map.player.pos.elements[1];
-    step = define_first_step(data, ray_dir, &ray_len, delta_dist);
-    if (size_ray(data, &ray_len, delta_dist, step) == 0)
-        perp_wall_dist = (ray_len.elements[0] - delta_dist.elements[0]);
-    else
-        perp_wall_dist = (ray_len.elements[1] - delta_dist.elements[1]);
+    // perp_wall_dist = 1;
+    // if (ray_dir.elements[0] > 0.01 || ray_dir.elements[1] > 0.01)
+    // {
+        delta_dist = compute_gradient(ray_dir);
+        if (isinf(delta_dist.elements[0]))
+            delta_dist.elements[0] = 1e6;
+        if (isinf(delta_dist.elements[1]))
+            delta_dist.elements[1] = 1e6;
+        data->map.x = (int)data->map.player.pos.elements[0];
+        data->map.y = (int)data->map.player.pos.elements[1];
+        define_first_step(data, ray_dir, &ray_len, delta_dist);
+        if (size_ray(data, &ray_len, delta_dist) == 0)
+            perp_wall_dist = (ray_len.elements[0] - delta_dist.elements[0]);
+        else
+            perp_wall_dist = (ray_len.elements[1] - delta_dist.elements[1]);
+    // }
     return (perp_wall_dist);
 }
 
@@ -56,6 +59,7 @@ double compute_dist(t_data* data, t_vec ray_dir)
 static t_vec compute_gradient(t_vec ray_dir)
 {
     t_vec   ret;
+
     if (ray_dir.elements[0] == 0)
         ret.elements[0] = INFINITY;
     else
@@ -76,31 +80,28 @@ static t_vec compute_gradient(t_vec ray_dir)
 * have the length of the ray advance by 1 unit
 * @return
 */
-static t_vec define_first_step(t_data* data, t_vec ray_dir, t_vec *ray_len, t_vec delta_dist)
+static void define_first_step(t_data* data, t_vec ray_dir, t_vec *ray_len, t_vec delta_dist)
 {
-    t_vec   step;
-
     if (ray_dir.elements[0] <= 0)
     {
-        step.elements[0] = -1;
+        data->step_x = -1;
         ray_len->elements[0] = (data->map.player.pos.elements[0] - (double)data->map.x) * delta_dist.elements[0];
     }
     else
     {
-        step.elements[0] = 1;
+        data->step_x = 1;
         ray_len->elements[0] = ((double)data->map.x + 1.0 - data->map.player.pos.elements[0]) * delta_dist.elements[0];
     }
     if (ray_dir.elements[1] <= 0)
     {
-        step.elements[1] = -1;
+        data->step_y = -1;
         ray_len->elements[1] = (data->map.player.pos.elements[1] - (double)data->map.y) * delta_dist.elements[1];
     }
     else
     {
-        step.elements[1] = 1;
+        data->step_y = 1;
         ray_len->elements[1] = ((double)data->map.y + 1.0 - data->map.player.pos.elements[1]) * delta_dist.elements[1];
     }
-    return (step);
 }
 
 /**
@@ -110,24 +111,22 @@ static t_vec define_first_step(t_data* data, t_vec ray_dir, t_vec *ray_len, t_ve
 * @param step unit of advancement of the ray
 * @return side to know which side of delta we have to subtract at ray_len
 */
-static  int  size_ray(t_data* data, t_vec *ray_len, t_vec delta_dist, t_vec step)
+static  int  size_ray(t_data* data, t_vec *ray_len, t_vec delta_dist)
 {
-    int i = 0;
-    while (data->map.grid[data->map.y][data->map.x] == '0' && i != 5)
+    while (data->map.grid[data->map.y][data->map.x] == '0')
     {
         if (ray_len->elements[0] <= ray_len->elements[1])
         {
-            data->map.x += (int)step.elements[0];
+            data->map.x += data->step_x;
             ray_len->elements[0] += delta_dist.elements[0];
             data->side = 0;
         }
         else
         {
-            data->map.y += (int)step.elements[1];
+            data->map.y += data->step_y;
             ray_len->elements[1] += delta_dist.elements[1];
             data->side = 1;
         }
-        i++;
     }
     return (data->side);
 }
