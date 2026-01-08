@@ -102,10 +102,9 @@ typedef struct	s_hero
 
 typedef	struct	s_map
 {
-	char	**map_lines;
+	char	**grid;
 	int		width;
 	int		height;
-	char	grid[SIZE_Y][SIZE_X + 1];
 	int		rows;
 	int		cols;
 	int		map_finished;

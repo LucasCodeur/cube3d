@@ -27,7 +27,7 @@ bool	ininitialize_values(t_data *data, t_parsing *parsing_data)
 	data->mlx.max_width = WIN_WIDTH;
 	data->map.cols = SIZE_X;
 	data->map.rows = SIZE_Y;
-	data->map.player.pos = new_vector_2D(1.0f, 1.0f);
+	data->map.player.pos = new_vector_2D(10.0f, 10.0f);
 	data->map.player.dir = new_vector_2D(1.0f, 0.0f);
 	data->map.player.plane = new_vector_2D(0.0f, 0.66f);
 	data->map.player.camera = new_vector_2D(0.0f, 0.0f);

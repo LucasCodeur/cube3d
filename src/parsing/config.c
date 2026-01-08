@@ -79,9 +79,9 @@ int	config(char *path, t_parsing *data)
 	printf("width=%d\n", data->map->width);
 	printf("height=%d\n", data->map->height);
 	i = 0;
-	while (data->map->map_lines[i])
+	while (data->map->grid[i])
 	{
-		printf("%s", data->map->map_lines[i]);
+		printf("%s", data->map->grid[i]);
 		i++;
 	}
 	printf("HERO:\n");

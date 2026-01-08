@@ -34,8 +34,8 @@ static int	hero_on_map(t_parsing *data, int i, int *j)
 		l = -1;
 		while (l < 1)
 		{
-			if (data->map->map_lines[i + k][*j + l] != '0'
-				&& data->map->map_lines[i + k][*j + l] != '1')
+			if (data->map->grid[i + k][*j + l] != '0'
+				&& data->map->grid[i + k][*j + l] != '1')
 			{
 				printf("Error\nHero out of the map\n");
 				return (1);
@@ -49,12 +49,12 @@ static int	hero_on_map(t_parsing *data, int i, int *j)
 
 static int	loop_tests(t_parsing *data, int i, int *j)
 {
-	while (data->map->map_lines[i][*j])
+	while (data->map->grid[i][*j])
 	{
-		if (data->map->map_lines[i][*j] == 'N'
-			|| data->map->map_lines[i][*j] == 'S'
-			|| data->map->map_lines[i][*j] == 'E'
-			|| data->map->map_lines[i][*j] == 'W')
+		if (data->map->grid[i][*j] == 'N'
+			|| data->map->grid[i][*j] == 'S'
+			|| data->map->grid[i][*j] == 'E'
+			|| data->map->grid[i][*j] == 'W')
 		{
 			if (data->map->player.orientation != '\0')
 			{
@@ -67,7 +67,7 @@ static int	loop_tests(t_parsing *data, int i, int *j)
 				return (1);
 			data->map->player.x = *j;
 			data->map->player.y = i;
-			data->map->player.orientation = data->map->map_lines[i][*j];
+			data->map->player.orientation = data->map->grid[i][*j];
 		}
 		(*j)++;
 	}
@@ -80,10 +80,10 @@ static int	check_save_hero(t_parsing *data)
 	int	j;
 
 	i = 0;
-	while (data->map->map_lines[i])
+	while (data->map->grid[i])
 	{
 		j = 0;
-		while (data->map->map_lines[i][j])
+		while (data->map->grid[i][j])
 		{
 			if (loop_tests(data, i, &j))
 				return (1);

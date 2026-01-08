@@ -31,7 +31,6 @@ bool	draw_map(t_data* data)
 	int	draw_end;
 	
 	x = 0;
-	clear_img(&data->img);
 	while (x < WIN_WIDTH)
 	{
 		data->map.player.camera = define_percentage_of_fov(x);

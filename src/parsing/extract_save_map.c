@@ -46,9 +46,9 @@ static int	loop_new_map(char **new_map_lines, char *line, t_parsing *data)
 	int	i;
 
 	i = 0;
-	while (data->map->map_lines && data->map->map_lines[i])
+	while (data->map->grid && data->map->grid[i])
 	{
-		new_map_lines[i] = ft_strdup(data, data->map->map_lines[i]);
+		new_map_lines[i] = ft_strdup(data, data->map->grid[i]);
 		if (!new_map_lines[i])
 		{
 			printf("Error\nProblem with ft_strdup in save_map_line\n");
@@ -79,7 +79,7 @@ static int	save_map_line(char *line, t_parsing *data)
 	}
 	if (loop_new_map(new_map_lines, line, data))
 		return (1);
-	data->map->map_lines = new_map_lines;
+	data->map->grid = new_map_lines;
 	if ((int)ft_strlen(line) - 1 > data->map->width)
 		data->map->width = ft_strlen(line) - 1;
 	data->map->height++;

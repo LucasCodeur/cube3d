@@ -50,9 +50,9 @@ static char	**map_copy(t_parsing *data)
 		return (NULL);
 	}
 	i = 0;
-	while (data->map->map_lines[i])
+	while (data->map->grid[i])
 	{
-		map_copy[i] = ft_strdup(data, data->map->map_lines[i]);
+		map_copy[i] = ft_strdup(data, data->map->grid[i]);
 		if (!map_copy[i])
 		{
 			printf("Error\nProblem with ft_strdup in map_copy\n");
