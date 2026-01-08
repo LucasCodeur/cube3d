@@ -82,22 +82,22 @@ static t_vec define_first_step(t_data* data, t_vec ray_dir, t_vec *ray_len, t_ve
 
     if (ray_dir.elements[0] <= 0)
     {
-        step.elements[0] = -1;
+        data->step_x = -1;
         ray_len->elements[0] = (data->map.player.pos.elements[0] - (double)data->map.x) * delta_dist.elements[0];
     }
     else
     {
-        step.elements[0] = 1;
+        data->step_x = 1;
         ray_len->elements[0] = ((double)data->map.x + 1.0 - data->map.player.pos.elements[0]) * delta_dist.elements[0];
     }
     if (ray_dir.elements[1] <= 0)
     {
-        step.elements[1] = -1;
+        data->step_y = -1;
         ray_len->elements[1] = (data->map.player.pos.elements[1] - (double)data->map.y) * delta_dist.elements[1];
     }
     else
     {
-        step.elements[1] = 1;
+        data->step_y = 1;
         ray_len->elements[1] = ((double)data->map.y + 1.0 - data->map.player.pos.elements[1]) * delta_dist.elements[1];
     }
     return (step);
@@ -116,13 +116,13 @@ static  int  size_ray(t_data* data, t_vec *ray_len, t_vec delta_dist, t_vec step
     {
         if (ray_len->elements[0] <= ray_len->elements[1])
         {
-            data->map.x += (int)step.elements[0];
+            data->map.x += data->step_x;
             ray_len->elements[0] += delta_dist.elements[0];
             data->side = 0;
         }
         else
         {
-            data->map.y += (int)step.elements[1];
+            data->map.y += data->step_y;
             ray_len->elements[1] += delta_dist.elements[1];
             data->side = 1;
         }

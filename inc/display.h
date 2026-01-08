@@ -119,6 +119,8 @@ typedef struct s_data
 	int			tile_size;
 	double		wall_x;
 	double		wall_y;
+	int			step_x;
+	int			step_y;
 	t_mlx		mlx;
 	t_img		img;
 	t_sprite	imgs;
