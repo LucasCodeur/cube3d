@@ -38,6 +38,7 @@ P_INC_MATH = $(P_SRC)/math/inc/
 P_SRC_DRAW = $(P_SRC)draw/
 P_SRC_TEST = $(P_SRC)test/
 P_SRC_SPRITES = $(P_SRC)sprites/
+P_SRC_PARSING = $(P_SRC)parsing/
 
 #############################################################################################
 #                                                                                           #
@@ -66,6 +67,37 @@ SRC_TEST = \
 	t_fov.c \
 	t_map_2D.c \
 
+SRC_PARSING =  \
+	$(P_SRC_PARSING)map/map.c					\
+	$(P_SRC_PARSING)minimap/minimap.c			\
+	$(P_SRC_PARSING)argument.c			\
+	$(P_SRC_PARSING)check_element_line.c	\
+	$(P_SRC_PARSING)check_extract_rgb.c	\
+	$(P_SRC_PARSING)check_map_structure.c\
+	$(P_SRC_PARSING)check_map.c			\
+	$(P_SRC_PARSING)extract_save_map.c	\
+	$(P_SRC_PARSING)config.c				\
+	$(P_SRC_PARSING)parsing.c			\
+	$(P_SRC_PARSING)save_element.c		\
+	$(P_SRC_PARSING)utils/ft_free.c				\
+	$(P_SRC_PARSING)utils/ft_atoi.c				\
+	$(P_SRC_PARSING)utils/ft_calloc.c			\
+	$(P_SRC_PARSING)utils/ft_lstadd_front.c		\
+	$(P_SRC_PARSING)utils/ft_lstclear.c			\
+	$(P_SRC_PARSING)utils/ft_lstnew.c			\
+	$(P_SRC_PARSING)utils/ft_lstsize.c			\
+	$(P_SRC_PARSING)utils/ft_malloc.c			\
+	$(P_SRC_PARSING)utils/ft_memmove.c			\
+	$(P_SRC_PARSING)utils/ft_split.c				\
+	$(P_SRC_PARSING)utils/ft_strdup.c			\
+	$(P_SRC_PARSING)utils/ft_strlen.c			\
+	$(P_SRC_PARSING)utils/ft_strncmp.c			\
+	$(P_SRC_PARSING)utils/ft_strnjoin.c			\
+	$(P_SRC_PARSING)utils/ft_strnstr.c			\
+	$(P_SRC_PARSING)utils/ft_strtrim.c			\
+	$(P_SRC_PARSING)utils/ft_substr.c			\
+	$(P_SRC_PARSING)utils/get_next_line.c
+
 MLX_LIB = $(P_MLX)libmlx.a
 MATH_LIB = $(P_LIB_MATH)libmath.a
 
@@ -82,6 +114,7 @@ SRCS =	\
 	$(addprefix $(P_SRC), $(SRC)) \
 	$(addprefix $(P_SRC_DRAW), $(SRC_DRAW)) \
 	$(addprefix $(P_SRC_SPRITES), $(SRC_SPRITES)) \
+	$(addprefix $(P_SRC_PARSING), $(SRC_PARSING)) \
 	$(addprefix $(P_SRC_TEST), $(SRC_TEST)) \
 
 # List of object files (redirect to P_OBJ)
@@ -237,4 +270,13 @@ On_Purple=\033[45m
 On_Cyan=\033[46m
 On_White=\033[47m
 
--include $(DEPS)% 
+.PHONY: all clean fclean re
+NAME = cub3D
+
+CC = cc
+CFLAGS = -Wall -Werror -Wextra -g3
+
+MLX_DIR = minilibx
+MLX = $(MLX_DIR)/libmlx.a
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11
+

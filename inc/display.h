@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/06 19:56:51 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/08 12:10:51 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef struct s_mlx
 
 typedef struct	s_hero
 {
+	int		x;
+	int		y;
 	t_vec	dir;
 	t_vec	pos;
 	t_vec	plane;
@@ -97,21 +99,15 @@ typedef struct	s_hero
 	double	old_time;
 }				t_hero;
 
-typedef struct s_minimap
-{
-	t_hero	hero;
-	int		scale_tile;
-}				t_minimap;
-
 typedef	struct	s_map
 {
-	int		witdh;
+	char	**map_lines;
+	int		width;
 	int		height;
 	char	grid[SIZE_Y][SIZE_X + 1];
 	int		rows;
 	int		cols;
-	int		x;
-	int		y;
+	int						map_finished;
 	t_hero	player;
 }				t_map;
 
@@ -149,7 +145,6 @@ int		move_hero(int keycode, t_data *data);
 
 //IMAGE
 t_img	fill_frame(t_data* data, char *path_to_asset, int* x, int* y);
-bool	display_map(t_data* data);
 void	update_maps(t_data* data);
 bool	draw_map(t_data* data);
 void	draw_hero(t_data* data, int tile_size);
