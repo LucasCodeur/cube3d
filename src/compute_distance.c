@@ -112,7 +112,8 @@ static t_vec define_first_step(t_data* data, t_vec ray_dir, t_vec *ray_len, t_ve
 */
 static  int  size_ray(t_data* data, t_vec *ray_len, t_vec delta_dist, t_vec step)
 {
-    while (data->map.grid[data->map.y][data->map.x] == '0')
+    int i = 0;
+    while (data->map.grid[data->map.y][data->map.x] == '0' && i != 5)
     {
         if (ray_len->elements[0] <= ray_len->elements[1])
         {
@@ -126,6 +127,7 @@ static  int  size_ray(t_data* data, t_vec *ray_len, t_vec delta_dist, t_vec step
             ray_len->elements[1] += delta_dist.elements[1];
             data->side = 1;
         }
+        i++;
     }
     return (data->side);
 }
