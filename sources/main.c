@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 15:06:01 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/07 14:56:57 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/08 09:42:15 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int argc, char **argv)
 	}
 	mlx_init_window(data);
 	display_map(data);
-	// display_minimap(data);
+	display_minimap(data);
 	mlx_hook_loop(data);
 	free_all(data);
 	return (0);

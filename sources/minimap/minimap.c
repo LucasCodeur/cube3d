@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 10:59:23 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/07 11:31:33 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/08 09:42:54 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	display_minimap(t_data *data)
 
 	wall = get_wall(data);
 
-	minimap.img = mlx_new_image(data->mlx_ptr, 150, 150);
+	minimap.img = mlx_new_image(data->mlx_ptr, 400, 200);
 	minimap.addr = mlx_get_data_addr(minimap.img, &minimap.bpp,
 			&minimap.line_len, &minimap.endian);
 	y = 0;
