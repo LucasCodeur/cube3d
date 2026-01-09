@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:57:02 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/12/16 10:45:31 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/09 15:51:29 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,23 +65,24 @@ static int	index_end(char const *s1, char const *set)
 }
 
 // Remove characters stored in set at the beginning and the end of s1
-char	*ft_strtrim(t_parsing *data, char const *s1, char const *set)
+t_error	ft_strtrim(t_parsing *data, char const *s1, char const *set, char *str)
 {
+	t_error	error;
 	int		start;
 	int		end;
 	int		i;
-	char	*str;
 
 	start = index_start(s1, set);
 	end = index_end(s1, set);
 	if (start > end)
 	{
-		str = ft_calloc(1, 1);
-		return (str);
+		error = ft_calloc(1, 1, str);
+		if (error.code != ERR_OK)
+			return (error);
 	}
-	str = ft_malloc(&data->garbage, sizeof(char) * end - start + 2);
-	if (str == NULL)
-		return (NULL);
+	error = ft_malloc(&data->garbage, sizeof(char) * end - start + 2, str);
+	if (error.code != ERR_OK)
+		return (error);
 	i = 0;
 	while (i < end - start + 1)
 	{
@@ -89,5 +90,5 @@ char	*ft_strtrim(t_parsing *data, char const *s1, char const *set)
 		i++;
 	}
 	str[i] = '\0';
-	return (str);
+	return (ERROR_OK);
 }

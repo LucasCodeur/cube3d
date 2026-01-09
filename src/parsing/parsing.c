@@ -6,17 +6,21 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 09:10:45 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/08 12:07:14 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/09 13:46:20 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h" 
+#include "parsing.h"
 
-int	parsing(int argc, char **argv, t_parsing *data)
+t_error	parsing(int argc, char **argv, t_parsing *data)
 {
-	if (check_argument(argc, argv, data))
-		return (1);
-	if (config(argv[1], data))
-		return (1);
-	return (0);
+	t_error	error;
+
+	error = check_argument(argc, argv, data);
+	if (error.code != ERR_OK)
+		return (error);
+	error = config(argv[1], data);
+	if (error.code != ERR_OK)
+		return (error);
+	return (ERROR_OK);
 }

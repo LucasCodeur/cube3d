@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 17:31:08 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/11/12 17:35:31 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/09 11:47:37 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H 
+#ifndef CUB3D_H
 # define CUB3D_H
 
-#include "display.h"
+# include "display.h"
 
 void	launcher(t_data *data);
 

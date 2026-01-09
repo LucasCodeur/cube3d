@@ -6,52 +6,62 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 09:09:51 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/08 12:08:18 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/09 14:03:56 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h" 
+#include "parsing.h"
 
-static int	check_argument_number(int argc)
+static t_error	check_argument_number(int argc)
 {
+	t_error	error;
+
 	if (argc != 2)
 	{
-		printf("Error\nYou have to enter one and only one argument (path of the map)\n");
-		return (1);
+		error.code = ERR_INVALID_ARG;
+		error.message = "Error\nYou have to enter one and only one argument (path of the map)\n";
+		return (error);
 	}
-	return (0);
+	return (ERROR_OK);
 }
 
-static int	check_file_extension(char *path, t_parsing *data)
+static t_error	check_file_extension(char *path, t_parsing *data)
 {
 	char	*extension;
 	size_t	len;
+	t_error	error;
 
 	len = ft_strlen(path);
 	if (len >= 5)
 	{
-		extension = ft_substr(data, path, len - 4, len);
-		if (!extension)
-			return (1);
+		error = ft_substr(data, path, len - 4, len, extension);
+		if (error.code != ERR_OK)
+			return (error);
 		if (ft_strncmp(extension, ".cub", 4))
 		{
-			printf("Error\nFilename must have .cub extension\n");
-			return (1);
+			error.code = ERR_INVALID_ARG;
+			error.message = "Error\nFilename must have .cub extension\n";
+			return (error);
 		}
 	}
 	else
 	{
-		printf("Error\nFilename must have .cub extension\n");
-		return (1);
+		error.code = ERR_INVALID_ARG;
+		error.message = "Error\nFilename must have .cub extension\n";
+		return (error);
 	}
-	return (0);
+	return (ERROR_OK);
 }
 
-int	check_argument(int argc, char **argv, t_parsing *data)
+t_error	check_argument(int argc, char **argv, t_parsing *data)
 {
-	if (check_argument_number(argc))
-		return (1);
-	if (check_file_extension(argv[1], data))
-		return (1);
-	return (0);
+	t_error	error;
+
+	error = check_argument_number(argc);
+	if (error.code != ERR_OK)
+		return (error);
+	error = check_file_extension(argv[1], data);
+	if (error.code != ERR_OK)
+		return (error);
+	return (ERROR_OK);
 }

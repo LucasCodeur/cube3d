@@ -6,27 +6,31 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:38:45 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/12/16 10:41:29 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/09 17:23:58 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h" 
+#include "parsing.h"
 
-static int	hero_on_limit(t_parsing *data, int i, int *j)
+static t_error	hero_on_limit(t_parsing *data, int i, int *j)
 {
+	t_error	error;
+
 	if (i == 0 || i == data->map->height - 1 || *j == 0
 		|| *j == data->map->width - 1)
 	{
-		printf("Error\nMap open, hero out of the map\n");
-		return (1);
+		error.code = ERR_INVALID_ARG;
+		error.message = "Map open,hero out of the map\n ";
+		return (error);
 	}
-	return (0);
+	return (ERROR_OK);
 }
 
-static int	hero_on_map(t_parsing *data, int i, int *j)
+static t_error	hero_on_map(t_parsing *data, int i, int *j)
 {
-	int	k;
-	int	l;
+	t_error	error;
+	int		k;
+	int		l;
 
 	k = -1;
 	while (k < 1)
@@ -34,50 +38,55 @@ static int	hero_on_map(t_parsing *data, int i, int *j)
 		l = -1;
 		while (l < 1)
 		{
-			if (data->map->grid[i + k][*j + l] != '0'
-				&& data->map->grid[i + k][*j + l] != '1')
+			if (data->map->grid[i + k][*j + l] != '0' && data->map->grid[i
+				+ k][*j + l] != '1')
 			{
-				printf("Error\nHero out of the map\n");
-				return (1);
+				error.code = ERR_INVALID_ARG;
+				error.message = "Hero out of the map\n";
+				return (error);
 			}
 			l = l + 2;
 		}
 		k = k + 2;
 	}
-	return (0);
+	return (ERROR_OK);
 }
 
-static int	loop_tests(t_parsing *data, int i, int *j)
+static t_error	loop_tests(t_parsing *data, int i, int *j)
 {
+	t_error	error;
+
 	while (data->map->grid[i][*j])
 	{
-		if (data->map->grid[i][*j] == 'N'
-			|| data->map->grid[i][*j] == 'S'
-			|| data->map->grid[i][*j] == 'E'
-			|| data->map->grid[i][*j] == 'W')
+		if (data->map->grid[i][*j] == 'N' || data->map->grid[i][*j] == 'S'
+			|| data->map->grid[i][*j] == 'E' || data->map->grid[i][*j] == 'W')
 		{
 			if (data->map->player.orientation != '\0')
 			{
-				printf("Error\nYou must have just one hero on the map\n");
-				return (1);
+				error.code = ERR_INVALID_ARG;
+				error.message = "You must have just one hero on the map\n";
+				return (error);
 			}
-			if (hero_on_limit(data, i, j))
-				return (1);
-			if (hero_on_map(data, i, j))
-				return (1);
+			error = hero_on_limit(data, i, j);
+			if (error.code != ERR_OK)
+				return (error);
+			error = hero_on_map(data, i, j);
+			if (error.code != ERR_OK)
+				return (error);
 			data->map->player.x = *j;
 			data->map->player.y = i;
 			data->map->player.orientation = data->map->grid[i][*j];
 		}
 		(*j)++;
 	}
-	return (0);
+	return (ERROR_OK);
 }
 
-static int	check_save_hero(t_parsing *data)
+static t_error	check_save_hero(t_parsing *data)
 {
-	int	i;
-	int	j;
+	t_error	error;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (data->map->grid[i])
@@ -85,24 +94,30 @@ static int	check_save_hero(t_parsing *data)
 		j = 0;
 		while (data->map->grid[i][j])
 		{
-			if (loop_tests(data, i, &j))
-				return (1);
+			error = loop_tests(data, i, &j);
+			if (error.code != ERR_OK)
+				return (error);
 		}
 		i++;
 	}
 	if (data->map->player.orientation == '\0')
 	{
-		printf("Error\nNo hero on your map\n");
-		return (1);
+		error.code = ERR_INVALID_ARG;
+		error.message = "No hero on your map\n";
+		return (error);
 	}
-	return (0);
+	return (ERROR_OK);
 }
 
-int	check_map(t_parsing *data)
+t_error	check_map(t_parsing *data)
 {
-	if (check_save_hero(data))
-		return (1);
-	if (check_map_structure(data))
-		return (1);
-	return (0);
+	t_error	error;
+
+	error = check_save_hero(data);
+	if (error.code != ERR_OK)
+		return (error);
+	error = check_map_structure(data);
+	if (error.code != ERR_OK)
+		return (error);
+	return (ERROR_OK);
 }

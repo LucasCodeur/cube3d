@@ -6,91 +6,95 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:22:08 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/12/16 10:41:55 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/09 17:08:46 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h" 
+#include "parsing.h"
 
-static int	extract_map_line(char *line, t_parsing *data)
+static t_error	extract_map_line(char *line, t_parsing *data)
 {
-	int	i;
+	t_error	error;
+	int		i;
 
 	if (!ft_strncmp(line, "\n", 1) && data->map->height)
 	{
 		data->map->map_finished = 1;
-		return (0);
+		return (ERROR_OK);
 	}
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
 		if (data->map->map_finished)
 		{
-			printf("Error\nEmpty line in map structure\n");
-			return (1);
+			error.code = ERR_INVALID_ARG;
+			error.message = "Empty line in map structure\n";
+			return (error);
 		}
 		if (line[i] != '1' && line[i] != '0' && line[i] != ' ' && line[i] != 'D'
 			&& line[i] != 'N' && line[i] != 'S' && line[i] != 'E'
 			&& line[i] != 'W')
 		{
-			printf("Error\nBad character in map structure\n");
-			return (1);
+			error.code = ERR_INVALID_ARG;
+			error.message = "Bad character in map structure\n";
+			return (error);
 		}
 		i++;
 	}
-	return (0);
+	return (ERROR_OK);
 }
 
-static int	loop_new_map(char **new_map_lines, char *line, t_parsing *data)
+static t_error	loop_new_map(char **new_map_lines, char *line, t_parsing *data)
 {
-	int	i;
+	t_error	error;
+	int		i;
 
 	i = 0;
 	while (data->map->grid && data->map->grid[i])
 	{
-		new_map_lines[i] = ft_strdup(data, data->map->grid[i]);
-		if (!new_map_lines[i])
-		{
-			printf("Error\nProblem with ft_strdup in save_map_line\n");
-			return (1);
-		}
+		error = ft_strdup(data, data->map->grid[i], new_map_lines[i]);
+		if (error.code != ERR_OK)
+			return (error);
 		i++;
 	}
-	new_map_lines[i] = ft_strdup(data, line);
-	if (!new_map_lines[i])
-	{
-		printf("Error\nProblem with ft_strdup in save_map_line\n");
-		return (1);
-	}
+	error = ft_strdup(data, line, new_map_lines[i]);
+	if (error.code != ERR_OK)
+		return (error);
 	new_map_lines[++i] = NULL;
-	return (0);
+	return (ERROR_OK);
 }
 
-static int	save_map_line(char *line, t_parsing *data)
+static t_error	save_map_line(char *line, t_parsing *data)
 {
+	t_error	error;
 	char	**new_map_lines;
 
-	new_map_lines = ft_malloc(&data->garbage, sizeof(char *)
-			* (data->map->height + 2));
-	if (!new_map_lines)
-	{
-		printf("Error\nMalloc of new_map_lines failed\n");
-		return (1);
-	}
-	if (loop_new_map(new_map_lines, line, data))
-		return (1);
+	error = ft_malloc(&data->garbage, sizeof(char *) * (data->map->height + 2),
+			new_map_lines);
+	if (error.code != ERR_OK)
+		return (error);
+	error = loop_new_map(new_map_lines, line, data);
+	if (error.code != ERR_OK)
+		return (error);
 	data->map->grid = new_map_lines;
 	if ((int)ft_strlen(line) - 1 > data->map->width)
 		data->map->width = ft_strlen(line) - 1;
 	data->map->height++;
-	return (0);
+	return (ERROR_OK);
 }
 
-int	extract_save_map(char *line, t_parsing *data)
+t_error	extract_save_map(char *line, t_parsing *data)
 {
-	if (extract_map_line(line, data))
-		return (1);
-	if (ft_strncmp(line, "\n", 1) && save_map_line(line, data))
-		return (1);
-	return (0);
+	t_error	error;
+
+	error = extract_map_line(line, data);
+	if (error.code != ERR_OK)
+		return (error);
+	if (ft_strncmp(line, "\n", 1))
+	{
+		error = save_map_line(line, data);
+		if (error.code != ERR_OK)
+			return (error);
+	}
+	return (ERROR_OK);
 }

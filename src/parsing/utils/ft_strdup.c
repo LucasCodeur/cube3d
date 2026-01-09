@@ -6,22 +6,22 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 14:43:04 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/12/16 10:44:56 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/09 17:04:04 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-char	*ft_strdup(t_parsing *data, const char *str)
+t_error	ft_strdup(t_parsing *data, const char *str, char *result)
 {
-	char	*result;
-	int		i;
 	int		len;
+	t_error	error;
+	int		i;
 
 	len = ft_strlen(str);
-	result = ft_malloc(&data->garbage, sizeof(char) * (len + 1));
-	if (result == NULL)
-		return (NULL);
+	error = ft_malloc(&data->garbage, sizeof(char) * (len + 1), result);
+	if (error.code != ERR_OK)
+		return (error);
 	i = 0;
 	while (i < len)
 	{
@@ -29,5 +29,5 @@ char	*ft_strdup(t_parsing *data, const char *str)
 		i++;
 	}
 	result[i] = '\0';
-	return (result);
+	return (ERROR_OK);
 }

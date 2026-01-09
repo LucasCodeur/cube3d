@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:01:49 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/08 12:07:10 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/09 17:17:57 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
+# include "display.h"
+# include "error.h"
 # include <fcntl.h>
 # include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-# include "display.h"
 // enum						ERROR
 // {
 // 	MALLOC,
@@ -58,7 +58,7 @@ typedef struct s_parsing
 }							t_parsing;
 
 //========== INIT ===========
-t_parsing						*init_parsing(void);
+t_parsing					*init_parsing(void);
 void						mlx_hook_loop(t_parsing *parsing);
 int							mlx_init_window(t_parsing *parsing);
 
@@ -66,45 +66,47 @@ int							mlx_init_window(t_parsing *parsing);
 int							display_map(t_parsing *parsing);
 
 //========== MINIMAP ===========
-int							display_minimap(t_parsing *parsing);
+int							display_minimap(t_data *data);
 
 //========== PARSING ===========
-int							parsing(int argc, char **argv, t_parsing *config_parsing);
-int							check_argument(int argc, char **argv,
-								t_parsing *config_parsing);
-int							config(char *path, t_parsing *config_parsing);
-int							check_element_line(char *line, t_parsing *config_parsing);
-int							extract_save_map(char *line, t_parsing *config_parsing);
-int							save_element(char *id, char *info,
-								t_parsing *config_parsing);
-int							*check_extract_rgb(t_parsing *config_parsing, char *info);
-int							check_map(t_parsing *config_parsing);
-int							check_map_structure(t_parsing *config_parsing);
+t_error						parsing(int argc, char **argv, t_parsing *data);
+t_error						check_argument(int argc, char **argv,
+								t_parsing *data);
+t_error						config(char *path, t_parsing *data);
+t_error						check_element_line(char *line, t_parsing *data);
+t_error						extract_save_map(char *line, t_parsing *data);
+t_error						save_element(char *id, char *info, t_parsing *data);
+t_error						check_extract_rgb(t_parsing *data, char *info,
+								int *rgb_int);
+t_error						check_map(t_parsing *data);
+t_error						check_map_structure(t_parsing *data);
 
 //========== UTILS ===========
 void						free_all(t_parsing *data);
 int							ft_atoi(const char *str);
-void						*ft_calloc(size_t elementCount, size_t elementSize);
+t_error						ft_calloc(size_t elementCount, size_t elementSize,
+								char *str);
 void						ft_lstadd_front(t_garbage **lst, t_garbage *new);
 void						ft_lstclear(t_garbage **lst, void (*del)(void *));
-t_garbage					*ft_lstnew(void *content);
+t_error						ft_lstnew(void *ptr, t_garbage *new);
 int							ft_lstsize(t_garbage *lst);
-void						*ft_malloc(t_garbage **garbage, int size);
+t_error						ft_malloc(t_garbage **garbage, int size, void *str);
 void						*ft_memmove(void *dest, const void *src, size_t c);
-char						**ft_split(t_parsing *config_parsing, char const *s,
-								char c);
-char						*ft_strdup(t_parsing *config_parsing, const char *str);
+t_error						ft_split(t_parsing *cd, char const *s, char c,
+								char **split);
+t_error						ft_strdup(t_parsing *data, const char *str,
+								char *result);
 size_t						ft_strlen(const char *str);
 int							ft_strncmp(const char *first, const char *second,
 								size_t length);
-char						*ft_strnjoin(t_parsing *config_parsing, char *s1,
-								char *s2, int byte_nbr);
+t_error						ft_strnjoin(t_parsing *data, char *s1, char *s2,
+								int byte_nbr);
 char						*ft_strnstr(const char *s1, const char *s2,
 								size_t len);
-char						*ft_strtrim(t_parsing *config_parsing, char const *s1,
-								char const *set);
-char						*ft_substr(t_parsing *config_parsing, char const *s,
-								unsigned int start, size_t len);
-char						*get_next_line(t_parsing *config_parsing, int fd);
+t_error						ft_strtrim(t_parsing *data, char const *s1,
+								char const *set, char *str);
+t_error						ft_substr(t_parsing *data, char const *s,
+								unsigned int start, size_t len, char *str);
+t_error						get_next_line(t_parsing *data, int fd, char *line);
 
 #endif

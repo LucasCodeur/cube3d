@@ -6,24 +6,30 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:57:57 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/12/16 10:45:44 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/09 15:39:37 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-char	*ft_substr(t_parsing *data, char const *s, unsigned int start, size_t len)
+t_error	ft_substr(t_parsing *data, char const *s, unsigned int start,
+		size_t len, char *str)
 {
 	size_t	i;
-	char	*str;
+	t_error	error;
 
 	if (start >= ft_strlen(s))
-		return (ft_calloc(1, 1));
+	{
+		error = ft_calloc(1, 1, str);
+		if (error.code != ERR_OK)
+			return (error);
+		return (ERROR_OK);
+	}
 	if (len > ft_strlen(s) - start)
 		len = ft_strlen(s) - start;
-	str = ft_malloc(&data->garbage, sizeof(char) * len + 1);
-	if (str == NULL)
-		return (NULL);
+	error = ft_malloc(&data->garbage, sizeof(char) * len + 1, str);
+	if (error.code != ERR_OK)
+		return (error);
 	i = 0;
 	while (s[start + i] != '\0' && i < len)
 	{
@@ -31,5 +37,5 @@ char	*ft_substr(t_parsing *data, char const *s, unsigned int start, size_t len)
 		i++;
 	}
 	str[i] = '\0';
-	return (str);
+	return (ERROR_OK);
 }

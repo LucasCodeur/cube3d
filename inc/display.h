@@ -6,13 +6,14 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/08 16:35:09 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/09 13:13:08 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DISPLAY_H
 # define DISPLAY_H
 
+# include "error.h"
 # include "vector.h"
 # include <math.h>
 # include <stdbool.h>

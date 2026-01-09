@@ -6,14 +6,15 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:14:23 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/12/16 10:41:13 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/09 17:23:17 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h" 
+#include "parsing.h"
 
-static int	check_map_opened(char **map_test, int i, int j)
+static t_error	check_map_opened(char **map_test, int i, int j)
 {
+	t_error	error;
 	char	array[3];
 	int		k;
 
@@ -29,76 +30,78 @@ static int	check_map_opened(char **map_test, int i, int j)
 			+ 1][j - 1] == array[k] || map_test[i + 1][j] == array[k]
 			|| map_test[i + 1][j + 1] == array[k])
 		{
-			printf("Error\nMap open\n");
-			return (1);
+			error.code = ERR_INVALID_ARG;
+			error.message = "Map open\n";
+			return (error);
 		}
 		k++;
 	}
-	return (0);
+	return (ERROR_OK);
 }
 
-static char	**map_copy(t_parsing *data)
+static t_error	map_copy(t_parsing *data, char **map_copy)
 {
-	char	**map_copy;
+	t_error	error;
 	int		i;
 
-	map_copy = ft_malloc(&data->garbage, sizeof(char *) * (data->map->height
-				+ 1));
-	if (!map_copy)
-	{
-		printf("Error\nMalloc of map_copy\n");
-		return (NULL);
-	}
+	error = ft_malloc(&data->garbage, sizeof(char *) * (data->map->height + 1),
+			map_copy);
+	if (error.code != ERR_OK)
+		return (error);
 	i = 0;
 	while (data->map->grid[i])
 	{
-		map_copy[i] = ft_strdup(data, data->map->grid[i]);
-		if (!map_copy[i])
-		{
-			printf("Error\nProblem with ft_strdup in map_copy\n");
-			return (NULL);
-		}
+		error = ft_strdup(data, data->map->grid[i], map_copy[i]);
+		if (error.code != ERR_OK)
+			return (error);
 		i++;
 	}
 	map_copy[i] = NULL;
-	return (map_copy);
+	return (ERROR_OK);
 }
 
-static int	recursive(char **map_test, int i, int j, t_parsing *data)
+static t_error	recursive(char **map_test, int i, int j, t_parsing *data)
 {
+	t_error	error;
+
 	if (i == 0 || j == 0 || i == data->map->height - 1 || j == data->map->width
 		- 1)
 	{
-		printf("Error\nMap open\n");
-		return (1);
+		error.code = ERR_INVALID_ARG;
+		error.message = "Map open\n";
+		return (error);
 	}
-	if (check_map_opened(map_test, i, j))
-		return (1);
+	error = check_map_opened(map_test, i, j);
+	if (error.code != ERR_OK)
+		return (error);
 	if (j != data->map->width - 1 && (map_test[i][j + 1] == '0' || map_test[i][j
 			+ 1] == data->map->player.orientation))
 	{
 		map_test[i][j + 1] = '1';
-		if (recursive(map_test, i, j + 1, data))
-			return (1);
+		error = recursive(map_test, i, j + 1, data);
+		if (error.code != ERR_OK)
+			return (error);
 	}
 	if (i != data->map->height - 1 && map_test[i + 1][j] == '0')
 	{
 		map_test[i + 1][j] = '1';
-		if (recursive(map_test, i + 1, j, data))
-			return (1);
+		error = recursive(map_test, i + 1, j, data);
+		if (error.code != ERR_OK)
+			return (error);
 	}
-	return (0);
+	return (ERROR_OK);
 }
 
-int	check_map_structure(t_parsing *data)
+t_error	check_map_structure(t_parsing *data)
 {
+	t_error	error;
 	char	**map_test;
 	int		i;
 	int		j;
 
-	map_test = map_copy(data);
-	if (!map_test)
-		return (1);
+	error = map_copy(data, map_test);
+	if (error.code != ERR_OK)
+		return (error);
 	i = -1;
 	while (map_test[++i])
 	{
@@ -108,11 +111,12 @@ int	check_map_structure(t_parsing *data)
 			if (map_test[i][j] == '0')
 			{
 				map_test[i][j] = '1';
-				if (recursive(map_test, i, j, data))
-					return (1);
+				error = recursive(map_test, i, j, data);
+				if (error.code != ERR_OK)
+					return (error);
 			}
 			j++;
 		}
 	}
-	return (0);
+	return (ERROR_OK);
 }

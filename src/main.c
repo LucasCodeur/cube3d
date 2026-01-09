@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 11:50:16 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/08 12:37:43 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/09 13:33:49 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "display.h"
-#include "parsing.h"
 #include "debug.h"
+#include "display.h"
+#include "error.h"
+#include "parsing.h"
 #include "test.h"
-
-#include <mlx.h>
-#include <X11/keysym.h>
 #include <X11/X.h>
+#include <X11/keysym.h>
+#include <mlx.h>
 
-bool	ininitialize_values(t_data *data, t_parsing *parsing_data)
+static void	ininitialize_values(t_data *data, t_parsing *parsing_data)
 {
 	ft_bzero(data, sizeof(t_data));
 	ft_bzero(parsing_data, sizeof(t_parsing));
@@ -32,7 +32,7 @@ bool	ininitialize_values(t_data *data, t_parsing *parsing_data)
 	data->map.player.plane = new_vector_2D(0.0f, 0.66f);
 	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
 	parsing_data->map = &data->map;
-	return (true);
+	return ;
 }
 
 void	launcher(t_data *data)
@@ -44,24 +44,26 @@ void	launcher(t_data *data)
 	load_imgs(data);
 	draw_map(data);
 	// t_display_map_2D(data);
+	display_minimap(data);
 	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, move_hero, data);
 	mlx_loop(data->mlx.ptr);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_data		data;
 	t_parsing	parsing_data;
+	t_error		error;
 
-	
 	ininitialize_values(&data, &parsing_data);
-	if (parsing(argc, argv, &parsing_data))
+	error = parsing(argc, argv, &parsing_data);
+	if (error.code != ERR_OK)
 	{
 		free_all(&parsing_data);
-		return (1);
+		return (EXIT_FAILURE);
 	}
 	launcher(&data);
 	// mlx_hook_loop(parsing_data);
 	// free_all(parsing_data);
-	return (0);
+	return (EXIT_SUCCESS);
 }

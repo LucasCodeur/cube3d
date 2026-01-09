@@ -6,62 +6,71 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:51:37 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/12/16 10:41:43 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/09 17:24:24 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h" 
+#include "parsing.h"
 
-static int	check_line(char *line, t_parsing *data)
+static t_error	check_line(char *line, t_parsing *data)
 {
+	t_error	error;
+
 	if (data->nb_valid_elements < 6 && *line != '\n')
 	{
-		if (check_element_line(line, data))
-			return (1);
+		error = check_element_line(line, data);
+		if (error.code != ERR_OK)
+			return (error);
 	}
 	else if (data->nb_valid_elements >= 6)
 	{
-		if (extract_save_map(line, data))
-			return (1);
+		error = extract_save_map(line, data);
+		if (error.code != ERR_OK)
+			return (error);
 	}
-	return (0);
+	return (ERROR_OK);
 }
 
-static int	check_file_opening(char *path, int *fd)
+static t_error	check_file_opening(char *path, int *fd)
 {
+	t_error	error;
+
 	*fd = open(path, O_RDONLY);
 	if (*fd == -1)
 	{
-		printf("Error\n");
-		perror("open");
-		return (1);
+		error.code = ERR_IO;
+		error.message = "Config file cant be opened";
+		return (error);
 	}
-	return (0);
+	return (ERROR_OK);
 }
 
-int	config(char *path, t_parsing *data)
+t_error	config(char *path, t_parsing *data)
 {
 	int		fd;
 	char	*line;
 	int		i;
+	t_error	error;
 
 	fd = -1;
-	if (check_file_opening(path, &fd))
-		return (1);
-	line = get_next_line(data, fd);
-	if (!line)
-	{
-		printf("Error\nLine cannot be read\n");
-		return (1);
-	}
+	error = check_file_opening(path, &fd);
+	if (error.code != ERR_OK)
+		return (error);
+	error = get_next_line(data, fd, line);
+	if (error.code != ERR_OK)
+		return (error);
 	while (line)
 	{
-		if (check_line(line, data))
-			return (1);
-		line = get_next_line(data, fd);
+		error = check_line(line, data);
+		if (error.code != ERR_OK)
+			return (error);
+		error = get_next_line(data, fd, line);
+		if (error.code != ERR_OK)
+			return (error);
 	}
-	if (check_map(data))
-		return (1);
+	error = check_map(data);
+	if (error.code != ERR_OK)
+		return (error);
 	/*A SUPPRIMER*/
 	printf("STRUCTURE:\n");
 	printf("north_texture=%s\n", data->north_texture);
@@ -89,5 +98,5 @@ int	config(char *path, t_parsing *data)
 	printf("pos y=%d\n", data->map->player.y);
 	printf("orientation=%c\n", data->map->player.orientation);
 	/*A SUPPRIMER*/
-	return (0);
+	return (ERROR_OK);
 }

@@ -6,94 +6,83 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:52:57 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/12/16 10:40:39 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/09 16:38:07 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h" 
+#include "parsing.h"
 
-static char	*choose_id(char *substr, t_parsing *data, int *i)
+static t_error	choose_id(char *substr, t_parsing *data, int *i, char *id)
 {
-	char	*id;
+	t_error	error;
 
-	id = NULL;
 	if (!ft_strncmp(substr, "NO ", 3) || !ft_strncmp(substr, "SO ", 3)
 		|| !ft_strncmp(substr, "WE ", 3) || !ft_strncmp(substr, "EA ", 3))
 	{
-		id = ft_substr(data, substr, 0, 2);
+		error = ft_substr(data, substr, 0, 2, id);
 		*i = 3;
 	}
 	else if (!ft_strncmp(substr, "F ", 2) || !ft_strncmp(substr, "C ", 2))
 	{
-		id = ft_substr(data, substr, 0, 1);
+		error = ft_substr(data, substr, 0, 1, id);
 		*i = 2;
 	}
-	if (!id)
-	{
-		printf("Error\nProblem with config elements\n");
-		return (NULL);
-	}
-	return (id);
+	if (error.code != ERR_OK)
+		return (error);
+	return (ERROR_OK);
 }
 
-static char	*extract_id(t_parsing *data, char *line, int *i)
+static t_error	extract_id(t_parsing *data, char *line, int *i, char *id)
 {
-	char	*id;
-	char	*substr;
+	t_error	error;
+	char	*str;
 
-	id = NULL;
-	substr = ft_substr(data, line, 0, 3);
-	if (!substr)
-	{
-		printf("Error\nProblem with ft_substr in extract_id\n");
-		return (NULL);
-	}
-	id = choose_id(substr, data, i);
-	if (!id)
-		return (NULL);
-	return (id);
+	error = ft_substr(data, line, 0, 3, str);
+	if (error.code != ERR_OK)
+		return (error);
+	error = choose_id(str, data, i, id);
+	if (error.code != ERR_OK)
+		return (error);
+	return (ERROR_OK);
 }
 
-static char	*extract_infos(t_parsing *data, char *line, int *i)
+static t_error	extract_infos(t_parsing *data, char *line, int *i,
+		char *info_clean)
 {
+	t_error	error;
 	char	*info_brut;
-	char	*info_clean;
 	int		index_start;
 
 	index_start = *i;
 	while (line[*i] != '\n')
 		*i = *i + 1;
-	info_brut = ft_substr(data, line, index_start, *i - index_start);
-	if (!info_brut)
-	{
-		printf("Error\nProblem with ft_substr in extract_infos\n");
-		return (NULL);
-	}
-	info_clean = ft_strtrim(data, info_brut, " ");
-	if (!info_clean)
-	{
-		printf("Error\nProblem with ft_strtrim in extract_infos\n");
-		return (NULL);
-	}
-	return (info_clean);
+	error = ft_substr(data, line, index_start, *i - index_start, info_brut);
+	if (error.code != ERR_OK)
+		return (error);
+	error = ft_strtrim(data, info_brut, " ", info_clean);
+	if (error.code != ERR_OK)
+		return (error);
+	return (ERROR_OK);
 }
 
-int	check_element_line(char *line, t_parsing *data)
+t_error	check_element_line(char *line, t_parsing *data)
 {
-	char	*id;
+	t_error	error;
 	char	*info;
 	int		i;
+	char	*id;
 
 	i = 0;
 	while (line[i] == ' ')
 		i++;
-	id = extract_id(data, line, &i);
-	if (!id)
-		return (1);
-	info = extract_infos(data, line, &i);
-	if (!info)
-		return (1);
-	if (save_element(id, info, data))
-		return (1);
-	return (0);
+	error = extract_id(data, line, &i, id);
+	if (error.code != ERR_OK)
+		return (error);
+	error = extract_infos(data, line, &i, info);
+	if (error.code != ERR_OK)
+		return (error);
+	error = save_element(id, info, data);
+	if (error.code != ERR_OK)
+		return (error);
+	return (ERROR_OK);
 }

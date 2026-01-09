@@ -6,27 +6,33 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:46:38 by prigaudi          #+#    #+#             */
-/*   Updated: 2025/12/16 10:45:14 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/09 15:11:52 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-char	*ft_strnjoin(t_parsing *data, char *s1, char *s2, int byte_nbr)
+// at the end s1=str to modify s1 withou returning something
+t_error	ft_strnjoin(t_parsing *data, char *s1, char *s2, int byte_nbr)
 {
 	char	*str;
 	int		i;
 	int		j;
+	t_error	error;
 
 	if (!s1 && byte_nbr == 0)
-		return (NULL);
+	{
+		error.code = ERR_FAIL;
+		error.message = "ft_strnjoin failed";
+		return (error);
+	}
 	if (!s1)
-		str = ft_malloc(&data->garbage, byte_nbr + 1);
+		error = ft_malloc(&data->garbage, byte_nbr + 1, str);
 	else
-		str = ft_malloc(&data->garbage, sizeof(char) * (ft_strlen(s1) + byte_nbr
-					+ 1));
-	if (str == NULL)
-		return (NULL);
+		error = ft_malloc(&data->garbage, sizeof(char) * (ft_strlen(s1)
+					+ byte_nbr + 1), str);
+	if (error.code != ERR_OK)
+		return (error);
 	i = 0;
 	j = 0;
 	while (s1 && s1[j])
@@ -35,5 +41,6 @@ char	*ft_strnjoin(t_parsing *data, char *s1, char *s2, int byte_nbr)
 	while (s2 && s2[j] && j < byte_nbr)
 		str[i++] = s2[j++];
 	str[i] = '\0';
-	return (str);
+	s1 = str;
+	return (ERROR_OK);
 }

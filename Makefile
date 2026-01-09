@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+         #
+#    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2026/01/06 19:57:26 by lud-adam         ###   ########.fr        #
+#    Updated: 2026/01/09 12:59:09 by prigaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRC = \
 	hooks.c \
 	compute_distance.c \
 	map.c \
+	minimap.c \
 	utils.c \
 	raycasting.c \
 	main.c \
@@ -95,9 +96,6 @@ SRC_PARSING = \
 	utils/ft_strtrim.c			\
 	utils/ft_substr.c			\
 	utils/get_next_line.c
-
-	# map/map.c \
-	# minimap/minimap.c \
 
 MLX_LIB = $(P_MLX)libmlx.a
 MATH_LIB = $(P_LIB_MATH)libmath.a
