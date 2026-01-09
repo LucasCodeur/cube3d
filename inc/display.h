@@ -21,7 +21,8 @@
 #include "vector.h"
 
 # define WIN_WIDTH 2000
-# define WIN_HEIGHT 1600
+# define WIN_HEIGHT 1000
+
 # define SIZE_X	20
 # define SIZE_Y	20
 
@@ -39,8 +40,9 @@
 # define YELLOW 0xFFFF000
 # define WHITE 0xFFFFFF00
 
-# define ADD_SPEED 5.0 * (M_PI / 180)
-# define SUBT_SPEED -5.0 * (M_PI / 180)
+# define ADD_SPEED 4.0 * (M_PI / 180)
+# define SUBT_SPEED -4.0 * (M_PI / 180)
+# define EPSILON 0.001
 
 typedef struct s_rgb
 {
@@ -71,11 +73,10 @@ typedef struct s_img
 
 typedef struct s_sprite
 {
-	t_img	ground;
-	t_img	wall_east;
-	t_img	wall_north;
-	t_img	wall_west;
-	t_img	wall_south;
+	t_img	*wall_east;
+	t_img	*wall_north;
+	t_img	*wall_west;
+	t_img	*wall_south;
 }				t_sprite;
 
 typedef struct s_mlx
@@ -117,11 +118,13 @@ typedef struct s_data
 {
 	int			side;
 	int			tile_size;
+	int			step_x;
+	int			step_y;
 	double		wall_x;
 	double		wall_y;
 	t_mlx		mlx;
 	t_img		img;
-	t_sprite	imgs;
+	t_sprite	*imgs;
 	t_map		map;
 	t_vec		ray_dir;
 }				t_data;
@@ -146,12 +149,12 @@ int		close_win(void *param);
 int		move_hero(int keycode, t_data *data);
 
 //IMAGE
-t_img	fill_frame(t_data* data, char *path_to_asset, int* x, int* y);
+void	fill_image(t_data* data);
 void	update_maps(t_data* data);
 bool	draw_map(t_data* data);
 void	draw_hero(t_data* data, int tile_size);
 void	clear_img(t_img *img);
-t_img	choose_texture(t_data *data);
+void	choose_texture(t_data *data, t_img **text);
 
 //UTILS
 void	ft_bzero(void *s, size_t n);

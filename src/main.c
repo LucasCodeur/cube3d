@@ -18,6 +18,7 @@
 #include <mlx.h>
 #include <X11/keysym.h>
 #include <X11/X.h>
+#include <stdlib.h>
 
 bool	ininitialize_values(t_data *data, t_parsing *parsing_data)
 {
@@ -31,6 +32,7 @@ bool	ininitialize_values(t_data *data, t_parsing *parsing_data)
 	data->map.player.dir = new_vector_2D(1.0f, 0.0f);
 	data->map.player.plane = new_vector_2D(0.0f, 0.66f);
 	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
+	data->imgs = malloc(sizeof(t_sprite));
 	parsing_data->map = &data->map;
 	return (true);
 }
@@ -61,7 +63,10 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 	launcher(&data);
-	// mlx_hook_loop(parsing_data);
-	// free_all(parsing_data);
+	free_img(&data);
+	// mlx_destroy_image(data.mlx.ptr, data.imgs.wall_east.img);
+	// mlx_destroy_image(data.mlx.ptr, data.imgs.wall_west.img);
+	// mlx_destroy_image(data.mlx.ptr, data.imgs.wall_north.img);
+	// mlx_destroy_image(data.mlx.ptr, data.imgs.wall_south.img);
 	return (0);
 }

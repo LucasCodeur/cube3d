@@ -17,7 +17,7 @@
 #include <math.h>
 
 static int	compute_x_of_texture(t_data *data, int text_size);
-static void draw_line(t_data* data, int top_wall, int bottom_wall, int x);
+static void draw_line(t_data* data, int top_strip, int bottom_wall, int x);
 
 /**
 * @brief allow to display the map
@@ -27,16 +27,16 @@ static void draw_line(t_data* data, int top_wall, int bottom_wall, int x);
 bool	draw_map(t_data* data)
 {
 	int x;
-	int	draw_start;
-	int	draw_end;
+	int	top_strip;
+	int	bottom_strip;
 	
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
 		data->map.player.camera = define_percentage_of_fov(x);
 		data->ray_dir = define_ray(data);
-		compute_height_of_line(data, &draw_start, &draw_end);	
-		draw_line(data, draw_start, draw_end, x);
+		compute_height_of_line(data, &top_strip, &bottom_strip);	
+		draw_line(data, top_strip, bottom_strip, x);
 		x++;
 	}
 	// t_display_map_2D(data);
@@ -47,40 +47,56 @@ bool	draw_map(t_data* data)
 /**
 * @brief draw the line define by x, the sky and the sol.
 * @param data all information about the program.
-* @param draw_start begin of the line to draw.
-* @param draw_end end of the line to draw.
+* @param top_strip begin of the line to draw.
+* @param bottom_strip end of the line to draw.
 * @return
 */
-static void draw_line(t_data* data, int top_wall, int bottom_wall, int x)
+static void draw_line(t_data* data, int top_strip, int bottom_strip, int x)
 {
-	t_img	text;
+	t_img	*text;
+	t_pixel	color;
 	double	step;	
 	double	tex_y;
 	int		tex_x;
 	int		y;
 
 	y = 0;
-	text = choose_texture(data);
-	text.color.value = BLACK;
-	step = (double)text.height / (double)(bottom_wall - top_wall);
-	while (y < top_wall)
-		my_mlx_pixel_put(data, x, y++, &text.color);
-	tex_x = compute_x_of_texture(data, text.height);
-	if (top_wall < 0)
-		tex_y = (y - top_wall) * step;
+	text = NULL;
+
+	color.value = BLACK;
+	if (data->side == 0)
+	{
+		if (data->ray_dir.elements[0] >= 0)
+			text = data->imgs->wall_east;
+		else
+			text = data->imgs->wall_west;
+	}
+	else
+	{
+		if (data->ray_dir.elements[1] >= 0)
+			text = data->imgs->wall_south;
+		else
+			text = data->imgs->wall_north;
+	}
+	step = (double)text->height / (double)(bottom_strip - top_strip);
+	while (y < top_strip)
+		my_mlx_pixel_put(data, x, y++, &color);
+	tex_x = compute_x_of_texture(data, text->height);
+	if (top_strip < 0)
+		tex_y = (y - top_strip) * step;
 	else
 		tex_y = 0;
-	while (y < bottom_wall)
+	while (y < bottom_strip)
 	{
-		text.color.value = *(int *)(text.addr + (int)tex_y * text.line_length + tex_x * (text.bits_per_pixel / 8));
-		my_mlx_pixel_put(data, x, y++, &text.color);
+		color.value = *(int *)(text->addr + (int)tex_y * text->line_length + tex_x * text->bits_per_pixel);
+		my_mlx_pixel_put(data, x, y++, &color);
 		tex_y += step;
-		if (tex_y > text.height)
-			tex_y = (double)text.height;
+		if (tex_y > text->height)
+			tex_y = (double)text->height;
 	}
-	text.color.value = BLACK;
+	color.value = BLACK;
 	while (y < WIN_HEIGHT - 1)
-		my_mlx_pixel_put(data, x, y++, &text.color);
+		my_mlx_pixel_put(data, x, y++, &color);
 }
 
 /**

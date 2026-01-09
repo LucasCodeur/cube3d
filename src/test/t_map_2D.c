@@ -29,8 +29,8 @@ bool	t_display_map_2D(t_data* data)
 	int size_cols; 
 	int size_rows;
 	
-	size_cols = (WIN_WIDTH / 4) / data->map.cols;
-	size_rows = (WIN_HEIGHT / 4) / data->map.rows;
+	size_cols = (WIN_WIDTH / 4) / data->map.width;
+	size_rows = (WIN_HEIGHT / 4) / data->map.height;
 	if (size_cols <= size_rows)
 		data->tile_size = size_cols;
 	else
@@ -119,9 +119,9 @@ bool	t_draw_map(t_data* data, int tile_size)
 
 	y = 0;
 	x = 0;
-	while (y < data->map.rows)
+	while (y < data->map.height)
 	{
-		while (x < data->map.cols)
+		while (x < data->map.width)
 		{
 			convert_and_draw_map(data, x, y, tile_size);		
 			x++;
