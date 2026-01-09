@@ -45,6 +45,14 @@ int move_hero(int keycode, t_data *data)
 		data->map.player.pos.elements[1] += 0.25f * data->map.player.dir.elements[1];
 		draw_map(data);
 	}
+	else if ((keycode == XK_q || keycode == XK_Q) && data->z < 500)
+	{
+		data->z += 50;
+	}
+	else if ((keycode == XK_e || keycode == XK_E) && data->z > -500)
+	{
+		data->z -= 50;
+	}
 	else
 	{
 		if (rotate_hero(data, keycode) == true)

@@ -20,8 +20,8 @@
 
 #include "vector.h"
 
-# define WIN_WIDTH 2000
-# define WIN_HEIGHT 2000
+# define WIN_WIDTH 3840 
+# define WIN_HEIGHT 2160
 
 # define SIZE_X	20
 # define SIZE_Y	20
@@ -127,6 +127,7 @@ typedef struct s_data
 	t_sprite	*imgs;
 	t_map		map;
 	t_vec		ray_dir;
+	int			z;
 }				t_data;
 
 void	launcher(t_data *data);
