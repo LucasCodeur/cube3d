@@ -21,7 +21,7 @@
 #include "vector.h"
 
 # define WIN_WIDTH 2000
-# define WIN_HEIGHT 1000
+# define WIN_HEIGHT 2000
 
 # define SIZE_X	20
 # define SIZE_Y	20

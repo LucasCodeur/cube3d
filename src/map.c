@@ -53,17 +53,18 @@ bool	draw_map(t_data* data)
 */
 static void draw_line(t_data* data, int top_strip, int bottom_strip, int x)
 {
-	t_img	*text;
-	t_pixel	color;
-	double	step;	
-	double	tex_y;
-	int		tex_x;
-	int		y;
+	t_img		*text;
+	t_pixel		color;
+	t_pixel		*dst;
+	double		step;	
+	double		tex_y;
+	int			tex_x;
+	int			y;
 
 	y = 0;
 	text = NULL;
 
-	color.value = BLACK;
+	// color.value = BLACK;
 	if (data->side == 0)
 	{
 		if (data->ray_dir.elements[0] >= 0)
@@ -79,24 +80,43 @@ static void draw_line(t_data* data, int top_strip, int bottom_strip, int x)
 			text = data->imgs->wall_north;
 	}
 	step = (double)text->height / (double)(bottom_strip - top_strip);
+	// printf("data->line length : %d\n", data->img.line_length);
+	// dst = (int *)(data->img.addr + x * 4);
+	dst = (t_pixel *)data->img.addr + x * 4;
+	color.value = BLACK;
 	while (y < top_strip)
-		my_mlx_pixel_put(data, x, y++, &color);
+	{
+		*dst = color;
+		dst += data->img.line_length;
+		y++;
+	}
 	tex_x = compute_x_of_texture(data, text->height);
 	if (top_strip < 0)
 		tex_y = (y - top_strip) * step;
 	else
 		tex_y = 0;
+	//    // t_pixel *dst;
+	//
+	// // x = x * 4;
+	//    // dst = (t_pixel*)(data->img.addr + (y * data->img.line_length + x));
 	while (y < bottom_strip)
 	{
-		color.value = *(int *)(text->addr + (int)tex_y * text->line_length + tex_x * text->bits_per_pixel);
-		my_mlx_pixel_put(data, x, y++, &color);
+		color.value = *(int *)(text->addr + (int)tex_y * text->line_length + tex_x * 4);
 		tex_y += step;
 		if (tex_y > text->height)
 			tex_y = (double)text->height;
+		*dst = color;
+		dst += data->img.line_length;
+		y++;
 	}
 	color.value = BLACK;
+	// 	my_mlx_pixel_put(data, x, y++, &color);
 	while (y < WIN_HEIGHT - 1)
-		my_mlx_pixel_put(data, x, y++, &color);
+	{
+		*dst = color;
+		dst += data->img.line_length;
+		y++;
+	}
 }
 
 /**

@@ -20,6 +20,31 @@
 #include <X11/X.h>
 #include <stdlib.h>
 
+int	close_win(void *param)
+{
+	t_mlx	*win;
+
+	if (!param)
+		return (0);
+	win = (t_mlx *)param;
+	exit(0);
+}
+
+int	key_press(int keycode, void *param)
+{
+	t_mlx	*mlx;
+
+	if (!param)
+		return (0);
+	mlx = (t_mlx *)param;
+	if (keycode == 65307)
+	{
+		// free_img(mlx);
+		exit(0);
+	}
+	return (0);
+}
+
 bool	ininitialize_values(t_data *data, t_parsing *parsing_data)
 {
 	ft_bzero(data, sizeof(t_data));
@@ -46,6 +71,8 @@ void	launcher(t_data *data)
 	load_imgs(data);
 	draw_map(data);
 	// t_display_map_2D(data);
+	mlx_hook(data->mlx.win, 17, 0, close_win, &data);
+	mlx_hook(data->mlx.win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, move_hero, data);
 	mlx_loop(data->mlx.ptr);
 }
