@@ -70,16 +70,16 @@ static void draw_line(t_data* data, int top_strip, int bottom_strip, int x)
 	if (data->side == 0)
 	{
 		if (data->ray_dir.elements[0] >= 0)
-			text = data->imgs->wall_east;
+			text = &data->imgs.wall_east;
 		else
-			text = data->imgs->wall_west;
+			text = &data->imgs.wall_west;
 	}
 	else
 	{
 		if (data->ray_dir.elements[1] >= 0)
-			text = data->imgs->wall_south;
+			text = &data->imgs.wall_south;
 		else
-			text = data->imgs->wall_north;
+			text = &data->imgs.wall_north;
 	}
 	step = (double)text->height / (double)(bottom_strip - top_strip);
 	dst = (t_pixel *)data->img.addr + x;
@@ -96,12 +96,13 @@ static void draw_line(t_data* data, int top_strip, int bottom_strip, int x)
 		tex_y = (y - top_strip) * step;
 	else
 		tex_y = 0;
+	tex_x *= 4;
 	while (y < bottom_strip && y < WIN_HEIGHT)
 	{
-		color.value = *(int *)(text->addr + (int)tex_y * text->line_length + tex_x * 4);
+		color.value = *(int *)(text->addr + (int)tex_y * text->line_length + tex_x);
 		tex_y += step;
 		if (tex_y > text->height)
-			tex_y = (double)text->height - 1;
+			tex_y = text->height - 1;
 		*dst = color;
 		dst += pixels_per_line;
 		y++;

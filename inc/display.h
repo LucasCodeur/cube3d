@@ -20,8 +20,8 @@
 
 #include "vector.h"
 
-# define WIN_WIDTH 3840 
-# define WIN_HEIGHT 2160
+# define WIN_WIDTH  750
+# define WIN_HEIGHT 750
 
 # define SIZE_X	20
 # define SIZE_Y	20
@@ -73,10 +73,10 @@ typedef struct s_img
 
 typedef struct s_sprite
 {
-	t_img	*wall_east;
-	t_img	*wall_north;
-	t_img	*wall_west;
-	t_img	*wall_south;
+	t_img	wall_east;
+	t_img	wall_north;
+	t_img	wall_west;
+	t_img	wall_south;
 }				t_sprite;
 
 typedef struct s_mlx
@@ -124,7 +124,7 @@ typedef struct s_data
 	double		wall_y;
 	t_mlx		mlx;
 	t_img		img;
-	t_sprite	*imgs;
+	t_sprite	imgs;
 	t_map		map;
 	t_vec		ray_dir;
 	int			z;
@@ -150,12 +150,12 @@ int		close_win(void *param);
 int		move_hero(int keycode, t_data *data);
 
 //IMAGE
-void	fill_image(t_data* data);
+t_img	fill_image(t_data* data, char *path_to_asset);
 void	update_maps(t_data* data);
 bool	draw_map(t_data* data);
 void	draw_hero(t_data* data, int tile_size);
 void	clear_img(t_img *img);
-void	choose_texture(t_data *data, t_img **text);
+void	choose_texture(t_data *data, t_img *text);
 
 //UTILS
 void	ft_bzero(void *s, size_t n);

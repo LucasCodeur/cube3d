@@ -57,7 +57,6 @@ bool	ininitialize_values(t_data *data, t_parsing *parsing_data)
 	data->map.player.dir = new_vector_2D(1.0f, 0.0f);
 	data->map.player.plane = new_vector_2D(0.0f, 0.66f);
 	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
-	data->imgs = malloc(sizeof(t_sprite));
 	data->z = 0;
 	parsing_data->map = &data->map;
 	return (true);
