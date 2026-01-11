@@ -24,17 +24,17 @@ void my_mlx_pixel_put(t_data *data, int x, int y, t_pixel *color)
     *dst = *color;
 }
 
-void clear_img(t_img *img)
-{
-    int i;
-
-    i = 0;
-    while (i < WIN_WIDTH * WIN_HEIGHT)
-    {
-        img->addr[i++] = 0x000000;
-        img->addr[i++] = 0x000000;
-        img->addr[i++] = 0x000000;
-        img->addr[i++] = 0;
-    }
-}
+// void clear_img(t_img *img)
+// {
+//     int i;
+//
+//     i = 0;
+//     while (i < WIN_WIDTH * WIN_HEIGHT)
+//     {
+//         img->addr[i++] = 0x000000;
+//         img->addr[i++] = 0x000000;
+//         img->addr[i++] = 0x000000;
+//         img->addr[i++] = 0;
+//     }
+// }
 

@@ -55,13 +55,15 @@ t_img	fill_image(t_data* data, char *path_to_asset)
 		perror("Error: Image not create\n");
 		// exit(1);
 	}
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	img.addr = (t_pixel *)(mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian));
 	if (!img.addr)
 	{
 		perror("Error: addr not create\n");
 		// exit(1);
 	}
 	img.bits_per_pixel = img.bits_per_pixel / 8;
+	img.double_height = (double)img.height;
+	img.pixels_per_line = img.line_length / sizeof(t_pixel);
 	return (img);
 }
 

@@ -14,6 +14,7 @@
 #include "parsing.h"
 #include "debug.h"
 #include "test.h"
+#include "matrice.h"
 
 #include <mlx.h>
 #include <X11/keysym.h>
@@ -62,6 +63,8 @@ bool	ininitialize_values(t_data *data, t_parsing *parsing_data)
 	return (true);
 }
 
+
+
 void	launcher(t_data *data)
 {
 	// mlx_init_window(data);
@@ -69,11 +72,12 @@ void	launcher(t_data *data)
 	// display_minimap(data);
 	init_screen_mlx(data);
 	load_imgs(data);
-	draw_map(data);
 	// t_display_map_2D(data);
 	mlx_hook(data->mlx.win, 17, 0, close_win, &data);
 	mlx_hook(data->mlx.win, 2, 1L << 0, key_press, &data);
-	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, move_hero, data);
+	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, press_move, data);
+	mlx_hook(data->mlx.win, KeyRelease, KeyReleaseMask, release_move, data);
+	mlx_loop_hook(data->mlx.ptr, execute_move, data);
 	mlx_loop(data->mlx.ptr);
 }
 

@@ -21,65 +21,58 @@
 //WARN: have to take off
 	#include "test.h"
 
-static bool	rotate_hero(t_data *data, int keycode);
-
-/**
-* @brief allow to move inside the map and set different keyhook like aswd
-* @param data contains all information necessary to the project.
-* @param keycode, link keybind to an effect
-* @return
-*/
-int move_hero(int keycode, t_data *data)
+int press_move(int keycode, t_data *data)
 {
 	if ((keycode == XK_s || keycode == XK_S) &&
 		data->map.grid[(int)(data->map.player.pos.elements[1] - 0.25f * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] - 0.5f * data->map.player.dir.elements[0])] == '0')
-	{
-		data->map.player.pos.elements[0] -= 0.25f * data->map.player.dir.elements[0];
-		data->map.player.pos.elements[1] -= 0.25f * data->map.player.dir.elements[1];
-		draw_map(data);
-	}
+		data->move.down = true;
 	else if ((keycode == XK_w || keycode == XK_W) && 
 		data->map.grid[(int)(data->map.player.pos.elements[1] + 0.25f * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] + 0.5f * data->map.player.dir.elements[0])] == '0')
-	{
-		data->map.player.pos.elements[0] += 0.25f * data->map.player.dir.elements[0];
-		data->map.player.pos.elements[1] += 0.25f * data->map.player.dir.elements[1];
-		draw_map(data);
-	}
-	else if ((keycode == XK_q || keycode == XK_Q) && data->z < 500)
-	{
-		data->z += 50;
-	}
-	else if ((keycode == XK_e || keycode == XK_E) && data->z > -500)
-	{
-		data->z -= 50;
-	}
-	else
-	{
-		if (rotate_hero(data, keycode) == true)
-			draw_map(data);
-	}
+		data->move.up = true;
+	else if(keycode == XK_d || keycode == XK_D)
+		data->move.left = true;
+	else if (keycode == XK_a || keycode == XK_A)
+		data->move.right = true;
 	return (0);
 }
 
-/**
-* @brief allow to rotate the hero according keycode
-* @param data contains all information necessary to the project.
-* @param keycode, link keybind to an effect
-* @return
-*/
-static bool	rotate_hero(t_data *data, int keycode)
+int release_move(int keycode, t_data *data)
 {
-	if (keycode == XK_d || keycode == XK_D)
+	if ((keycode == XK_s || keycode == XK_S) && data->move.down == true)
+		data->move.down = false;
+	else if ((keycode == XK_w || keycode == XK_W) && data->move.up == true)	
+		data->move.up = false;
+	else if((keycode == XK_d || keycode == XK_D) && data->move.rotate_left == true)
+		data->move.left = false;
+	else if ((keycode == XK_a || keycode == XK_A) && data->move.rotate_right == true)
+		data->move.right = false;
+	return (0);
+}
+
+int	execute_move(t_data *data)
+{
+	if (data->move.down == true && 
+		data->map.grid[(int)(data->map.player.pos.elements[1] - 0.25f * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] - 0.25f * data->map.player.dir.elements[0])] == '0')
+	{
+		data->map.player.pos.elements[0] -= 0.25f * data->map.player.dir.elements[0];
+		data->map.player.pos.elements[1] -= 0.25f * data->map.player.dir.elements[1];
+	}
+	else if (data->move.up == true && 
+		data->map.grid[(int)(data->map.player.pos.elements[1] + 0.25f * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] + 0.25f * data->map.player.dir.elements[0])] == '0')	
+	{
+		data->map.player.pos.elements[0] += 0.25f * data->map.player.dir.elements[0];
+		data->map.player.pos.elements[1] += 0.25f * data->map.player.dir.elements[1];
+	}
+	else if(data->move.left == true)
 	{
 		data->map.player.dir = rotate_vect(data->map.player.dir, ADD_SPEED);
 		data->map.player.plane = rotate_vect(data->map.player.plane, ADD_SPEED);
-		return (true);
 	}
-	else if (keycode == XK_a || keycode == XK_A)
+	else if (data->move.right == true)
 	{
 		data->map.player.dir = rotate_vect(data->map.player.dir, SUBT_SPEED);
 		data->map.player.plane = rotate_vect(data->map.player.plane, SUBT_SPEED);
-		return (true);
 	}
-	return (false);
+	draw_map(data);
+	return (0);
 }

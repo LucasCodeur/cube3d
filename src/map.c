@@ -62,7 +62,6 @@ static void draw_line(t_data* data, int top_strip, int bottom_strip, int x)
 	int			y;
 
 	y = 0;
-	// y += data->z;
 	top_strip += data->z;
 	bottom_strip += data->z;
 	text = NULL;
@@ -81,14 +80,13 @@ static void draw_line(t_data* data, int top_strip, int bottom_strip, int x)
 		else
 			text = &data->imgs.wall_north;
 	}
-	step = (double)text->height / (double)(bottom_strip - top_strip);
-	dst = (t_pixel *)data->img.addr + x;
+	step = text->double_height / (double)(bottom_strip - top_strip);
+	dst = data->img.addr + x;
 	color.value = BLACK;
-	int pixels_per_line = data->img.line_length / sizeof(t_pixel);
 	while (y < top_strip && y < WIN_HEIGHT)
 	{
 		*dst = color;
-		dst += pixels_per_line;
+		dst += data->img.pixels_per_line;
 		y++;
 	}
 	tex_x = compute_x_of_texture(data, text->height);
@@ -96,23 +94,21 @@ static void draw_line(t_data* data, int top_strip, int bottom_strip, int x)
 		tex_y = (y - top_strip) * step;
 	else
 		tex_y = 0;
-	tex_x *= 4;
 	while (y < bottom_strip && y < WIN_HEIGHT)
 	{
-		color.value = *(int *)(text->addr + (int)tex_y * text->line_length + tex_x);
+		color = *(text->addr + (int)tex_y * text->pixels_per_line + tex_x);
 		tex_y += step;
 		if (tex_y > text->height)
 			tex_y = text->height - 1;
 		*dst = color;
-		dst += pixels_per_line;
+		dst += data->img.pixels_per_line;
 		y++;
 	}
 	color.value = BLACK;
-	// 	my_mlx_pixel_put(data, x, y++, &color);
 	while (y < WIN_HEIGHT)
 	{
 		*dst = color;
-		dst += pixels_per_line;
+		dst += data->img.pixels_per_line;
 		y++;
 	}
 }

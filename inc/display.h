@@ -20,8 +20,8 @@
 
 #include "vector.h"
 
-# define WIN_WIDTH  750
-# define WIN_HEIGHT 750
+# define WIN_WIDTH 3840 
+# define WIN_HEIGHT 2160
 
 # define SIZE_X	20
 # define SIZE_Y	20
@@ -46,6 +46,7 @@
 
 typedef struct s_rgb
 {
+
 	uint8_t r;
 	uint8_t g;
 	uint8_t b;
@@ -62,12 +63,14 @@ typedef union s_pixel
 typedef struct s_img
 {
 	void	*img;
-	char*	addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 	int		height;
 	int		width;
+	int		pixels_per_line;
+	double	double_height;
+	t_pixel	*addr;
 	t_pixel	color;
 }			t_img;
 
@@ -89,6 +92,7 @@ typedef struct s_mlx
 }				t_mlx;
 
 typedef struct	s_hero
+
 {
 	char	orientation;
 	t_vec	dir;
@@ -114,6 +118,16 @@ typedef	struct	s_map
 	t_hero	player;
 }				t_map;
 
+typedef struct s_move
+{
+	bool	up; 
+	bool	down; 
+	bool	right; 
+	bool	left; 
+	bool	rotate_left; 
+	bool	rotate_right;
+} t_move;
+
 typedef struct s_data
 {
 	int			side;
@@ -127,6 +141,7 @@ typedef struct s_data
 	t_sprite	imgs;
 	t_map		map;
 	t_vec		ray_dir;
+	t_move		move;
 	int			z;
 }				t_data;
 
@@ -148,6 +163,9 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, t_pixel *color);
 int		key_press(int keycode, void *param);
 int		close_win(void *param);
 int		move_hero(int keycode, t_data *data);
+int		press_move(int keycode, t_data *data);
+int		release_move(int keycode, t_data *data);
+int		execute_move(t_data *data);
 
 //IMAGE
 t_img	fill_image(t_data* data, char *path_to_asset);
