@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 11:50:16 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/08 12:37:43 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/12 15:26:05 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,7 @@
 #include <X11/keysym.h>
 #include <X11/X.h>
 #include <stdlib.h>
-
-int	close_win(void *param)
-{
-	t_mlx	*win;
-
-	if (!param)
-		return (0);
-	win = (t_mlx *)param;
-	exit(0);
-}
-
-int	key_press(int keycode, void *param)
-{
-	t_mlx	*mlx;
-
-	if (!param)
-		return (0);
-	mlx = (t_mlx *)param;
-	if (keycode == 65307)
-	{
-		// free_img(mlx);
-		exit(0);
-	}
-	return (0);
-}
+#include <sys/time.h>
 
 bool	ininitialize_values(t_data *data, t_parsing *parsing_data)
 {
@@ -63,21 +39,31 @@ bool	ininitialize_values(t_data *data, t_parsing *parsing_data)
 	return (true);
 }
 
-
+int	execute(t_data *data)
+{
+	data->fps.current_time = get_time();
+	data->fps.delta_time = data->fps.current_time - data->fps.last_time;
+	if (data->fps.delta_time >= FRAME_DURATION)
+	{
+		
+		move_hero(data);
+		rotate_hero(data);	
+		data->fps.count_frame++;
+		draw_map(data);	
+		count_fps(data);
+	}
+	return (0);
+}
 
 void	launcher(t_data *data)
 {
-	// mlx_init_window(data);
-	// display_map(data);
-	// display_minimap(data);
 	init_screen_mlx(data);
 	load_imgs(data);
-	// t_display_map_2D(data);
+	data->fps.last_time = get_time();
 	mlx_hook(data->mlx.win, 17, 0, close_win, &data);
-	mlx_hook(data->mlx.win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, press_move, data);
 	mlx_hook(data->mlx.win, KeyRelease, KeyReleaseMask, release_move, data);
-	mlx_loop_hook(data->mlx.ptr, execute_move, data);
+	mlx_loop_hook(data->mlx.ptr, execute, data);
 	mlx_loop(data->mlx.ptr);
 }
 

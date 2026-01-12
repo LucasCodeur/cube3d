@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/08 12:10:51 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/12 16:33:48 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@
 
 # define ADD_SPEED 4.0 * (M_PI / 180)
 # define SUBT_SPEED -4.0 * (M_PI / 180)
-# define SPEED 0.15
-# define ROTATE_FORWARD_90 90.0 * (M_PI / 180)
-# define ROTATE_BACKWARD_90 -90.0 * (M_PI / 180)
+# define SPEED 0.25
+# define ROTATE_FORWARD 90.0 * (M_PI / 180)
+# define ROTATE_BACKWARD -90.0 * (M_PI / 180)
 # define EPSILON 0.001
+# define FPS 60
+# define FRAME_DURATION 1.0/ FPS
 
 typedef struct s_rgb
 {
@@ -65,16 +67,21 @@ typedef union s_pixel
 
 typedef struct s_img
 {
-	void	*img;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 	int		height;
 	int		width;
 	int		pixels_per_line;
+	int		top_strip;
+	int		bottom_strip;
+	int		x;
+	double	y;
+	double	step;	
 	double	double_height;
 	t_pixel	*addr;
 	t_pixel	color;
+	void	*img;
 }			t_img;
 
 typedef struct s_sprite
@@ -97,7 +104,6 @@ typedef struct s_mlx
 typedef struct	s_hero
 
 {
-	char	orientation;
 	t_vec	dir;
 	t_vec	pos;
 	t_vec	plane;
@@ -106,6 +112,7 @@ typedef struct	s_hero
 	double	old_time;
 	int		x;
 	int		y;
+	char	orientation;
 }				t_hero;
 
 typedef	struct	s_map
@@ -131,30 +138,42 @@ typedef struct s_move
 	bool	rotate_right;
 } t_move;
 
+typedef struct s_fps
+{
+	double		current_time;
+	double		last_time;
+	double		delta_time;
+	int			count_frame;
+	int			count;
+}				t_fps;
+
 typedef struct s_data
 {
 	int			side;
 	int			tile_size;
 	int			step_x;
 	int			step_y;
+	int			z;
 	double		wall_x;
 	double		wall_y;
+	t_fps		fps;
 	t_mlx		mlx;
 	t_img		img;
 	t_sprite	imgs;
 	t_map		map;
 	t_vec		ray_dir;
 	t_move		move;
-	int			z;
 }				t_data;
 
 void	launcher(t_data *data);
+
+//RAYCASTING
 double	compute_dist(t_data* data, t_vec ray_dir);
 t_vec	define_ray(t_data* data);
 t_vec	define_percentage_of_fov(int x);
 void	compute_height_of_line(t_data* data, int* draw_start, int* draw_end);
-bool	draw_map(t_data* data);
 void	load_imgs(t_data *data);
+bool	draw_map(t_data* data);
 
 //MLX
 void	init_mlx(t_mlx *t_mlx);
@@ -165,18 +184,24 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, t_pixel *color);
 //HOOKS
 int		key_press(int keycode, void *param);
 int		close_win(void *param);
-int		move_hero(int keycode, t_data *data);
 int		press_move(int keycode, t_data *data);
 int		release_move(int keycode, t_data *data);
-int		execute_move(t_data *data);
+int		execute(t_data *data);
+bool	move_hero(t_data *data);
+bool	rotate_hero(t_data *data);
+double	get_time(void);
 
 //IMAGE
-t_img	fill_image(t_data* data, char *path_to_asset);
 void	update_maps(t_data* data);
-bool	draw_map(t_data* data);
 void	draw_hero(t_data* data, int tile_size);
 void	clear_img(t_img *img);
-void	choose_texture(t_data *data, t_img *text);
+void	choose_texture(t_data *data, t_img **text);
+bool	draw_map(t_data* data);
+t_img	fill_image(t_data* data, char *path_to_asset);
+
+//FPS
+void	count_fps(t_data *data);
+double	get_time(void);
 
 //UTILS
 void	ft_bzero(void *s, size_t n);

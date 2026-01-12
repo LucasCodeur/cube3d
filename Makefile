@@ -6,7 +6,7 @@
 #    By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2026/01/06 19:57:26 by lud-adam         ###   ########.fr        #
+#    Updated: 2026/01/12 15:28:02 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,10 +49,12 @@ P_SRC_SPRITES = $(P_SRC)sprites/
 SRC = \
 	mlx.c \
 	hooks.c \
+	hooks_player.c \
 	compute_distance.c \
 	map.c \
 	utils.c \
 	raycasting.c \
+	fps.c \
 	debug.c \
 	main.c \
 

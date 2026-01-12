@@ -29,8 +29,8 @@ bool	t_display_map_2D(t_data* data)
 	int size_cols; 
 	int size_rows;
 	
-	size_cols = (WIN_WIDTH / 4) / data->map.width;
-	size_rows = (WIN_HEIGHT / 4) / data->map.height;
+	size_cols = (WIN_WIDTH / 8) / data->map.width;
+	size_rows = (WIN_HEIGHT / 8) / data->map.height;
 	if (size_cols <= size_rows)
 		data->tile_size = size_cols;
 	else
@@ -41,8 +41,6 @@ bool	t_display_map_2D(t_data* data)
 	// t_cast_plane_vec(data, data->tile_size);
 	t_ray_casting_2D(data);
 	t_cast_dir_vec(data, data->tile_size);
-
-	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.img, 0, 0);
 	return (true);
 }
 
