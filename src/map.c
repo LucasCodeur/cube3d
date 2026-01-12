@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:06:40 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/12 16:40:31 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/12 16:55:45 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	draw_map(t_data* data)
 	while (x < WIN_WIDTH)
 	{
 		data->map.player.camera = define_percentage_of_fov(x);
-		data->ray_dir = define_ray(data);
+		data->raycasting.ray_dir = define_ray(data);
 		compute_height_of_line(data, &data->img.top_strip, &data->img.bottom_strip);	
 		draw_line(data, x);
 		x++;
@@ -57,8 +57,8 @@ static void draw_line(t_data* data, int x)
 	int			y;
 
 	y = 0;
-	data->img.top_strip += data->z;
-	data->img.bottom_strip += data->z;
+	data->img.top_strip += data->raycasting.z;
+	data->img.bottom_strip += data->raycasting.z;
 	text = NULL;
 	choose_texture(data, &text);
 	text->step = text->double_height / (double)(data->img.bottom_strip - data->img.top_strip);
@@ -77,7 +77,7 @@ static int	compute_x_of_texture(t_data *data, int text_size)
 {
 	int	texture_x;
 
-	texture_x = (int)(data->wall_x * text_size);
+	texture_x = (int)(data->raycasting.wall_x * text_size);
 	if (texture_x < 0)
 		texture_x = 1;
 	else if (texture_x > text_size)

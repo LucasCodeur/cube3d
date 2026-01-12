@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:55:13 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/12 16:15:56 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/12 16:58:06 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@
 void choose_texture(t_data *data, t_img **text)
 {
 
-	if (data->side == 0)
+	if (data->raycasting.side == 0)
 	{
-		if (data->ray_dir.elements[0] >= 0)
+		if (data->raycasting.ray_dir.elements[0] >= 0)
 			*text = &data->imgs.wall_east;
 		else
 			*text = &data->imgs.wall_west;
 	}
 	else
 	{
-		if (data->ray_dir.elements[1] >= 0)
+		if (data->raycasting.ray_dir.elements[1] >= 0)
 			*text = &data->imgs.wall_south;
 		else
 			*text = &data->imgs.wall_north;

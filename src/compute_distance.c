@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/27 16:33:24 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/02 16:29:52 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/12 17:02:50 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,29 +84,25 @@ static t_vec compute_gradient(t_vec ray_dir)
 */
 static void define_first_step(t_data* data, t_vec ray_dir, t_vec *ray_len, t_vec delta_dist)
 {
-    t_vec pos_nudge;
-
-    pos_nudge.elements[0] = data->map.player.pos.elements[0] + ray_dir.elements[0] * 0.001;
-    pos_nudge.elements[1] = data->map.player.pos.elements[1] + ray_dir.elements[1] * 0.001;
     if (ray_dir.elements[0] <= 0 && ray_dir.elements[0] != INFINITY)
     {
-        data->step_x = -1;
-        ray_len->elements[0] = (pos_nudge.elements[0] - (double)data->map.x) * delta_dist.elements[0];
+        data->raycasting.step_x = -1;
+        ray_len->elements[0] = (data->map.player.pos.elements[0] - (double)data->map.x) * delta_dist.elements[0];
     }
     else if (ray_dir.elements[0] != INFINITY)
     {
-        data->step_x = 1;
-        ray_len->elements[0] = ((double)data->map.x + 1.0 - pos_nudge.elements[0]) * delta_dist.elements[0];
+        data->raycasting.step_x = 1;
+        ray_len->elements[0] = ((double)data->map.x + 1.0 - data->map.player.pos.elements[0]) * delta_dist.elements[0];
     }
     if (ray_dir.elements[1] <= 0 && ray_dir.elements[1] != INFINITY)
     {
-        data->step_y = -1;
-        ray_len->elements[1] = (pos_nudge.elements[1] - (double)data->map.y) * delta_dist.elements[1];
+        data->raycasting.step_y = -1;
+        ray_len->elements[1] = (data->map.player.pos.elements[1] - (double)data->map.y) * delta_dist.elements[1];
     }
     else if (ray_dir.elements[1] != INFINITY)
     {
-        data->step_y = 1;
-        ray_len->elements[1] = ((double)data->map.y + 1.0 - pos_nudge.elements[1]) * delta_dist.elements[1];
+        data->raycasting.step_y = 1;
+        ray_len->elements[1] = ((double)data->map.y + 1.0 - data->map.player.pos.elements[1]) * delta_dist.elements[1];
     }
 }
 
@@ -120,30 +116,23 @@ static void define_first_step(t_data* data, t_vec ray_dir, t_vec *ray_len, t_vec
 static  int  size_ray(t_data* data, t_vec *ray_len, t_vec delta_dist)
 {
     int max_step;
-    // double  diff;
 
     max_step = 0;
     while (data->map.grid[data->map.y][data->map.x] == '0' && max_step < 50)
     {
         if (ray_len->elements[0] <= ray_len->elements[1])
         {
-            // diff = fabs(ray_len->elements[0] - ray_len->elements[1]);
-            // if (diff < 0.001)
-            //     ray_len->elements[1] += EPSILON;
-            data->map.x += data->step_x;
+            data->map.x += data->raycasting.step_x;
             ray_len->elements[0] += delta_dist.elements[0];
-            data->side = 0;
+            data->raycasting.side = 0;
         }
         else
         {
-            // diff = fabs(ray_len->elements[1] - ray_len->elements[0]);
-            // if (diff < 0.001)
-            //     ray_len->elements[0] += EPSILON;
-            data->map.y += data->step_y;
+            data->map.y += data->raycasting.step_y;
             ray_len->elements[1] += delta_dist.elements[1];
-            data->side = 1;
+            data->raycasting.side = 1;
         }
         max_step++;
     }
-    return (data->side);
+    return (data->raycasting.side);
 }

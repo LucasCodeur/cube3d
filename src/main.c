@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 11:50:16 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/12 15:26:05 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/12 17:03:10 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ bool	ininitialize_values(t_data *data, t_parsing *parsing_data)
 	data->map.player.dir = new_vector_2D(1.0f, 0.0f);
 	data->map.player.plane = new_vector_2D(0.0f, 0.66f);
 	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
-	data->z = 0;
 	parsing_data->map = &data->map;
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 18:02:32 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/27 17:14:22 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/12 17:02:18 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ bool	t_display_map_2D(t_data* data)
 	size_cols = (WIN_WIDTH / 8) / data->map.width;
 	size_rows = (WIN_HEIGHT / 8) / data->map.height;
 	if (size_cols <= size_rows)
-		data->tile_size = size_cols;
+		data->raycasting.tile_size = size_cols;
 	else
-		data->tile_size = size_rows;
-	t_draw_map(data, data->tile_size);
-	t_draw_hero(data, data->tile_size);
+		data->raycasting.tile_size = size_rows;
+	t_draw_map(data, data->raycasting.tile_size);
+	t_draw_hero(data, data->raycasting.tile_size);
 	// t_display_fov(data);
-	// t_cast_plane_vec(data, data->tile_size);
+	// t_cast_plane_vec(data, data->raycasting.tile_size);
 	t_ray_casting_2D(data);
-	t_cast_dir_vec(data, data->tile_size);
+	t_cast_dir_vec(data, data->raycasting.tile_size);
 	return (true);
 }
 
@@ -97,8 +97,8 @@ static void    t_set_value(t_data* data, int* map_x, int* map_y, int* screen_x, 
         *map_x = test_x;
         *map_y = test_y;
         
-        *screen_x = test_x * data->tile_size + data->tile_size / 2;
-	*screen_y = test_y * data->tile_size + data->tile_size / 2;
+        *screen_x = test_x * data->raycasting.tile_size + data->raycasting.tile_size / 2;
+	*screen_y = test_y * data->raycasting.tile_size + data->raycasting.tile_size / 2;
 }
 
 static void	fill_color(t_map map, int x, int y, t_pixel* color);

@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/12 16:33:48 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/12 17:00:16 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ typedef struct s_move
 	bool	left; 
 	bool	rotate_left; 
 	bool	rotate_right;
-} t_move;
+}				t_move;
 
 typedef struct s_fps
 {
@@ -147,22 +147,29 @@ typedef struct s_fps
 	int			count;
 }				t_fps;
 
-typedef struct s_data
+typedef struct s_raycasting
 {
 	int			side;
+	//WARN: have to take off
 	int			tile_size;
+
 	int			step_x;
 	int			step_y;
 	int			z;
 	double		wall_x;
 	double		wall_y;
-	t_fps		fps;
-	t_mlx		mlx;
-	t_img		img;
-	t_sprite	imgs;
-	t_map		map;
 	t_vec		ray_dir;
-	t_move		move;
+}				t_raycasting;
+
+typedef struct s_data
+{
+	t_raycasting	raycasting;
+	t_mlx			mlx;
+	t_img			img;
+	t_sprite		imgs;
+	t_map			map;
+	t_move			move;
+	t_fps			fps;
 }				t_data;
 
 void	launcher(t_data *data);
