@@ -20,8 +20,8 @@
 
 #include "vector.h"
 
-# define WIN_WIDTH 3840 
-# define WIN_HEIGHT 2160
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 
 # define SIZE_X	20
 # define SIZE_Y	20
@@ -42,6 +42,9 @@
 
 # define ADD_SPEED 4.0 * (M_PI / 180)
 # define SUBT_SPEED -4.0 * (M_PI / 180)
+# define SPEED 0.15
+# define ROTATE_FORWARD_90 90.0 * (M_PI / 180)
+# define ROTATE_BACKWARD_90 -90.0 * (M_PI / 180)
 # define EPSILON 0.001
 
 typedef struct s_rgb
