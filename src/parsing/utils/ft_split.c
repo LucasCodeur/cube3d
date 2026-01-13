@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:35:12 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/09 17:25:18 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/13 17:46:26 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,24 @@ static void	free_malloc(char **split, int j)
 }
 
 static t_error	extract(t_parsing *config_data, char const *s, int start,
-		int end, char *extracted_str)
+		int end, char **extracted_str)
 {
 	t_error	error;
 	int		i;
 
+	printf("coucou1\n");
 	error = ft_malloc(&config_data->garbage, sizeof(char) * (end - start + 2),
-			extracted_str);
+			(void **)extracted_str);
+	printf("coucou2\n");
 	if (error.code != ERR_OK)
 		return (error);
 	i = 0;
 	while (i + start <= end)
 	{
-		extracted_str[i] = s[start + i];
+		(*extracted_str)[i] = s[start + i];
 		i++;
 	}
-	extracted_str[i] = '\0';
+	(*extracted_str)[i] = '\0';
 	return (ERROR_OK);
 }
 
@@ -77,21 +79,23 @@ static t_error	test_str(char **split, int j)
 	return (ERROR_OK);
 }
 
-t_error	ft_split(t_parsing *cd, char const *s, char c, char **split)
+t_error	ft_split(t_parsing *cd, char const *s, char c, char ***split)
 {
 	t_error	error;
 	int		start;
 	int		i;
 	int		j;
 
+	printf("split\n");
 	error = ft_malloc(&cd->garbage, sizeof(char *) * (char_count(s, c) + 1),
-			split);
+			(void **)split);
 	if (error.code != ERR_OK)
 		return (error);
 	j = 0;
 	i = 0;
 	while (s[i] != '\0')
 	{
+		printf("s[i]=%c\n", s[i]);
 		if (s[i] != c)
 		{
 			start = i;
@@ -100,12 +104,12 @@ t_error	ft_split(t_parsing *cd, char const *s, char c, char **split)
 			error = extract(cd, s, start, i, split[j]);
 			if (error.code != ERR_OK)
 				return (error);
-			error = test_str(split, j++);
+			error = test_str(*split, j++);
 			if (error.code != ERR_OK)
 				return (error);
 		}
 		i++;
 	}
-	split[j] = NULL;
+	*split[j] = NULL;
 	return (ERROR_OK);
 }

@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:18:04 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/09 15:25:58 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/13 17:20:56 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	find_index(char *buffer, int *stop_read)
 	return (i);
 }
 
-static t_error	get_buffer(t_parsing *data, char *line, char *buffer,
+static t_error	get_buffer(t_parsing *data, char **line, char *buffer,
 		int *check)
 {
 	int		i;
@@ -51,11 +51,12 @@ static t_error	get_buffer(t_parsing *data, char *line, char *buffer,
 			*check = 1;
 			return (ERROR_OK);
 		}
-		error = ft_strnjoin(data, *line, buffer, i);
+		error = ft_strnjoin(data, line, buffer, i);
 		if (error.code != ERR_OK)
 			return (error);
 	}
 	*check = 2;
+	return (ERROR_OK);
 }
 
 static t_error	read_buffer(char **line, ssize_t *byte_read, char *buffer,
@@ -74,7 +75,7 @@ static t_error	read_buffer(char **line, ssize_t *byte_read, char *buffer,
 	}
 	if (*byte_read == 0)
 	{
-		if (line)
+		if (*line)
 		{
 			buffer[0] = '\0';
 			*check = 1;
@@ -89,7 +90,7 @@ static t_error	read_buffer(char **line, ssize_t *byte_read, char *buffer,
 	return (ERROR_OK);
 }
 
-static t_error	get_line(t_parsing *data, char *buffer, int fd, char *line)
+static t_error	get_line(t_parsing *data, char *buffer, int fd, char **line)
 {
 	int		check;
 	ssize_t	byte_read;
@@ -103,12 +104,12 @@ static t_error	get_line(t_parsing *data, char *buffer, int fd, char *line)
 		return (ERROR_OK);
 	while (byte_read)
 	{
-		read_buffer(&line, &byte_read, buffer, fd, &check);
+		error = read_buffer(line, &byte_read, buffer, fd, &check);
 		if (error.code != ERR_OK)
 			return (error);
 		if (check == 1)
 			return (ERROR_OK);
-		get_buffer(data, &line, buffer, &check);
+		error = get_buffer(data, line, buffer, &check);
 		if (error.code != ERR_OK)
 			return (error);
 		if (check == 1)
@@ -117,18 +118,19 @@ static t_error	get_line(t_parsing *data, char *buffer, int fd, char *line)
 	return (ERROR_OK);
 }
 
-t_error	get_next_line(t_parsing *data, int fd, char *line)
+t_error	get_next_line(t_parsing *data, int fd, char **line)
 {
 	static char	buffer[BUFFER_SIZE + 1];
 	t_error		error;
 
+	*line = NULL;
 	if (fd == -1 || BUFFER_SIZE <= 0)
 	{
 		error.code = ERR_IO;
 		error.message = "Line can't be read (file invalid or BUFFER_SIZE incorrect\n";
 		return (error);
 	}
-	get_line(data, buffer, fd, line);
+	error = get_line(data, buffer, fd, line);
 	if (error.code != ERR_OK)
 		return (error);
 	return (ERROR_OK);

@@ -6,13 +6,13 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:52:57 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/09 16:38:07 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/13 14:42:20 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static t_error	choose_id(char *substr, t_parsing *data, int *i, char *id)
+static t_error	choose_id(char *substr, t_parsing *data, int *i, char **id)
 {
 	t_error	error;
 
@@ -32,12 +32,13 @@ static t_error	choose_id(char *substr, t_parsing *data, int *i, char *id)
 	return (ERROR_OK);
 }
 
-static t_error	extract_id(t_parsing *data, char *line, int *i, char *id)
+static t_error	extract_id(t_parsing *data, char *line, int *i, char **id)
 {
 	t_error	error;
 	char	*str;
 
-	error = ft_substr(data, line, 0, 3, str);
+	str = NULL;
+	error = ft_substr(data, line, 0, 3, &str);
 	if (error.code != ERR_OK)
 		return (error);
 	error = choose_id(str, data, i, id);
@@ -47,16 +48,17 @@ static t_error	extract_id(t_parsing *data, char *line, int *i, char *id)
 }
 
 static t_error	extract_infos(t_parsing *data, char *line, int *i,
-		char *info_clean)
+		char **info_clean)
 {
 	t_error	error;
 	char	*info_brut;
 	int		index_start;
 
+	info_brut = NULL;
 	index_start = *i;
 	while (line[*i] != '\n')
 		*i = *i + 1;
-	error = ft_substr(data, line, index_start, *i - index_start, info_brut);
+	error = ft_substr(data, line, index_start, *i - index_start, &info_brut);
 	if (error.code != ERR_OK)
 		return (error);
 	error = ft_strtrim(data, info_brut, " ", info_clean);
@@ -72,13 +74,15 @@ t_error	check_element_line(char *line, t_parsing *data)
 	int		i;
 	char	*id;
 
+	id = NULL;
+	info = NULL;
 	i = 0;
 	while (line[i] == ' ')
 		i++;
-	error = extract_id(data, line, &i, id);
+	error = extract_id(data, line, &i, &id);
 	if (error.code != ERR_OK)
 		return (error);
-	error = extract_infos(data, line, &i, info);
+	error = extract_infos(data, line, &i, &info);
 	if (error.code != ERR_OK)
 		return (error);
 	error = save_element(id, info, data);

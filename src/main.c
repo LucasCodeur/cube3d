@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 11:50:16 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/09 13:33:49 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/13 17:11:12 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	main(int argc, char *argv[])
 	error = parsing(argc, argv, &parsing_data);
 	if (error.code != ERR_OK)
 	{
-		free_all(&parsing_data);
+		// free_all(&parsing_data);
 		return (EXIT_FAILURE);
 	}
 	launcher(&data);

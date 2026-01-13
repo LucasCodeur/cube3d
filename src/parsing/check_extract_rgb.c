@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 13:54:18 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/09 16:34:28 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:31:13 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,14 @@ t_error	check_extract_rgb(t_parsing *data, char *info, int *rgb_int)
 	t_error	error;
 	char	**rgb_str;
 
-	error = ft_split(data, info, ',', rgb_str);
+	rgb_str = NULL;
+	error = ft_split(data, info, ',', &rgb_str);
 	if (error.code != ERR_OK)
 		return (error);
 	error = is_digit_or_space(rgb_str);
 	if (error.code != ERR_OK)
 		return (error);
-	error = ft_malloc(&data->garbage, sizeof(int) * (3 + 1), rgb_int);
+	error = ft_malloc(&data->garbage, sizeof(int) * (3 + 1), (void **)&rgb_int);
 	if (error.code != ERR_OK)
 		return (error);
 	error = rgb_loop(rgb_str, rgb_int);

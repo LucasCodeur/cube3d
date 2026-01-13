@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:51:37 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/09 17:24:24 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/13 17:21:40 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static t_error	check_line(char *line, t_parsing *data)
 	}
 	else if (data->nb_valid_elements >= 6)
 	{
+		printf("extract map\n");
 		error = extract_save_map(line, data);
 		if (error.code != ERR_OK)
 			return (error);
@@ -52,19 +53,21 @@ t_error	config(char *path, t_parsing *data)
 	int		i;
 	t_error	error;
 
+	line = NULL;
 	fd = -1;
 	error = check_file_opening(path, &fd);
 	if (error.code != ERR_OK)
 		return (error);
-	error = get_next_line(data, fd, line);
+	error = get_next_line(data, fd, &line);
 	if (error.code != ERR_OK)
 		return (error);
 	while (line)
 	{
+		printf("line=%s\n", line);
 		error = check_line(line, data);
 		if (error.code != ERR_OK)
 			return (error);
-		error = get_next_line(data, fd, line);
+		error = get_next_line(data, fd, &line);
 		if (error.code != ERR_OK)
 			return (error);
 	}

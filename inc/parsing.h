@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:01:49 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/09 17:17:57 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:56:52 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-// enum						ERROR
-// {
-// 	MALLOC,
-// 	NO_ERROR,
-// 	PARSING,
-// }
 
 typedef struct s_garbage	t_garbage;
 
@@ -85,28 +79,29 @@ t_error						check_map_structure(t_parsing *data);
 void						free_all(t_parsing *data);
 int							ft_atoi(const char *str);
 t_error						ft_calloc(size_t elementCount, size_t elementSize,
-								char *str);
+								char **str);
 void						ft_lstadd_front(t_garbage **lst, t_garbage *new);
 void						ft_lstclear(t_garbage **lst, void (*del)(void *));
-t_error						ft_lstnew(void *ptr, t_garbage *new);
+t_error						ft_lstnew(void *ptr, t_garbage **new);
 int							ft_lstsize(t_garbage *lst);
-t_error						ft_malloc(t_garbage **garbage, int size, void *str);
+t_error						ft_malloc(t_garbage **garbage, int size,
+								void **str);
 void						*ft_memmove(void *dest, const void *src, size_t c);
 t_error						ft_split(t_parsing *cd, char const *s, char c,
-								char **split);
+								char ***split);
 t_error						ft_strdup(t_parsing *data, const char *str,
-								char *result);
+								char **result);
 size_t						ft_strlen(const char *str);
 int							ft_strncmp(const char *first, const char *second,
 								size_t length);
-t_error						ft_strnjoin(t_parsing *data, char *s1, char *s2,
+t_error						ft_strnjoin(t_parsing *data, char **s1, char *s2,
 								int byte_nbr);
 char						*ft_strnstr(const char *s1, const char *s2,
 								size_t len);
 t_error						ft_strtrim(t_parsing *data, char const *s1,
-								char const *set, char *str);
+								char const *set, char **str);
 t_error						ft_substr(t_parsing *data, char const *s,
-								unsigned int start, size_t len, char *str);
-t_error						get_next_line(t_parsing *data, int fd, char *line);
+								unsigned int start, size_t len, char **str);
+t_error						get_next_line(t_parsing *data, int fd, char **line);
 
 #endif

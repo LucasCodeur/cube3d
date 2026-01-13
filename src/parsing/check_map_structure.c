@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:14:23 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/09 17:23:17 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:22:42 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static t_error	check_map_opened(char **map_test, int i, int j)
 	return (ERROR_OK);
 }
 
-static t_error	map_copy(t_parsing *data, char **map_copy)
+static t_error	map_copy(t_parsing *data, char ***map_copy)
 {
 	t_error	error;
 	int		i;
 
 	error = ft_malloc(&data->garbage, sizeof(char *) * (data->map->height + 1),
-			map_copy);
+			(void **)*map_copy);
 	if (error.code != ERR_OK)
 		return (error);
 	i = 0;
@@ -56,7 +56,7 @@ static t_error	map_copy(t_parsing *data, char **map_copy)
 			return (error);
 		i++;
 	}
-	map_copy[i] = NULL;
+	*map_copy[i] = NULL;
 	return (ERROR_OK);
 }
 
@@ -99,7 +99,8 @@ t_error	check_map_structure(t_parsing *data)
 	int		i;
 	int		j;
 
-	error = map_copy(data, map_test);
+	map_test = NULL;
+	error = map_copy(data, &map_test);
 	if (error.code != ERR_OK)
 		return (error);
 	i = -1;

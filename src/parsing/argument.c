@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 09:09:51 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/09 14:03:56 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/13 14:52:47 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ static t_error	check_file_extension(char *path, t_parsing *data)
 	size_t	len;
 	t_error	error;
 
+	extension = NULL;
 	len = ft_strlen(path);
 	if (len >= 5)
 	{
-		error = ft_substr(data, path, len - 4, len, extension);
+		error = ft_substr(data, path, len - 4, len, &extension);
 		if (error.code != ERR_OK)
 			return (error);
 		if (ft_strncmp(extension, ".cub", 4))

@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:38:45 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/09 17:23:58 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/13 15:33:41 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,11 @@ static t_error	check_save_hero(t_parsing *data)
 	int		j;
 
 	i = 0;
+	printf("coucou1\n");
+	printf("data->map->grid[i]=%s\n", data->map->grid[i]);
 	while (data->map->grid[i])
 	{
+		printf("coucou2\n");
 		j = 0;
 		while (data->map->grid[i][j])
 		{

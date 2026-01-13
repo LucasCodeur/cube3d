@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:22:08 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/09 17:08:46 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:57:52 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_error	extract_map_line(char *line, t_parsing *data)
 	return (ERROR_OK);
 }
 
-static t_error	loop_new_map(char **new_map_lines, char *line, t_parsing *data)
+static t_error	loop_new_map(char ***new_map_lines, char *line, t_parsing *data)
 {
 	t_error	error;
 	int		i;
@@ -60,7 +60,7 @@ static t_error	loop_new_map(char **new_map_lines, char *line, t_parsing *data)
 	error = ft_strdup(data, line, new_map_lines[i]);
 	if (error.code != ERR_OK)
 		return (error);
-	new_map_lines[++i] = NULL;
+	*new_map_lines[++i] = NULL;
 	return (ERROR_OK);
 }
 
@@ -69,11 +69,12 @@ static t_error	save_map_line(char *line, t_parsing *data)
 	t_error	error;
 	char	**new_map_lines;
 
+	new_map_lines = NULL;
 	error = ft_malloc(&data->garbage, sizeof(char *) * (data->map->height + 2),
-			new_map_lines);
+			(void **)&new_map_lines);
 	if (error.code != ERR_OK)
 		return (error);
-	error = loop_new_map(new_map_lines, line, data);
+	error = loop_new_map(&new_map_lines, line, data);
 	if (error.code != ERR_OK)
 		return (error);
 	data->map->grid = new_map_lines;
