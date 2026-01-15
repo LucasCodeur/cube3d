@@ -17,13 +17,24 @@
 
 typedef enum
 {
-	ERR_OK = 0,
+	ERR_OK,
 	ERR_FAIL,
 	ERR_MEMORY,
 	ERR_INVALID_ARG,
-	ERR_IO
+	ERR_IO,
+	ERR_MLX 
 }					t_error_code;
-
+//
+// typedef enum
+// {
+// 	ERR_OK = "No problem",
+// 	ERR_FAIL = "Generic problem",
+// 	ERR_MEMORY = 2,
+// 	ERR_INVALID_ARG = 3,
+// 	ERR_IO = 4,
+// 	ERR_MLX = 5
+// }					t_error_message;
+//
 typedef struct s_error
 {
 	t_error_code	code;

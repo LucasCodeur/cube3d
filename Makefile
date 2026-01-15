@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2026/01/09 12:59:09 by prigaudi         ###   ########.fr        #
+#    Updated: 2026/01/15 13:05:42 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,13 +49,16 @@ P_SRC_SPRITES = $(P_SRC)sprites/
 SRC = \
 	mlx.c \
 	hooks.c \
+	hooks_player.c \
 	compute_distance.c \
 	map.c \
-	minimap.c \
 	utils.c \
 	raycasting.c \
-	main.c \
+	fps.c \
 	debug.c \
+	main.c \
+
+	# minimap.c \
 
 SRC_SPRITES = \
 	create_sprites.c \

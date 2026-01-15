@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 18:02:32 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/27 17:14:22 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/12 17:02:18 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,18 @@ bool	t_display_map_2D(t_data* data)
 	int size_cols; 
 	int size_rows;
 	
-	size_cols = (WIN_WIDTH / 4) / data->map.cols;
-	size_rows = (WIN_HEIGHT / 4) / data->map.rows;
+	size_cols = (WIN_WIDTH / 8) / data->map.width;
+	size_rows = (WIN_HEIGHT / 8) / data->map.height;
 	if (size_cols <= size_rows)
-		data->tile_size = size_cols;
+		data->raycasting.tile_size = size_cols;
 	else
-		data->tile_size = size_rows;
-	t_draw_map(data, data->tile_size);
-	t_draw_hero(data, data->tile_size);
+		data->raycasting.tile_size = size_rows;
+	t_draw_map(data, data->raycasting.tile_size);
+	t_draw_hero(data, data->raycasting.tile_size);
 	// t_display_fov(data);
-	// t_cast_plane_vec(data, data->tile_size);
+	// t_cast_plane_vec(data, data->raycasting.tile_size);
 	t_ray_casting_2D(data);
-	t_cast_dir_vec(data, data->tile_size);
-
-	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.img, 0, 0);
+	t_cast_dir_vec(data, data->raycasting.tile_size);
 	return (true);
 }
 
@@ -99,8 +97,8 @@ static void    t_set_value(t_data* data, int* map_x, int* map_y, int* screen_x, 
         *map_x = test_x;
         *map_y = test_y;
         
-        *screen_x = test_x * data->tile_size + data->tile_size / 2;
-	*screen_y = test_y * data->tile_size + data->tile_size / 2;
+        *screen_x = test_x * data->raycasting.tile_size + data->raycasting.tile_size / 2;
+	*screen_y = test_y * data->raycasting.tile_size + data->raycasting.tile_size / 2;
 }
 
 static void	fill_color(t_map map, int x, int y, t_pixel* color);
@@ -119,9 +117,9 @@ bool	t_draw_map(t_data* data, int tile_size)
 
 	y = 0;
 	x = 0;
-	while (y < data->map.rows)
+	while (y < data->map.height)
 	{
-		while (x < data->map.cols)
+		while (x < data->map.width)
 		{
 			convert_and_draw_map(data, x, y, tile_size);		
 			x++;

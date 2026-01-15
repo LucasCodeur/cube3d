@@ -36,9 +36,6 @@ P_INC = inc/
 P_OBJ = .obj/
 P_VECTOR = $(P_SRC)vector/
 P_MATRICE = $(P_SRC)matrice/
-P_TEST = test/
-P_SRC_TEST = $(P_TEST)src/
-P_INC_TEST = $(P_TEST)inc/
 
 #############################################################################################
 #                                                                                           #
@@ -47,8 +44,9 @@ P_INC_TEST = $(P_TEST)inc/
 #############################################################################################
 
 SRC = \
-	main.c \
-	utils_maths.c \
+ 	utils_maths.c \
+
+	# main.c \
 
 SRC_VECTOR = \
 	vector.c \
@@ -66,9 +64,6 @@ SRC_VECTOR = \
 SRC_MATRICE = \
 	matrice.c \
 
-SRC_TEST = \
-	t_vector.c
-
 LIBS = \
 
 #############################################################################################
@@ -77,18 +72,17 @@ LIBS = \
 #                                                                                           #
 #############################################################################################
 SRCS =	\
-	$(addprefix $(P_SRC), $(SRC)) \
 	$(addprefix $(P_VECTOR), $(SRC_VECTOR)) \
 	$(addprefix $(P_MATRICE), $(SRC_MATRICE)) \
-
+		
 # List of object files (redirect to P_OBJ)
 OBJS =  \
 	$(subst $(P_SRC), $(P_OBJ), $(SRCS:.c=.o)) \
 
 
-SRC_TEST_FILES = $(addprefix $(P_SRC_TEST), $(SRC_TEST))
-OBJ_TEST_FILES = $(SRC_TEST_FILES:.c=.o)
-TEST_OBJS = $(patsubst %.c, $(P_OBJ)%.o, $(SRC_TEST_FILES))
+# SRC_TEST_FILES = $(addprefix $(P_SRC_TEST), $(SRC_TEST))
+# OBJ_TEST_FILES = $(SRC_TEST_FILES:.c=.o)
+# # TEST_OBJS = $(patsubst %.c, $(P_OBJ)%.o, $(SRC_TEST_FILES))
 
 # List of depedencies
 DEPS = $(OBJS:%.o=%.d)
@@ -99,20 +93,20 @@ DEPS = $(OBJS:%.o=%.d)
 #                                                                                           #
 #############################################################################################
 all:
-	@$(MAKE) $(NAME)
+	$(MAKE) $(NAME)
 
 # Create $(NAME) executable
-$(TEST_NAME): $(OBJS)
-	@if $(CC) $(CFLAGS) -lm $(DEPENDANCIES) -I $(P_INC) -I $(P_INC_TEST) -o $(NAME) $(OBJS) $(LIBS); then \
-		echo "$(Green)Creating executable $@$(Color_Off)"; \
-	else \
-		echo "$(Red)Error creating $@$(Color_Off)"; \
-	fi
+# $(TEST_NAME): $(OBJS)
+# 	@if $(CC) $(CFLAGS) -lm $(DEPENDANCIES) -I $(P_INC) -I $(P_INC_TEST) -o $(NAME) $(OBJS) $(LIBS); then \
+# 		echo "$(Green)Creating executable $@$(Color_Off)"; \
+# 	else \
+# 		echo "$(Red)Error creating $@$(Color_Off)"; \
+# 	fi
 
 # Custom rule to compilate all .c with there path
 $(P_OBJ)%.o: $(P_SRC)%.c 
 	@mkdir -p $(dir $@)
-	@if $(CC) $(CFLAGS) $(DEPENDANCIES) -I $(P_INC) -I $(P_INC_TEST) -c $< -o $@; then \
+	@if $(CC) $(CFLAGS) $(DEPENDANCIES) -I $(P_INC) -c $< -o $@; then \
 		echo "$(Cyan)Compiling $<$(Color_Off)"; \
 	else \
 		echo "$(Red)Error creating $@$(Color_Off)"; \
@@ -121,13 +115,12 @@ $(P_OBJ)%.o: $(P_SRC)%.c
 $(NAME): $(OBJS) 
 	ar -rcs $(NAME) $^
 
-test_exec: $(TEST_OBJS) $(OBJS)
-	@$(CC) $(CFLAGS) -lm -I $(P_INC) -I $(P_INC_TEST) -o $@ $^
+# test_exec: $(TEST_OBJS) $(OBJS)
+# 	@$(CC) $(CFLAGS) -lm -I $(P_INC) -I $(P_INC_TEST) -o $@ $^
 
 $(P_OBJ)%.o: %.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(DEPENDANCIES) -I $(P_INC) -I $(P_INC_TEST) -c $< -o $@
-
+	@$(CC) $(CFLAGS) $(DEPENDANCIES) -I $(P_INC) -c $< -o $@
 
 #############################################################################################
 #                                                                                           #
@@ -143,7 +136,6 @@ clean:
 
 clean-bin:
 	rm -f $(NAME)
-	rm -f $(TEST_NAME)
 
 clean-obj:
 	@$(MAKE) clean
@@ -162,7 +154,7 @@ fclear: fclean
 flcean: fclean
 flcear: fclean
 
-test: test_exec
+# test: test_exec
 
 #############################################################################################
 #                                                                                           #

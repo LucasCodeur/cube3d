@@ -55,12 +55,8 @@ void	normalize(t_vec *v);
 t_vec	power(t_vec v, float k);
 void	power_of(t_vec *v, float k);
 
-//WARN: have to take off
-t_vec	new_vector(unsigned int dim, ...);
 t_vec	copy_ptr(t_vec *v);
 void	print(t_vec v);
-#define NUMARGS(type, ...) (sizeof((type[]){0.0f, ##__VA_ARGS__}) / sizeof(type) - 1)
-#define vector(...) new_vector(NUMARGS(float, __VA_ARGS__), ##__VA_ARGS__)
 
 /**
 * @brief utils to the library

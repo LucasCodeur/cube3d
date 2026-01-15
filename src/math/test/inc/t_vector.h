@@ -13,7 +13,6 @@
 #ifndef T_VECTOR_H 
 # define T_VECTOR_H
 
-
 void 	t_num_args(void);
 void	t_vector(void);
 void	t_equals_vector(void);

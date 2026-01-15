@@ -15,8 +15,6 @@
 #include <stdlib.h>
 #include <mlx.h>
 
-void	load_imgs(t_data *data);
-
 /**
 * @brief allow to init the mlx
 * @param data contains all information necessary to the project.
@@ -42,7 +40,7 @@ void	init_screen_mlx(t_data *data)
 		free_img(data);
 		exit(1);
 	}
-	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
+	data->img.addr = (t_pixel *)mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
 			&data->img.line_length, &data->img.endian);
 	if (!data->img.addr)
 	{
@@ -50,6 +48,7 @@ void	init_screen_mlx(t_data *data)
 		free_img(data);
 		exit(1);
 	}
+	data->img.pixels_per_line = data->img.line_length / sizeof(t_pixel);
 }
 
 /**

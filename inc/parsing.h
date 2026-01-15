@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:01:49 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/15 09:57:13 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:44:15 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
-# include "display.h"
 # include "error.h"
 # include <fcntl.h>
 # include <limits.h>
@@ -30,6 +29,7 @@ typedef struct s_garbage
 	void					*ptr;
 	t_garbage				*next;
 }							t_garbage;
+
 
 /*
 is_valid = 1 if all elements are present and no superflux

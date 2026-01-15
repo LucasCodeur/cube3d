@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:06:40 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/06 19:58:55 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/12 16:55:45 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 #include <math.h>
 
 static int	compute_x_of_texture(t_data *data, int text_size);
-static void draw_line(t_data* data, int top_wall, int bottom_wall, int x);
+static int	compute_y_of_texture(t_img *text, int top_strip, int y);
+static void	put_all_pixels(t_data *data, t_img *text, int x, int y);
+static void draw_line(t_data* data, int x);
 
 /**
 * @brief allow to display the map
@@ -27,16 +29,14 @@ static void draw_line(t_data* data, int top_wall, int bottom_wall, int x);
 bool	draw_map(t_data* data)
 {
 	int x;
-	int	draw_start;
-	int	draw_end;
 	
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
 		data->map.player.camera = define_percentage_of_fov(x);
-		data->ray_dir = define_ray(data);
-		compute_height_of_line(data, &draw_start, &draw_end);	
-		draw_line(data, draw_start, draw_end, x);
+		data->raycasting.ray_dir = define_ray(data);
+		compute_height_of_line(data, &data->img.top_strip, &data->img.bottom_strip);	
+		draw_line(data, x);
 		x++;
 	}
 	// t_display_map_2D(data);
@@ -47,57 +47,93 @@ bool	draw_map(t_data* data)
 /**
 * @brief draw the line define by x, the sky and the sol.
 * @param data all information about the program.
-* @param draw_start begin of the line to draw.
-* @param draw_end end of the line to draw.
+* @param top_strip begin of the line to draw.
+* @param bottom_strip end of the line to draw.
 * @return
 */
-static void draw_line(t_data* data, int top_wall, int bottom_wall, int x)
+static void draw_line(t_data* data, int x)
 {
-	t_img	text;
-	double	step;	
-	double	tex_y;
-	int		tex_x;
-	int		y;
+	t_img		*text;
+	int			y;
 
 	y = 0;
-	text = choose_texture(data);
-	text.color.value = BLACK;
-	step = (double)text.height / (double)(bottom_wall - top_wall);
-	while (y < top_wall)
-		my_mlx_pixel_put(data, x, y++, &text.color);
-	tex_x = compute_x_of_texture(data, text.height);
-	if (top_wall < 0)
-		tex_y = (y - top_wall) * step;
-	else
-		tex_y = 0;
-	while (y < bottom_wall)
-	{
-		text.color.value = *(int *)(text.addr + (int)tex_y * text.line_length + tex_x * (text.bits_per_pixel / 8));
-		my_mlx_pixel_put(data, x, y++, &text.color);
-		tex_y += step;
-		if (tex_y > text.height)
-			tex_y = (double)text.height;
-	}
-	text.color.value = BLACK;
-	while (y < WIN_HEIGHT - 1)
-		my_mlx_pixel_put(data, x, y++, &text.color);
+	data->img.top_strip += data->raycasting.z;
+	data->img.bottom_strip += data->raycasting.z;
+	text = NULL;
+	choose_texture(data, &text);
+	text->step = text->double_height / (double)(data->img.bottom_strip - data->img.top_strip);
+	text->x = compute_x_of_texture(data, text->height);
+	text->y = compute_y_of_texture(text, data->img.top_strip, y);
+	put_all_pixels(data, text, x, y);
 }
 
 /**
-* @brief allow to compute x and y of the texture
+* @brief allow to compute x of the texture
 * @param data all information about the program.
 * @param text_size size of the texture
-* @param x boolean to know if I have to compute x or y of the texture 
-* @return x or y of the texture
+* @return x of the texture
 */
 static int	compute_x_of_texture(t_data *data, int text_size)
 {
-	int	texture_x;;
+	int	texture_x;
 
-	texture_x = (int)(data->wall_x * text_size);
+	texture_x = (int)(data->raycasting.wall_x * text_size);
 	if (texture_x < 0)
 		texture_x = 1;
 	else if (texture_x > text_size)
 		texture_x = text_size - 1;
 	return (texture_x);
+}
+/**
+* @brief allow to compute y of the texture
+* @param data all information about the program.
+* @return y of the texture
+*/
+static int	compute_y_of_texture(t_img *text, int top_strip, int y)
+{
+	int	text_y;
+
+	text_y = 0;
+	if (top_strip < 0)
+		text_y = (y - top_strip) * text->step;
+	else
+		text_y = 0;
+	return (text_y);
+}
+
+/**
+* @brief allow to put all the pixels on the main screen
+* @param data all information about the program.
+* @param text pointer of the texture to map
+* @param x abcisssa of the screen
+* @param y ordinate of the screen on the strip of x
+* @return
+*/
+static void	put_all_pixels(t_data *data, t_img *text, int x, int y)
+{
+	t_pixel		*dst;
+	t_pixel		color;
+
+	color.value = BLACK;	
+	dst = data->img.addr + x;
+	while (y++ < data->img.top_strip && y < WIN_HEIGHT)
+	{
+		*dst = color;
+		dst += data->img.pixels_per_line;
+	}
+	while (y++ < data->img.bottom_strip && y < WIN_HEIGHT)
+	{
+		color = *(text->addr + (int)text->y * text->pixels_per_line + text->x);
+		text->y += text->step;
+		if (text->y > text->height)
+			text->y = text->height - 1;
+		*dst = color;
+		dst += data->img.pixels_per_line;
+	}
+	color.value = BLACK;
+	while (y++ < WIN_HEIGHT)
+	{
+		*dst = color;
+		dst += data->img.pixels_per_line;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 10:05:29 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/18 13:21:33 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/12 16:54:29 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,30 @@
 /**
  * @brief fill draw_start and draw_end, that the born of the line in order to display the walls.
  * @param data all information about the program.
- * @param draw_start the beginning of the line to draw in order to display the wall.
- * @param draw_end the ending of the line to draw in order to display the wall.
+ * @param top_strip the beginning of the line to draw in order to display the wall.
+ * @param bottom_strip the ending of the line to draw in order to display the wall.
  * @return
  */
-void compute_height_of_line(t_data* data, int* draw_start, int* draw_end)
+void compute_height_of_line(t_data* data, int* top_strip, int* bottom_strip)
 {
-	int		line_height;
+	int		strip_height;
 	double	dist;
 
-	dist = compute_dist(data, data->ray_dir);
-	if (data->side == 0)
+	dist = compute_dist(data, data->raycasting.ray_dir);
+	if (data->raycasting.side == 0)
 	{
-		data->wall_x = data->map.player.pos.elements[1] + dist * data->ray_dir.elements[1];
-		data->wall_y = data->map.player.pos.elements[0] + dist * data->ray_dir.elements[0];
+		data->raycasting.wall_x = data->map.player.pos.elements[1] + dist * data->raycasting.ray_dir.elements[1];
+		data->raycasting.wall_y = data->map.player.pos.elements[0] + dist * data->raycasting.ray_dir.elements[0];
 	}
 	else
 	{
-		data->wall_x = data->map.player.pos.elements[0] + dist * data->ray_dir.elements[0];
-		data->wall_y = data->map.player.pos.elements[1] + dist * data->ray_dir.elements[1];
+		data->raycasting.wall_x = data->map.player.pos.elements[0] + dist * data->raycasting.ray_dir.elements[0];
+		data->raycasting.wall_y = data->map.player.pos.elements[1] + dist * data->raycasting.ray_dir.elements[1];
 	}
-	data->wall_x -= floor(data->wall_x);
-	line_height = (int)(WIN_HEIGHT / dist);
-	*draw_start = -line_height * 0.5 + WIN_HEIGHT * 0.5;
-	*draw_end = line_height * 0.5 + WIN_HEIGHT * 0.5;
+	data->raycasting.wall_x -= floor(data->raycasting.wall_x);
+	strip_height = (int)(WIN_HEIGHT / dist);
+	*top_strip = -strip_height * 0.5 + WIN_HEIGHT * 0.5;
+	*bottom_strip = strip_height * 0.5 + WIN_HEIGHT * 0.5;
 }
 
 /**
