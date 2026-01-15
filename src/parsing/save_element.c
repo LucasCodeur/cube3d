@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:10:16 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/09 16:36:35 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/15 09:58:12 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static t_error	save_ceiling_floor(char *id, char *info, t_parsing *data)
 
 	if (!ft_strncmp(id, "F", 1) && !data->floor_rgb_color)
 	{
-		error = check_extract_rgb(data, info, data->floor_rgb_color);
+		error = check_extract_rgb(data, info, &(data->floor_rgb_color));
 		if (error.code != ERR_OK)
 			return (error);
 		data->nb_valid_elements++;
@@ -73,7 +73,7 @@ static t_error	save_ceiling_floor(char *id, char *info, t_parsing *data)
 	}
 	else if (!ft_strncmp(id, "C", 1) && !data->ceiling_rgb_color)
 	{
-		error = check_extract_rgb(data, info, data->ceiling_rgb_color);
+		error = check_extract_rgb(data, info, &(data->ceiling_rgb_color));
 		if (error.code != ERR_OK)
 			return (error);
 		data->nb_valid_elements++;

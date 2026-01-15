@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:01:49 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/13 16:56:52 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/15 09:57:13 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_error						check_element_line(char *line, t_parsing *data);
 t_error						extract_save_map(char *line, t_parsing *data);
 t_error						save_element(char *id, char *info, t_parsing *data);
 t_error						check_extract_rgb(t_parsing *data, char *info,
-								int *rgb_int);
+								int **rgb_int);
 t_error						check_map(t_parsing *data);
 t_error						check_map_structure(t_parsing *data);
 

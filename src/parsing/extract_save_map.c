@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:22:08 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/13 16:57:52 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/15 11:14:03 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ static t_error	loop_new_map(char ***new_map_lines, char *line, t_parsing *data)
 	i = 0;
 	while (data->map->grid && data->map->grid[i])
 	{
-		error = ft_strdup(data, data->map->grid[i], new_map_lines[i]);
+		error = ft_strdup(data, data->map->grid[i], &(*new_map_lines)[i]);
 		if (error.code != ERR_OK)
 			return (error);
 		i++;
 	}
-	error = ft_strdup(data, line, new_map_lines[i]);
+	error = ft_strdup(data, line, &(*new_map_lines)[i]);
 	if (error.code != ERR_OK)
 		return (error);
-	*new_map_lines[++i] = NULL;
+	(*new_map_lines)[++i] = NULL;
 	return (ERROR_OK);
 }
 

@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:18:04 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/13 17:20:56 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/15 11:24:10 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static t_error	read_buffer(char **line, ssize_t *byte_read, char *buffer,
 	}
 	if (*byte_read == 0)
 	{
-		if (*line)
+		if (line)
 		{
 			buffer[0] = '\0';
 			*check = 1;

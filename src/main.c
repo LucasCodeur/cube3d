@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 11:50:16 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/13 17:11:12 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/15 11:38:11 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	launcher(t_data *data)
 	load_imgs(data);
 	draw_map(data);
 	// t_display_map_2D(data);
-	display_minimap(data);
+	// display_minimap(data);
 	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, move_hero, data);
 	mlx_loop(data->mlx.ptr);
 }

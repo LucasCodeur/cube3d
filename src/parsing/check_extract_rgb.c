@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 13:54:18 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/13 16:31:13 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/15 10:13:19 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_error	test_rgb_value(int value)
 	return (ERROR_OK);
 }
 
-static t_error	rgb_loop(char **rgb_str, int *rgb_int)
+static t_error	rgb_loop(char **rgb_str, int **rgb_int)
 {
 	t_error	error;
 	int		i;
@@ -39,8 +39,8 @@ static t_error	rgb_loop(char **rgb_str, int *rgb_int)
 			error.message = "RGB format invalid\n";
 			return (error);
 		}
-		rgb_int[i] = ft_atoi(rgb_str[i]);
-		error = test_rgb_value(rgb_int[i]);
+		(*rgb_int)[i] = ft_atoi(rgb_str[i]);
+		error = test_rgb_value((*rgb_int)[i]);
 		if (error.code != ERR_OK)
 			return (error);
 		i++;
@@ -51,7 +51,7 @@ static t_error	rgb_loop(char **rgb_str, int *rgb_int)
 		error.message = "RGB format invalid\n";
 		return (error);
 	}
-	rgb_int[i] = 0;
+	(*rgb_int)[i] = 0;
 	return (ERROR_OK);
 }
 
@@ -101,7 +101,7 @@ static t_error	is_digit_or_space(char **rgb_str)
 	return (ERROR_OK);
 }
 
-t_error	check_extract_rgb(t_parsing *data, char *info, int *rgb_int)
+t_error	check_extract_rgb(t_parsing *data, char *info, int **rgb_int)
 {
 	t_error	error;
 	char	**rgb_str;
@@ -113,7 +113,8 @@ t_error	check_extract_rgb(t_parsing *data, char *info, int *rgb_int)
 	error = is_digit_or_space(rgb_str);
 	if (error.code != ERR_OK)
 		return (error);
-	error = ft_malloc(&data->garbage, sizeof(int) * (3 + 1), (void **)&rgb_int);
+	error = ft_malloc(&data->garbage, sizeof(int) * (3 + 1),
+			(void **)&(*rgb_int));
 	if (error.code != ERR_OK)
 		return (error);
 	error = rgb_loop(rgb_str, rgb_int);

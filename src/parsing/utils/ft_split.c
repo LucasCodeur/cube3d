@@ -6,24 +6,24 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:35:12 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/13 17:46:26 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/15 10:12:28 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static void	free_malloc(char **split, int j)
-{
-	int	i;
+// static void	free_malloc(char **split, int j)
+// {
+// 	int	i;
 
-	i = j - 1;
-	while (i >= 0)
-	{
-		free(split[i]);
-		i--;
-	}
-	free(split);
-}
+// 	i = j - 1;
+// 	while (i >= 0)
+// 	{
+// 		free(split[i]);
+// 		i--;
+// 	}
+// 	free(split);
+// }
 
 static t_error	extract(t_parsing *config_data, char const *s, int start,
 		int end, char **extracted_str)
@@ -31,10 +31,8 @@ static t_error	extract(t_parsing *config_data, char const *s, int start,
 	t_error	error;
 	int		i;
 
-	printf("coucou1\n");
 	error = ft_malloc(&config_data->garbage, sizeof(char) * (end - start + 2),
 			(void **)extracted_str);
-	printf("coucou2\n");
 	if (error.code != ERR_OK)
 		return (error);
 	i = 0;
@@ -65,19 +63,19 @@ static int	char_count(char const *s, char c)
 	return (counter);
 }
 
-static t_error	test_str(char **split, int j)
-{
-	t_error	error;
+// static t_error	test_str(char **split, int j)
+// {
+// 	t_error	error;
 
-	if (split[j] == NULL)
-	{
-		free_malloc(split, j);
-		error.code = ERR_FAIL;
-		error.message = "split failed";
-		return (error);
-	}
-	return (ERROR_OK);
-}
+// 	if (split[j] == NULL)
+// 	{
+// 		// free_malloc(split, j);
+// 		error.code = ERR_FAIL;
+// 		error.message = "split failed";
+// 		return (error);
+// 	}
+// 	return (ERROR_OK);
+// }
 
 t_error	ft_split(t_parsing *cd, char const *s, char c, char ***split)
 {
@@ -86,7 +84,6 @@ t_error	ft_split(t_parsing *cd, char const *s, char c, char ***split)
 	int		i;
 	int		j;
 
-	printf("split\n");
 	error = ft_malloc(&cd->garbage, sizeof(char *) * (char_count(s, c) + 1),
 			(void **)split);
 	if (error.code != ERR_OK)
@@ -95,21 +92,21 @@ t_error	ft_split(t_parsing *cd, char const *s, char c, char ***split)
 	i = 0;
 	while (s[i] != '\0')
 	{
-		printf("s[i]=%c\n", s[i]);
 		if (s[i] != c)
 		{
 			start = i;
 			while (s[i + 1] != c && s[i + 1] != '\0')
 				i++;
-			error = extract(cd, s, start, i, split[j]);
+			error = extract(cd, s, start, i, &(*split)[j]);
 			if (error.code != ERR_OK)
 				return (error);
-			error = test_str(*split, j++);
-			if (error.code != ERR_OK)
-				return (error);
+			j++;
+			// error = test_str(*split, j++);
+			// if (error.code != ERR_OK)
+			// 	return (error);
 		}
 		i++;
 	}
-	*split[j] = NULL;
+	(*split)[j] = NULL;
 	return (ERROR_OK);
 }
