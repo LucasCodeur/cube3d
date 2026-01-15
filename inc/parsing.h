@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:01:49 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/15 14:44:15 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/15 16:18:32 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
+# include "display.h"
 # include "error.h"
 # include <fcntl.h>
 # include <limits.h>
@@ -30,7 +31,6 @@ typedef struct s_garbage
 	t_garbage				*next;
 }							t_garbage;
 
-
 /*
 is_valid = 1 if all elements are present and no superflux
 => Each element are tested after
@@ -39,7 +39,6 @@ typedef struct s_parsing
 {
 	void					*mlx_ptr;
 	void					*win_ptr;
-	t_map					*map;
 	char					*north_texture;
 	char					*south_texture;
 	char					*east_texture;
@@ -56,24 +55,24 @@ t_parsing					*init_parsing(void);
 void						mlx_hook_loop(t_parsing *parsing);
 int							mlx_init_window(t_parsing *parsing);
 
-//========== MAP ===========
-int							display_map(t_parsing *parsing);
+// //========== MAP ===========
+// int							display_map(t_parsing *parsing);
 
-//========== MINIMAP ===========
-int							display_minimap(t_data *data);
+// //========== MINIMAP ===========
+// int							display_minimap(t_data *data);
 
 //========== PARSING ===========
-t_error						parsing(int argc, char **argv, t_parsing *data);
+t_error						parsing(int argc, char **argv, t_data *data);
 t_error						check_argument(int argc, char **argv,
 								t_parsing *data);
-t_error						config(char *path, t_parsing *data);
+t_error						config(char *path, t_data *data);
 t_error						check_element_line(char *line, t_parsing *data);
-t_error						extract_save_map(char *line, t_parsing *data);
+t_error						extract_save_map(char *line, t_data *data);
 t_error						save_element(char *id, char *info, t_parsing *data);
 t_error						check_extract_rgb(t_parsing *data, char *info,
 								int **rgb_int);
-t_error						check_map(t_parsing *data);
-t_error						check_map_structure(t_parsing *data);
+t_error						check_map(t_data *data);
+t_error						check_map_structure(t_data *data);
 
 //========== UTILS ===========
 void						free_all(t_parsing *data);
@@ -89,7 +88,7 @@ t_error						ft_malloc(t_garbage **garbage, int size,
 void						*ft_memmove(void *dest, const void *src, size_t c);
 t_error						ft_split(t_parsing *cd, char const *s, char c,
 								char ***split);
-t_error						ft_strdup(t_parsing *data, const char *str,
+t_error						ft_strdup(t_data *data, const char *str,
 								char **result);
 size_t						ft_strlen(const char *str);
 int							ft_strncmp(const char *first, const char *second,

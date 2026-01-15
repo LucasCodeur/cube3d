@@ -6,26 +6,26 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:22:08 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/15 11:14:03 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/15 16:09:23 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static t_error	extract_map_line(char *line, t_parsing *data)
+static t_error	extract_map_line(char *line, t_data *data)
 {
 	t_error	error;
 	int		i;
 
-	if (!ft_strncmp(line, "\n", 1) && data->map->height)
+	if (!ft_strncmp(line, "\n", 1) && data->map.height)
 	{
-		data->map->map_finished = 1;
+		data->map.map_finished = 1;
 		return (ERROR_OK);
 	}
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
-		if (data->map->map_finished)
+		if (data->map.map_finished)
 		{
 			error.code = ERR_INVALID_ARG;
 			error.message = "Empty line in map structure\n";
@@ -44,15 +44,15 @@ static t_error	extract_map_line(char *line, t_parsing *data)
 	return (ERROR_OK);
 }
 
-static t_error	loop_new_map(char ***new_map_lines, char *line, t_parsing *data)
+static t_error	loop_new_map(char ***new_map_lines, char *line, t_data *data)
 {
 	t_error	error;
 	int		i;
 
 	i = 0;
-	while (data->map->grid && data->map->grid[i])
+	while (data->map.grid && data->map.grid[i])
 	{
-		error = ft_strdup(data, data->map->grid[i], &(*new_map_lines)[i]);
+		error = ft_strdup(data, data->map.grid[i], &(*new_map_lines)[i]);
 		if (error.code != ERR_OK)
 			return (error);
 		i++;
@@ -64,27 +64,27 @@ static t_error	loop_new_map(char ***new_map_lines, char *line, t_parsing *data)
 	return (ERROR_OK);
 }
 
-static t_error	save_map_line(char *line, t_parsing *data)
+static t_error	save_map_line(char *line, t_data *data)
 {
 	t_error	error;
 	char	**new_map_lines;
 
 	new_map_lines = NULL;
-	error = ft_malloc(&data->garbage, sizeof(char *) * (data->map->height + 2),
-			(void **)&new_map_lines);
+	error = ft_malloc(&data->parsing->garbage, sizeof(char *)
+			* (data->map.height + 2), (void **)&new_map_lines);
 	if (error.code != ERR_OK)
 		return (error);
 	error = loop_new_map(&new_map_lines, line, data);
 	if (error.code != ERR_OK)
 		return (error);
-	data->map->grid = new_map_lines;
-	if ((int)ft_strlen(line) - 1 > data->map->width)
-		data->map->width = ft_strlen(line) - 1;
-	data->map->height++;
+	data->map.grid = new_map_lines;
+	if ((int)ft_strlen(line) - 1 > data->map.width)
+		data->map.width = ft_strlen(line) - 1;
+	data->map.height++;
 	return (ERROR_OK);
 }
 
-t_error	extract_save_map(char *line, t_parsing *data)
+t_error	extract_save_map(char *line, t_data *data)
 {
 	t_error	error;
 

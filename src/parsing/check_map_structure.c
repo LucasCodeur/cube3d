@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:14:23 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/15 11:37:25 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/15 16:11:38 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,19 @@ static t_error	check_map_opened(char **map_test, int i, int j)
 	return (ERROR_OK);
 }
 
-static t_error	map_copy(t_parsing *data, char ***map_copy)
+static t_error	map_copy(t_data *data, char ***map_copy)
 {
 	t_error	error;
 	int		i;
 
-	error = ft_malloc(&data->garbage, sizeof(char *) * (data->map->height + 1),
-			(void **)map_copy);
+	error = ft_malloc(&data->parsing->garbage, sizeof(char *)
+			* (data->map.height + 1), (void **)map_copy);
 	if (error.code != ERR_OK)
 		return (error);
 	i = 0;
-	while (data->map->grid[i])
+	while (data->map.grid[i])
 	{
-		error = ft_strdup(data, data->map->grid[i], &(*map_copy)[i]);
+		error = ft_strdup(data, data->map.grid[i], &(*map_copy)[i]);
 		if (error.code != ERR_OK)
 			return (error);
 		i++;
@@ -60,11 +60,11 @@ static t_error	map_copy(t_parsing *data, char ***map_copy)
 	return (ERROR_OK);
 }
 
-static t_error	recursive(char **map_test, int i, int j, t_parsing *data)
+static t_error	recursive(char **map_test, int i, int j, t_data *data)
 {
 	t_error	error;
 
-	if (i == 0 || j == 0 || i == data->map->height - 1 || j == data->map->width
+	if (i == 0 || j == 0 || i == data->map.height - 1 || j == data->map.width
 		- 1)
 	{
 		error.code = ERR_INVALID_ARG;
@@ -74,15 +74,15 @@ static t_error	recursive(char **map_test, int i, int j, t_parsing *data)
 	error = check_map_opened(map_test, i, j);
 	if (error.code != ERR_OK)
 		return (error);
-	if (j != data->map->width - 1 && (map_test[i][j + 1] == '0' || map_test[i][j
-			+ 1] == data->map->player.orientation))
+	if (j != data->map.width - 1 && (map_test[i][j + 1] == '0' || map_test[i][j
+			+ 1] == data->map.player.orientation))
 	{
 		map_test[i][j + 1] = '1';
 		error = recursive(map_test, i, j + 1, data);
 		if (error.code != ERR_OK)
 			return (error);
 	}
-	if (i != data->map->height - 1 && map_test[i + 1][j] == '0')
+	if (i != data->map.height - 1 && map_test[i + 1][j] == '0')
 	{
 		map_test[i + 1][j] = '1';
 		error = recursive(map_test, i + 1, j, data);
@@ -92,7 +92,7 @@ static t_error	recursive(char **map_test, int i, int j, t_parsing *data)
 	return (ERROR_OK);
 }
 
-t_error	check_map_structure(t_parsing *data)
+t_error	check_map_structure(t_data *data)
 {
 	t_error	error;
 	char	**map_test;

@@ -3,25 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:03:49 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/15 14:39:32 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/15 15:55:39 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "debug.h"
 #include "display.h"
 #include "error.h"
+#include "matrice.h"
 #include "parsing.h"
 #include "test.h"
-#include "matrice.h"
-
 #include <X11/X.h>
 #include <X11/keysym.h>
 #include <mlx.h>
-#include <sys/time.h>
 #include <stdlib.h>
+#include <sys/time.h>
 
 static void	ininitialize_values(t_data *data, t_parsing *parsing_data)
 {
@@ -35,7 +34,6 @@ static void	ininitialize_values(t_data *data, t_parsing *parsing_data)
 	data->map.player.dir = new_vector_2D(1.0f, 0.0f);
 	data->map.player.plane = new_vector_2D(0.0f, 0.66f);
 	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
-	parsing_data->map = &data->map;
 	return ;
 }
 
@@ -46,13 +44,12 @@ int	execute(t_data *data)
 	if (data->fps.delta_time >= FRAME_DURATION)
 	{
 		move_hero(data);
-		rotate_hero(data);	
+		rotate_hero(data);
 		data->fps.count_frame++;
-		draw_map(data);	
+		draw_map(data);
 		count_fps(data);
 		if (data->keycode.escape == true)
 		{
-			
 			exit(0);
 		}
 	}
@@ -84,18 +81,18 @@ void	print_message_error(t_error error)
 		printf("Open/Read file problem\n");
 	else if (error.code == ERR_MLX)
 		printf("Mlx problem\n");
-	else 
+	else
 		printf("No problem\n");
 	printf("%s\n", error.message);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_data		data;
-	t_error		error;
+	t_data	data;
+	t_error	error;
 
-	ininitialize_values(&data, &data->parsing);
-	error = parsing(argc, argv, &data->parsing);
+	ininitialize_values(&data, data.parsing);
+	error = parsing(argc, argv, &data);
 	launcher(&data);
 	// mlx_hook_loop(parsing_data);
 	// free_all(parsing_data);

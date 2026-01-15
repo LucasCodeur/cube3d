@@ -6,27 +6,25 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/15 14:38:57 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/15 15:53:02 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DISPLAY_H 
+#ifndef DISPLAY_H
 # define DISPLAY_H
 
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include <math.h>
-
-#include "vector.h"
-#include "error.h"
-#include "parsing.h"
+# include "error.h"
+# include "vector.h"
+# include <math.h>
+# include <stdbool.h>
+# include <stdint.h>
+# include <stdio.h>
 
 # define WIN_WIDTH 2560
 # define WIN_HEIGHT 1440
 
-# define SIZE_X	20
-# define SIZE_Y	20
+# define SIZE_X 20
+# define SIZE_Y 20
 
 # define ASSET_PLAYER "/home/lud-adam/Documents/cube3d/assets/basic/player.xpm"
 # define ASSET_W_EAST "/home/lud-adam/Documents/cube3d/assets/textures/east.xpm"
@@ -35,10 +33,10 @@
 # define ASSET_W_SOUTH "/home/lud-adam/Documents/cube3d/assets/textures/south.xpm"
 
 # define BLACK 0x2c2c2c
-# define RED   0xFF0000FF
+# define RED 0xFF0000FF
 # define ORANGE 0xFF6347
 # define GREEN 0xFF00FF00
-# define BLUE  0x0000FF
+# define BLUE 0x0000FF
 # define YELLOW 0xFFFF000
 # define WHITE 0xFFFFFF00
 
@@ -48,171 +46,175 @@
 # define ROTATE_FORWARD 90.0 * (M_PI / 180)
 # define ROTATE_BACKWARD -90.0 * (M_PI / 180)
 # define FPS 60
-# define FRAME_DURATION 1.0/ FPS
+# define FRAME_DURATION 1.0 / FPS
+
+typedef struct s_parsing	t_parsing;
 
 typedef struct s_rgb
 {
-	uint8_t r;
-	uint8_t g;
-	uint8_t b;
-	uint8_t a;
-}				t_rgb;
+	uint8_t					r;
+	uint8_t					g;
+	uint8_t					b;
+	uint8_t					a;
+}							t_rgb;
 
 typedef union s_pixel
 {
-	unsigned int	value;
-	t_rgb			rgb;
-	uint8_t			channels[4];
-}				t_pixel;
+	unsigned int			value;
+	t_rgb					rgb;
+	uint8_t					channels[4];
+}							t_pixel;
 
 typedef struct s_img
 {
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		height;
-	int		width;
-	int		pixels_per_line;
-	int		top_strip;
-	int		bottom_strip;
-	int		x;
-	double	y;
-	double	step;	
-	double	double_height;
-	t_pixel	*addr;
-	t_pixel	color;
-	void	*img;
-}			t_img;
+	int						bits_per_pixel;
+	int						line_length;
+	int						endian;
+	int						height;
+	int						width;
+	int						pixels_per_line;
+	int						top_strip;
+	int						bottom_strip;
+	int						x;
+	double					y;
+	double					step;
+	double					double_height;
+	t_pixel					*addr;
+	t_pixel					color;
+	void					*img;
+}							t_img;
 
 typedef struct s_sprite
 {
-	t_img	wall_east;
-	t_img	wall_north;
-	t_img	wall_west;
-	t_img	wall_south;
-}				t_sprite;
+	t_img					wall_east;
+	t_img					wall_north;
+	t_img					wall_west;
+	t_img					wall_south;
+}							t_sprite;
 
 typedef struct s_mlx
 {
-	char	*buf;
-	void	*ptr;
-	void	*win;
-	int		max_width;
-	int		max_height;
-}				t_mlx;
+	char					*buf;
+	void					*ptr;
+	void					*win;
+	int						max_width;
+	int						max_height;
+}							t_mlx;
 
-typedef struct	s_hero
+typedef struct s_hero
 
 {
-	t_vec	dir;
-	t_vec	pos;
-	t_vec	plane;
-	t_vec	camera;
-	double	time;
-	double	old_time;
-	int		x;
-	int		y;
-	char	orientation;
-}				t_hero;
+	t_vec					dir;
+	t_vec					pos;
+	t_vec					plane;
+	t_vec					camera;
+	double					time;
+	double					old_time;
+	int						x;
+	int						y;
+	char					orientation;
+}							t_hero;
 
-typedef	struct	s_map
+typedef struct s_map
 {
-	char	**grid;
-	int		width;
-	int		height;
-	int		rows;
-	int		cols;
-	int		map_finished;
-	int		x;
-	int		y;
-	t_hero	player;
-}				t_map;
+	char					**grid;
+	int						width;
+	int						height;
+	int						rows;
+	int						cols;
+	int						map_finished;
+	int						x;
+	int						y;
+	t_hero					player;
+}							t_map;
 
 typedef struct s_keycode
 {
-	bool	up; 
-	bool	down; 
-	bool	right; 
-	bool	left; 
-	bool	rotate_left; 
-	bool	rotate_right;
-	bool	escape;
-	bool	cross;
-}				t_keycode;
+	bool					up;
+	bool					down;
+	bool					right;
+	bool					left;
+	bool					rotate_left;
+	bool					rotate_right;
+	bool					escape;
+	bool					cross;
+}							t_keycode;
 
 typedef struct s_fps
 {
-	double		current_time;
-	double		last_time;
-	double		delta_time;
-	int			count_frame;
-	int			count;
-}				t_fps;
+	double					current_time;
+	double					last_time;
+	double					delta_time;
+	int						count_frame;
+	int						count;
+}							t_fps;
 
 typedef struct s_raycasting
 {
-	int			side;
-	//WARN: have to take off
-	int			tile_size;
+	int						side;
+	// WARN: have to take off
+	int						tile_size;
 
-	int			step_x;
-	int			step_y;
-	int			z;
-	double		wall_x;
-	double		wall_y;
-	t_vec		ray_dir;
-}				t_raycasting;
+	int						step_x;
+	int						step_y;
+	int						z;
+	double					wall_x;
+	double					wall_y;
+	t_vec					ray_dir;
+}							t_raycasting;
 
 typedef struct s_data
 {
-	t_raycasting	raycasting;
-	t_mlx			mlx;
-	t_img			img;
-	t_sprite		imgs;
-	t_map			map;
-	t_keycode		keycode;
-	t_fps			fps;
-	t_parsing		parsing;
-}				t_data;
+	t_raycasting			raycasting;
+	t_mlx					mlx;
+	t_img					img;
+	t_sprite				imgs;
+	t_map					map;
+	t_keycode				keycode;
+	t_fps					fps;
+	t_parsing				*parsing;
+}							t_data;
 
-void	launcher(t_data *data);
+void						launcher(t_data *data);
 
-//RAYCASTING
-double	compute_dist(t_data* data, t_vec ray_dir);
-t_vec	define_ray(t_data* data);
-t_vec	define_percentage_of_fov(int x);
-void	compute_height_of_line(t_data* data, int* draw_start, int* draw_end);
-bool	draw_map(t_data* data);
+// RAYCASTING
+double						compute_dist(t_data *data, t_vec ray_dir);
+t_vec						define_ray(t_data *data);
+t_vec						define_percentage_of_fov(int x);
+void						compute_height_of_line(t_data *data,
+								int *draw_start, int *draw_end);
+bool						draw_map(t_data *data);
 
-//MLX
-void	init_mlx(t_mlx *t_mlx);
-void	init_screen_mlx(t_data *data);
-void	free_img(t_data *data);
-void	my_mlx_pixel_put(t_data *data, int x, int y, t_pixel *color);
+// MLX
+void						init_mlx(t_mlx *t_mlx);
+void						init_screen_mlx(t_data *data);
+void						free_img(t_data *data);
+void						my_mlx_pixel_put(t_data *data, int x, int y,
+								t_pixel *color);
 
-//HOOKS
-int		key_press(int keycode, void *param);
-int		close_win(void *param);
-int		press_move(int keycode, t_data *data);
-int		release_move(int keycode, t_data *data);
-int		execute(t_data *data);
-bool	move_hero(t_data *data);
-bool	rotate_hero(t_data *data);
-double	get_time(void);
+// HOOKS
+int							key_press(int keycode, void *param);
+int							close_win(void *param);
+int							press_move(int keycode, t_data *data);
+int							release_move(int keycode, t_data *data);
+int							execute(t_data *data);
+bool						move_hero(t_data *data);
+bool						rotate_hero(t_data *data);
+double						get_time(void);
 
-//IMAGE
-t_error	load_imgs(t_data *data);
-void	update_maps(t_data* data);
-void	draw_hero(t_data* data, int tile_size);
-void	clear_img(t_img *img);
-void	choose_texture(t_data *data, t_img **text);
-bool	draw_map(t_data* data);
+// IMAGE
+t_error						load_imgs(t_data *data);
+void						update_maps(t_data *data);
+void						draw_hero(t_data *data, int tile_size);
+void						clear_img(t_img *img);
+void						choose_texture(t_data *data, t_img **text);
+bool						draw_map(t_data *data);
 
-//FPS
-void	count_fps(t_data *data);
-double	get_time(void);
+// FPS
+void						count_fps(t_data *data);
+double						get_time(void);
 
-//UTILS
-void	ft_bzero(void *s, size_t n);
+// UTILS
+void						ft_bzero(void *s, size_t n);
 
 #endif
