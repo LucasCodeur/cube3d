@@ -20,8 +20,8 @@
 
 #include "vector.h"
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 2560
+# define WIN_HEIGHT 1440
 
 # define SIZE_X	20
 # define SIZE_Y	20
@@ -45,7 +45,6 @@
 # define SPEED 0.25
 # define ROTATE_FORWARD 90.0 * (M_PI / 180)
 # define ROTATE_BACKWARD -90.0 * (M_PI / 180)
-# define EPSILON 0.001
 # define FPS 60
 # define FRAME_DURATION 1.0/ FPS
 
