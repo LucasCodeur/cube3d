@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:01:49 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/16 10:18:07 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 13:46:07 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_error		check_map(t_data *data);
 t_error		check_map_structure(t_data *data);
 
 //========== UTILS ===========
-void		free_all(t_data *data);
+// void		free_all(t_data *data);
 int			ft_atoi(const char *str);
 t_error		ft_calloc(size_t elementCount, size_t elementSize, char **str);
 void		ft_lstadd_front(t_garbage **lst, t_garbage *new);

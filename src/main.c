@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:03:49 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/16 11:07:14 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 14:01:30 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ static t_error	ininitialize_values(t_data *data)
 	error = ft_malloc(&data->garbage, sizeof(t_parsing),
 			(void **)&data->parsing);
 	if (error.code != ERR_OK)
-	{
-		error.code = ERR_MEMORY;
-	}
+		return (error);
 	ft_bzero(data->parsing, sizeof(t_parsing));
 	data->mlx.max_height = WIN_HEIGHT;
 	data->mlx.max_width = WIN_WIDTH;
@@ -57,25 +55,28 @@ int	execute(t_data *data)
 		draw_map(data);
 		count_fps(data);
 		if (data->keycode.escape == true)
-		{
-			close_win(data);
-			// free_all(data);
-			// exit(0);
-		}
+			destroy_free_exit(data);
 	}
 	return (0);
 }
 
-void	launcher(t_data *data)
+static t_error	launcher(t_data *data)
 {
-	init_screen_mlx(data);
-	load_imgs(data);
+	t_error	error;
+
+	error = init_screen_mlx(data);
+	if (error.code != ERR_OK)
+		return (error);
+	error = load_imgs(data);
+	if (error.code != ERR_OK)
+		return (error);
 	data->fps.last_time = get_time();
-	mlx_hook(data->mlx.win, 17, 0, close_win, data);
+	mlx_hook(data->mlx.win, 17, 0, destroy_free_exit, data);
 	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, press_move, data);
 	mlx_hook(data->mlx.win, KeyRelease, KeyReleaseMask, release_move, data);
 	mlx_loop_hook(data->mlx.ptr, execute, data);
 	mlx_loop(data->mlx.ptr);
+	return (ERROR_OK);
 }
 
 void	print_message_error(t_error error)
@@ -101,12 +102,23 @@ int	main(int argc, char *argv[])
 	t_data	data;
 	t_error	error;
 
-	ininitialize_values(&data);
+	error = ininitialize_values(&data);
+	if (error.code != ERR_OK)
+	{
+		print_message_error(error);
+		destroy_free_exit(&data);
+	}
 	error = parsing(argc, argv, &data);
-	launcher(&data);
-	free_all(&data);
-	error.code = ERR_MLX;
-	printf("exit code : %d\n", error.code);
-	print_message_error(error);
+	if (error.code != ERR_OK)
+	{
+		print_message_error(error);
+		destroy_free_exit(&data);
+	}
+	error = launcher(&data);
+	if (error.code != ERR_OK)
+	{
+		print_message_error(error);
+		destroy_free_exit(&data);
+	}
 	return (error.code);
 }

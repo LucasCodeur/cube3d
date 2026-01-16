@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:51:37 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/16 09:43:48 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 14:02:08 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_error	config(char *path, t_data *data)
 {
 	int		fd;
 	char	*line;
-	int		i;
 	t_error	error;
 
 	line = NULL;
@@ -72,32 +71,5 @@ t_error	config(char *path, t_data *data)
 	error = check_map(data);
 	if (error.code != ERR_OK)
 		return (error);
-	/*A SUPPRIMER*/
-	printf("STRUCTURE:\n");
-	printf("north_texture=%s\n", data->parsing->north_texture);
-	printf("south_texture=%s\n", data->parsing->south_texture);
-	printf("east_texture=%s\n", data->parsing->east_texture);
-	printf("west_texture=%s\n", data->parsing->west_texture);
-	printf("floor_rgb_color1=%d\n", data->parsing->floor_rgb_color[0]);
-	printf("floor_rgb_color2=%d\n", data->parsing->floor_rgb_color[1]);
-	printf("floor_rgb_color3=%d\n", data->parsing->floor_rgb_color[2]);
-	printf("ceiling_rgb_color1=%d\n", data->parsing->ceiling_rgb_color[0]);
-	printf("ceiling_rgb_color2=%d\n", data->parsing->ceiling_rgb_color[1]);
-	printf("ceiling_rgb_color3=%d\n", data->parsing->ceiling_rgb_color[2]);
-	printf("Nbre elements=%d\n", data->parsing->nb_valid_elements);
-	printf("MAP:\n");
-	printf("width=%d\n", data->map.width);
-	printf("height=%d\n", data->map.height);
-	i = 0;
-	while (data->map.grid[i])
-	{
-		printf("%s", data->map.grid[i]);
-		i++;
-	}
-	printf("HERO:\n");
-	printf("pos x=%d\n", data->map.player.x);
-	printf("pos y=%d\n", data->map.player.y);
-	printf("orientation=%c\n", data->map.player.orientation);
-	/*A SUPPRIMER*/
 	return (ERROR_OK);
 }

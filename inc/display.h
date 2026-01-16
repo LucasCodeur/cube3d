@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/16 11:01:51 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 13:58:11 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,8 +184,6 @@ typedef struct s_data
 	t_garbage				*garbage;
 }							t_data;
 
-void						launcher(t_data *data);
-
 // RAYCASTING
 double						compute_dist(t_data *data, t_vec ray_dir);
 t_vec						define_ray(t_data *data);
@@ -196,7 +194,7 @@ bool						draw_map(t_data *data);
 
 // MLX
 void						init_mlx(t_mlx *t_mlx);
-void						init_screen_mlx(t_data *data);
+t_error						init_screen_mlx(t_data *data);
 void						free_img(t_data *data);
 void						my_mlx_pixel_put(t_data *data, int x, int y,
 								t_pixel *color);
@@ -225,6 +223,6 @@ double						get_time(void);
 
 // UTILS
 void						ft_bzero(void *s, size_t n);
-void						free_all(t_data *data);
+int							destroy_free_exit(t_data *data);
 
 #endif

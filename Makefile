@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2026/01/16 10:33:26 by prigaudi         ###   ########.fr        #
+#    Updated: 2026/01/16 13:31:12 by prigaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,14 +48,13 @@ P_SRC_SPRITES = $(P_SRC)sprites/
 
 SRC = \
 	mlx.c \
-	hooks.c \
 	hooks_player.c \
 	compute_distance.c \
 	map.c \
 	utils.c \
 	raycasting.c \
 	fps.c \
-	ft_free.c \
+	destroy_free_exit.c \
 	debug.c \
 	main.c \
 
