@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:01:40 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/02 15:16:51 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/16 16:09:22 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	d_print_grid(t_map map)
 {
-	for (int i = 0; i < map.rows; i++)
+	for (int i = 0; i < map.height; i++)
 		printf("%s\n", map.grid[i]);
 	printf("x: %lf\n", map.player.pos.elements[0]);	
 	printf("y: %lf\n", map.player.pos.elements[1]);	

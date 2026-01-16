@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:03:49 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/16 14:01:30 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 16:17:02 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,16 @@ static t_error	ininitialize_values(t_data *data)
 	ft_bzero(data->parsing, sizeof(t_parsing));
 	data->mlx.max_height = WIN_HEIGHT;
 	data->mlx.max_width = WIN_WIDTH;
-	data->map.cols = SIZE_X;
-	data->map.rows = SIZE_Y;
-	data->map.player.pos = new_vector_2D(10.0f, 10.0f);
+	return (ERROR_OK);
+}
+
+static void	ininitialize_math_values(t_data *data)
+{
+	data->map.player.pos = new_vector_2D(data->map.player.x, data->map.player.y);
 	data->map.player.dir = new_vector_2D(1.0f, 0.0f);
 	data->map.player.plane = new_vector_2D(0.0f, 0.66f);
 	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
-	return (ERROR_OK);
+	data->map.grid[data->map.player.y][data->map.player.x] = '0';
 }
 
 int	execute(t_data *data)
@@ -64,6 +67,7 @@ static t_error	launcher(t_data *data)
 {
 	t_error	error;
 
+	ininitialize_math_values(data);
 	error = init_screen_mlx(data);
 	if (error.code != ERR_OK)
 		return (error);
