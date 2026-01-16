@@ -6,11 +6,12 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:06:40 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/16 14:39:31 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 17:09:20 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
+#include "parsing.h"
 #include "test.h"
 #include <math.h>
 #include <mlx.h>
@@ -115,7 +116,10 @@ static void	put_all_pixels(t_data *data, t_img *text, int x, int y)
 	t_pixel	*dst;
 	t_pixel	color;
 
-	color.value = BLACK;
+	color.channels[0] = data->parsing->ceiling_rgb_color[2];
+	color.channels[1] = data->parsing->ceiling_rgb_color[1];
+	color.channels[2] = data->parsing->ceiling_rgb_color[0];
+	color.channels[3] = 255;
 	dst = data->img.addr + x;
 	while (y++ < data->img.top_strip && y < WIN_HEIGHT)
 	{
@@ -131,7 +135,10 @@ static void	put_all_pixels(t_data *data, t_img *text, int x, int y)
 		*dst = color;
 		dst += data->img.pixels_per_line;
 	}
-	color.value = BLACK;
+	color.channels[0] = data->parsing->floor_rgb_color[2];
+	color.channels[1] = data->parsing->floor_rgb_color[1];
+	color.channels[2] = data->parsing->floor_rgb_color[0];
+	color.channels[3] = 255;
 	while (y++ < WIN_HEIGHT)
 	{
 		*dst = color;
