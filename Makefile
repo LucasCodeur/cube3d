@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2026/01/16 13:31:12 by prigaudi         ###   ########.fr        #
+#    Updated: 2026/01/16 14:40:13 by prigaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,6 @@ SRC = \
 	# minimap.c \
 
 SRC_SPRITES = \
-	create_sprites.c \
 	texture.c \
 
 SRC_DRAW = \
