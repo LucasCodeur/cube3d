@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:22:08 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/15 16:09:23 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 09:08:00 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ static t_error	save_map_line(char *line, t_data *data)
 	char	**new_map_lines;
 
 	new_map_lines = NULL;
-	error = ft_malloc(&data->parsing->garbage, sizeof(char *)
-			* (data->map.height + 2), (void **)&new_map_lines);
+	error = ft_malloc(&data->garbage, sizeof(char *) * (data->map.height + 2),
+			(void **)&new_map_lines);
 	if (error.code != ERR_OK)
 		return (error);
 	error = loop_new_map(&new_map_lines, line, data);

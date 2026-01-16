@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:03:49 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/15 15:55:39 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 10:33:57 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,18 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-static void	ininitialize_values(t_data *data, t_parsing *parsing_data)
+static t_error	ininitialize_values(t_data *data)
 {
+	t_error	error;
+
 	ft_bzero(data, sizeof(t_data));
-	ft_bzero(parsing_data, sizeof(t_parsing));
+	error = ft_malloc(&data->garbage, sizeof(t_parsing),
+			(void **)&data->parsing);
+	if (error.code != ERR_OK)
+	{
+		error.code = ERR_MEMORY;
+	}
+	ft_bzero(data->parsing, sizeof(t_parsing));
 	data->mlx.max_height = WIN_HEIGHT;
 	data->mlx.max_width = WIN_WIDTH;
 	data->map.cols = SIZE_X;
@@ -34,7 +42,7 @@ static void	ininitialize_values(t_data *data, t_parsing *parsing_data)
 	data->map.player.dir = new_vector_2D(1.0f, 0.0f);
 	data->map.player.plane = new_vector_2D(0.0f, 0.66f);
 	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
-	return ;
+	return (ERROR_OK);
 }
 
 int	execute(t_data *data)
@@ -50,6 +58,7 @@ int	execute(t_data *data)
 		count_fps(data);
 		if (data->keycode.escape == true)
 		{
+			free_all(data);
 			exit(0);
 		}
 	}
@@ -83,7 +92,8 @@ void	print_message_error(t_error error)
 		printf("Mlx problem\n");
 	else
 		printf("No problem\n");
-	printf("%s\n", error.message);
+	if (error.message)
+		printf("%s\n", error.message);
 }
 
 int	main(int argc, char *argv[])
@@ -91,11 +101,10 @@ int	main(int argc, char *argv[])
 	t_data	data;
 	t_error	error;
 
-	ininitialize_values(&data, data.parsing);
+	ininitialize_values(&data);
 	error = parsing(argc, argv, &data);
 	launcher(&data);
-	// mlx_hook_loop(parsing_data);
-	// free_all(parsing_data);
+	free_all(&data);
 	error.code = ERR_MLX;
 	printf("exit code : %d\n", error.code);
 	print_message_error(error);

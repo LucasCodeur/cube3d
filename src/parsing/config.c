@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:51:37 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/15 16:19:46 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 09:43:48 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_error	check_line(char *line, t_data *data)
 
 	if (data->parsing->nb_valid_elements < 6 && *line != '\n')
 	{
-		error = check_element_line(line, data->parsing);
+		error = check_element_line(line, data);
 		if (error.code != ERR_OK)
 			return (error);
 	}
@@ -57,7 +57,7 @@ t_error	config(char *path, t_data *data)
 	error = check_file_opening(path, &fd);
 	if (error.code != ERR_OK)
 		return (error);
-	error = get_next_line(data->parsing, fd, &line);
+	error = get_next_line(data, fd, &line);
 	if (error.code != ERR_OK)
 		return (error);
 	while (line)
@@ -65,7 +65,7 @@ t_error	config(char *path, t_data *data)
 		error = check_line(line, data);
 		if (error.code != ERR_OK)
 			return (error);
-		error = get_next_line(data->parsing, fd, &line);
+		error = get_next_line(data, fd, &line);
 		if (error.code != ERR_OK)
 			return (error);
 	}

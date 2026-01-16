@@ -6,14 +6,14 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:46:38 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/13 16:56:32 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 09:12:21 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
 // at the end s1=str to modify s1 withou returning something
-t_error	ft_strnjoin(t_parsing *data, char **s1, char *s2, int byte_nbr)
+t_error	ft_strnjoin(t_data *data, char **s1, char *s2, int byte_nbr)
 {
 	char	*str;
 	int		i;

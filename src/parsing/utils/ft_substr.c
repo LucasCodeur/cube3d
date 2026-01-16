@@ -6,14 +6,14 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:57:57 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/13 16:23:00 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 09:14:19 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-t_error	ft_substr(t_parsing *data, char const *s, unsigned int start,
-		size_t len, char **str)
+t_error	ft_substr(t_data *data, char const *s, unsigned int start, size_t len,
+		char **str)
 {
 	size_t	i;
 	t_error	error;

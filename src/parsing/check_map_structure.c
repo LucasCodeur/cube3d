@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:14:23 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/15 16:11:38 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 09:09:11 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static t_error	map_copy(t_data *data, char ***map_copy)
 	t_error	error;
 	int		i;
 
-	error = ft_malloc(&data->parsing->garbage, sizeof(char *)
-			* (data->map.height + 1), (void **)map_copy);
+	error = ft_malloc(&data->garbage, sizeof(char *) * (data->map.height + 1),
+			(void **)map_copy);
 	if (error.code != ERR_OK)
 		return (error);
 	i = 0;

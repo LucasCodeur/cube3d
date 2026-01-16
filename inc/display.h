@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/15 15:53:02 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 10:31:59 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,14 @@
 # define FRAME_DURATION 1.0 / FPS
 
 typedef struct s_parsing	t_parsing;
+
+typedef struct s_garbage	t_garbage;
+
+typedef struct s_garbage
+{
+	void					*ptr;
+	t_garbage				*next;
+}							t_garbage;
 
 typedef struct s_rgb
 {
@@ -173,6 +181,7 @@ typedef struct s_data
 	t_keycode				keycode;
 	t_fps					fps;
 	t_parsing				*parsing;
+	t_garbage				*garbage;
 }							t_data;
 
 void						launcher(t_data *data);
@@ -216,5 +225,6 @@ double						get_time(void);
 
 // UTILS
 void						ft_bzero(void *s, size_t n);
+void						free_all(t_data *data);
 
 #endif

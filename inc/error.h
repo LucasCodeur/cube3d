@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 11:44:19 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/09 14:10:48 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 09:54:52 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,9 @@ typedef enum
 	ERR_MEMORY,
 	ERR_INVALID_ARG,
 	ERR_IO,
-	ERR_MLX 
+	ERR_MLX
 }					t_error_code;
-//
-// typedef enum
-// {
-// 	ERR_OK = "No problem",
-// 	ERR_FAIL = "Generic problem",
-// 	ERR_MEMORY = 2,
-// 	ERR_INVALID_ARG = 3,
-// 	ERR_IO = 4,
-// 	ERR_MLX = 5
-// }					t_error_message;
-//
+
 typedef struct s_error
 {
 	t_error_code	code;

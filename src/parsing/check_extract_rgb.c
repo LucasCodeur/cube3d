@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 13:54:18 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/15 10:13:19 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 09:07:05 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static t_error	is_digit_or_space(char **rgb_str)
 	return (ERROR_OK);
 }
 
-t_error	check_extract_rgb(t_parsing *data, char *info, int **rgb_int)
+t_error	check_extract_rgb(t_data *data, char *info, int **rgb_int)
 {
 	t_error	error;
 	char	**rgb_str;

@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 14:43:04 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/15 16:03:03 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 09:43:28 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_error	ft_strdup(t_data *data, const char *str, char **result)
 	int		i;
 
 	len = ft_strlen(str);
-	error = ft_malloc(&data->parsing->garbage, sizeof(char) * (len + 1),
+	error = ft_malloc(&data->garbage, sizeof(char) * (len + 1),
 			(void **)result);
 	if (error.code != ERR_OK)
 		return (error);

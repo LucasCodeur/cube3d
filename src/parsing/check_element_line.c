@@ -6,13 +6,13 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:52:57 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/13 14:42:20 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 09:17:18 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static t_error	choose_id(char *substr, t_parsing *data, int *i, char **id)
+static t_error	choose_id(char *substr, t_data *data, int *i, char **id)
 {
 	t_error	error;
 
@@ -32,7 +32,7 @@ static t_error	choose_id(char *substr, t_parsing *data, int *i, char **id)
 	return (ERROR_OK);
 }
 
-static t_error	extract_id(t_parsing *data, char *line, int *i, char **id)
+static t_error	extract_id(t_data *data, char *line, int *i, char **id)
 {
 	t_error	error;
 	char	*str;
@@ -47,7 +47,7 @@ static t_error	extract_id(t_parsing *data, char *line, int *i, char **id)
 	return (ERROR_OK);
 }
 
-static t_error	extract_infos(t_parsing *data, char *line, int *i,
+static t_error	extract_infos(t_data *data, char *line, int *i,
 		char **info_clean)
 {
 	t_error	error;
@@ -67,7 +67,7 @@ static t_error	extract_infos(t_parsing *data, char *line, int *i,
 	return (ERROR_OK);
 }
 
-t_error	check_element_line(char *line, t_parsing *data)
+t_error	check_element_line(char *line, t_data *data)
 {
 	t_error	error;
 	char	*info;

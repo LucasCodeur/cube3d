@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:10:16 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/15 09:58:12 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 09:16:39 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,37 +59,39 @@ static t_error	save_compass_element(char *id, char *info, t_parsing *data)
 	return (error);
 }
 
-static t_error	save_ceiling_floor(char *id, char *info, t_parsing *data)
+static t_error	save_ceiling_floor(char *id, char *info, t_data *data)
 {
 	t_error	error;
 
-	if (!ft_strncmp(id, "F", 1) && !data->floor_rgb_color)
+	if (!ft_strncmp(id, "F", 1) && !data->parsing->floor_rgb_color)
 	{
-		error = check_extract_rgb(data, info, &(data->floor_rgb_color));
+		error = check_extract_rgb(data, info,
+				&(data->parsing->floor_rgb_color));
 		if (error.code != ERR_OK)
 			return (error);
-		data->nb_valid_elements++;
+		data->parsing->nb_valid_elements++;
 		return (ERROR_OK);
 	}
-	else if (!ft_strncmp(id, "C", 1) && !data->ceiling_rgb_color)
+	else if (!ft_strncmp(id, "C", 1) && !data->parsing->ceiling_rgb_color)
 	{
-		error = check_extract_rgb(data, info, &(data->ceiling_rgb_color));
+		error = check_extract_rgb(data, info,
+				&(data->parsing->ceiling_rgb_color));
 		if (error.code != ERR_OK)
 			return (error);
-		data->nb_valid_elements++;
+		data->parsing->nb_valid_elements++;
 		return (ERROR_OK);
 	}
 	return (ERROR_OK);
 }
 
-t_error	save_element(char *id, char *info, t_parsing *data)
+t_error	save_element(char *id, char *info, t_data *data)
 {
 	t_error	error;
 
 	if (!ft_strncmp(id, "NO", 2) || !ft_strncmp(id, "SO", 2) || !ft_strncmp(id,
 			"WE", 2) || !ft_strncmp(id, "EA", 2))
 	{
-		error = save_compass_element(id, info, data);
+		error = save_compass_element(id, info, data->parsing);
 		if (error.code != ERR_OK)
 			return (error);
 	}

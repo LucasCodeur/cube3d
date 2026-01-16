@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2026/01/15 13:05:42 by lud-adam         ###   ########.fr        #
+#    Updated: 2026/01/16 10:33:26 by prigaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRC = \
 	utils.c \
 	raycasting.c \
 	fps.c \
+	ft_free.c \
 	debug.c \
 	main.c \
 
@@ -81,7 +82,6 @@ SRC_PARSING = \
 	config.c \
 	parsing.c \
 	save_element.c \
-	utils/ft_free.c	\
 	utils/ft_atoi.c	\
 	utils/ft_calloc.c \
 	utils/ft_lstadd_front.c	\

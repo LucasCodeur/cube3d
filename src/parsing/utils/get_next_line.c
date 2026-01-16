@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:18:04 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/15 11:24:10 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 09:43:02 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static int	find_index(char *buffer, int *stop_read)
 	return (i);
 }
 
-static t_error	get_buffer(t_parsing *data, char **line, char *buffer,
-		int *check)
+static t_error	get_buffer(t_data *data, char **line, char *buffer, int *check)
 {
 	int		i;
 	int		stop_read;
@@ -90,7 +89,7 @@ static t_error	read_buffer(char **line, ssize_t *byte_read, char *buffer,
 	return (ERROR_OK);
 }
 
-static t_error	get_line(t_parsing *data, char *buffer, int fd, char **line)
+static t_error	get_line(t_data *data, char *buffer, int fd, char **line)
 {
 	int		check;
 	ssize_t	byte_read;
@@ -118,7 +117,7 @@ static t_error	get_line(t_parsing *data, char *buffer, int fd, char **line)
 	return (ERROR_OK);
 }
 
-t_error	get_next_line(t_parsing *data, int fd, char **line)
+t_error	get_next_line(t_data *data, int fd, char **line)
 {
 	static char	buffer[BUFFER_SIZE + 1];
 	t_error		error;

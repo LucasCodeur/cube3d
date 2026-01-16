@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 09:09:51 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/15 15:29:46 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 09:42:30 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_error	check_argument_number(int argc)
 	return (ERROR_OK);
 }
 
-static t_error	check_file_extension(char *path, t_parsing *data)
+static t_error	check_file_extension(char *path, t_data *data)
 {
 	char	*extension;
 	size_t	len;
@@ -54,7 +54,7 @@ static t_error	check_file_extension(char *path, t_parsing *data)
 	return (ERROR_OK);
 }
 
-t_error	check_argument(int argc, char **argv, t_parsing *data)
+t_error	check_argument(int argc, char **argv, t_data *data)
 {
 	t_error	error;
 
