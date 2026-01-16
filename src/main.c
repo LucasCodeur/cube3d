@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:03:49 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/16 10:33:57 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 11:07:14 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ int	execute(t_data *data)
 		count_fps(data);
 		if (data->keycode.escape == true)
 		{
-			free_all(data);
-			exit(0);
+			close_win(data);
+			// free_all(data);
+			// exit(0);
 		}
 	}
 	return (0);
@@ -70,8 +71,7 @@ void	launcher(t_data *data)
 	init_screen_mlx(data);
 	load_imgs(data);
 	data->fps.last_time = get_time();
-	if (mlx_hook(data->mlx.win, 17, 0, close_win, &data) == 0)
-		return ;
+	mlx_hook(data->mlx.win, 17, 0, close_win, data);
 	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, press_move, data);
 	mlx_hook(data->mlx.win, KeyRelease, KeyReleaseMask, release_move, data);
 	mlx_loop_hook(data->mlx.ptr, execute, data);

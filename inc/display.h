@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/16 10:31:59 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/16 11:01:51 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ void						my_mlx_pixel_put(t_data *data, int x, int y,
 
 // HOOKS
 int							key_press(int keycode, void *param);
-int							close_win(void *param);
+int							close_win(t_data *data);
 int							press_move(int keycode, t_data *data);
 int							release_move(int keycode, t_data *data);
 int							execute(t_data *data);

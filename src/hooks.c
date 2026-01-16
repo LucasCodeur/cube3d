@@ -11,15 +11,27 @@
 /* ************************************************************************** */
 
 #include "display.h"
-
+#include <mlx.h>
 #include <stdlib.h>
 
-int	close_win(void *param)
-{
-	t_mlx	*win;
+// int	close_win(void *param)
+// {
+// 	t_mlx	*win;
 
-	if (!param)
-		return (1);
-	win = (t_mlx *)param;
-	return (0);
+// 	if (!param)
+// 		return (1);
+// 	win = (t_mlx *)param;
+// 	return (0);
+// }
+
+int	close_win(t_data *data)
+{
+	// if (data->mlx.win)
+	// 	mlx_destroy_window(data->mlx.ptr, data->mlx.win);
+	// if (data->mlx.ptr)
+	// 	mlx_destroy_display(data->mlx.ptr);
+	free_img(data);
+	free_all(data);
+	exit(EXIT_SUCCESS);
+	return (1);
 }
