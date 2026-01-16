@@ -11,11 +11,14 @@
 /* ************************************************************************** */
 
 #include "display.h"
+
 #include "matrice.h"
 #include "vector.h"
 
 #include <mlx.h>
 #include <X11/keysym.h>
+
+static	void move_left_or_right(t_data *data, double to_rotate);
 
 int press_move(int keycode, t_data *data)
 {
@@ -57,30 +60,28 @@ int release_move(int keycode, t_data *data)
 	return (0);
 }
 
-static	void move_left_or_right(t_data *data, int to_rotate);
-
 bool	move_hero(t_data *data)
 {
-		if (data->keycode.down == true && 
-			data->map.grid[(int)(data->map.player.pos.elements[1] - SPEED * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] - SPEED * data->map.player.dir.elements[0])] == '0')
-		{
-			data->map.player.pos.elements[0] -= SPEED * data->map.player.dir.elements[0];
-			data->map.player.pos.elements[1] -= SPEED * data->map.player.dir.elements[1];
-		}
-		else if (data->keycode.up == true && 
-			data->map.grid[(int)(data->map.player.pos.elements[1] + SPEED * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] + SPEED * data->map.player.dir.elements[0])] == '0')	
-		{
-			data->map.player.pos.elements[0] += SPEED * data->map.player.dir.elements[0];
-			data->map.player.pos.elements[1] += SPEED * data->map.player.dir.elements[1];
-		}
-		else if (data->keycode.left == true)
-			move_left_or_right(data, ROTATE_BACKWARD);
-		else if (data->keycode.right == true)
-			move_left_or_right(data, ROTATE_FORWARD);
+	if (data->keycode.down == true && 
+		data->map.grid[(int)(data->map.player.pos.elements[1] - SPEED * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] - SPEED * data->map.player.dir.elements[0])] == '0')
+	{
+		data->map.player.pos.elements[0] -= SPEED * data->map.player.dir.elements[0];
+		data->map.player.pos.elements[1] -= SPEED * data->map.player.dir.elements[1];
+	}
+	else if (data->keycode.up == true && 
+		data->map.grid[(int)(data->map.player.pos.elements[1] + SPEED * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] + SPEED * data->map.player.dir.elements[0])] == '0')	
+	{
+		data->map.player.pos.elements[0] += SPEED * data->map.player.dir.elements[0];
+		data->map.player.pos.elements[1] += SPEED * data->map.player.dir.elements[1];
+	}
+	else if (data->keycode.left == true)
+		move_left_or_right(data, ROTATE_BACKWARD);
+	else if (data->keycode.right == true)
+		move_left_or_right(data, ROTATE_FORWARD);
 	return (true);
 }
 
-static	void move_left_or_right(t_data *data, int to_rotate)
+static	void move_left_or_right(t_data *data, double to_rotate)
 {
 	t_vec dir_rotate;
 
@@ -90,6 +91,8 @@ static	void move_left_or_right(t_data *data, int to_rotate)
 		data->map.player.pos.elements[0] += SPEED * dir_rotate.elements[0];
 		data->map.player.pos.elements[1] += SPEED * dir_rotate.elements[1];
 	}
+	else
+		return ;
 }
 
 bool	rotate_hero(t_data *data)
