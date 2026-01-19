@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:03:49 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/19 15:20:24 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/19 16:36:51 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	ininitialize_math_values(t_data *data)
 			data->map.player.y);
 	data->map.player.dir = new_vector_2D(1.0f, 0.0f);
 	data->map.player.plane = new_vector_2D(0.0f, 0.66f);
-	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
+	data->map.player.camera = new_vector_2D(1.0f, 0.0f);
 	data->map.grid[data->map.player.y][data->map.player.x] = '0';
 }
 
@@ -113,18 +113,21 @@ int	main(int argc, char *argv[])
 	{
 		print_message_error(error);
 		destroy_free_exit(&data);
+		return (error.code);
 	}
 	error = parsing(argc, argv, &data);
 	if (error.code != ERR_OK)
 	{
 		print_message_error(error);
 		destroy_free_exit(&data);
+		return (error.code);
 	}
 	error = launcher(&data);
 	if (error.code != ERR_OK)
 	{
 		print_message_error(error);
 		destroy_free_exit(&data);
+		return (error.code);
 	}
 	return (error.code);
 }
