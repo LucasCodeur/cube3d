@@ -16,10 +16,11 @@
 #include "matrice.h"
 #include "parsing.h"
 #include "test.h"
+#include "vector.h"
+
 #include <X11/X.h>
 #include <X11/keysym.h>
 #include <mlx.h>
-#include <stdlib.h>
 #include <sys/time.h>
 
 static t_error	ininitialize_values(t_data *data)
@@ -41,8 +42,8 @@ static void	ininitialize_math_values(t_data *data)
 {
 	data->map.player.pos = new_vector_2D(data->map.player.x,
 			data->map.player.y);
-	data->map.player.dir = new_vector_2D(1.0f, 0.0f);
-	data->map.player.plane = new_vector_2D(0.0f, 0.66f);
+	data->map.player.dir = new_vector_2D(0.0f, 1.0f);
+	data->map.player.plane = new_vector_2D(0.66f, 0.0f);
 	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
 	data->map.grid[data->map.player.y][data->map.player.x] = '0';
 }

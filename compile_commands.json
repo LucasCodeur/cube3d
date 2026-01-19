@@ -37,11 +37,11 @@
    "-I",
    "src//math/inc/",
    "-c",
-   "src/hooks.c",
+   "src/hooks_player.c",
    "-o",
-   ".obj/hooks.o"
+   ".obj/hooks_player.o"
   ],
-  "file": "src/hooks.c"
+  "file": "src/hooks_player.c"
  },
  {
   "directory": "/home/lud-adam/Documents/cube3d",
@@ -147,11 +147,33 @@
    "-I",
    "src//math/inc/",
    "-c",
-   "src/main.c",
+   "src/fps.c",
    "-o",
-   ".obj/main.o"
+   ".obj/fps.o"
   ],
-  "file": "src/main.c"
+  "file": "src/fps.c"
+ },
+ {
+  "directory": "/home/lud-adam/Documents/cube3d",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-MMD",
+   "-MP",
+   "-I",
+   "inc/",
+   "-I",
+   "minilibx-linux/",
+   "-I",
+   "src//math/inc/",
+   "-c",
+   "src/destroy_free_exit.c",
+   "-o",
+   ".obj/destroy_free_exit.o"
+  ],
+  "file": "src/destroy_free_exit.c"
  },
  {
   "directory": "/home/lud-adam/Documents/cube3d",
@@ -191,11 +213,11 @@
    "-I",
    "src//math/inc/",
    "-c",
-   "src/draw/utils_draw.c",
+   "src/main.c",
    "-o",
-   ".obj/draw/utils_draw.o"
+   ".obj/main.o"
   ],
-  "file": "src/draw/utils_draw.c"
+  "file": "src/main.c"
  },
  {
   "directory": "/home/lud-adam/Documents/cube3d",
@@ -213,11 +235,11 @@
    "-I",
    "src//math/inc/",
    "-c",
-   "src/sprites/create_sprites.c",
+   "src/draw/utils_draw.c",
    "-o",
-   ".obj/sprites/create_sprites.o"
+   ".obj/draw/utils_draw.o"
   ],
-  "file": "src/sprites/create_sprites.c"
+  "file": "src/draw/utils_draw.c"
  },
  {
   "directory": "/home/lud-adam/Documents/cube3d",
@@ -438,28 +460,6 @@
    ".obj/parsing/save_element.o"
   ],
   "file": "src/parsing/save_element.c"
- },
- {
-  "directory": "/home/lud-adam/Documents/cube3d",
-  "arguments": [
-   "cc",
-   "-Wextra",
-   "-Wall",
-   "-Werror",
-   "-MMD",
-   "-MP",
-   "-I",
-   "inc/",
-   "-I",
-   "minilibx-linux/",
-   "-I",
-   "src//math/inc/",
-   "-c",
-   "src/parsing/utils/ft_free.c",
-   "-o",
-   ".obj/parsing/utils/ft_free.o"
-  ],
-  "file": "src/parsing/utils/ft_free.c"
  },
  {
   "directory": "/home/lud-adam/Documents/cube3d",
