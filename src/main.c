@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:03:49 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/16 16:17:02 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/19 15:20:24 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static t_error	ininitialize_values(t_data *data)
 
 static void	ininitialize_math_values(t_data *data)
 {
-	data->map.player.pos = new_vector_2D(data->map.player.x, data->map.player.y);
+	data->map.player.pos = new_vector_2D(data->map.player.x,
+			data->map.player.y);
 	data->map.player.dir = new_vector_2D(1.0f, 0.0f);
 	data->map.player.plane = new_vector_2D(0.0f, 0.66f);
 	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
@@ -56,6 +57,7 @@ int	execute(t_data *data)
 		rotate_hero(data);
 		data->fps.count_frame++;
 		draw_map(data);
+		// display_minimap(data);
 		count_fps(data);
 		if (data->keycode.escape == true)
 			destroy_free_exit(data);

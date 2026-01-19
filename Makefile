@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2026/01/16 14:40:13 by prigaudi         ###   ########.fr        #
+#    Updated: 2026/01/19 15:15:55 by prigaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,8 +57,7 @@ SRC = \
 	destroy_free_exit.c \
 	debug.c \
 	main.c \
-
-	# minimap.c \
+# 	minimap.c \
 
 SRC_SPRITES = \
 	texture.c \

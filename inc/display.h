@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/16 14:06:00 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/19 10:58:00 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ typedef struct s_data
 	t_img					img;
 	t_sprite				imgs;
 	t_map					map;
+	t_img					minimap;
 	t_keycode				keycode;
 	t_fps					fps;
 	t_parsing				*parsing;
@@ -222,5 +223,8 @@ double						get_time(void);
 // UTILS
 void						ft_bzero(void *s, size_t n);
 int							destroy_free_exit(t_data *data);
+
+// MINIMAP
+int							display_minimap(t_data *data);
 
 #endif

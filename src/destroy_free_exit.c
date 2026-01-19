@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:09:35 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/16 13:46:39 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/19 11:08:09 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,13 @@ void	free_img(t_data *data)
 	}
 	if (data->img.addr)
 		data->img.addr = NULL;
+	if (data->minimap.img)
+	{
+		mlx_destroy_image(data->mlx.ptr, data->minimap.img);
+		data->minimap.img = NULL;
+	}
+	if (data->minimap.addr)
+		data->minimap.addr = NULL;
 	free_textures(data);
 	if (data->mlx.win)
 	{
