@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:03:49 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/19 16:36:51 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:49:49 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ static t_error	launcher(t_data *data)
 
 void	print_message_error(t_error error)
 {
+	printf("Error\n");
 	if (error.code == ERR_FAIL)
 		printf("Generic problem\n");
 	else if (error.code == ERR_MEMORY)
