@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2026/01/20 09:44:26 by lud-adam         ###   ########.fr        #
+#    Updated: 2026/01/20 18:27:12 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC = \
 	fps.c \
 	destroy_free_exit.c \
 	debug.c \
+	launcher.c \
 	main.c \
 
 # 	minimap.c \

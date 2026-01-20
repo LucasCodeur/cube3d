@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/20 16:37:14 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/20 18:30:39 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@
 
 # define SIZE_X 20
 # define SIZE_Y 20
-
-# define ASSET_PLAYER "/home/lud-adam/Documents/cube3d/assets/basic/player.xpm"
-# define ASSET_W_EAST "/home/lud-adam/Documents/cube3d/assets/textures/east.xpm"
-# define ASSET_W_NORTH "/home/lud-adam/Documents/cube3d/assets/textures/north.xpm"
-# define ASSET_W_WEST "/home/lud-adam/Documents/cube3d/assets/textures/west.xpm"
-# define ASSET_W_SOUTH "/home/lud-adam/Documents/cube3d/assets/textures/south.xpm"
 
 # define BLACK 0x2c2c2c
 # define RED 0xFF0000FF
@@ -185,6 +179,8 @@ typedef struct s_data
 	t_parsing				*parsing;
 	t_garbage				*garbage;
 }							t_data;
+
+t_error	launcher(t_data *data);
 
 // RAYCASTING
 double						compute_dist(t_data *data, t_vec ray_dir);

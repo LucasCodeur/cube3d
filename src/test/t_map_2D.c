@@ -29,8 +29,8 @@ bool	t_display_map_2D(t_data* data)
 	int size_cols; 
 	int size_rows;
 	
-	size_cols = (WIN_WIDTH / 8) / data->map.width;
-	size_rows = (WIN_HEIGHT / 8) / data->map.height;
+	size_cols = (WIN_WIDTH / 16) / data->map.width;
+	size_rows = (WIN_HEIGHT / 16) / data->map.height;
 	if (size_cols <= size_rows)
 		data->raycasting.tile_size = size_cols;
 	else
@@ -147,7 +147,7 @@ void	t_draw_hero(t_data* data, int tile_size)
 
 	px_start = data->map.player.pos.elements[0] * tile_size;
 	py_start = data->map.player.pos.elements[1] * tile_size;
-	color.value = GREEN;
+	color.value = BLUE;
 	py = 0;
 	px = 0;
 	while (py < tile_size)
@@ -173,9 +173,9 @@ void	t_draw_hero(t_data* data, int tile_size)
 static void	fill_color(t_map map, int x, int y, t_pixel* color)
 {
 	if (map.grid[y][x] == '0')
-		color->value = BLUE;
+		color->value = BLACK;
 	else
-		color->value = RED;
+		color->value = WHITE;
 }
 
 /**
@@ -188,7 +188,7 @@ static void	fill_color(t_map map, int x, int y, t_pixel* color)
 */
 static void convert_and_draw_map(t_data* data, int x, int y, int tile_size)
 {
-	t_pixel	color;
+	t_pixel		color;
 	int		px_start; 
 	int		py_start;
 	int		py;

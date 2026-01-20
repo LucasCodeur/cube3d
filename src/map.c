@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:06:40 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/19 15:15:49 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/20 18:33:13 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ bool	draw_map(t_data *data)
 		draw_line(data, x);
 		x++;
 	}
-	// t_display_map_2D(data);
 	// display_minimap(data);
 	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.img, 0, 0);
 	return (true);
