@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:03:49 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/20 11:14:55 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/20 11:47:12 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,21 @@ static void	ininitialize_math_values(t_data *data)
 	}
 	else if (data->map.player.orientation == 'S')
 	{
-		data->map.player.plane = new_vector_2D(0.66f, 0.0f);
+		data->map.player.plane = new_vector_2D(-0.66f, 0.0f);
 		data->map.player.dir = new_vector_2D(0.0f, 1.0f);
 	}
 	else if (data->map.player.orientation == 'E')
 	{
-		data->map.player.plane = new_vector_2D(0.0f, -0.66f);
+		data->map.player.plane = new_vector_2D(0.0f, 0.66f);
 		data->map.player.dir = new_vector_2D(1.0f, 0.0f);
 	}
 	else if (data->map.player.orientation == 'W')
 	{
-		data->map.player.plane = new_vector_2D(0.0f, 0.66f);
+		data->map.player.plane = new_vector_2D(0.0f, -0.66f);
 		data->map.player.dir = new_vector_2D(-1.0f, 0.0f);
 	}
 	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
 	data->map.grid[data->map.player.y][data->map.player.x] = '0';
-	printf("dir value x : %f\n", data->map.player.dir.elements[0]);
-	printf("dir value y : %f\n", data->map.player.dir.elements[1]);
-	printf("pos value x : %f\n", data->map.player.pos.elements[0]);
-	printf("pos value y : %f\n", data->map.player.pos.elements[1]);
 }
 
 int	execute(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:27:25 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/20 11:27:40 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/20 11:47:04 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ static	void move_left_or_right(t_data *data, bool right);
 
 bool	move_hero(t_data *data)
 {
-
-	printf("dir value x : %f\n", data->map.player.dir.elements[0]);
-	printf("dir value y : %f\n", data->map.player.dir.elements[1]);
-	// printf("pos value x : %f\n", data->map.player.pos.elements[0]);
-	// printf("pos value y : %f\n", data->map.player.pos.elements[1]);
 	if (data->keycode.down == true && 
 		data->map.grid[(int)(data->map.player.pos.elements[1] - SPEED * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] - SPEED * data->map.player.dir.elements[0])] == '0')
 	{
@@ -67,7 +62,6 @@ static	void move_left_or_right(t_data *data, bool right)
 
 bool	rotate_hero(t_data *data)
 {
-	if (data->)
 	if (data->keycode.rotate_left == true)
 	{
 		data->map.player.dir = rotate_vect(data->map.player.dir, SUBT_SPEED);
