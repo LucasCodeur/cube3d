@@ -16,7 +16,7 @@
 #include <math.h>
 #include <mlx.h>
 
-static int	compute_x_of_texture(t_data *data, int text_size);
+static int	compute_x_of_texture(t_data *data, t_img *text);
 static int	compute_y_of_texture(t_img *text, int top_strip, int y);
 static void	put_all_pixels(t_data *data, t_img *text, int x, int y);
 static void	draw_line(t_data *data, int x);
@@ -65,7 +65,7 @@ static void	draw_line(t_data *data, int x)
 	choose_texture(data, &text);
 	text->step = text->double_height / (double)(data->img.bottom_strip
 			- data->img.top_strip);
-	text->x = compute_x_of_texture(data, text->height);
+	text->x = compute_x_of_texture(data, text);
 	text->y = compute_y_of_texture(text, data->img.top_strip, y);
 	put_all_pixels(data, text, x, y);
 }
@@ -73,35 +73,39 @@ static void	draw_line(t_data *data, int x)
 /**
  * @brief allow to compute x of the texture
  * @param data all information about the program.
- * @param text_size size of the texture
+ * @param text texture to map.
  * @return x of the texture
  */
-static int	compute_x_of_texture(t_data *data, int text_size)
+static int	compute_x_of_texture(t_data *data, t_img *text)
 {
 	int	texture_x;
 
-	texture_x = (int)(data->raycasting.wall_x * text_size);
+	texture_x = (int)(data->raycasting.wall_x * text->height);
 	if (texture_x < 0)
 		texture_x = 1;
-	else if (texture_x > text_size)
-		texture_x = text_size - 1;
+	else if (texture_x > text->height)
+		texture_x = text->height - 1;
+	if ((data->raycasting.side == 0 && data->raycasting.ray_dir.elements[0] < 0) || (data->raycasting.side == 1 && data->raycasting.ray_dir.elements[1] > 0))
+		texture_x = text->height - texture_x - 1;
 	return (texture_x);
 }
 /**
  * @brief allow to compute y of the texture
- * @param data all information about the program.
+ * @param text texture to map.
+ * @param top_strip top of the strip that have to display.
+ * @param coordinate has to map inside the cordinate of the texture.
  * @return y of the texture
  */
 static int	compute_y_of_texture(t_img *text, int top_strip, int y)
 {
-	int	text_y;
+	int	texture_y;
 
-	text_y = 0;
+	texture_y = 0;
 	if (top_strip < 0)
-		text_y = (y - top_strip) * text->step;
+		texture_y = (y - top_strip) * text->step;
 	else
-		text_y = 0;
-	return (text_y);
+		texture_y = 0;
+	return (texture_y);
 }
 
 /**
