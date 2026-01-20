@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:52:57 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/16 09:17:18 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/20 11:17:18 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,22 @@ static t_error	choose_id(char *substr, t_data *data, int *i, char **id)
 		|| !ft_strncmp(substr, "WE ", 3) || !ft_strncmp(substr, "EA ", 3))
 	{
 		error = ft_substr(data, substr, 0, 2, id);
+		if (error.code != ERR_OK)
+			return (error);
 		*i = 3;
+		return (ERROR_OK);
 	}
 	else if (!ft_strncmp(substr, "F ", 2) || !ft_strncmp(substr, "C ", 2))
 	{
 		error = ft_substr(data, substr, 0, 1, id);
+		if (error.code != ERR_OK)
+			return (error);
 		*i = 2;
+		return (ERROR_OK);
 	}
-	if (error.code != ERR_OK)
-		return (error);
-	return (ERROR_OK);
+	error.code = ERR_INVALID_ARG;
+	error.message = "Config file is not valid\n";
+	return (error);
 }
 
 static t_error	extract_id(t_data *data, char *line, int *i, char **id)
@@ -56,7 +62,7 @@ static t_error	extract_infos(t_data *data, char *line, int *i,
 
 	info_brut = NULL;
 	index_start = *i;
-	while (line[*i] != '\n')
+	while (line[*i] != '\n' && line[*i] != '\0')
 		*i = *i + 1;
 	error = ft_substr(data, line, index_start, *i - index_start, &info_brut);
 	if (error.code != ERR_OK)

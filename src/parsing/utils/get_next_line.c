@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:18:04 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/16 09:43:02 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/20 11:05:22 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,14 @@ static t_error	read_buffer(char **line, ssize_t *byte_read, char *buffer,
 	}
 	if (*byte_read == 0)
 	{
-		if (line)
+		if (*line)
 		{
 			buffer[0] = '\0';
 			*check = 1;
 			return (ERROR_OK);
 		}
-		error.code = ERR_IO;
-		error.message = "Nothing to read";
-		return (error);
+		*check = 0;
+		return (ERROR_OK);
 	}
 	buffer[*byte_read] = '\0';
 	*check = 2;
@@ -106,7 +105,7 @@ static t_error	get_line(t_data *data, char *buffer, int fd, char **line)
 		error = read_buffer(line, &byte_read, buffer, fd, &check);
 		if (error.code != ERR_OK)
 			return (error);
-		if (check == 1)
+		if (check == 1 || check == 0)
 			return (ERROR_OK);
 		error = get_buffer(data, line, buffer, &check);
 		if (error.code != ERR_OK)

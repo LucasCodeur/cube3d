@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:51:37 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/16 14:02:08 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/20 11:25:16 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,21 @@ static t_error	check_file_opening(char *path, int *fd)
 	return (ERROR_OK);
 }
 
-t_error	config(char *path, t_data *data)
+static t_error	gnl_loop(t_data *data, int fd)
 {
-	int		fd;
-	char	*line;
 	t_error	error;
+	char	*line;
 
 	line = NULL;
-	fd = -1;
-	error = check_file_opening(path, &fd);
-	if (error.code != ERR_OK)
-		return (error);
 	error = get_next_line(data, fd, &line);
 	if (error.code != ERR_OK)
 		return (error);
+	if (!line)
+	{
+		error.code = ERR_INVALID_ARG;
+		error.message = "File is empty\n";
+		return (error);
+	}
 	while (line)
 	{
 		error = check_line(line, data);
@@ -67,6 +68,27 @@ t_error	config(char *path, t_data *data)
 		error = get_next_line(data, fd, &line);
 		if (error.code != ERR_OK)
 			return (error);
+	}
+	return (ERROR_OK);
+}
+
+t_error	config(char *path, t_data *data)
+{
+	t_error	error;
+	int		fd;
+
+	fd = -1;
+	error = check_file_opening(path, &fd);
+	if (error.code != ERR_OK)
+		return (error);
+	error = gnl_loop(data, fd);
+	if (error.code != ERR_OK)
+		return (error);
+	if (!data->map.map_finished)
+	{
+		error.code = ERR_INVALID_ARG;
+		error.message = "Config file is not valid\n";
+		return (error);
 	}
 	error = check_map(data);
 	if (error.code != ERR_OK)
