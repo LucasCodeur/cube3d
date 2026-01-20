@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:03:49 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/20 11:47:12 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:31:08 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ static t_error	ininitialize_values(t_data *data)
 		return (error);
 	ft_bzero(data->parsing, sizeof(t_parsing));
 	data->mlx.max_height = WIN_HEIGHT;
-	data->mlx.max_width = WIN_WIDTH;
-	return (ERROR_OK);
+	data->mlx.max_width = WIN_WIDTH; return (ERROR_OK);
 }
 
 static void	ininitialize_math_values(t_data *data)
@@ -72,14 +71,14 @@ int	execute(t_data *data)
 	data->fps.delta_time = data->fps.current_time - data->fps.last_time;
 	if (data->fps.delta_time >= FRAME_DURATION)
 	{
+		data->fps.count_frame++;	
 		move_hero(data);
-		rotate_hero(data);
-		data->fps.count_frame++;
-		draw_map(data);
 		// display_minimap(data);
 		// count_fps(data);
 		if (data->keycode.escape == true)
 			destroy_free_exit(data);
+		rotate_hero(data);
+		draw_map(data);
 	}
 	return (0);
 }
@@ -99,6 +98,7 @@ static t_error	launcher(t_data *data)
 	mlx_hook(data->mlx.win, 17, 0, destroy_free_exit, data);
 	mlx_hook(data->mlx.win, KeyPress, KeyPressMask, press_move, data);
 	mlx_hook(data->mlx.win, KeyRelease, KeyReleaseMask, release_move, data);
+	mlx_hook(data->mlx.win, MotionNotify, PointerMotionMask, mouse_hook, data);
 	mlx_loop_hook(data->mlx.ptr, execute, data);
 	mlx_loop(data->mlx.ptr);
 	return (ERROR_OK);

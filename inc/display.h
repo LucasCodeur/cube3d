@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/19 10:58:00 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:37:14 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 
 # define ADD_SPEED 4.0 * (M_PI / 180)
 # define SUBT_SPEED -4.0 * (M_PI / 180)
+# define MIDDLE_SCREEN_X WIN_WIDTH / 2
+# define MIDDLE_SCREEN_Y WIN_HEIGHT / 2
 # define SPEED 0.25
 # define ROTATE_FORWARD 90.0 * (M_PI / 180)
 # define ROTATE_BACKWARD -90.0 * (M_PI / 180)
@@ -110,7 +112,6 @@ typedef struct s_mlx
 }							t_mlx;
 
 typedef struct s_hero
-
 {
 	t_vec					dir;
 	t_vec					pos;
@@ -201,12 +202,12 @@ void						my_mlx_pixel_put(t_data *data, int x, int y,
 								t_pixel *color);
 
 // HOOKS
+int							mouse_hook(int x, int y, t_data *data);
 int							press_move(int keycode, t_data *data);
 int							release_move(int keycode, t_data *data);
 int							execute(t_data *data);
-bool						move_hero(t_data *data);
-bool						rotate_hero(t_data *data);
-double						get_time(void);
+void						move_hero(t_data *data);
+void						rotate_hero(t_data *data);
 
 // IMAGE
 t_error						load_imgs(t_data *data);
@@ -226,5 +227,8 @@ int							destroy_free_exit(t_data *data);
 
 // MINIMAP
 int							display_minimap(t_data *data);
+
+// OTHERS
+double						get_time(void);
 
 #endif
