@@ -64,6 +64,10 @@ static void	ininitialize_math_values(t_data *data)
 	}
 	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
 	data->map.grid[data->map.player.y][data->map.player.x] = '0';
+	printf("dir value x : %f\n", data->map.player.dir.elements[0]);
+	printf("dir value y : %f\n", data->map.player.dir.elements[1]);
+	printf("pos value x : %f\n", data->map.player.pos.elements[0]);
+	printf("pos value y : %f\n", data->map.player.pos.elements[1]);
 }
 
 int	execute(t_data *data)
@@ -77,7 +81,7 @@ int	execute(t_data *data)
 		data->fps.count_frame++;
 		draw_map(data);
 		// display_minimap(data);
-		count_fps(data);
+		// count_fps(data);
 		if (data->keycode.escape == true)
 			destroy_free_exit(data);
 	}

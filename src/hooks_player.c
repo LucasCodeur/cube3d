@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:27:25 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/15 14:26:45 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/20 09:57:00 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,46 +19,6 @@
 #include <X11/keysym.h>
 
 static	void move_left_or_right(t_data *data, double to_rotate);
-
-int press_move(int keycode, t_data *data)
-{
-	if ((keycode == XK_s || keycode == XK_S) &&
-		data->map.grid[(int)(data->map.player.pos.elements[1] - SPEED * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] - 0.5f * data->map.player.dir.elements[0])] == '0')
-		data->keycode.down = true;
-	else if ((keycode == XK_w || keycode == XK_W) && 
-		data->map.grid[(int)(data->map.player.pos.elements[1] + SPEED * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] + 0.5f * data->map.player.dir.elements[0])] == '0')
-		data->keycode.up = true;
-	else if(keycode == XK_d || keycode == XK_D)
-		data->keycode.right = true;
-	else if (keycode == XK_a || keycode == XK_A)
-		data->keycode.left = true;
-	else if (keycode == XK_Left)
-		data->keycode.rotate_left = true;
-	else if (keycode == XK_Right)
-		data->keycode.rotate_right = true;
-	else if (keycode == XK_Escape)
-		data->keycode.escape = true;
-	return (0);
-}
-
-int release_move(int keycode, t_data *data)
-{
-	if ((keycode == XK_s || keycode == XK_S) && data->keycode.down == true)
-		data->keycode.down = false;
-	else if ((keycode == XK_w || keycode == XK_W) && data->keycode.up == true)	
-		data->keycode.up = false;
-	else if((keycode == XK_d || keycode == XK_D) && data->keycode.right == true)
-		data->keycode.right = false;
-	else if ((keycode == XK_a || keycode == XK_A) && data->keycode.left == true)
-		data->keycode.left = false;
-	else if (keycode == XK_Left && data->keycode.rotate_left == true)
-		data->keycode.rotate_left = false;
-	else if (keycode == XK_Right && data->keycode.rotate_right == true)
-		data->keycode.rotate_right = false;
-	else if (keycode == XK_Escape && data->keycode.escape == true)
-		data->keycode.escape = false;
-	return (0);
-}
 
 bool	move_hero(t_data *data)
 {
@@ -75,9 +35,31 @@ bool	move_hero(t_data *data)
 		data->map.player.pos.elements[1] += SPEED * data->map.player.dir.elements[1];
 	}
 	else if (data->keycode.left == true)
-		move_left_or_right(data, ROTATE_BACKWARD);
+	{
+		if (data->map.player.dir.elements[0] != -1 && data->map.player.dir.elements[1] != 0)
+		{
+			move_left_or_right(data, ROTATE_BACKWARD);
+			printf("backward\n");
+		}
+		else
+		{
+			printf("forward\n");
+			move_left_or_right(data, ROTATE_FORWARD);
+		}
+	}
 	else if (data->keycode.right == true)
-		move_left_or_right(data, ROTATE_FORWARD);
+	{
+		if (data->map.player.dir.elements[0] != 0 && data->map.player.dir.elements[1] != -1)
+		{
+			printf("forward\n");
+			move_left_or_right(data, ROTATE_FORWARD);
+		}
+		else
+		{
+			printf("backward\n");
+			move_left_or_right(data, ROTATE_BACKWARD);
+		}
+	}
 	return (true);
 }
 
