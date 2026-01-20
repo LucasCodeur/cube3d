@@ -42,8 +42,26 @@ static void	ininitialize_math_values(t_data *data)
 {
 	data->map.player.pos = new_vector_2D(data->map.player.x,
 			data->map.player.y);
-	data->map.player.dir = new_vector_2D(0.0f, 1.0f);
-	data->map.player.plane = new_vector_2D(0.66f, 0.0f);
+	if (data->map.player.orientation == 'N')
+	{
+		data->map.player.plane = new_vector_2D(0.66f, 0.0f);
+		data->map.player.dir = new_vector_2D(0.0f, -1.0f);
+	}
+	else if (data->map.player.orientation == 'S')
+	{
+		data->map.player.plane = new_vector_2D(0.66f, 0.0f);
+		data->map.player.dir = new_vector_2D(0.0f, 1.0f);
+	}
+	else if (data->map.player.orientation == 'E')
+	{
+		data->map.player.plane = new_vector_2D(0.0f, -0.66f);
+		data->map.player.dir = new_vector_2D(1.0f, 0.0f);
+	}
+	else if (data->map.player.orientation == 'W')
+	{
+		data->map.player.plane = new_vector_2D(0.0f, 0.66f);
+		data->map.player.dir = new_vector_2D(-1.0f, 0.0f);
+	}
 	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
 	data->map.grid[data->map.player.y][data->map.player.x] = '0';
 }
