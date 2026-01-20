@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 13:54:18 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/16 09:07:05 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/20 11:35:53 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ static t_error	rgb_loop(char **rgb_str, int **rgb_int)
 			return (error);
 		}
 		(*rgb_int)[i] = ft_atoi(rgb_str[i]);
-		error = test_rgb_value((*rgb_int)[i]);
+		error = test_rgb_value((*rgb_int)[i++]);
 		if (error.code != ERR_OK)
 			return (error);
-		i++;
 	}
 	if (i < 3)
 	{

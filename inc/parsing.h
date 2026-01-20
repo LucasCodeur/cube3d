@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:01:49 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/16 13:46:07 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:44:42 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,26 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+typedef struct s_substr_io
+{
+	char	*in;
+	char	*out;
+}			t_substr_io;
+
+typedef struct s_gnl_variables
+{
+	t_data	*data;
+	int		fd;
+	char	**line;
+}			t_gnl_variables;
+
+typedef struct s_split_variable
+{
+	int		start;
+	int		i;
+	int		j;
+}			t_split_variable;
 
 /*
 is_valid = 1 if all elements are present and no superflux
@@ -54,6 +74,7 @@ t_error		save_element(char *id, char *info, t_data *data);
 t_error		check_extract_rgb(t_data *data, char *info, int **rgb_int);
 t_error		check_map(t_data *data);
 t_error		check_map_structure(t_data *data);
+t_error		check_save_hero(t_data *data);
 
 //========== UTILS ===========
 // void		free_all(t_data *data);
@@ -73,8 +94,8 @@ t_error		ft_strnjoin(t_data *data, char **s1, char *s2, int byte_nbr);
 char		*ft_strnstr(const char *s1, const char *s2, size_t len);
 t_error		ft_strtrim(t_data *data, char const *s1, char const *set,
 				char **str);
-t_error		ft_substr(t_data *data, char const *s, unsigned int start,
-				size_t len, char **str);
+t_error		ft_substr(t_data *data, t_substr_io *substr_io, unsigned int start,
+				size_t len);
 t_error		get_next_line(t_data *data, int fd, char **line);
 
 #endif

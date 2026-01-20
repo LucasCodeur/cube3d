@@ -6,22 +6,17 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:22:08 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/16 09:08:00 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/20 13:40:31 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static t_error	extract_map_line(char *line, t_data *data)
+static t_error	extract_map_line_loop(char *line, t_data *data)
 {
 	t_error	error;
 	int		i;
 
-	if (!ft_strncmp(line, "\n", 1) && data->map.height)
-	{
-		data->map.map_finished = 1;
-		return (ERROR_OK);
-	}
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
@@ -41,6 +36,21 @@ static t_error	extract_map_line(char *line, t_data *data)
 		}
 		i++;
 	}
+	return (ERROR_OK);
+}
+
+static t_error	extract_map_line(char *line, t_data *data)
+{
+	t_error	error;
+
+	if (!ft_strncmp(line, "\n", 1) && data->map.height)
+	{
+		data->map.map_finished = 1;
+		return (ERROR_OK);
+	}
+	error = extract_map_line_loop(line, data);
+	if (error.code != ERR_OK)
+		return (error);
 	return (ERROR_OK);
 }
 

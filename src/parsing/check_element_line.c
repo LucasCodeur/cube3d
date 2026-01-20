@@ -6,30 +6,32 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:52:57 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/20 11:17:18 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:45:19 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static t_error	choose_id(char *substr, t_data *data, int *i, char **id)
+static t_error	choose_id(t_substr_io s_io, t_data *data, int *i, char **id)
 {
 	t_error	error;
 
-	if (!ft_strncmp(substr, "NO ", 3) || !ft_strncmp(substr, "SO ", 3)
-		|| !ft_strncmp(substr, "WE ", 3) || !ft_strncmp(substr, "EA ", 3))
+	if (!ft_strncmp(s_io.in, "NO ", 3) || !ft_strncmp(s_io.in, "SO ", 3)
+		|| !ft_strncmp(s_io.in, "WE ", 3) || !ft_strncmp(s_io.in, "EA ", 3))
 	{
-		error = ft_substr(data, substr, 0, 2, id);
+		error = ft_substr(data, &s_io, 0, 2);
 		if (error.code != ERR_OK)
 			return (error);
+		*id = s_io.out;
 		*i = 3;
 		return (ERROR_OK);
 	}
-	else if (!ft_strncmp(substr, "F ", 2) || !ft_strncmp(substr, "C ", 2))
+	else if (!ft_strncmp(s_io.in, "F ", 2) || !ft_strncmp(s_io.in, "C ", 2))
 	{
-		error = ft_substr(data, substr, 0, 1, id);
+		error = ft_substr(data, &s_io, 0, 1);
 		if (error.code != ERR_OK)
 			return (error);
+		*id = s_io.out;
 		*i = 2;
 		return (ERROR_OK);
 	}
@@ -40,14 +42,15 @@ static t_error	choose_id(char *substr, t_data *data, int *i, char **id)
 
 static t_error	extract_id(t_data *data, char *line, int *i, char **id)
 {
-	t_error	error;
-	char	*str;
+	t_error		error;
+	t_substr_io	substr_io;
 
-	str = NULL;
-	error = ft_substr(data, line, 0, 3, &str);
+	substr_io.in = line;
+	error = ft_substr(data, &substr_io, 0, 3);
 	if (error.code != ERR_OK)
 		return (error);
-	error = choose_id(str, data, i, id);
+	substr_io.in = substr_io.out;
+	error = choose_id(substr_io, data, i, id);
 	if (error.code != ERR_OK)
 		return (error);
 	return (ERROR_OK);
@@ -56,18 +59,18 @@ static t_error	extract_id(t_data *data, char *line, int *i, char **id)
 static t_error	extract_infos(t_data *data, char *line, int *i,
 		char **info_clean)
 {
-	t_error	error;
-	char	*info_brut;
-	int		index_start;
+	t_error		error;
+	int			index_start;
+	t_substr_io	substr_io;
 
-	info_brut = NULL;
 	index_start = *i;
 	while (line[*i] != '\n' && line[*i] != '\0')
 		*i = *i + 1;
-	error = ft_substr(data, line, index_start, *i - index_start, &info_brut);
+	substr_io.in = line;
+	error = ft_substr(data, &substr_io, index_start, *i - index_start);
 	if (error.code != ERR_OK)
 		return (error);
-	error = ft_strtrim(data, info_brut, " ", info_clean);
+	error = ft_strtrim(data, substr_io.out, " ", info_clean);
 	if (error.code != ERR_OK)
 		return (error);
 	return (ERROR_OK);

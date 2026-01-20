@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:14:23 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/16 09:09:11 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:47:19 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,12 @@ static t_error	map_copy(t_data *data, char ***map_copy)
 	return (ERROR_OK);
 }
 
-static t_error	recursive(char **map_test, int i, int j, t_data *data)
+static t_error	recursive(char **map_test, int i, int j, t_data *data);
+
+static t_error	recursive_loop(char **map_test, int i, int j, t_data *data)
 {
 	t_error	error;
 
-	if (i == 0 || j == 0 || i == data->map.height - 1 || j == data->map.width
-		- 1)
-	{
-		error.code = ERR_INVALID_ARG;
-		error.message = "Map open\n";
-		return (error);
-	}
-	error = check_map_opened(map_test, i, j);
-	if (error.code != ERR_OK)
-		return (error);
 	if (j != data->map.width - 1 && (map_test[i][j + 1] == '0' || map_test[i][j
 			+ 1] == data->map.player.orientation))
 	{
@@ -92,6 +84,26 @@ static t_error	recursive(char **map_test, int i, int j, t_data *data)
 	return (ERROR_OK);
 }
 
+static t_error	recursive(char **map_test, int i, int j, t_data *data)
+{
+	t_error	error;
+
+	if (i == 0 || j == 0 || i == data->map.height - 1 || j == data->map.width
+		- 1)
+	{
+		error.code = ERR_INVALID_ARG;
+		error.message = "Map open\n";
+		return (error);
+	}
+	error = check_map_opened(map_test, i, j);
+	if (error.code != ERR_OK)
+		return (error);
+	error = recursive_loop(map_test, i, j, data);
+	if (error.code != ERR_OK)
+		return (error);
+	return (ERROR_OK);
+}
+
 t_error	check_map_structure(t_data *data)
 {
 	t_error	error;
@@ -106,8 +118,8 @@ t_error	check_map_structure(t_data *data)
 	i = -1;
 	while (map_test[++i])
 	{
-		j = 0;
-		while (map_test[i][j])
+		j = -1;
+		while (map_test[i][++j])
 		{
 			if (map_test[i][j] == '0')
 			{
@@ -116,7 +128,6 @@ t_error	check_map_structure(t_data *data)
 				if (error.code != ERR_OK)
 					return (error);
 			}
-			j++;
 		}
 	}
 	return (ERROR_OK);

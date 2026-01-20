@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 09:09:51 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/16 13:47:48 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:46:17 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_error	check_argument_number(int argc)
 	if (argc != 2)
 	{
 		error.code = ERR_INVALID_ARG;
-		error.message = "You have to enter one and only one argument (path of the map)\n";
+		error.message = "You have to enter one and only one argument\n";
 		return (error);
 	}
 	return (ERROR_OK);
@@ -27,18 +27,18 @@ static t_error	check_argument_number(int argc)
 
 static t_error	check_file_extension(char *path, t_data *data)
 {
-	char	*extension;
-	size_t	len;
-	t_error	error;
+	size_t		len;
+	t_error		error;
+	t_substr_io	substr_io;
 
-	extension = NULL;
 	len = ft_strlen(path);
 	if (len >= 5)
 	{
-		error = ft_substr(data, path, len - 4, len, &extension);
+		substr_io.in = path;
+		error = ft_substr(data, &substr_io, len - 4, len);
 		if (error.code != ERR_OK)
 			return (error);
-		if (ft_strncmp(extension, ".cub", 4))
+		if (ft_strncmp(substr_io.out, ".cub", 4))
 		{
 			error.code = ERR_INVALID_ARG;
 			error.message = "Filename must have .cub extension\n";

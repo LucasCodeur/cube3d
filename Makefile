@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2026/01/19 15:15:55 by prigaudi         ###   ########.fr        #
+#    Updated: 2026/01/20 11:49:03 by prigaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,7 @@ SRC_PARSING = \
 	extract_save_map.c	\
 	config.c \
 	parsing.c \
+	check_save_hero.c \
 	save_element.c \
 	utils/ft_atoi.c	\
 	utils/ft_calloc.c \
