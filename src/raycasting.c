@@ -16,7 +16,7 @@
 #include "display.h"
 
 /**
- * @brief fill draw_start and draw_end, that the born of the line in order to display the walls.
+ * @brief fill top strip and bottom_strip, that the born of the line in order to display the walls.
  * @param data all information about the program.
  * @param top_strip the beginning of the line to draw in order to display the wall.
  * @param bottom_strip the ending of the line to draw in order to display the wall.
@@ -55,7 +55,7 @@ t_vec mapping_x_on_screen(int x)
 {
 	t_vec camera;
 
-	camera.elements[0] = (x * 2) / (double)WIN_WIDTH - 1;
+	camera.elements[0] = (x * 2 / (double)WIN_WIDTH) - 1;
 	camera.elements[1] = 0.0f;
 	return (camera);
 }

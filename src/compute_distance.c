@@ -16,7 +16,7 @@
 #include <math.h>
 #include <float.h>
 
-static t_vec compute_gradient(t_vec ray_dir);
+static t_vec compute_slope(t_vec ray_dir);
 static void define_first_step(t_data* data, t_vec ray_dir, t_vec *ray_len, t_vec delta_dist);
 static int  size_ray(t_data* data, t_vec *ray_len, t_vec delta_dist);
 
@@ -34,7 +34,7 @@ double compute_dist(t_data* data, t_vec ray_dir)
 
     ray_len.elements[0] = INFINITY;
     ray_len.elements[1] = INFINITY;
-    delta_dist = compute_gradient(ray_dir);
+    delta_dist = compute_slope(ray_dir);
     if (isinf(delta_dist.elements[0]))
         delta_dist.elements[0] = 1e6;
     if (isinf(delta_dist.elements[1]))
@@ -50,11 +50,11 @@ double compute_dist(t_data* data, t_vec ray_dir)
 }
 
 /**
-* @brief compute gradient of ray_dir
+* @brief compute the slope of ray_dir
 * @param ray_dir direction of the ray
 * @return ret the value of the compute of the gradient 
 */
-static t_vec compute_gradient(t_vec ray_dir)
+static t_vec compute_slope(t_vec ray_dir)
 {
     t_vec   ret;
 
