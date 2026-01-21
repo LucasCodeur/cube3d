@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:42:40 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/21 12:43:23 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 16:24:47 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,19 @@ static void	put_pixel(t_img *img, int x, int y, t_pixel color)
 	*(unsigned int *)dst = color.value;
 }
 
-void	draw_square(t_data *data, int x, int y, int size, t_pixel color)
+void	draw_square(t_data *data, t_drawing_infos drawing_infos, t_pixel color)
 {
 	int	i;
 	int	j;
 
 	j = 0;
-	while (j < size)
+	while (j < drawing_infos.size)
 	{
 		i = 0;
-		while (i < size)
+		while (i < drawing_infos.size)
 		{
-			put_pixel(&data->img, x + i, y + j, color);
+			put_pixel(&data->img, drawing_infos.x + i, drawing_infos.y + j,
+				color);
 			i++;
 		}
 		j++;

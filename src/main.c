@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:03:49 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 13:02:57 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 16:58:45 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static t_error	ininitialize_values(t_data *data)
 
 static void	print_message_error(t_error error)
 {
+	printf("Error\n");
 	if (error.code == ERR_FAIL)
 		printf("Generic problem\n");
 	else if (error.code == ERR_MEMORY)

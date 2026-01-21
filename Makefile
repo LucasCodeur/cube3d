@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2026/01/21 13:03:03 by prigaudi         ###   ########.fr        #
+#    Updated: 2026/01/21 15:20:58 by prigaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ P_OBJ = .obj/
 P_LIB_MATH = $(P_SRC)math/
 P_INC_MATH = $(P_SRC)/math/inc/
 P_SRC_DRAW = $(P_SRC)draw/
-P_SRC_TEST = $(P_SRC)test/
 P_SRC_PARSING = $(P_SRC)parsing/
 P_SRC_SPRITES = $(P_SRC)sprites/
 
@@ -67,10 +66,6 @@ SRC_SPRITES = \
 
 SRC_DRAW = \
 	utils_draw.c
-
-SRC_TEST = \
-	t_fov.c \
-	t_map_2D.c \
 
 SRC_PARSING = \
 	argument.c \

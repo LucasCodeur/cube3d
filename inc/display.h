@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 13:03:43 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 16:24:35 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 # define MINI_OFFSET_Y 10
 # define MINI_TILE 20
 # define PLAYER_SIZE 4
-# define MINI_RADIUS 6 
+# define MINI_RADIUS 6
 
 typedef struct s_parsing	t_parsing;
 
@@ -87,6 +87,13 @@ typedef struct s_minimap_variables
 	int						player_screen_x;
 	int						player_screen_y;
 }							t_minimap_variables;
+
+typedef union s_drawing_infos
+{
+	int						x;
+	int						y;
+	int						size;
+}							t_drawing_infos;
 
 typedef struct s_img
 {
@@ -203,7 +210,6 @@ t_error						launcher(t_data *data);
 // RAYCASTING
 double						compute_dist(t_data *data, t_vec ray_dir);
 t_vec						define_ray(t_data *data);
-t_vec						define_percentage_of_fov(int x);
 void						compute_height_of_line(t_data *data,
 								int *draw_start, int *draw_end);
 bool						draw_map(t_data *data);
@@ -225,9 +231,6 @@ void						rotate_hero(t_data *data);
 
 // IMAGE
 t_error						load_imgs(t_data *data);
-void						update_maps(t_data *data);
-void						draw_hero(t_data *data, int tile_size);
-void						clear_img(t_img *img);
 void						choose_texture(t_data *data, t_img **text);
 bool						draw_map(t_data *data);
 
@@ -243,10 +246,12 @@ int							destroy_free_exit(t_data *data);
 void						draw_minimap(t_data *data);
 
 // MINIMAP UTILS
-void						draw_square(t_data *data, int x, int y, int size,
-								t_pixel color);
+void						draw_square(t_data *data,
+								t_drawing_infos drawing_infos, t_pixel color);
 
 // OTHERS
 double						get_time(void);
+
+t_vec						mapping_x_on_screen(int x);
 
 #endif
