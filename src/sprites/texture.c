@@ -28,16 +28,16 @@ void	choose_texture(t_data *data, t_img **text)
 	if (data->raycasting.side == 0)
 	{
 		if (data->raycasting.ray_dir.elements[0] >= 0)
-			*text = &data->imgs.wall_east;
-		else
 			*text = &data->imgs.wall_west;
+		else
+			*text = &data->imgs.wall_east;
 	}
 	else
 	{
 		if (data->raycasting.ray_dir.elements[1] >= 0)
-			*text = &data->imgs.wall_south;
-		else
 			*text = &data->imgs.wall_north;
+		else
+			*text = &data->imgs.wall_south;
 	}
 }
 

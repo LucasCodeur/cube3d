@@ -28,6 +28,8 @@ void compute_height_of_line(t_data* data, int* top_strip, int* bottom_strip)
 	double	dist;
 
 	dist = compute_dist(data, data->raycasting.ray_dir);
+	if (dist < 0.1)
+		dist = 0.5;
 	if (data->raycasting.side == 0)
 	{
 		data->raycasting.wall_x = data->map.player.pos.elements[1] + dist * data->raycasting.ray_dir.elements[1];

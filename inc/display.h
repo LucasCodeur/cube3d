@@ -48,7 +48,7 @@
 # define MINI_OFFSET_Y 10
 # define MINI_TILE 20
 # define PLAYER_SIZE 4
-# define MINI_RADIUS 6
+# define MINI_RADIUS 6 
 
 typedef struct s_parsing	t_parsing;
 
