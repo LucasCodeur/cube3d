@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:55:13 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 15:18:27 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 21:05:30 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static t_error	fill_image(t_data *data, char *path_to_asset, t_img *img)
 	if (!img->img)
 	{
 		error.code = ERR_MLX;
-		printf("blabla\n");
 		error.message = "mlx_xpm_file_to_image failed";
 		return (error);
 	}
