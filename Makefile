@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2026/01/21 10:04:58 by prigaudi         ###   ########.fr        #
+#    Updated: 2026/01/21 12:42:31 by prigaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRC = \
 	debug.c \
 	main.c \
 	minimap.c \
+	minimap_utils.c \
 
 SRC_SPRITES = \
 	texture.c \

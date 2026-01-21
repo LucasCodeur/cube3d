@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 12:00:59 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 12:44:23 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,19 @@ typedef union s_pixel
 	t_rgb					rgb;
 	uint8_t					channels[4];
 }							t_pixel;
+
+typedef struct s_minimap_variables
+{
+	t_pixel					color;
+	int						x;
+	int						y;
+	int						start_x;
+	int						start_y;
+	int						end_x;
+	int						end_y;
+	int						player_screen_x;
+	int						player_screen_y;
+}							t_minimap_variables;
 
 typedef struct s_img
 {
@@ -184,7 +197,6 @@ typedef struct s_data
 	t_img					img;
 	t_sprite				imgs;
 	t_map					map;
-	t_img					minimap;
 	t_keycode				keycode;
 	t_fps					fps;
 	t_parsing				*parsing;
@@ -232,6 +244,9 @@ int							destroy_free_exit(t_data *data);
 
 // MINIMAP
 void						draw_minimap(t_data *data);
-void						draw_player_minimap(t_data *data);
+
+// MINIMAP UTILS
+void						draw_square(t_data *data, int x, int y, int size,
+								t_pixel color);
 
 #endif
