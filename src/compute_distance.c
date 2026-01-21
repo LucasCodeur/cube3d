@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/27 16:33:24 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 15:27:35 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:37:53 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ static void	define_first_step(t_data *data, t_vec ray_dir, t_vec *ray_len,
  */
 static int	size_ray(t_data *data, t_vec *ray_len, t_vec delta_dist)
 {
-	int	max_step;
-
 	while (data->map.grid[data->map.y][data->map.x] == '0')
 	{
 		if (ray_len->elements[0] <= ray_len->elements[1])

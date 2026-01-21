@@ -6,14 +6,13 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:06:40 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 14:59:39 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:32:11 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 #include "parsing.h"
 #include "test.h"
-
 #include <mlx.h>
 
 static int	compute_x_of_texture(t_data *data, t_img *text);
