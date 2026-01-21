@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/27 16:33:24 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 15:25:38 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:27:35 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ static int	size_ray(t_data *data, t_vec *ray_len, t_vec delta_dist)
 {
 	int	max_step;
 
-<<<<<<< HEAD
 	while (data->map.grid[data->map.y][data->map.x] == '0')
 	{
 		if (ray_len->elements[0] <= ray_len->elements[1])
@@ -135,24 +134,4 @@ static int	size_ray(t_data *data, t_vec *ray_len, t_vec delta_dist)
 		}
 	}
 	return (data->raycasting.side);
-=======
-	max_step = 0;
-	while (data->map.grid[data->map.y][data->map.x] == '0' && max_step < 50)
-	{
-		if (ray_len->elements[0] <= ray_len->elements[1])
-		{
-			data->map.x += data->raycasting.step_x;
-			ray_len->elements[0] += delta_dist.elements[0];
-			data->raycasting.side = 0;
-		}
-		else
-		{
-			data->map.y += data->raycasting.step_y;
-			ray_len->elements[1] += delta_dist.elements[1];
-			data->raycasting.side = 1;
-		}
-		max_step++;
-	}
-	return (data->raycasting.side);
->>>>>>> minimap
 }
