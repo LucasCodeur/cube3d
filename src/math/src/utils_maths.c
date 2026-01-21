@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_maths.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 15:41:06 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/12/29 15:45:02 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:03:42 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 double	to_radian(int degrees)
 {
-	return (degrees * (M_PI/180));
+	return (degrees * (M_PI / 180));
 }

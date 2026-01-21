@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   fps.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:08:18 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/12 15:10:15 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/21 14:46:50 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
-
 #include <sys/time.h>
 
 double	get_time(void)
 {
 	struct timeval	tv;
-	
+
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec + tv.tv_usec / 10000000.0);
 }

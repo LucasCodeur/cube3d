@@ -3,27 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:01:40 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/16 16:09:22 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/21 14:50:47 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "display.h" 
 #include "debug.h"
+#include "display.h"
 
 void	d_print_grid(t_map map)
 {
 	for (int i = 0; i < map.height; i++)
 		printf("%s\n", map.grid[i]);
-	printf("x: %lf\n", map.player.pos.elements[0]);	
-	printf("y: %lf\n", map.player.pos.elements[1]);	
+	printf("x: %lf\n", map.player.pos.elements[0]);
+	printf("y: %lf\n", map.player.pos.elements[1]);
 }
 
-void	d_print_frame(t_img img, int* x, int* y)
+void	d_print_frame(t_img img, int *x, int *y)
 {
-	t_pixel* image = (t_pixel *)img.addr;
+	t_pixel	*image;
+
+	image = (t_pixel *)img.addr;
 	printf("X :%u Y :%u Bpp : %u\n", *x, *y, img.bits_per_pixel);
 	for (int i = 0; i < (*x * *y); i++)
 	{
@@ -32,7 +34,7 @@ void	d_print_frame(t_img img, int* x, int* y)
 	printf("\n");
 }
 
-void	d_generate_map(t_data* data)
+void	d_generate_map(t_data *data)
 {
 	for (int i = 0; i < data->map.rows; i++)
 	{
@@ -55,7 +57,10 @@ void	d_generate_map(t_data* data)
 	data->map.player.pos.elements[1] = (SIZE_Y + 2) * 0.5;
 }
 
-void	d_print_values(t_data* data)
+void	d_print_values(t_data *data)
 {
-	printf("POS:%.2f,%.2f | DIR:%.2f,%.2f | PLANE:%.2f,%.2f\n", data->map.player.pos.elements[0], data->map.player.pos.elements[1], data->map.player.dir.elements[0], data->map.player.dir.elements[0], data->map.player.plane.elements[0], data->map.player.plane.elements[1]);
+	printf("POS:%.2f,%.2f | DIR:%.2f,%.2f | PLANE:%.2f,%.2f\n",
+		data->map.player.pos.elements[0], data->map.player.pos.elements[1],
+		data->map.player.dir.elements[0], data->map.player.dir.elements[0],
+		data->map.player.plane.elements[0], data->map.player.plane.elements[1]);
 }

@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:55:13 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/16 13:56:20 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:18:27 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static t_error	fill_image(t_data *data, char *path_to_asset, t_img *img);
 
 /**
 
-	* @brief allow to choose which texture according side and the direction of the ray
+	* @brief allow to choose which texture according
+		side and the direction of the ray
 	* @param all informatio about the program
 	* @return the texture to display
 	*/

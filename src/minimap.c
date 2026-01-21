@@ -6,11 +6,12 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 10:59:23 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/21 12:47:26 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 14:44:49 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
+#include "parsing.h"
 
 static void	init_values(t_data *data, t_minimap_variables *minimap_var)
 {
@@ -47,14 +48,17 @@ static void	draw_structure_minimap(t_data *data,
 		&& minimap_var->x < data->map.width
 		&& minimap_var->y < data->map.height)
 	{
-		if (data->map.grid[minimap_var->y][minimap_var->x] == '1')
-			minimap_var->color.value = 0x808080;
-		else
-			minimap_var->color.value = 0xFFFAF0;
-		draw_square(data, MINI_OFFSET_X + (minimap_var->x
-				- minimap_var->start_x) * MINI_TILE, MINI_OFFSET_Y
-			+ (minimap_var->y - minimap_var->start_y) * MINI_TILE, MINI_TILE,
-			minimap_var->color);
+		if (minimap_var->x < (int)ft_strlen(data->map.grid[minimap_var->y]))
+		{
+			if (data->map.grid[minimap_var->y][minimap_var->x] == '1')
+				minimap_var->color.value = 0x808080;
+			else
+				minimap_var->color.value = 0xFFFAF0;
+			draw_square(data, MINI_OFFSET_X + (minimap_var->x
+					- minimap_var->start_x) * MINI_TILE, MINI_OFFSET_Y
+				+ (minimap_var->y - minimap_var->start_y) * MINI_TILE,
+				MINI_TILE, minimap_var->color);
+		}
 	}
 	else
 	{
