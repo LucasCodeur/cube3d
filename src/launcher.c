@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:26:12 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/20 18:32:45 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/21 13:05:54 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
-#include "parsing.h"
 #include "error.h"
-
+#include "parsing.h"
 #include <X11/X.h>
 #include <X11/keysym.h>
 #include <mlx.h>
 #include <sys/time.h>
 
-int	execute(t_data *data);
+int			execute(t_data *data);
 static void	ininitialize_math_values(t_data *data);
 
 t_error	launcher(t_data *data)
@@ -49,14 +48,14 @@ int	execute(t_data *data)
 	data->fps.delta_time = data->fps.current_time - data->fps.last_time;
 	if (data->fps.delta_time >= FRAME_DURATION)
 	{
-		data->fps.count_frame++;	
+		data->fps.count_frame++;
 		move_hero(data);
-		// display_minimap(data);
 		// count_fps(data);
 		if (data->keycode.escape == true)
 			destroy_free_exit(data);
 		rotate_hero(data);
 		draw_map(data);
+		draw_minimap(data);
 	}
 	return (0);
 }
