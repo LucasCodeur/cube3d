@@ -85,6 +85,7 @@ static t_error	fill_image(t_data *data, char *path_to_asset, t_img *img)
 	if (!img->img)
 	{
 		error.code = ERR_MLX;
+		printf("blabla\n");
 		error.message = "mlx_xpm_file_to_image failed";
 		return (error);
 	}

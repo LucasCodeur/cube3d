@@ -34,12 +34,6 @@
 # define YELLOW 0xFFFF000
 # define WHITE 0xFFFFFF00
 
-# define ADD_SPEED 4.0 * (M_PI / 180)
-# define SUBT_SPEED -4.0 * (M_PI / 180)
-# define MIDDLE_SCREEN_X WIN_WIDTH / 2
-# define MIDDLE_SCREEN_Y WIN_HEIGHT / 2
-# define FRAME_DURATION 1.0 / FPS
-
 # define MINI_OFFSET_X 10
 # define MINI_OFFSET_Y 10
 # define MINI_TILE 20
@@ -215,6 +209,7 @@ t_error						launcher(t_data *data);
 // RAYCASTING
 double						compute_dist(t_data *data, t_vec ray_dir);
 t_vec						define_ray(t_data *data);
+t_vec						mapping_x_on_screen(int x);
 void						compute_height_of_line(t_data *data,
 								int *draw_start, int *draw_end);
 bool						draw_map(t_data *data);
@@ -223,8 +218,6 @@ bool						draw_map(t_data *data);
 void						init_mlx(t_mlx *t_mlx);
 t_error						init_screen_mlx(t_data *data);
 void						free_img(t_data *data);
-void						my_mlx_pixel_put(t_data *data, int x, int y,
-								t_pixel *color);
 
 // HOOKS
 int							mouse_hook(int x, int y, t_data *data);
@@ -244,6 +237,7 @@ void						count_fps(t_data *data);
 double						get_time(void);
 
 // UTILS
+void						fill_color(t_pixel *color, int* rgb);
 void						ft_bzero(void *s, size_t n);
 int							destroy_free_exit(t_data *data);
 
@@ -257,6 +251,5 @@ void						draw_square(t_data *data,
 // OTHERS
 double						get_time(void);
 
-t_vec						mapping_x_on_screen(int x);
 
 #endif

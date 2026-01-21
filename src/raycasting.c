@@ -14,6 +14,8 @@
 #include <math.h>
 #include <stdbool.h>
 
+static void	fill_x_texture(t_data *data, double dist);
+
 /**
  * @brief fill top strip and bottom_strip, that the born of the line in order to display the walls.
  * @param data all information about the program.
@@ -29,20 +31,7 @@ void	compute_height_of_line(t_data *data, int *top_strip, int *bottom_strip)
 	dist = compute_dist(data, data->raycasting.ray_dir);
 	if (dist < 0.1)
 		dist = 0.5;
-	if (data->raycasting.side == 0)
-	{
-		data->raycasting.wall_x = data->map.player.pos.elements[1] + dist
-			* data->raycasting.ray_dir.elements[1];
-		data->raycasting.wall_y = data->map.player.pos.elements[0] + dist
-			* data->raycasting.ray_dir.elements[0];
-	}
-	else
-	{
-		data->raycasting.wall_x = data->map.player.pos.elements[0] + dist
-			* data->raycasting.ray_dir.elements[0];
-		data->raycasting.wall_y = data->map.player.pos.elements[1] + dist
-			* data->raycasting.ray_dir.elements[1];
-	}
+	fill_x_texture(data, dist);
 	data->raycasting.wall_x -= floor(data->raycasting.wall_x);
 	strip_height = (int)(WIN_HEIGHT / dist);
 	*top_strip = -strip_height * 0.5 + WIN_HEIGHT * 0.5;
@@ -79,4 +68,32 @@ t_vec	define_ray(t_data *data)
 		+ data->map.player.plane.elements[1]
 		* data->map.player.camera.elements[0];
 	return (ret);
+}
+
+/**
+* @brief fill the x of the texture
+* @param data all information about the program
+* @param dist distance of the ray
+* @return
+*/
+static void	fill_x_texture(t_data *data, double dist)
+{
+	if (data->raycasting.side == 0)
+	{
+		data->raycasting.wall_x = data->map.player.pos.elements[1] 
+			+ dist
+			* data->raycasting.ray_dir.elements[1];
+		data->raycasting.wall_y = data->map.player.pos.elements[0] 
+			+ dist
+			* data->raycasting.ray_dir.elements[0];
+	}
+	else
+	{
+		data->raycasting.wall_x = data->map.player.pos.elements[0] 
+			+ dist
+			* data->raycasting.ray_dir.elements[0];
+		data->raycasting.wall_y = data->map.player.pos.elements[1] 
+			+ dist
+			* data->raycasting.ray_dir.elements[1];
+	}
 }

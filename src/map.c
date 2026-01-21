@@ -121,11 +121,8 @@ static void	put_all_pixels(t_data *data, t_img *text, int x, int y)
 	t_pixel	*dst;
 	t_pixel	color;
 
-	color.channels[0] = data->parsing->ceiling_rgb_color[2];
-	color.channels[1] = data->parsing->ceiling_rgb_color[1];
-	color.channels[2] = data->parsing->ceiling_rgb_color[0];
-	color.channels[3] = 255;
 	dst = data->img.addr + x;
+	fill_color(&color, data->parsing->floor_rgb_color);
 	while (y++ < data->img.top_strip && y < WIN_HEIGHT)
 	{
 		*dst = color;
@@ -140,10 +137,7 @@ static void	put_all_pixels(t_data *data, t_img *text, int x, int y)
 		*dst = color;
 		dst += data->img.pixels_per_line;
 	}
-	color.channels[0] = data->parsing->floor_rgb_color[2];
-	color.channels[1] = data->parsing->floor_rgb_color[1];
-	color.channels[2] = data->parsing->floor_rgb_color[0];
-	color.channels[3] = 255;
+	fill_color(&color, data->parsing->ceiling_rgb_color);
 	while (y++ < WIN_HEIGHT)
 	{
 		*dst = color;

@@ -12,14 +12,10 @@
 
 #include "display.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, t_pixel *color)
+void	fill_color(t_pixel *color, int* rgb)
 {
-	t_pixel	*dst;
-
-	if (x < 0 || x > WIN_WIDTH || y < 0 || y > WIN_HEIGHT)
-		return ;
-	if (!data->img.addr)
-		return ;
-	dst = (t_pixel *)(data->img.addr + (y * data->img.line_length + x * 4));
-	*dst = *color;
+	color->channels[0] = rgb[2];
+	color->channels[1] = rgb[1];
+	color->channels[2] = rgb[0];
+	color->channels[3] = 255;
 }

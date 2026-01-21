@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 09:43:33 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 14:57:36 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 20:58:39 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 #include <X11/keysym.h>
 #include <mlx.h>
 
+static bool handle_up_and_down(t_data *data, int keycode);
+
+/**
+* @brief allow to handle the press of the keys
+* @param data all information about the program.
+* @param keycode is an int that represents a 
+* touch of the keyboard in the mlx.
+* @return 0 if success
+*/
 int	press_move(int keycode, t_data *data)
 {
-	if ((keycode == XK_s || keycode == XK_S)
-		&& data->map.grid[(int)(data->map.player.pos.elements[1] - SPEED
-			* data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0]
-			- 0.5f * data->map.player.dir.elements[0])] == '0')
-		data->keycode.down = true;
-	else if ((keycode == XK_w || keycode == XK_W)
-		&& data->map.grid[(int)(data->map.player.pos.elements[1] + SPEED
-			* data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0]
-			+ 0.5f * data->map.player.dir.elements[0])] == '0')
-		data->keycode.up = true;
-	else if (keycode == XK_d || keycode == XK_D)
+	if (handle_up_and_down(data, keycode) == true)
+		return (0);
+	if (keycode == XK_d || keycode == XK_D)
 		data->keycode.right = true;
 	else if (keycode == XK_a || keycode == XK_A)
 		data->keycode.left = true;
@@ -39,6 +40,13 @@ int	press_move(int keycode, t_data *data)
 	return (0);
 }
 
+/**
+* @brief allow to handle the release of the keys
+* @param data all information about the program.
+* @param keycode is an int that represents a 
+* touch of the keyboard in the mlx.
+* @return 0 if success
+*/
 int	release_move(int keycode, t_data *data)
 {
 	if ((keycode == XK_s || keycode == XK_S) && data->keycode.down == true)
@@ -57,4 +65,37 @@ int	release_move(int keycode, t_data *data)
 	else if (keycode == XK_Escape && data->keycode.escape == true)
 		data->keycode.escape = false;
 	return (0);
+}
+
+/**
+* @brief allow to handle w and s
+* @param data all information about the program.
+* @param keycode is an int that represents a 
+*  key of the keyboard inside the mlx.
+* @return true if the correspondent keycode inside the boolean structure or false
+*/
+static bool handle_up_and_down(t_data *data, int keycode)
+{
+	int		x;
+	int		y;
+
+	x = 0;
+	y = 0;
+	if (keycode == XK_s || keycode == XK_S)
+	{
+		y = data->map.player.pos.elements[1] - SPEED * data->map.player.dir.elements[1];
+		x = data->map.player.pos.elements[0] - 0.5f * data->map.player.dir.elements[0];
+		if (data->map.grid[y][x] == '0')
+			data->keycode.down = true;
+		return (true);
+	}
+	else if (keycode == XK_w || keycode == XK_W)
+	{
+		y = (int)(data->map.player.pos.elements[1] + SPEED * data->map.player.dir.elements[1]);
+		x = (int)(data->map.player.pos.elements[0] + 0.5f * data->map.player.dir.elements[0]);	
+		if (data->map.grid[y][x] == '0')
+			data->keycode.up = true;
+		return (true);
+	}
+	return (false);
 }

@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2026/01/21 15:20:58 by prigaudi         ###   ########.fr        #
+#    Updated: 2026/01/21 20:54:19 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRC = \
 	mlx.c \
 	hooks_player.c \
 	hooks_press_and_release.c \
+	hooks_mouse_and_rotate.c \
 	compute_distance.c \
 	map.c \
 	utils.c \

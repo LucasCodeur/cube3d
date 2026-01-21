@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:26:12 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 15:08:10 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 21:03:25 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,14 @@
 #include <sys/time.h>
 
 int			execute(t_data *data);
+static void	ininitialize_compute(t_compute *cube);
 static void	ininitialize_math_values(t_data *data);
 
+/**
+* @brief allow to launch the main algorithm of the program
+* @param data all information about the program.
+* @return error ok if success
+*/
 t_error	launcher(t_data *data)
 {
 	t_error	error;
@@ -42,15 +48,20 @@ t_error	launcher(t_data *data)
 	return (ERROR_OK);
 }
 
+/**
+* @brief function that execute the different function to display 
+* maps and handle the movements
+* @param data all information about the program.
+* @return 0 if success
+*/
 int	execute(t_data *data)
 {
 	data->fps.current_time = get_time();
 	data->fps.delta_time = data->fps.current_time - data->fps.last_time;
-	if (data->fps.delta_time >= FRAME_DURATION)
+	if (data->fps.delta_time >= data->cube.frame_duration)
 	{
 		data->fps.count_frame++;
 		move_hero(data);
-		// count_fps(data);
 		if (data->keycode.escape == true)
 			destroy_free_exit(data);
 		rotate_hero(data);
@@ -60,6 +71,11 @@ int	execute(t_data *data)
 	return (0);
 }
 
+/**
+* @brief ininitialize all values of maths to do the raycasting
+* @param data all information about the program.
+* @return
+*/
 static void	ininitialize_math_values(t_data *data)
 {
 	data->map.player.pos = new_vector_2d(data->map.player.x,
@@ -86,4 +102,19 @@ static void	ininitialize_math_values(t_data *data)
 	}
 	data->map.player.camera = new_vector_2d(0.0f, 0.0f);
 	data->map.grid[data->map.player.y][data->map.player.x] = '0';
+	ininitialize_compute(&data->cube);
+}
+
+/**
+* @brief ininitialize all computes of maths to do the raycasting
+* @param cube structure to stock all precompute of different formulas
+* @return
+*/
+static void	ininitialize_compute(t_compute *cube)
+{
+	cube->add_speed = 5.0 * (M_PI / 180);
+	cube->subt_speed = -5.0 * (M_PI / 180);
+	cube->middle_screen_x = WIN_WIDTH / 2;
+	cube->middle_screen_y = WIN_HEIGHT / 2;
+	cube->frame_duration = 1.0 / FPS;
 }
