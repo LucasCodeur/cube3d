@@ -6,11 +6,12 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:01:10 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/16 13:58:50 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/20 17:09:04 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
+
 #include <mlx.h>
 #include <stdlib.h>
 
@@ -32,6 +33,12 @@ t_error	init_screen_mlx(t_data *data)
 	}
 	mlx_get_screen_size(data->mlx.ptr, &data->mlx.max_width,
 		&data->mlx.max_height);
+	if ((WIN_WIDTH > data->mlx.max_width) || (WIN_HEIGHT > data->mlx.max_height) || WIN_WIDTH < 100 || WIN_HEIGHT < 100)
+	{
+		error.code = ERR_MLX;
+		error.message = "size of screen isn't correct";
+		return (error);
+	}
 	data->mlx.win = mlx_new_window(data->mlx.ptr, WIN_WIDTH, WIN_HEIGHT,
 			"cube3D");
 	if (!data->mlx.win || WIN_WIDTH > data->mlx.max_width

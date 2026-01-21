@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 12:44:23 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 13:03:43 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@
 # define SIZE_X 20
 # define SIZE_Y 20
 
-# define ASSET_PLAYER "/home/lud-adam/Documents/cube3d/assets/basic/player.xpm"
-# define ASSET_W_EAST "/home/lud-adam/Documents/cube3d/assets/textures/east.xpm"
-# define ASSET_W_NORTH "/home/lud-adam/Documents/cube3d/assets/textures/north.xpm"
-# define ASSET_W_WEST "/home/lud-adam/Documents/cube3d/assets/textures/west.xpm"
-# define ASSET_W_SOUTH "/home/lud-adam/Documents/cube3d/assets/textures/south.xpm"
-
 # define BLACK 0x2c2c2c
 # define RED 0xFF0000FF
 # define ORANGE 0xFF6347
@@ -42,6 +36,8 @@
 
 # define ADD_SPEED 4.0 * (M_PI / 180)
 # define SUBT_SPEED -4.0 * (M_PI / 180)
+# define MIDDLE_SCREEN_X WIN_WIDTH / 2
+# define MIDDLE_SCREEN_Y WIN_HEIGHT / 2
 # define SPEED 0.25
 # define ROTATE_FORWARD 90.0 * (M_PI / 180)
 # define ROTATE_BACKWARD -90.0 * (M_PI / 180)
@@ -129,7 +125,6 @@ typedef struct s_mlx
 }							t_mlx;
 
 typedef struct s_hero
-
 {
 	t_vec					dir;
 	t_vec					pos;
@@ -203,6 +198,8 @@ typedef struct s_data
 	t_garbage				*garbage;
 }							t_data;
 
+t_error						launcher(t_data *data);
+
 // RAYCASTING
 double						compute_dist(t_data *data, t_vec ray_dir);
 t_vec						define_ray(t_data *data);
@@ -219,12 +216,12 @@ void						my_mlx_pixel_put(t_data *data, int x, int y,
 								t_pixel *color);
 
 // HOOKS
+int							mouse_hook(int x, int y, t_data *data);
 int							press_move(int keycode, t_data *data);
 int							release_move(int keycode, t_data *data);
 int							execute(t_data *data);
-bool						move_hero(t_data *data);
-bool						rotate_hero(t_data *data);
-double						get_time(void);
+void						move_hero(t_data *data);
+void						rotate_hero(t_data *data);
 
 // IMAGE
 t_error						load_imgs(t_data *data);
@@ -248,5 +245,8 @@ void						draw_minimap(t_data *data);
 // MINIMAP UTILS
 void						draw_square(t_data *data, int x, int y, int size,
 								t_pixel color);
+
+// OTHERS
+double						get_time(void);
 
 #endif

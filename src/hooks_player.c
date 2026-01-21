@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:27:25 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/15 14:26:45 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:38:36 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,49 +18,14 @@
 #include <mlx.h>
 #include <X11/keysym.h>
 
-static	void move_left_or_right(t_data *data, double to_rotate);
+static	void move_left_or_right(t_data *data, bool right);
 
-int press_move(int keycode, t_data *data)
-{
-	if ((keycode == XK_s || keycode == XK_S) &&
-		data->map.grid[(int)(data->map.player.pos.elements[1] - SPEED * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] - 0.5f * data->map.player.dir.elements[0])] == '0')
-		data->keycode.down = true;
-	else if ((keycode == XK_w || keycode == XK_W) && 
-		data->map.grid[(int)(data->map.player.pos.elements[1] + SPEED * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] + 0.5f * data->map.player.dir.elements[0])] == '0')
-		data->keycode.up = true;
-	else if(keycode == XK_d || keycode == XK_D)
-		data->keycode.right = true;
-	else if (keycode == XK_a || keycode == XK_A)
-		data->keycode.left = true;
-	else if (keycode == XK_Left)
-		data->keycode.rotate_left = true;
-	else if (keycode == XK_Right)
-		data->keycode.rotate_right = true;
-	else if (keycode == XK_Escape)
-		data->keycode.escape = true;
-	return (0);
-}
-
-int release_move(int keycode, t_data *data)
-{
-	if ((keycode == XK_s || keycode == XK_S) && data->keycode.down == true)
-		data->keycode.down = false;
-	else if ((keycode == XK_w || keycode == XK_W) && data->keycode.up == true)	
-		data->keycode.up = false;
-	else if((keycode == XK_d || keycode == XK_D) && data->keycode.right == true)
-		data->keycode.right = false;
-	else if ((keycode == XK_a || keycode == XK_A) && data->keycode.left == true)
-		data->keycode.left = false;
-	else if (keycode == XK_Left && data->keycode.rotate_left == true)
-		data->keycode.rotate_left = false;
-	else if (keycode == XK_Right && data->keycode.rotate_right == true)
-		data->keycode.rotate_right = false;
-	else if (keycode == XK_Escape && data->keycode.escape == true)
-		data->keycode.escape = false;
-	return (0);
-}
-
-bool	move_hero(t_data *data)
+/**
+* @brief allow to deplace the hero
+* @param data all information about the program
+* @return
+*/
+void	move_hero(t_data *data)
 {
 	if (data->keycode.down == true && 
 		data->map.grid[(int)(data->map.player.pos.elements[1] - SPEED * data->map.player.dir.elements[1])][(int)(data->map.player.pos.elements[0] - SPEED * data->map.player.dir.elements[0])] == '0')
@@ -75,37 +40,80 @@ bool	move_hero(t_data *data)
 		data->map.player.pos.elements[1] += SPEED * data->map.player.dir.elements[1];
 	}
 	else if (data->keycode.left == true)
-		move_left_or_right(data, ROTATE_BACKWARD);
+			move_left_or_right(data, false);
 	else if (data->keycode.right == true)
-		move_left_or_right(data, ROTATE_FORWARD);
-	return (true);
+			move_left_or_right(data, true);
 }
 
-static	void move_left_or_right(t_data *data, double to_rotate)
+/**
+* @brief allow to deplace the hero on the sides
+* @param data all information about the program
+* @param right boolean if true move on the right 
+* and if false move on the right
+* @return
+*/
+static	void move_left_or_right(t_data *data, bool right)
 {
-	t_vec dir_rotate;
+	double side_x;
+	double side_y;
 
-	dir_rotate = rotate_vect(data->map.player.dir, to_rotate);
-	if (data->map.grid[(int)(data->map.player.pos.elements[1] + SPEED * dir_rotate.elements[1])][(int)(data->map.player.pos.elements[0] + SPEED * dir_rotate.elements[0])] == '0')	
+	side_x = -data->map.player.dir.elements[1];
+	side_y = data->map.player.dir.elements[0];
+	if (right == true && data->map.grid[(int)(data->map.player.pos.elements[1] + data->map.player.plane.elements[1] * SPEED)][(int)(data->map.player.pos.elements[0] + data->map.player.plane.elements[0] * SPEED)] == '0')
 	{
-		data->map.player.pos.elements[0] += SPEED * dir_rotate.elements[0];
-		data->map.player.pos.elements[1] += SPEED * dir_rotate.elements[1];
+		data->map.player.pos.elements[0] += data->map.player.plane.elements[0] * SPEED;
+		data->map.player.pos.elements[1] += data->map.player.plane.elements[1] * SPEED;
 	}
-	else
-		return ;
+	else if (right == false && data->map.grid[(int)(data->map.player.pos.elements[1] - data->map.player.plane.elements[1] * SPEED)][(int)(data->map.player.pos.elements[0] - data->map.player.plane.elements[0] * SPEED)] == '0')
+	{
+		data->map.player.pos.elements[0] -= data->map.player.plane.elements[0] * SPEED;
+		data->map.player.pos.elements[1] -= data->map.player.plane.elements[1] * SPEED;
+	}
 }
 
-bool	rotate_hero(t_data *data)
+/**
+* @brief allow to rotate the player if boolean are true
+* @param data all information about the program
+* @return
+*/
+void	rotate_hero(t_data *data)
 {
 	if (data->keycode.rotate_left == true)
 	{
 		data->map.player.dir = rotate_vect(data->map.player.dir, SUBT_SPEED);
 		data->map.player.plane = rotate_vect(data->map.player.plane, SUBT_SPEED);
+		data->keycode.rotate_left = false;
 	}
 	else if (data->keycode.rotate_right == true)
 	{
 		data->map.player.dir = rotate_vect(data->map.player.dir, ADD_SPEED);
 		data->map.player.plane = rotate_vect(data->map.player.plane, ADD_SPEED);
+		data->keycode.rotate_right = false;
 	}
-	return (true);
+}
+
+/**
+* @brief allow to move the camera with the mouse
+* @param x abscisse of the mouse
+* @param y ordinate of the mouse
+* @param data all information about the program
+* @return 0 if success
+*/
+int	mouse_hook(int x, int y, t_data *data)
+{
+	int			delta_x;
+	int			delta_y;
+
+	delta_x = MIDDLE_SCREEN_X - x;
+	delta_y = MIDDLE_SCREEN_Y - y;
+	if (delta_y > 0 && data->raycasting.z < 800)
+		data->raycasting.z += delta_y;
+	if (delta_y < 0 && data->raycasting.z > -800)
+		data->raycasting.z += delta_y;
+	if (delta_x > 0)
+		data->keycode.rotate_left = true;
+	else if (delta_x < 0)
+		data->keycode.rotate_right = true;
+	mlx_mouse_move(data->mlx.ptr, data->mlx.win, MIDDLE_SCREEN_X, MIDDLE_SCREEN_Y);
+	return (0); 
 }
