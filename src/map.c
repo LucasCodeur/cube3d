@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:06:40 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/20 18:33:13 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/21 14:59:39 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ bool	draw_map(t_data *data)
 		draw_line(data, x);
 		x++;
 	}
-	// display_minimap(data);
 	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.img, 0, 0);
 	return (true);
 }
@@ -84,10 +83,13 @@ static int	compute_x_of_texture(t_data *data, t_img *text)
 		texture_x = 1;
 	else if (texture_x > text->height)
 		texture_x = text->height - 1;
-	if ((data->raycasting.side == 0 && data->raycasting.ray_dir.elements[0] < 0) || (data->raycasting.side == 1 && data->raycasting.ray_dir.elements[1] > 0))
+	if ((data->raycasting.side == 0 && data->raycasting.ray_dir.elements[0] < 0)
+		|| (data->raycasting.side == 1
+			&& data->raycasting.ray_dir.elements[1] > 0))
 		texture_x = text->height - texture_x - 1;
 	return (texture_x);
 }
+
 /**
  * @brief allow to compute y of the texture
  * @param text texture to map.

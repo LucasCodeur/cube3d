@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:26:12 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 13:26:41 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:08:10 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,28 @@ int	execute(t_data *data)
 
 static void	ininitialize_math_values(t_data *data)
 {
-	data->map.player.pos = new_vector_2D(data->map.player.x,
+	data->map.player.pos = new_vector_2d(data->map.player.x,
 			data->map.player.y);
 	if (data->map.player.orientation == 'N')
 	{
-		data->map.player.plane = new_vector_2D(0.66f, 0.0f);
-		data->map.player.dir = new_vector_2D(0.0f, -1.0f);
+		data->map.player.plane = new_vector_2d(0.66f, 0.0f);
+		data->map.player.dir = new_vector_2d(0.0f, -1.0f);
 	}
 	else if (data->map.player.orientation == 'S')
 	{
-		data->map.player.plane = new_vector_2D(-0.66f, 0.0f);
-		data->map.player.dir = new_vector_2D(0.0f, 1.0f);
+		data->map.player.plane = new_vector_2d(-0.66f, 0.0f);
+		data->map.player.dir = new_vector_2d(0.0f, 1.0f);
 	}
 	else if (data->map.player.orientation == 'E')
 	{
-		data->map.player.plane = new_vector_2D(0.0f, 0.66f);
-		data->map.player.dir = new_vector_2D(1.0f, 0.0f);
+		data->map.player.plane = new_vector_2d(0.0f, 0.66f);
+		data->map.player.dir = new_vector_2d(1.0f, 0.0f);
 	}
 	else if (data->map.player.orientation == 'W')
 	{
-		data->map.player.plane = new_vector_2D(0.0f, -0.66f);
-		data->map.player.dir = new_vector_2D(-1.0f, 0.0f);
+		data->map.player.plane = new_vector_2d(0.0f, -0.66f);
+		data->map.player.dir = new_vector_2d(-1.0f, 0.0f);
 	}
-	data->map.player.camera = new_vector_2D(0.0f, 0.0f);
+	data->map.player.camera = new_vector_2d(0.0f, 0.0f);
 	data->map.grid[data->map.player.y][data->map.player.x] = '0';
 }
