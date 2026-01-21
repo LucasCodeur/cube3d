@@ -6,186 +6,97 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 10:59:23 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/19 15:05:32 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 11:59:40 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 #include <mlx.h>
 
-// return pixel color in (x,y)
-unsigned int	get_pixel(t_img *img, int x, int y)
+static void	put_pixel(t_img *img, int x, int y, t_pixel color)
 {
-	t_pixel	*pixel;
+	char	*dst;
 
-	pixel = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	return (*(unsigned int *)pixel);
+	if (x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGHT)
+		return ;
+	dst = (char *)img->addr + (y * img->line_length + x * (img->bits_per_pixel
+				/ 8));
+	*(unsigned int *)dst = color.value;
 }
 
-void	put_pixel(t_img *img, int x, int y, unsigned int color)
+static void	draw_square(t_data *data, int x, int y, int size, t_pixel color)
 {
-	t_pixel	*pixel;
+	int	i;
+	int	j;
 
-	pixel = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int *)pixel = color;
-}
-
-void	scale_image(t_img *dst, t_img *src)
-{
-	int	x;
-	int	y;
-	int	src_x;
-	int	src_y;
-
-	y = 0;
-	while (y < dst->height)
-	{
-		x = 0;
-		while (x < dst->width)
-		{
-			src_x = x * src->width / dst->width;
-			src_y = y * src->height / dst->height;
-			put_pixel(dst, x, y, get_pixel(src, src_x, src_y));
-			x++;
-		}
-		y++;
-	}
-}
-// Create sprite 8x8 with image 32x32
-static t_img	get_wall(t_data *data)
-{
-	t_img	wall_minimap;
-
-	// t_img	wall32;
-	// wall32.img = mlx_xpm_file_to_image(data->mlx.ptr, "./assets/wall.xpm",
-	// 		&wall32.width, &wall32.height);
-	// wall32.addr = (t_pixel *)mlx_get_data_addr(wall32.img,
-	// 		&wall32.bits_per_pixel, &wall32.line_length, &wall32.endian);
-	wall_minimap.img = mlx_xpm_file_to_image(data->mlx.ptr, "./assets/wall.xpm",
-			&wall_minimap.width, &wall_minimap.height);
-	wall_minimap.addr = (t_pixel *)mlx_get_data_addr(wall_minimap.img,
-			&wall_minimap.bits_per_pixel, &wall_minimap.line_length,
-			&wall_minimap.endian);
-	// scale_image(&wall_minimap, &wall32);
-	return (wall_minimap);
-}
-/*
-color = 4 octets soit 32 bits
-color = *(int *)(wall.addr + j * wall.line_length + i * 4);
-wall.line_length = nombre d'octet pour une ligne entière
-i * 4 correspond a i x 32 bits par pixel / 8 (bits par octets)
-
-wall.addr =
-*/
-// static void	wall_to_map(t_img *wall, t_img *map, int x, int y)
-// {
-// 	int		j;
-// 	int		i;
-// 	int		minimap_x;
-// 	int		minimap_y;
-// 	t_pixel	color;
-
-// 	// int				coef;
-// 	j = 0;
-// 	while (j < wall->height)
-// 	{
-// 		i = 0;
-// 		while (i < wall->width)
-// 		{
-// 			minimap_x = x + i;
-// 			minimap_y = y + j;
-// 			if (minimap_x >= 0 && minimap_x < map->width * 32 && minimap_y >= 0
-// 				&& minimap_y < map->height)
-// 			{
-// 				color = *(t_pixel *)((char *)wall->addr + j * wall->line_length
-// 						+ i * 4);
-// 				*(t_pixel *)((char *)map->addr + minimap_y * map->line_length
-// 						+ minimap_x * 4) = color;
-// 			}
-// 			i++;
-// 		}
-// 		j++;
-// 	}
-// }
-
-static void	wall_to_map(t_img *wall, t_img *map, int x, int y, char c)
-{
-	int		j;
-	int		i;
-	int		map_x;
-	int		map_y;
-	t_pixel	color;
-
-	// int				coef;
 	j = 0;
-	while (j < wall->height)
+	while (j < size)
 	{
 		i = 0;
-		while (i < wall->width)
+		while (i < size)
 		{
-			map_x = x + i;
-			map_y = y + j;
-			if (map_x >= 0 && map_x < map->width * 32 && map_y >= 0
-				&& map_y < map->height * 32)
-			{
-				if (c == '1')
-				{
-					color = *(t_pixel *)((char *)wall->addr + j
-							* wall->line_length + i * 4);
-					*(t_pixel *)((char *)map->addr + map_y * map->line_length
-							+ map_x * 4) = color;
-				}
-				else if (c == '0')
-				{
-					color.value = BLUE;
-					*(t_pixel *)((char *)map->addr + map_y * map->line_length
-							+ map_x * 4) = color;
-				}
-			}
+			put_pixel(&data->img, x + i, y + j, color);
 			i++;
 		}
 		j++;
 	}
 }
 
-// wall = 8 * 8px
-int	display_minimap(t_data *data)
+void	draw_minimap(t_data *data)
 {
+	t_pixel	color;
 	int		x;
 	int		y;
-	t_img	wall;
+	int		start_x;
+	int		start_y;
+	int		end_x;
+	int		end_y;
+	int		player_screen_x;
+	int		player_screen_y;
 
-	wall = get_wall(data);
-	// data->minimap.width = data->map.width * 32;
-	// data->minimap.height = data->map.height * 32;
-	// data->minimap.img = mlx_new_image(data->mlx.ptr, data->minimap.width,
-	// 		data->minimap.height);
-	// data->minimap.addr = (t_pixel *)mlx_get_data_addr(data->minimap.img,
-	// 		&data->minimap.bits_per_pixel, &data->minimap.line_length,
-	// 		&data->minimap.endian);
-	y = 0;
-	while (y < data->map.height)
+	start_x = data->map.player.pos.elements[0] - MINI_RADIUS;
+	start_y = data->map.player.pos.elements[1] - MINI_RADIUS;
+	if (start_x < 0)
+		start_x = 0;
+	if (start_x + 2 * MINI_RADIUS + 1 > data->map.width)
+		start_x = data->map.width - (2 * MINI_RADIUS + 1);
+	if (start_y < 0)
+		start_y = 0;
+	if (start_y + 2 * MINI_RADIUS + 1 > data->map.height)
+		start_y = data->map.height - (2 * MINI_RADIUS + 1);
+	end_x = start_x + 2 * MINI_RADIUS + 1;
+	end_y = start_y + 2 * MINI_RADIUS + 1;
+	y = start_y;
+	while (y < end_y)
 	{
-		x = 0;
-		while (x < data->map.width)
+		x = start_x;
+		while (x < end_x)
 		{
-			wall_to_map(&wall, &data->img, x * 32, y * 32,
-				data->map.grid[y][x]);
-			// if (data->map.grid[y][x] == '1')
-			// {
-			// 	wall_to_map(&wall, &data->img, x * 32, y * 32, );
-			// }
-			// if (data->map.grid[y][x] == '0')
-			// {
-			// 	color.value = BLUE;
-			// 	// wall_to_map(&wall, &data->img, x * 32, y * 32);
-			// }
+			if (x >= 0 && y >= 0 && x < data->map.width && y < data->map.height)
+			{
+				if (data->map.grid[y][x] == '1')
+					color.value = 0x808080;
+				else
+					color.value = 0xFFFAF0;
+				draw_square(data, MINI_OFFSET_X + (x - start_x) * MINI_TILE,
+					MINI_OFFSET_Y + (y - start_y) * MINI_TILE, MINI_TILE,
+					color);
+			}
+			else
+			{
+				color.value = 0x000000;
+			}
+			draw_square(data, MINI_OFFSET_X + (x - start_x) * MINI_TILE,
+				MINI_OFFSET_Y + (y - start_y) * MINI_TILE, MINI_TILE, color);
 			x++;
 		}
 		y++;
 	}
-	/*mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->minimap.img,
-		0,
-		0);*/
-	return (0);
+	color.value = 0xFF0000;
+	player_screen_x = MINI_OFFSET_X + (data->map.player.pos.elements[0]
+			- start_x) * MINI_TILE;
+	player_screen_y = MINI_OFFSET_Y + (data->map.player.pos.elements[1]
+			- start_y) * MINI_TILE;
+	draw_square(data, player_screen_x - PLAYER_SIZE / 2, player_screen_y
+		- PLAYER_SIZE / 2, PLAYER_SIZE, color);
 }

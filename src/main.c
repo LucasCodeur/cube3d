@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:03:49 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/20 16:49:49 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 11:20:23 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	execute(t_data *data)
 		rotate_hero(data);
 		data->fps.count_frame++;
 		draw_map(data);
-		// display_minimap(data);
+		draw_minimap(data);
 		count_fps(data);
 		if (data->keycode.escape == true)
 			destroy_free_exit(data);

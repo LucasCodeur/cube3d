@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/19 10:58:00 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 12:00:59 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@
 # define ROTATE_BACKWARD -90.0 * (M_PI / 180)
 # define FPS 60
 # define FRAME_DURATION 1.0 / FPS
+
+# define MINI_OFFSET_X 10
+# define MINI_OFFSET_Y 10
+# define MINI_TILE 20
+# define PLAYER_SIZE 4
+# define MINI_RADIUS 6
 
 typedef struct s_parsing	t_parsing;
 
@@ -225,6 +231,7 @@ void						ft_bzero(void *s, size_t n);
 int							destroy_free_exit(t_data *data);
 
 // MINIMAP
-int							display_minimap(t_data *data);
+void						draw_minimap(t_data *data);
+void						draw_player_minimap(t_data *data);
 
 #endif
