@@ -32,24 +32,20 @@ double compute_dist(t_data* data, t_vec ray_dir)
     t_vec   delta_dist;
     double  perp_wall_dist;
 
-    // perp_wall_dist = 1;
-    // if (ray_dir.elements[0] > 0.01 || ray_dir.elements[1] > 0.01)
-    // {
-        ray_len.elements[0] = INFINITY;
-        ray_len.elements[1] = INFINITY;
-        delta_dist = compute_gradient(ray_dir);
-        if (isinf(delta_dist.elements[0]))
-            delta_dist.elements[0] = 1e6;
-        if (isinf(delta_dist.elements[1]))
-            delta_dist.elements[1] = 1e6;
-        data->map.x = (int)data->map.player.pos.elements[0];
-        data->map.y = (int)data->map.player.pos.elements[1];
-        define_first_step(data, ray_dir, &ray_len, delta_dist);
-        if (size_ray(data, &ray_len, delta_dist) == 0)
-            perp_wall_dist = (ray_len.elements[0] - delta_dist.elements[0]);
-        else
-            perp_wall_dist = (ray_len.elements[1] - delta_dist.elements[1]);
-    // }
+    ray_len.elements[0] = INFINITY;
+    ray_len.elements[1] = INFINITY;
+    delta_dist = compute_gradient(ray_dir);
+    if (isinf(delta_dist.elements[0]))
+        delta_dist.elements[0] = 1e6;
+    if (isinf(delta_dist.elements[1]))
+        delta_dist.elements[1] = 1e6;
+    data->map.x = (int)data->map.player.pos.elements[0];
+    data->map.y = (int)data->map.player.pos.elements[1];
+    define_first_step(data, ray_dir, &ray_len, delta_dist);
+    if (size_ray(data, &ray_len, delta_dist) == 0)
+        perp_wall_dist = (ray_len.elements[0] - delta_dist.elements[0]);
+    else
+        perp_wall_dist = (ray_len.elements[1] - delta_dist.elements[1]);
     return (perp_wall_dist);
 }
 
@@ -115,10 +111,7 @@ static void define_first_step(t_data* data, t_vec ray_dir, t_vec *ray_len, t_vec
 */
 static  int  size_ray(t_data* data, t_vec *ray_len, t_vec delta_dist)
 {
-    int max_step;
-
-    max_step = 0;
-    while (data->map.grid[data->map.y][data->map.x] == '0' && max_step < 50)
+    while (data->map.grid[data->map.y][data->map.x] == '0')
     {
         if (ray_len->elements[0] <= ray_len->elements[1])
         {
@@ -132,7 +125,6 @@ static  int  size_ray(t_data* data, t_vec *ray_len, t_vec delta_dist)
             ray_len->elements[1] += delta_dist.elements[1];
             data->raycasting.side = 1;
         }
-        max_step++;
     }
     return (data->raycasting.side);
 }

@@ -13,7 +13,7 @@
 #include "display.h"
 #include "parsing.h"
 #include "test.h"
-#include <math.h>
+
 #include <mlx.h>
 
 static int	compute_x_of_texture(t_data *data, t_img *text);
