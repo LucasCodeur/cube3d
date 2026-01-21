@@ -33,7 +33,7 @@ bool	draw_map(t_data *data)
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
-		data->map.player.camera = define_percentage_of_fov(x);
+		data->map.player.camera = mapping_x_on_screen(x);
 		data->raycasting.ray_dir = define_ray(data);
 		compute_height_of_line(data, &data->img.top_strip,
 			&data->img.bottom_strip);

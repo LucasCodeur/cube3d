@@ -51,7 +51,7 @@ void compute_height_of_line(t_data* data, int* top_strip, int* bottom_strip)
 * @param x position on the abscisse
 * @return the value of camera that correspond at of percentage of the fov
 */
-t_vec define_percentage_of_fov(int x)
+t_vec mapping_x_on_screen(int x)
 {
 	t_vec camera;
 
