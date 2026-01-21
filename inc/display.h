@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 16:24:35 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:56:04 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@
 # define SUBT_SPEED -4.0 * (M_PI / 180)
 # define MIDDLE_SCREEN_X WIN_WIDTH / 2
 # define MIDDLE_SCREEN_Y WIN_HEIGHT / 2
-# define SPEED 0.25
-# define ROTATE_FORWARD 90.0 * (M_PI / 180)
-# define ROTATE_BACKWARD -90.0 * (M_PI / 180)
-# define FPS 60
 # define FRAME_DURATION 1.0 / FPS
 
 # define MINI_OFFSET_X 10
@@ -49,6 +45,8 @@
 # define MINI_TILE 20
 # define PLAYER_SIZE 4
 # define MINI_RADIUS 6
+# define SPEED 0.25
+# define FPS 60
 
 typedef struct s_parsing	t_parsing;
 
@@ -181,9 +179,6 @@ typedef struct s_fps
 typedef struct s_raycasting
 {
 	int						side;
-	// WARN: have to take off
-	int						tile_size;
-
 	int						step_x;
 	int						step_y;
 	int						z;
@@ -192,9 +187,19 @@ typedef struct s_raycasting
 	t_vec					ray_dir;
 }							t_raycasting;
 
+typedef	struct	s_compute
+{
+	double					add_speed;
+	double					subt_speed;
+	double					frame_duration;
+	int						middle_screen_x;
+	int						middle_screen_y;
+}	t_compute;
+
 typedef struct s_data
 {
 	t_raycasting			raycasting;
+	t_compute				cube;
 	t_mlx					mlx;
 	t_img					img;
 	t_sprite				imgs;
