@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 15:37:26 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/21 16:24:35 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,13 @@ typedef struct s_minimap_variables
 	int						player_screen_x;
 	int						player_screen_y;
 }							t_minimap_variables;
+
+typedef union s_drawing_infos
+{
+	int						x;
+	int						y;
+	int						size;
+}							t_drawing_infos;
 
 typedef struct s_img
 {
@@ -239,8 +246,8 @@ int							destroy_free_exit(t_data *data);
 void						draw_minimap(t_data *data);
 
 // MINIMAP UTILS
-void						draw_square(t_data *data, int x, int y, int size,
-								t_pixel color);
+void						draw_square(t_data *data,
+								t_drawing_infos drawing_infos, t_pixel color);
 
 // OTHERS
 double						get_time(void);
