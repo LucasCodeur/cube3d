@@ -1,4 +1,4 @@
- This project has been created as part of the 42 curriculum by <lud-adam>, <prigaudi>.
+This project has been created as part of the 42 curriculum by <lud-adam>, <prigaudi>.
 
 ---
 
@@ -8,10 +8,10 @@
 
 This project allows students to learn:
 
-* **Raycasting** in 2D to simulate 3D environments
-* Working with **MiniLibX** (a minimal graphics library in C)
-* Handling **vectors, structures, and arrays** in C
-* Game logic and **map parsing**
+- **Raycasting** in 2D to simulate 3D environments
+- Working with **MiniLibX** (a minimal graphics library in C)
+- Handling **vectors, structures, and arrays** in C
+- Game logic and **map parsing**
 
 ---
 
@@ -19,9 +19,9 @@ This project allows students to learn:
 
 ### 1. Pre-requisites
 
-* Linux or macOS
-* GCC or clang
-* Make installed
+- Linux or macOS
+- GCC or clang
+- Make installed
 
 ### 2. Download MiniLibX
 
@@ -60,10 +60,10 @@ cub3D/
 
 # 📄 Map Format (`.cub`)
 
-* Walls: `1`
-* Empty space: `0`
-* Player spawn: `N`, `S`, `E`, `W` (facing direction)
-* Example:
+- Walls: `1`
+- Empty space: `0`
+- Player spawn: `N`, `S`, `E`, `W` (facing direction)
+- Example:
 
 ```
 111111
@@ -76,11 +76,36 @@ cub3D/
 
 # 🎮 Controls
 
-* **W / A / S / D** → Move player
-* **Mouse** → Look around / rotate view
-* **ESC** → Exit
+- **W / A / S / D** → Move player
+- **Mouse** → Look around / rotate view
+- **ESC** → Exit
 
 ---
+
+# Parsing
+
+## Configuration elements checking
+
+First, the program checks the number of arguments (one and only one is required) and its extension (.cub is accepted).
+Then, the program validates that the path given as an argument can be opened and starts reading the configuration file. An empty file immediately returns an error and stops the program.
+Each line is then validated one by one.
+
+The following cases will return an error:
+
+- Invalid element prefix.
+- Duplicate definition of a configuration element.
+- Missing configuration element.
+- Invalid RGB format for the floor or the ceiling.
+
+## Map checking
+
+Once the six configuration elements are successfully parsed, the program starts parsing the map structure. The following cases will return an error:
+
+- Empty line in the map structure.
+- Unauthorized character.
+- More than one player defined.
+- Player outside the map.
+- Open map.
 
 # 🎨 Graphics (Raycasting)
 
@@ -93,31 +118,25 @@ Raycasting is an algorithm that **traces rays** from the player’s position to 
 ### How It Works
 
 1. **Data Structures**
-
-   * Vectors represent positions and directions (`x`, `y`).
+   - Vectors represent positions and directions (`x`, `y`).
 
 2. **Field of View (FOV)**
-
-   * Defines the visible area in front of the player.
-   * Combines **direction vector** + **plane vector** to determine the FOV width.
+   - Defines the visible area in front of the player.
+   - Combines **direction vector** + **plane vector** to determine the FOV width.
 
 3. **Rays**
-
-   * For each vertical screen column, calculate the ray direction in camera space.
+   - For each vertical screen column, calculate the ray direction in camera space.
 
 4. **DDA Algorithm**
-
-   * Step along the ray until it hits a wall.
-   * Track distance and axis hit for texture mapping.
+   - Step along the ray until it hits a wall.
+   - Track distance and axis hit for texture mapping.
 
 5. **Wall Strip Height**
-
-   * Distance to the wall determines the vertical slice height on screen.
+   - Distance to the wall determines the vertical slice height on screen.
 
 6. **Texture Mapping**
-
-   * Use linear interpolation to map the wall texture correctly.
-   * Repeat for every screen column.
+   - Use linear interpolation to map the wall texture correctly.
+   - Repeat for every screen column.
 
 > ⚠️ Note: Texture mapping relies on collision point, wall height, and texture dimensions.
 
@@ -125,36 +144,36 @@ Raycasting is an algorithm that **traces rays** from the player’s position to 
 
 # 🔹 Parsing
 
-* Reads `.cub` maps and converts them into data usable for raycasting.
-* Detects walls, empty spaces, and player start position.
+- Reads `.cub` maps and converts them into data usable for raycasting.
+- Detects walls, empty spaces, and player start position.
 
 ---
 
 # 🌟 Features
 
-* ⚡ Real-time **frame rate**
-* 🎯 **FPS counter**
-* 🗺 **Minimap**
-* 🖱 **Mouse input**
+- ⚡ Real-time **frame rate**
+- 🎯 **FPS counter**
+- 🗺 **Minimap**
+- 🖱 **Mouse input**
 
 ---
 
 # 📚 Resources
 
-* [Vector rotation in 2D](https://www.alibabacloud.com/blog/the-use-of-vector-rotation-in-a-two-dimensional-space_599766)
-* [Cross product calculator](https://www.omnicalculator.com/fr/mathematiques/calculateur-produit-vectoriel)
-* [YouTube: Raycasting tutorial 1](https://www.youtube.com/watch?v=mR3Rwyu52rA)
-* [YouTube: Raycasting tutorial 2](https://www.youtube.com/watch?v=NbSee-XM7WA)
-* [Lodev Raycasting tutorial](https://lodev.org/cgtutor/raycasting.html)
-* [MiniLibX hook examples](https://42-cursus.gitbook.io/guide/minilibx/minilibx-hook-examples)
-* [Raycasting explanation](https://perso.esiee.fr/~buzerl/sphinx_IMA/80%20raycast/raycast.html)
+- [Vector rotation in 2D](https://www.alibabacloud.com/blog/the-use-of-vector-rotation-in-a-two-dimensional-space_599766)
+- [Cross product calculator](https://www.omnicalculator.com/fr/mathematiques/calculateur-produit-vectoriel)
+- [YouTube: Raycasting tutorial 1](https://www.youtube.com/watch?v=mR3Rwyu52rA)
+- [YouTube: Raycasting tutorial 2](https://www.youtube.com/watch?v=NbSee-XM7WA)
+- [Lodev Raycasting tutorial](https://lodev.org/cgtutor/raycasting.html)
+- [MiniLibX hook examples](https://42-cursus.gitbook.io/guide/minilibx/minilibx-hook-examples)
+- [Raycasting explanation](https://perso.esiee.fr/~buzerl/sphinx_IMA/80%20raycast/raycast.html)
 
 ---
 
 # ⚠️ Known Limitations
 
-* Only 2D maps supported (no diagonal walls)
-* Simple wall textures (no dynamic lighting)
-* No enemies or shooting mechanics
+- Only 2D maps supported (no diagonal walls)
+- Simple wall textures (no dynamic lighting)
+- No enemies or shooting mechanics
 
 ---
