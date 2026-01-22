@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:51:37 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/22 13:52:42 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:51:41 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_error	check_line(char *line, t_data *data)
 		if (error.code != ERR_OK)
 			return (error);
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	check_file_opening(char *path, int *fd)
@@ -42,10 +42,31 @@ static t_error	check_file_opening(char *path, int *fd)
 		error.message = "Config file cant be opened";
 		return (error);
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
-static t_error	gnl_loop(t_data *data, int fd)
+static t_error	gnl_loop(t_data *data, int fd, char **line)
+{
+	t_error	error;
+
+	while (*line)
+	{
+		error = check_line(*line, data);
+		if (error.code != ERR_OK)
+			return (error);
+		error = get_next_line(data, fd, line);
+		if (error.code != ERR_OK)
+			return (error);
+		if (!*line)
+		{
+			data->map.map_finished = 1;
+			return (error_ok());
+		}
+	}
+	return (error_ok());
+}
+
+static t_error	read_file(t_data *data, int fd)
 {
 	t_error	error;
 	char	*line;
@@ -60,33 +81,21 @@ static t_error	gnl_loop(t_data *data, int fd)
 		error.message = "File is empty\n";
 		return (error);
 	}
-	while (line)
-	{
-		error = check_line(line, data);
-		if (error.code != ERR_OK)
-			return (error);
-		error = get_next_line(data, fd, &line);
-		if (error.code != ERR_OK)
-			return (error);
-		if (!line)
-		{
-			data->map.map_finished = 1;
-			return (ERROR_OK);
-		}
-	}
-	return (ERROR_OK);
+	error = gnl_loop(data, fd, &line);
+	if (error.code != ERR_OK)
+		return (error);
+	return (error_ok());
 }
 
 t_error	config(char *path, t_data *data)
 {
 	t_error	error;
-	int		fd;
 
-	fd = -1;
-	error = check_file_opening(path, &fd);
+	data->parsing->fd = -1;
+	error = check_file_opening(path, &data->parsing->fd);
 	if (error.code != ERR_OK)
 		return (error);
-	error = gnl_loop(data, fd);
+	error = read_file(data, data->parsing->fd);
 	if (error.code != ERR_OK)
 		return (error);
 	if (!data->map.map_finished)
@@ -98,5 +107,5 @@ t_error	config(char *path, t_data *data)
 	error = check_map(data);
 	if (error.code != ERR_OK)
 		return (error);
-	return (ERROR_OK);
+	return (error_ok());
 }

@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/22 16:32:21 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:05:15 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct s_minimap_variables
 	int						player_screen_y;
 }							t_minimap_variables;
 
-typedef union s_drawing_infos
+typedef struct s_drawing_infos
 {
 	int						x;
 	int						y;

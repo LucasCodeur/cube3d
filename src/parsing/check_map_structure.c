@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:14:23 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/21 15:18:10 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:01:38 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_error	check_map_opened(char **map_test, int i, int j)
 		}
 		k++;
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	map_copy(t_data *data, char ***map_copy)
@@ -57,7 +57,7 @@ static t_error	map_copy(t_data *data, char ***map_copy)
 		i++;
 	}
 	(*map_copy)[i] = NULL;
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	recursive(char **map_test, int i, int j, t_data *data);
@@ -67,7 +67,7 @@ static t_error	recursive_loop(char **map_test, int i, int j, t_data *data)
 	t_error	error;
 
 	if (j != data->map.width - 1 && (map_test[i][j + 1] == '0' || map_test[i][j
-			+ 1] == data->map.player.orientation))
+		+ 1] == data->map.player.orientation))
 	{
 		map_test[i][j + 1] = '1';
 		error = recursive(map_test, i, j + 1, data);
@@ -81,7 +81,7 @@ static t_error	recursive_loop(char **map_test, int i, int j, t_data *data)
 		if (error.code != ERR_OK)
 			return (error);
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	recursive(char **map_test, int i, int j, t_data *data)
@@ -101,7 +101,7 @@ static t_error	recursive(char **map_test, int i, int j, t_data *data)
 	error = recursive_loop(map_test, i, j, data);
 	if (error.code != ERR_OK)
 		return (error);
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 t_error	check_map_structure(t_data *data)
@@ -130,5 +130,5 @@ t_error	check_map_structure(t_data *data)
 			}
 		}
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }

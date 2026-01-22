@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:10:11 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/22 14:16:26 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:49:22 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_error	is_good_char(char *line, int i)
 		error.message = "Bad character in map structure\n";
 		return (error);
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	extract_map_line_loop(char *line, t_data *data)
@@ -37,7 +37,7 @@ static t_error	extract_map_line_loop(char *line, t_data *data)
 		if (line[i] == '\0')
 		{
 			data->map.map_finished = 1;
-			return (ERROR_OK);
+			return (error_ok());
 		}
 		if (data->map.map_finished)
 		{
@@ -50,20 +50,20 @@ static t_error	extract_map_line_loop(char *line, t_data *data)
 			return (error);
 		i++;
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 t_error	extract_map_line(char *line, t_data *data)
 {
-	t_error error;
+	t_error	error;
 
 	if (!ft_strncmp(line, "\n", 1) && data->map.height)
 	{
 		data->map.map_finished = 1;
-		return (ERROR_OK);
+		return (error_ok());
 	}
 	error = extract_map_line_loop(line, data);
 	if (error.code != ERR_OK)
 		return (error);
-	return (ERROR_OK);
+	return (error_ok());
 }

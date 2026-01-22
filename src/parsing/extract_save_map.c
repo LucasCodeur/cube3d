@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:22:08 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/22 14:11:18 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:49:22 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_error	loop_new_map(char ***new_map_lines, char *line, t_data *data)
 	if (error.code != ERR_OK)
 		return (error);
 	(*new_map_lines)[++i] = NULL;
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	save_map_line(char *line, t_data *data)
@@ -49,7 +49,7 @@ static t_error	save_map_line(char *line, t_data *data)
 	if ((int)ft_strlen(line) - 1 > data->map.width)
 		data->map.width = ft_strlen(line) - 1;
 	data->map.height++;
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 t_error	extract_save_map(char *line, t_data *data)
@@ -65,5 +65,5 @@ t_error	extract_save_map(char *line, t_data *data)
 		if (error.code != ERR_OK)
 			return (error);
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }

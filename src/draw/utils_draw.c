@@ -6,13 +6,13 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:52:59 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 15:01:34 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:26:07 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 
-void	fill_color(t_pixel *color, int* rgb)
+void	fill_color(t_pixel *color, int *rgb)
 {
 	color->channels[0] = rgb[2];
 	color->channels[1] = rgb[1];

@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:48:02 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/20 12:39:38 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:51:41 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_error	hero_on_limit(t_data *data, int i, int *j)
 		error.message = "Map open,hero out of the map\n ";
 		return (error);
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	hero_on_map(t_data *data, int i, int *j)
@@ -49,7 +49,7 @@ static t_error	hero_on_map(t_data *data, int i, int *j)
 		}
 		k = k + 2;
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	is_already_an_hero(t_data *data)
@@ -62,7 +62,7 @@ static t_error	is_already_an_hero(t_data *data)
 		error.message = "You must have just one hero on the map\n";
 		return (error);
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	loop_tests(t_data *data, int i, int *j)
@@ -89,7 +89,7 @@ static t_error	loop_tests(t_data *data, int i, int *j)
 		}
 		(*j)++;
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 t_error	check_save_hero(t_data *data)
@@ -116,5 +116,5 @@ t_error	check_save_hero(t_data *data)
 		error.message = "No hero on your map\n";
 		return (error);
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }

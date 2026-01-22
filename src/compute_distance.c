@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/27 16:33:24 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 17:04:35 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:27:04 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #include <float.h>
 #include <math.h>
 
-static t_vec compute_slope(t_vec ray_dir);
-static void define_first_step(t_data* data, t_vec ray_dir,
-	t_vec *ray_len, t_vec delta_dist);
-static int  size_ray(t_data* data, t_vec *ray_len, t_vec delta_dist);
+static t_vec	compute_slope(t_vec ray_dir);
+static void		define_first_step(t_data *data, t_vec ray_dir, t_vec *ray_len,
+					t_vec delta_dist);
+static int		size_ray(t_data *data, t_vec *ray_len, t_vec delta_dist);
 
 /**
  * @brief allow to compute the distance when we encounter a wall
@@ -33,29 +33,29 @@ double	compute_dist(t_data *data, t_vec ray_dir)
 	t_vec	delta_dist;
 	double	perp_wall_dist;
 
-    ray_len.elements[0] = INFINITY;
-    ray_len.elements[1] = INFINITY;
-    delta_dist = compute_slope(ray_dir);
-    if (isinf(delta_dist.elements[0]))
-        delta_dist.elements[0] = 1e6;
-    if (isinf(delta_dist.elements[1]))
-        delta_dist.elements[1] = 1e6;
-    data->map.x = (int)data->map.player.pos.elements[0];
-    data->map.y = (int)data->map.player.pos.elements[1];
-    define_first_step(data, ray_dir, &ray_len, delta_dist);
-    if (size_ray(data, &ray_len, delta_dist) == 0)
-        perp_wall_dist = (ray_len.elements[0] - delta_dist.elements[0]);
-    else
-        perp_wall_dist = (ray_len.elements[1] - delta_dist.elements[1]);
-    return (perp_wall_dist);
+	ray_len.elements[0] = INFINITY;
+	ray_len.elements[1] = INFINITY;
+	delta_dist = compute_slope(ray_dir);
+	if (isinf(delta_dist.elements[0]))
+		delta_dist.elements[0] = 1e6;
+	if (isinf(delta_dist.elements[1]))
+		delta_dist.elements[1] = 1e6;
+	data->map.x = (int)data->map.player.pos.elements[0];
+	data->map.y = (int)data->map.player.pos.elements[1];
+	define_first_step(data, ray_dir, &ray_len, delta_dist);
+	if (size_ray(data, &ray_len, delta_dist) == 0)
+		perp_wall_dist = (ray_len.elements[0] - delta_dist.elements[0]);
+	else
+		perp_wall_dist = (ray_len.elements[1] - delta_dist.elements[1]);
+	return (perp_wall_dist);
 }
 
 /**
-* @brief compute the slope of ray_dir
-* @param ray_dir direction of the ray
-* @return ret the value of the compute of the gradient 
-*/
-static t_vec compute_slope(t_vec ray_dir)
+ * @brief compute the slope of ray_dir
+ * @param ray_dir direction of the ray
+ * @return ret the value of the compute of the gradient
+ */
+static t_vec	compute_slope(t_vec ray_dir)
 {
 	t_vec	ret;
 

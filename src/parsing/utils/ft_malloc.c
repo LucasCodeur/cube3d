@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 10:32:09 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/15 09:45:52 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:49:22 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ t_error	ft_malloc(t_garbage **garbage, int size, void **str)
 	}
 	ft_lstnew(*str, &new);
 	ft_lstadd_front(garbage, new);
-	return (ERROR_OK);
+	return (error_ok());
 }

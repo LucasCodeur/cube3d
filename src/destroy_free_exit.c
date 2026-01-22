@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:09:35 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/21 14:55:22 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:10:30 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ static void	free_all(t_data *data)
 
 int	destroy_free_exit(t_data *data)
 {
+	close(data->parsing->fd);
 	free_img(data);
 	free_all(data);
 	exit(EXIT_SUCCESS);

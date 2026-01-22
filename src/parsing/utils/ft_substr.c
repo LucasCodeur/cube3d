@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:57:57 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/20 16:46:02 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:49:22 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_error	ft_substr(t_data *data, t_substr_io *substr_io, unsigned int start,
 		error = ft_calloc(1, 1, &substr_io->out);
 		if (error.code != ERR_OK)
 			return (error);
-		return (ERROR_OK);
+		return (error_ok());
 	}
 	if (len > ft_strlen(substr_io->in) - start)
 		len = ft_strlen(substr_io->in) - start;
@@ -38,5 +38,5 @@ t_error	ft_substr(t_data *data, t_substr_io *substr_io, unsigned int start,
 		i++;
 	}
 	(substr_io->out)[i] = '\0';
-	return (ERROR_OK);
+	return (error_ok());
 }

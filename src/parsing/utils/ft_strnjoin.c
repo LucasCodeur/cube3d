@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:46:38 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/20 13:47:33 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:49:22 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ t_error	ft_strnjoin(t_data *data, char **s1, char *s2, int byte_nbr)
 		return (error);
 	loop(&str, s1, s2, byte_nbr);
 	(*s1) = str;
-	return (ERROR_OK);
+	return (error_ok());
 }

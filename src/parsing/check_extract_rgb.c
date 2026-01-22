@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 13:54:18 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/20 11:35:53 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:51:41 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_error	test_rgb_value(int value)
 		error.message = "RGB Format Invalid\n";
 		return (error);
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	rgb_loop(char **rgb_str, int **rgb_int)
@@ -51,7 +51,7 @@ static t_error	rgb_loop(char **rgb_str, int **rgb_int)
 		return (error);
 	}
 	(*rgb_int)[i] = 0;
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	loop_digit_or_space(char **rgb_str, int i, int *one_digit)
@@ -73,7 +73,7 @@ static t_error	loop_digit_or_space(char **rgb_str, int i, int *one_digit)
 			*one_digit = 1;
 		j++;
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	is_digit_or_space(char **rgb_str)
@@ -97,7 +97,7 @@ static t_error	is_digit_or_space(char **rgb_str)
 		}
 		i++;
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 t_error	check_extract_rgb(t_data *data, char *info, int **rgb_int)
@@ -119,5 +119,5 @@ t_error	check_extract_rgb(t_data *data, char *info, int **rgb_int)
 	error = rgb_loop(rgb_str, rgb_int);
 	if (error.code != ERR_OK)
 		return (error);
-	return (ERROR_OK);
+	return (error_ok());
 }

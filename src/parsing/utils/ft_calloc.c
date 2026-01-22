@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 08:34:41 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/13 14:17:19 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:49:22 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ t_error	ft_calloc(size_t elementCount, size_t elementSize, char **str)
 		tamp[i] = '\0';
 		i++;
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
