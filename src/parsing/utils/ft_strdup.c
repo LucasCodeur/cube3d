@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 14:43:04 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/16 09:43:28 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:49:22 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ t_error	ft_strdup(t_data *data, const char *str, char **result)
 		i++;
 	}
 	(*result)[i] = '\0';
-	return (ERROR_OK);
+	return (error_ok());
 }

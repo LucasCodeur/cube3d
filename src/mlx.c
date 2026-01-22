@@ -6,12 +6,11 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:01:10 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/22 14:04:34 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:51:41 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
-
 #include <mlx.h>
 
 static void	init_windows_and_image(t_data *data, t_error *error);
@@ -46,7 +45,7 @@ t_error	init_screen_mlx(t_data *data)
 	if (error.code == ERR_MLX)
 		return (error);
 	data->img.pixels_per_line = data->img.line_length / sizeof(t_pixel);
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 /**

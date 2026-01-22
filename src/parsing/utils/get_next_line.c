@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:18:04 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/22 13:53:03 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:49:22 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ static t_error	get_buffer(t_gnl_variables gnl_var, char *buffer, int *check)
 				return (error);
 			ft_memmove(buffer, buffer + i, BUFFER_SIZE + 1 - i);
 			*check = 1;
-			return (ERROR_OK);
+			return (error_ok());
 		}
 		error = ft_strnjoin(gnl_var.data, gnl_var.line, buffer, i);
 		if (error.code != ERR_OK)
 			return (error);
 	}
 	*check = 2;
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	read_buffer(t_gnl_variables gnl_var, ssize_t *byte_read,
@@ -78,14 +78,14 @@ static t_error	read_buffer(t_gnl_variables gnl_var, ssize_t *byte_read,
 		{
 			buffer[0] = '\0';
 			*check = 1;
-			return (ERROR_OK);
+			return (error_ok());
 		}
 		*check = 0;
-		return (ERROR_OK);
+		return (error_ok());
 	}
 	buffer[*byte_read] = '\0';
 	*check = 2;
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	get_line(t_gnl_variables gnl_var, char *buffer)
@@ -99,21 +99,21 @@ static t_error	get_line(t_gnl_variables gnl_var, char *buffer)
 	if (error.code != ERR_OK)
 		return (error);
 	if (check == 1)
-		return (ERROR_OK);
+		return (error_ok());
 	while (byte_read)
 	{
 		error = read_buffer(gnl_var, &byte_read, buffer, &check);
 		if (error.code != ERR_OK)
 			return (error);
 		if (check == 1 || check == 0)
-			return (ERROR_OK);
+			return (error_ok());
 		error = get_buffer(gnl_var, buffer, &check);
 		if (error.code != ERR_OK)
 			return (error);
 		if (check == 1)
-			return (ERROR_OK);
+			return (error_ok());
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 t_error	get_next_line(t_data *data, int fd, char **line)
@@ -135,5 +135,5 @@ t_error	get_next_line(t_data *data, int fd, char **line)
 	error = get_line(gnl_var, buffer);
 	if (error.code != ERR_OK)
 		return (error);
-	return (ERROR_OK);
+	return (error_ok());
 }

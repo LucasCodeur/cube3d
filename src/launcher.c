@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:26:12 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 21:05:26 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:50:17 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static void	ininitialize_compute(t_compute *cube);
 static void	ininitialize_math_values(t_data *data);
 
 /**
-* @brief allow to launch the main algorithm of the program
-* @param data all information about the program.
-* @return error ok if success
-*/
+ * @brief allow to launch the main algorithm of the program
+ * @param data all information about the program.
+ * @return error ok if success
+ */
 t_error	launcher(t_data *data)
 {
 	t_error	error;
@@ -45,15 +45,15 @@ t_error	launcher(t_data *data)
 	mlx_hook(data->mlx.win, MotionNotify, PointerMotionMask, mouse_hook, data);
 	mlx_loop_hook(data->mlx.ptr, execute, data);
 	mlx_loop(data->mlx.ptr);
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 /**
-* @brief function that execute the different function to display 
-* maps and handle the movements
-* @param data all information about the program.
-* @return 0 if success
-*/
+ * @brief function that execute the different function to display
+ * maps and handle the movements
+ * @param data all information about the program.
+ * @return 0 if success
+ */
 int	execute(t_data *data)
 {
 	data->fps.current_time = get_time();
@@ -72,10 +72,10 @@ int	execute(t_data *data)
 }
 
 /**
-* @brief ininitialize all values of maths to do the raycasting
-* @param data all information about the program.
-* @return
-*/
+ * @brief ininitialize all values of maths to do the raycasting
+ * @param data all information about the program.
+ * @return
+ */
 static void	ininitialize_math_values(t_data *data)
 {
 	data->map.player.pos = new_vector_2d(data->map.player.x,
@@ -106,10 +106,10 @@ static void	ininitialize_math_values(t_data *data)
 }
 
 /**
-* @brief ininitialize all computes of maths to do the raycasting
-* @param cube structure to stock all precompute of different formulas
-* @return
-*/
+ * @brief ininitialize all computes of maths to do the raycasting
+ * @param cube structure to stock all precompute of different formulas
+ * @return
+ */
 static void	ininitialize_compute(t_compute *cube)
 {
 	cube->add_speed = 5.0 * (M_PI / 180);

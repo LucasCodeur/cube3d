@@ -6,12 +6,12 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:01:49 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/22 16:05:38 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:28:47 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef PARSING_H
+# define PARSING_H
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif

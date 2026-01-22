@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:03:49 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/22 11:28:22 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:51:41 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static t_error	ininitialize_values(t_data *data)
 	ft_bzero(data->parsing, sizeof(t_parsing));
 	data->mlx.max_height = WIN_HEIGHT;
 	data->mlx.max_width = WIN_WIDTH;
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static void	print_message_error(t_error error)

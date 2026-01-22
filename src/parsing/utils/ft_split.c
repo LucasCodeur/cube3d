@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:35:12 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/20 13:04:40 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:49:22 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_error	extract(t_data *config_data, char const *s,
 		j++;
 	}
 	(*extracted_str)[j] = '\0';
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static int	char_count(char const *s, char c)
@@ -74,5 +74,5 @@ t_error	ft_split(t_data *cd, char const *s, char c, char ***split)
 		}
 	}
 	(*split)[split_var.j] = NULL;
-	return (ERROR_OK);
+	return (error_ok());
 }

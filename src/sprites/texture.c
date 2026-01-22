@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:55:13 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 21:05:30 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:49:22 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_error	load_imgs(t_data *data)
 			&data->imgs.wall_south);
 	if (error.code != ERR_OK)
 		return (error);
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 /**
@@ -99,5 +99,5 @@ static t_error	fill_image(t_data *data, char *path_to_asset, t_img *img)
 	img->bits_per_pixel = img->bits_per_pixel / 8;
 	img->double_height = (double)img->height;
 	img->pixels_per_line = img->line_length / sizeof(t_pixel);
-	return (ERROR_OK);
+	return (error_ok());
 }

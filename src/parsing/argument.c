@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 09:09:51 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/20 16:46:17 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:51:41 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_error	check_argument_number(int argc)
 		error.message = "You have to enter one and only one argument\n";
 		return (error);
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	check_file_extension(char *path, t_data *data)
@@ -51,7 +51,7 @@ static t_error	check_file_extension(char *path, t_data *data)
 		error.message = "Filename must have .cub extension\n";
 		return (error);
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 t_error	check_argument(int argc, char **argv, t_data *data)
@@ -64,5 +64,5 @@ t_error	check_argument(int argc, char **argv, t_data *data)
 	error = check_file_extension(argv[1], data);
 	if (error.code != ERR_OK)
 		return (error);
-	return (ERROR_OK);
+	return (error_ok());
 }

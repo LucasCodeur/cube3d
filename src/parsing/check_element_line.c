@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 14:52:57 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/20 16:45:19 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:51:41 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_error	choose_id(t_substr_io s_io, t_data *data, int *i, char **id)
 			return (error);
 		*id = s_io.out;
 		*i = 3;
-		return (ERROR_OK);
+		return (error_ok());
 	}
 	else if (!ft_strncmp(s_io.in, "F ", 2) || !ft_strncmp(s_io.in, "C ", 2))
 	{
@@ -33,7 +33,7 @@ static t_error	choose_id(t_substr_io s_io, t_data *data, int *i, char **id)
 			return (error);
 		*id = s_io.out;
 		*i = 2;
-		return (ERROR_OK);
+		return (error_ok());
 	}
 	error.code = ERR_INVALID_ARG;
 	error.message = "Config file is not valid\n";
@@ -53,7 +53,7 @@ static t_error	extract_id(t_data *data, char *line, int *i, char **id)
 	error = choose_id(substr_io, data, i, id);
 	if (error.code != ERR_OK)
 		return (error);
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 static t_error	extract_infos(t_data *data, char *line, int *i,
@@ -73,7 +73,7 @@ static t_error	extract_infos(t_data *data, char *line, int *i,
 	error = ft_strtrim(data, substr_io.out, " ", info_clean);
 	if (error.code != ERR_OK)
 		return (error);
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 t_error	check_element_line(char *line, t_data *data)
@@ -97,5 +97,5 @@ t_error	check_element_line(char *line, t_data *data)
 	error = save_element(id, info, data);
 	if (error.code != ERR_OK)
 		return (error);
-	return (ERROR_OK);
+	return (error_ok());
 }

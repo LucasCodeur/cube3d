@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:10:16 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/19 15:26:21 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:49:22 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ static t_error	save_compass_element(char *id, char *info, t_parsing *data)
 	t_error	error;
 
 	if (!save_north_south(id, info, data))
-		return (ERROR_OK);
+		return (error_ok());
 	else if (!save_west_east(id, info, data))
-		return (ERROR_OK);
+		return (error_ok());
 	error.code = ERR_INVALID_ARG;
 	error.message = "Double definition of a config element\n";
 	return (error);
@@ -70,7 +70,7 @@ static t_error	save_ceiling_floor(char *id, char *info, t_data *data)
 		if (error.code != ERR_OK)
 			return (error);
 		data->parsing->nb_valid_elements++;
-		return (ERROR_OK);
+		return (error_ok());
 	}
 	else if (!ft_strncmp(id, "C", 1) && !data->parsing->ceiling_rgb_color)
 	{
@@ -79,9 +79,9 @@ static t_error	save_ceiling_floor(char *id, char *info, t_data *data)
 		if (error.code != ERR_OK)
 			return (error);
 		data->parsing->nb_valid_elements++;
-		return (ERROR_OK);
+		return (error_ok());
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }
 
 t_error	save_element(char *id, char *info, t_data *data)
@@ -101,5 +101,5 @@ t_error	save_element(char *id, char *info, t_data *data)
 		if (error.code != ERR_OK)
 			return (error);
 	}
-	return (ERROR_OK);
+	return (error_ok());
 }

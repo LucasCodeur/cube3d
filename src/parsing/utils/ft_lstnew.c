@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 19:23:36 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/13 14:12:36 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:49:22 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ t_error	ft_lstnew(void *ptr, t_garbage **new)
 	}
 	(*new)->ptr = ptr;
 	(*new)->next = NULL;
-	return (ERROR_OK);
+	return (error_ok());
 }
