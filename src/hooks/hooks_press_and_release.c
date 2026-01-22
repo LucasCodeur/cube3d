@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 09:43:33 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/22 16:17:00 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 17:03:35 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,36 @@ int	release_move(int keycode, t_data *data)
 	return (0);
 }
 
+static bool	handle_up(t_data *data, int keycode, int x, int y)
+{
+	if (keycode == XK_s || keycode == XK_S)
+	{
+		y = data->map.player.pos.elements[1] - SPEED
+			* data->map.player.dir.elements[1];
+		x = data->map.player.pos.elements[0] - 0.5f
+			* data->map.player.dir.elements[0];
+		if (data->map.grid[y][x] == '0')
+			data->keycode.down = true;
+		return (true);
+	}
+	return (false);
+}
+
+static bool	handle_down(t_data *data, int keycode, int x, int y)
+{
+	if (keycode == XK_w || keycode == XK_W)
+	{
+		y = (int)(data->map.player.pos.elements[1] + SPEED
+				* data->map.player.dir.elements[1]);
+		x = (int)(data->map.player.pos.elements[0] + 0.5f
+				* data->map.player.dir.elements[0]);
+		if (data->map.grid[y][x] == '0')
+			data->keycode.up = true;
+		return (true);
+	}
+	return (false);
+}
+
 /**
  * @brief allow to handle w and s
  * @param data all information about the program.
@@ -83,25 +113,9 @@ static bool	handle_up_and_down(t_data *data, int keycode)
 
 	x = 0;
 	y = 0;
-	if (keycode == XK_s || keycode == XK_S)
-	{
-		y = data->map.player.pos.elements[1] - SPEED
-			* data->map.player.dir.elements[1];
-		x = data->map.player.pos.elements[0] - 0.5f
-			* data->map.player.dir.elements[0];
-		if (data->map.grid[y][x] == '0')
-			data->keycode.down = true;
+	if (handle_up(data, keycode, x, y))
 		return (true);
-	}
-	else if (keycode == XK_w || keycode == XK_W)
-	{
-		y = (int)(data->map.player.pos.elements[1] + SPEED
-				* data->map.player.dir.elements[1]);
-		x = (int)(data->map.player.pos.elements[0] + 0.5f
-				* data->map.player.dir.elements[0]);
-		if (data->map.grid[y][x] == '0')
-			data->keycode.up = true;
+	if (handle_down(data, keycode, x, y))
 		return (true);
-	}
 	return (false);
 }
