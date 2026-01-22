@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:51:37 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/22 13:52:42 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:08:40 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,12 @@ static t_error	gnl_loop(t_data *data, int fd)
 t_error	config(char *path, t_data *data)
 {
 	t_error	error;
-	int		fd;
 
-	fd = -1;
-	error = check_file_opening(path, &fd);
+	data->parsing->fd = -1;
+	error = check_file_opening(path, &data->parsing->fd);
 	if (error.code != ERR_OK)
 		return (error);
-	error = gnl_loop(data, fd);
+	error = gnl_loop(data, data->parsing->fd);
 	if (error.code != ERR_OK)
 		return (error);
 	if (!data->map.map_finished)

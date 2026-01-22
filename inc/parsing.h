@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:01:49 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/22 14:10:45 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:05:38 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ is_valid = 1 if all elements are present and no superflux
 */
 typedef struct s_parsing
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
+	int		fd;
 	char	*north_texture;
 	char	*south_texture;
 	char	*east_texture;
