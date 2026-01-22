@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 17:22:08 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/21 14:21:06 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 10:51:29 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static t_error	extract_map_line(char *line, t_data *data)
 {
 	t_error	error;
 
-	if (!ft_strncmp(line, "\n", 1) && data->map.height)
+	if ((!ft_strncmp(line, "\n", 1) || !ft_strncmp(line, "\n", 1))
+		&& data->map.height)
 	{
 		data->map.map_finished = 1;
 		return (ERROR_OK);

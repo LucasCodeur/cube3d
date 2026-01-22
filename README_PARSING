@@ -7,5 +7,9 @@ This cases will return an error :
 
 - Bad element prefix (NO, SO, WE, EA, F or C).
 - Double definition of a config element.
-- Bad RGB format.
+- Config element missing
+- Bad RGB format for floor or ceiling
+
+Once the 6 config elements are saved, program begins to save the map structure. This cases will return an error :
+
 -
