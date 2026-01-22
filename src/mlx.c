@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "display.h"
+
 #include <mlx.h>
 
 static void	init_windows_and_image(t_data *data, t_error *error);
@@ -24,6 +25,7 @@ t_error	init_screen_mlx(t_data *data)
 {
 	t_error	error;
 
+	error.code = 0;
 	data->mlx.ptr = mlx_init();
 	if (!data->mlx.ptr)
 	{

@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2026/01/21 20:54:19 by lud-adam         ###   ########.fr        #
+#    Updated: 2026/01/21 21:08:46 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ P_INC_MATH = $(P_SRC)/math/inc/
 P_SRC_DRAW = $(P_SRC)draw/
 P_SRC_PARSING = $(P_SRC)parsing/
 P_SRC_SPRITES = $(P_SRC)sprites/
+P_SRC_HOOKS = $(P_SRC)hooks/
 
 #############################################################################################
 #                                                                                           #
@@ -47,9 +48,6 @@ P_SRC_SPRITES = $(P_SRC)sprites/
 
 SRC = \
 	mlx.c \
-	hooks_player.c \
-	hooks_press_and_release.c \
-	hooks_mouse_and_rotate.c \
 	compute_distance.c \
 	map.c \
 	utils.c \
@@ -67,6 +65,11 @@ SRC_SPRITES = \
 
 SRC_DRAW = \
 	utils_draw.c
+
+SRC_HOOKS = \
+	hooks_player.c \
+	hooks_press_and_release.c \
+	hooks_mouse_and_rotate.c \
 
 SRC_PARSING = \
 	argument.c \
@@ -114,6 +117,7 @@ SRCS = \
 	$(addprefix $(P_SRC_DRAW), $(SRC_DRAW)) \
 	$(addprefix $(P_SRC_SPRITES), $(SRC_SPRITES)) \
 	$(addprefix $(P_SRC_PARSING), $(SRC_PARSING)) \
+	$(addprefix $(P_SRC_HOOKS), $(SRC_HOOKS)) \
 	$(addprefix $(P_SRC_TEST), $(SRC_TEST)) \
 
 # List of object files (redirect to P_OBJ)
