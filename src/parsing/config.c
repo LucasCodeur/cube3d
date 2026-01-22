@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 13:51:37 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/20 11:25:16 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 13:52:42 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ static t_error	gnl_loop(t_data *data, int fd)
 		error = get_next_line(data, fd, &line);
 		if (error.code != ERR_OK)
 			return (error);
+		if (!line)
+		{
+			data->map.map_finished = 1;
+			return (ERROR_OK);
+		}
 	}
 	return (ERROR_OK);
 }

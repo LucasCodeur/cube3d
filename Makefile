@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2026/01/22 11:26:02 by prigaudi         ###   ########.fr        #
+#    Updated: 2026/01/22 14:13:04 by prigaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,7 @@ SRC_PARSING = \
 	check_map_structure.c \
 	check_map.c	\
 	extract_save_map.c	\
+	extract_map_line.c \
 	config.c \
 	parsing.c \
 	check_save_hero.c \

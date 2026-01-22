@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:01:49 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/20 16:44:42 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 14:10:45 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ t_error		check_extract_rgb(t_data *data, char *info, int **rgb_int);
 t_error		check_map(t_data *data);
 t_error		check_map_structure(t_data *data);
 t_error		check_save_hero(t_data *data);
+t_error		extract_map_line(char *line, t_data *data);
 
 //========== UTILS ===========
-// void		free_all(t_data *data);
 int			ft_atoi(const char *str);
 t_error		ft_calloc(size_t elementCount, size_t elementSize, char **str);
 void		ft_lstadd_front(t_garbage **lst, t_garbage *new);
