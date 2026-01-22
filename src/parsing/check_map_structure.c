@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:14:23 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/22 16:51:41 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:01:38 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static t_error	recursive_loop(char **map_test, int i, int j, t_data *data)
 	t_error	error;
 
 	if (j != data->map.width - 1 && (map_test[i][j + 1] == '0' || map_test[i][j
-			+ 1] == data->map.player.orientation))
+		+ 1] == data->map.player.orientation))
 	{
 		map_test[i][j + 1] = '1';
 		error = recursive(map_test, i, j + 1, data);
