@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 17:56:04 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/22 11:14:35 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,14 +181,14 @@ typedef struct s_raycasting
 	t_vec					ray_dir;
 }							t_raycasting;
 
-typedef	struct	s_compute
+typedef struct s_compute
 {
 	double					add_speed;
 	double					subt_speed;
 	double					frame_duration;
 	int						middle_screen_x;
 	int						middle_screen_y;
-}	t_compute;
+}							t_compute;
 
 typedef struct s_data
 {
@@ -215,7 +215,6 @@ void						compute_height_of_line(t_data *data,
 bool						draw_map(t_data *data);
 
 // MLX
-void						init_mlx(t_mlx *t_mlx);
 t_error						init_screen_mlx(t_data *data);
 void						free_img(t_data *data);
 
@@ -237,7 +236,7 @@ void						count_fps(t_data *data);
 double						get_time(void);
 
 // UTILS
-void						fill_color(t_pixel *color, int* rgb);
+void						fill_color(t_pixel *color, int *rgb);
 void						ft_bzero(void *s, size_t n);
 int							destroy_free_exit(t_data *data);
 
@@ -250,6 +249,5 @@ void						draw_square(t_data *data,
 
 // OTHERS
 double						get_time(void);
-
 
 #endif

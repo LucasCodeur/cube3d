@@ -6,19 +6,18 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:27:25 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 21:05:27 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/22 11:24:26 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 #include "vector.h"
-
 #include <X11/keysym.h>
 #include <mlx.h>
 
 static void	move_left_or_right(t_data *data, bool right);
-static void handle_up(t_data *data);
-static void handle_down(t_data *data);
+static void	handle_up(t_data *data);
+static void	handle_down(t_data *data);
 
 /**
  * @brief allow to deplace the hero
@@ -38,17 +37,19 @@ void	move_hero(t_data *data)
 }
 
 /**
-* @brief allow to handle down
-* @param data all information about the program.
-* @return
-*/
-static void handle_down(t_data *data)
+ * @brief allow to handle down
+ * @param data all information about the program.
+ * @return
+ */
+static void	handle_down(t_data *data)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 
-	y = data->map.player.pos.elements[1] - SPEED * data->map.player.dir.elements[1];
-	x = data->map.player.pos.elements[0] - 0.5f * data->map.player.dir.elements[0];
+	y = data->map.player.pos.elements[1] - SPEED
+		* data->map.player.dir.elements[1];
+	x = data->map.player.pos.elements[0] - 0.5f
+		* data->map.player.dir.elements[0];
 	if (data->map.grid[y][x] == '0')
 	{
 		data->map.player.pos.elements[0] -= SPEED
@@ -59,17 +60,19 @@ static void handle_down(t_data *data)
 }
 
 /**
-* @brief allow to handle up
-* @param data all information about the program.
-* @return
-*/
-static void handle_up(t_data *data)
+ * @brief allow to handle up
+ * @param data all information about the program.
+ * @return
+ */
+static void	handle_up(t_data *data)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 
-	y = (int)(data->map.player.pos.elements[1] + SPEED * data->map.player.dir.elements[1]);
-	x = (int)(data->map.player.pos.elements[0] + 0.5f * data->map.player.dir.elements[0]);	
+	y = (int)(data->map.player.pos.elements[1] + SPEED
+			* data->map.player.dir.elements[1]);
+	x = (int)(data->map.player.pos.elements[0] + 0.5f
+			* data->map.player.dir.elements[0]);
 	if (data->map.grid[y][x] == '0')
 	{
 		data->map.player.pos.elements[0] += SPEED

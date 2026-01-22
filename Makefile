@@ -6,7 +6,7 @@
 #    By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/14 14:47:47 by lud-adam          #+#    #+#              #
-#    Updated: 2026/01/21 21:08:46 by lud-adam         ###   ########.fr        #
+#    Updated: 2026/01/22 14:13:04 by prigaudi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,11 @@ SRC = \
 	minimap.c \
 	minimap_utils.c \
 
+SRC_HOOKS = \
+	hooks_player.c \
+	hooks_press_and_release.c \
+	hooks_mouse_and_rotate.c \
+
 SRC_SPRITES = \
 	texture.c \
 
@@ -78,6 +83,7 @@ SRC_PARSING = \
 	check_map_structure.c \
 	check_map.c	\
 	extract_save_map.c	\
+	extract_map_line.c \
 	config.c \
 	parsing.c \
 	check_save_hero.c \
