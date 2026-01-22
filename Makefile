@@ -34,7 +34,9 @@ P_INC = inc/
 P_MLX = minilibx-linux/
 P_OBJ = .obj/
 P_LIB_MATH = $(P_SRC)math/
+
 P_INC_MATH = $(P_SRC)/math/inc/
+
 P_SRC_DRAW = $(P_SRC)draw/
 P_SRC_PARSING = $(P_SRC)parsing/
 P_SRC_SPRITES = $(P_SRC)sprites/
@@ -54,7 +56,6 @@ SRC = \
 	raycasting.c \
 	fps.c \
 	destroy_free_exit.c \
-	debug.c \
 	launcher.c \
 	main.c \
 	minimap.c \
@@ -124,7 +125,6 @@ SRCS = \
 	$(addprefix $(P_SRC_SPRITES), $(SRC_SPRITES)) \
 	$(addprefix $(P_SRC_PARSING), $(SRC_PARSING)) \
 	$(addprefix $(P_SRC_HOOKS), $(SRC_HOOKS)) \
-	$(addprefix $(P_SRC_TEST), $(SRC_TEST)) \
 
 # List of object files (redirect to P_OBJ)
 OBJS =  \
@@ -140,8 +140,8 @@ DEPS = $(OBJS:%.o=%.d)
 #                                          RULES                                            #
 #                                                                                           #
 #############################################################################################
-all:
-	@$(MAKE) $(NAME)
+all: coucou
+	$(MAKE) $(NAME)
 
 # Create $(NAME) executable
 $(NAME): $(MLX_LIB) $(P_LIB_MATH)libmath.a $(OBJS)
@@ -177,8 +177,8 @@ $(P_LIB_MATH)math.a:
 #                                                                                           #
 #############################################################################################
 
-make:
-	$(P_LIB_MATH) make
+coucou:
+	$(MAKE) -C $(P_LIB_MATH)
 
 # Rules for clean up
 clean:

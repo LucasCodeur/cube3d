@@ -19,7 +19,6 @@ NO_DIR = --no-print-directory
 
 MAKE := $(MAKE) -j $(NO_DIR)
 NAME = libmath.a
-TEST_NAME = test_exec
 
 # Debugging flags
 CFLAGS_DEBUG = -Wall -Wextra -g3 -D DEBUG=1
@@ -45,8 +44,6 @@ P_MATRICE = $(P_SRC)matrice/
 
 SRC = \
  	utils_maths.c \
-
-	# main.c \
 
 SRC_VECTOR = \
 	vector.c \
@@ -79,11 +76,6 @@ SRCS =	\
 OBJS =  \
 	$(subst $(P_SRC), $(P_OBJ), $(SRCS:.c=.o)) \
 
-
-# SRC_TEST_FILES = $(addprefix $(P_SRC_TEST), $(SRC_TEST))
-# OBJ_TEST_FILES = $(SRC_TEST_FILES:.c=.o)
-# # TEST_OBJS = $(patsubst %.c, $(P_OBJ)%.o, $(SRC_TEST_FILES))
-
 # List of depedencies
 DEPS = $(OBJS:%.o=%.d)
 
@@ -94,14 +86,6 @@ DEPS = $(OBJS:%.o=%.d)
 #############################################################################################
 all:
 	$(MAKE) $(NAME)
-
-# Create $(NAME) executable
-# $(TEST_NAME): $(OBJS)
-# 	@if $(CC) $(CFLAGS) -lm $(DEPENDANCIES) -I $(P_INC) -I $(P_INC_TEST) -o $(NAME) $(OBJS) $(LIBS); then \
-# 		echo "$(Green)Creating executable $@$(Color_Off)"; \
-# 	else \
-# 		echo "$(Red)Error creating $@$(Color_Off)"; \
-# 	fi
 
 # Custom rule to compilate all .c with there path
 $(P_OBJ)%.o: $(P_SRC)%.c 
@@ -114,9 +98,6 @@ $(P_OBJ)%.o: $(P_SRC)%.c
 
 $(NAME): $(OBJS) 
 	ar -rcs $(NAME) $^
-
-# test_exec: $(TEST_OBJS) $(OBJS)
-# 	@$(CC) $(CFLAGS) -lm -I $(P_INC) -I $(P_INC_TEST) -o $@ $^
 
 $(P_OBJ)%.o: %.c
 	@mkdir -p $(dir $@)
@@ -154,8 +135,6 @@ fclear: fclean
 flcean: fclean
 flcear: fclean
 
-# test: test_exec
-
 #############################################################################################
 #                                                                                           #
 #                                           DEBUG                                           #
@@ -165,37 +144,7 @@ flcear: fclean
 debug:
 	@$(MAKE) $(NAME) CFLAGS="$(CFLAGS_DEBUG)"
 
-debug-cc:
-	@$(MAKE) $(NAME) CFLAGS="$(CC_DEBUG_CFLAGS)" CC="$(CC_DEBUG)" Cyan="$(Yellow)" Green="$(Purple)"
-
 # Debugging print
-debug-print:
-	@$(MAKE) debug-print-project
-	@$(MAKE) debug-print-separator
-
-debug-print-separator:
-	@echo ""
-	@echo "$(On_Yellow)____________________$(Color_Off)"
-	@echo ""
-
-define check_var
-	@if [ "$(strip $(1))" = "" ]; then \
-		echo "$(Red)No $(2) found$(Color_Off)"; \
-	else \
-		echo "$(Red)$(2): \n\t$(Blue)$(1)$(Color_Off)"; \
-	fi
-endef
-
-debug-print-project:
-	$(call check_var,$(NAME),"Project")
-	$(call check_var,$(SRCS),"SRCS")
-	$(call check_var,$(OBJS),"OBJS")
-	$(call check_var,$(INCS),"INCS")
-	$(call check_var,$(LIBS),"LIBS")
-	@$(MAKE) debug-print-separator
-	$(call check_var,$(SRCS_TEST),"SRCS_TEST")
-	$(call check_var,$(OBJS_TEST),"OBJS_TEST")
-
 
 #############################################################################################
 #                                                                                           #

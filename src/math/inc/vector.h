@@ -16,7 +16,6 @@
 # include <stdbool.h>
 # include <stdio.h>
 
-// WARN: have to take off
 # include <stdarg.h>
 # define VEC
 

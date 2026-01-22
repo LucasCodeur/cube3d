@@ -10,12 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "debug.h"
 #include "display.h"
 #include "error.h"
 #include "matrice.h"
 #include "parsing.h"
-#include "test.h"
 #include "vector.h"
 
 static t_error	ininitialize_values(t_data *data);

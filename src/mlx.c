@@ -43,8 +43,8 @@ t_error	init_screen_mlx(t_data *data)
 		return (error);
 	}
 	init_windows_and_image(data, &error);
-	// if (error.code == ERR_MLX)
-	// 	return (error);
+	if (error.code == ERR_MLX)
+		return (error);
 	data->img.pixels_per_line = data->img.line_length / sizeof(t_pixel);
 	return (ERROR_OK);
 }

@@ -12,8 +12,6 @@
 
 #include "parsing.h"
 
-// t_error	ft_substr(t_data *data, char const *str_in, unsigned int start,
-// 		size_t len, char **str_out)
 t_error	ft_substr(t_data *data, t_substr_io *substr_io, unsigned int start,
 		size_t len)
 {

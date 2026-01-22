@@ -61,9 +61,6 @@ typedef struct s_parsing
 	int		config_is_valid;
 }			t_parsing;
 
-// //========== MINIMAP ===========
-// int							display_minimap(t_data *data);
-
 //========== PARSING ===========
 t_error		parsing(int argc, char **argv, t_data *data);
 t_error		check_argument(int argc, char **argv, t_data *data);

@@ -64,7 +64,6 @@ static int	index_end(char const *s1, char const *set)
 	return (i);
 }
 
-// Remove characters stored in set at the beginning and the end of s1
 t_error	ft_strtrim(t_data *data, char const *s1, char const *set, char **str)
 {
 	t_error	error;

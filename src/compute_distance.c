@@ -16,7 +16,8 @@
 #include <math.h>
 
 static t_vec compute_slope(t_vec ray_dir);
-static void define_first_step(t_data* data, t_vec ray_dir, t_vec *ray_len, t_vec delta_dist);
+static void define_first_step(t_data* data, t_vec ray_dir,
+	t_vec *ray_len, t_vec delta_dist);
 static int  size_ray(t_data* data, t_vec *ray_len, t_vec delta_dist);
 
 /**

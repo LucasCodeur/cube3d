@@ -27,7 +27,6 @@ static void	loop(char **str, char **s1, char *s2, int byte_nbr)
 	(*str)[i] = '\0';
 }
 
-// at the end s1=str to modify s1 withou returning something
 t_error	ft_strnjoin(t_data *data, char **s1, char *s2, int byte_nbr)
 {
 	char	*str;
