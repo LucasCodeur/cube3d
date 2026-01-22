@@ -6,15 +6,15 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:03:49 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/22 11:28:22 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:32:23 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 #include "error.h"
-#include "matrice.h"
+#include "lmath.h"
 #include "parsing.h"
-#include "vector.h"
+#include "lmath.h"
 
 static t_error	ininitialize_values(t_data *data);
 static void		print_message_error(t_error error);

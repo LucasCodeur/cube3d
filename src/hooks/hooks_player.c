@@ -6,12 +6,12 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:27:25 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/22 11:24:26 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:33:02 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
-#include "vector.h"
+#include "lmath.h"
 #include <X11/keysym.h>
 #include <mlx.h>
 

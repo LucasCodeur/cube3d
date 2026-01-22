@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "lmath.h"
 
 /**
  * @brief allow to multiply two vectors together and produce a new one

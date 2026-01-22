@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "display.h"
-#include "matrice.h"
+#include "lmath.h"
 
 #include <X11/keysym.h>
 #include <mlx.h>

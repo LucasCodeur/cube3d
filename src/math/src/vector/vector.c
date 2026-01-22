@@ -6,11 +6,11 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:58:08 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 15:13:28 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:30:37 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "lmath.h"
 
 /**
  * @brief copy a vector

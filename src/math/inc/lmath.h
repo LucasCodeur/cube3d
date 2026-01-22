@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.h                                           :+:      :+:    :+:   */
+/*   lmath.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:48:48 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 15:08:14 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:27:34 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR_H
-# define VECTOR_H
+#ifndef LMATH_H
+# define LMATH_H
 
 # include <stdbool.h>
 # include <stdio.h>
@@ -58,6 +58,13 @@ void				print(t_vec v);
 /**
  * @brief utils to the library
  */
+
+// MATRICE
+t_vec				rotate_vect(t_vec v, double rad);
+void				rotate_vect_by_p(t_vec *v, double rad);
+
+// UTILS MATH
+double				to_radian(int degrees);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 
 #endif

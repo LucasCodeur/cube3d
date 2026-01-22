@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "lmath.h"
 
 /**
  * @brief apply a multiplicator to scaling the vector

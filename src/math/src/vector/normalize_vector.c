@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "lmath.h"
 
 /**
 * @brief allow to compute the magnitude of the vector 

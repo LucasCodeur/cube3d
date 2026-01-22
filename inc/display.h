@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/22 11:14:35 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:32:21 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define DISPLAY_H
 
 # include "error.h"
-# include "vector.h"
+# include "lmath.h"
 # include <math.h>
 # include <stdbool.h>
 # include <stdint.h>

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "lmath.h"
 
 /** @brief allow to divide two vectors together and produce a new one
  * @param v1 the first vector to divide to the second

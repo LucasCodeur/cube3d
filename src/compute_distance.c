@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "display.h"
-#include "vector.h"
+#include "lmath.h"
+
 #include <float.h>
 #include <math.h>
 

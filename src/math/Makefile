@@ -69,6 +69,7 @@ LIBS = \
 #                                                                                           #
 #############################################################################################
 SRCS =	\
+	$(addprefix $(P_SRC), $(SRC)) \
 	$(addprefix $(P_VECTOR), $(SRC_VECTOR)) \
 	$(addprefix $(P_MATRICE), $(SRC_MATRICE)) \
 		
@@ -88,7 +89,7 @@ all:
 	$(MAKE) $(NAME)
 
 # Custom rule to compilate all .c with there path
-$(P_OBJ)%.o: $(P_SRC)%.c 
+$(P_OBJ)%.o: $(P_SRC)%.c $(P_INC)
 	@mkdir -p $(dir $@)
 	@if $(CC) $(CFLAGS) $(DEPENDANCIES) -I $(P_INC) -c $< -o $@; then \
 		echo "$(Cyan)Compiling $<$(Color_Off)"; \
@@ -99,7 +100,7 @@ $(P_OBJ)%.o: $(P_SRC)%.c
 $(NAME): $(OBJS) 
 	ar -rcs $(NAME) $^
 
-$(P_OBJ)%.o: %.c
+$(P_OBJ)%.o: %.c $(P_INC)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(DEPENDANCIES) -I $(P_INC) -c $< -o $@
 

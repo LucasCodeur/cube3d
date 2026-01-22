@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "lmath.h"
+
 #include <math.h>
-#include <stdlib.h>
 
 /**
  * @brief allow to rotate the vector
