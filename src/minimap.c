@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 10:59:23 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/21 16:26:16 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/23 17:04:14 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,18 @@ static void	draw_structure_minimap(t_data *data,
 {
 	t_drawing_infos	drawing_infos;
 
-	if (minimap_var->x >= 0 && minimap_var->y >= 0
-		&& minimap_var->x < data->map.width
-		&& minimap_var->y < data->map.height)
+	if (minimap_var->y >= 0 && minimap_var->y < data->map.height
+		&& minimap_var->x >= 0
+		&& minimap_var->x < (int)ft_strlen(data->map.grid[minimap_var->y]) - 1)
 	{
-		if (minimap_var->x < (int)ft_strlen(data->map.grid[minimap_var->y]))
-		{
-			if (data->map.grid[minimap_var->y][minimap_var->x] == '1')
-				minimap_var->color.value = 0x808080;
-			else
-				minimap_var->color.value = 0xFFFAF0;
-		}
+		if (data->map.grid[minimap_var->y][minimap_var->x] == '1')
+			minimap_var->color.value = 0x808080;
+		else
+			minimap_var->color.value = 0xFFFAF0;
 	}
 	else
 	{
-		minimap_var->color.value = 0x000000;
+		minimap_var->color.value = 0x808080;
 	}
 	drawing_infos.x = MINI_OFFSET_X + (minimap_var->x - minimap_var->start_x)
 		* MINI_TILE;
