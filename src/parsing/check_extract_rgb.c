@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 13:54:18 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/22 16:51:41 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/23 14:57:03 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_error	rgb_loop(char **rgb_str, int **rgb_int)
 	i = 0;
 	while (rgb_str[i])
 	{
-		if (i > 3)
+		if (i >= 3)
 		{
 			error.code = ERR_FAIL;
 			error.message = "RGB format invalid\n";

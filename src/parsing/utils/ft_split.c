@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:35:12 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/22 16:49:22 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/23 16:21:08 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,35 @@ static t_error	extract(t_data *config_data, char const *s,
 	return (error_ok());
 }
 
-static int	char_count(char const *s, char c)
+static t_error	char_count(char const *s, char c, int *counter)
 {
-	int	counter;
-	int	i;
+	t_error	error;
+	int		i;
 
-	counter = 0;
+	*counter = 0;
 	i = 0;
 	while (s[i] != '\0')
 	{
+		if (s[i] == c && (s[i + 1] == c || s[i + 1] == '\0'))
+		{
+			error.code = ERR_INVALID_ARG;
+			error.message = "RGB format invalid\n";
+			return (error);
+		}
 		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
 		{
-			counter++;
+			(*counter)++;
 		}
 		i++;
 	}
-	return (counter);
+	return (error_ok());
 }
 
-t_error	ft_split(t_data *cd, char const *s, char c, char ***split)
+static t_error	split_loop(t_data *cd, char const *s, char c, char ***split)
 {
 	t_error				error;
 	t_split_variable	split_var;
 
-	error = ft_malloc(&cd->garbage, sizeof(char *) * (char_count(s, c) + 1),
-			(void **)split);
-	if (error.code != ERR_OK)
-		return (error);
 	split_var.j = 0;
 	split_var.i = -1;
 	while (s[++split_var.i] != '\0')
@@ -74,5 +76,29 @@ t_error	ft_split(t_data *cd, char const *s, char c, char ***split)
 		}
 	}
 	(*split)[split_var.j] = NULL;
+	return (error_ok());
+}
+
+t_error	ft_split(t_data *cd, char const *s, char c, char ***split)
+{
+	t_error	error;
+	int		counter;
+
+	error = char_count(s, c, &counter);
+	if (error.code != ERR_OK)
+		return (error);
+	if (counter != 3)
+	{
+		error.code = ERR_INVALID_ARG;
+		error.message = "RGB format invalid\n";
+		return (error);
+	}
+	error = ft_malloc(&cd->garbage, sizeof(char *) * (counter + 1),
+			(void **)split);
+	if (error.code != ERR_OK)
+		return (error);
+	error = split_loop(cd, s, c, split);
+	if (error.code != ERR_OK)
+		return (error);
 	return (error_ok());
 }
