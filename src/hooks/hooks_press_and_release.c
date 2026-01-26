@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "display.h"
+
 #include <X11/keysym.h>
 #include <mlx.h>
 
@@ -67,30 +68,30 @@ int	release_move(int keycode, t_data *data)
 	return (0);
 }
 
-static bool	handle_up(t_data *data, int keycode, int x, int y)
+static bool	handle_up(t_data *data, int keycode)
 {
 	if (keycode == XK_s || keycode == XK_S)
 	{
-		y = data->map.player.pos.elements[1] - SPEED
-			* data->map.player.dir.elements[1];
-		x = data->map.player.pos.elements[0] - 0.5f
-			* data->map.player.dir.elements[0];
-		if (data->map.grid[y][x] == '0')
+		// y = data->map.player.pos.elements[1] - SPEED
+		// 	* data->map.player.dir.elements[1];
+		// x = data->map.player.pos.elements[0] - 0.5f
+		// 	* data->map.player.dir.elements[0];
+		// if (data->map.grid[y][x] == '0')
 			data->keycode.down = true;
 		return (true);
 	}
 	return (false);
 }
 
-static bool	handle_down(t_data *data, int keycode, int x, int y)
+static bool	handle_down(t_data *data, int keycode)
 {
 	if (keycode == XK_w || keycode == XK_W)
 	{
-		y = (int)(data->map.player.pos.elements[1] + SPEED
-				* data->map.player.dir.elements[1]);
-		x = (int)(data->map.player.pos.elements[0] + 0.5f
-				* data->map.player.dir.elements[0]);
-		if (data->map.grid[y][x] == '0')
+		// y = (int)(data->map.player.pos.elements[1] + SPEED
+		// 		* data->map.player.dir.elements[1]);
+		// x = (int)(data->map.player.pos.elements[0] + 0.5f
+		// 		* data->map.player.dir.elements[0]);
+		// if (data->map.grid[y][x] == '0')
 			data->keycode.up = true;
 		return (true);
 	}
@@ -101,21 +102,15 @@ static bool	handle_down(t_data *data, int keycode, int x, int y)
  * @brief allow to handle w and s
  * @param data all information about the program.
  * @param keycode is an int that represents a
- *  key of the keyboard inside the mlx.
-
-	* @return true if the correspondent keycode inside
-	the boolean structure or false
+ * key of the keyboard inside the mlx.
+ * @return true if the correspondent keycode inside
+ * the boolean structure or false
  */
 static bool	handle_up_and_down(t_data *data, int keycode)
 {
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	if (handle_up(data, keycode, x, y))
+	if (handle_up(data, keycode) == true)
 		return (true);
-	if (handle_down(data, keycode, x, y))
+	if (handle_down(data, keycode) == true)
 		return (true);
 	return (false);
 }

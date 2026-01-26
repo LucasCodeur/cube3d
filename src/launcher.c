@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:26:12 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/22 16:50:17 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/26 10:40:52 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int	execute(t_data *data)
  */
 static void	ininitialize_math_values(t_data *data)
 {
-	data->map.player.pos = new_vector_2d(data->map.player.x,
-			data->map.player.y);
+	data->map.player.pos = new_vector_2d(data->map.player.x + 0.01 + HITBOX,
+			data->map.player.y + HITBOX + 0.01);
 	if (data->map.player.orientation == 'N')
 	{
 		data->map.player.plane = new_vector_2d(0.66f, 0.0f);

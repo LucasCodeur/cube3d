@@ -18,14 +18,12 @@ static void	fill_x_texture(t_data *data, double dist);
 
 /**
  * @brief fill top strip and bottom_strip,
-	that the born of the line in order to display the walls.
+ * that the born of the line in order to display the walls.
  * @param data all information about the program.
-
-	* @param top_strip the beginning of the line to draw
-	in order to display the wall.
-
-	* @param bottom_strip the ending of the line to draw
-	in order to display the wall.
+ * @param top_strip the beginning of the line
+ * to draw in order to display the wall.
+ * @param bottom_strip the ending of the line
+ * to draw in order to display the wall.
  * @return
  */
 void	compute_height_of_line(t_data *data, int *top_strip, int *bottom_strip)
@@ -34,8 +32,6 @@ void	compute_height_of_line(t_data *data, int *top_strip, int *bottom_strip)
 	double	dist;
 
 	dist = compute_dist(data, data->raycasting.ray_dir);
-	if (dist < 0.1)
-		dist = 0.5;
 	fill_x_texture(data, dist);
 	data->raycasting.wall_x -= floor(data->raycasting.wall_x);
 	strip_height = (int)(WIN_HEIGHT / dist);

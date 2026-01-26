@@ -6,12 +6,13 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:27:25 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/22 16:33:02 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/26 10:37:35 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 #include "lmath.h"
+
 #include <X11/keysym.h>
 #include <mlx.h>
 
@@ -37,49 +38,63 @@ void	move_hero(t_data *data)
 }
 
 /**
- * @brief allow to handle down
+ * @brief allow to handle up
  * @param data all information about the program.
+ * @param map_x x of the player on the map
+ * @param map_y y of the player on the map
  * @return
  */
-static void	handle_down(t_data *data)
+static void	handle_up(t_data *data)
 {
-	int	x;
-	int	y;
+	double	dx;
+	double	dy;
+	double	px;
+	double	py;
 
-	y = data->map.player.pos.elements[1] - SPEED
-		* data->map.player.dir.elements[1];
-	x = data->map.player.pos.elements[0] - 0.5f
-		* data->map.player.dir.elements[0];
-	if (data->map.grid[y][x] == '0')
-	{
-		data->map.player.pos.elements[0] -= SPEED
-			* data->map.player.dir.elements[0];
-		data->map.player.pos.elements[1] -= SPEED
-			* data->map.player.dir.elements[1];
-	}
+	px = data->map.player.pos.elements[0];
+	py = data->map.player.pos.elements[1];
+	dx = SPEED * data->map.player.dir.elements[0];
+	dy = SPEED * data->map.player.dir.elements[1];
+	if (dx > 0 && data->map.grid[(int)py][(int)(px + dx + HITBOX)] == '0')
+		px += dx;
+	else if (dx < 0 && data->map.grid[(int)(py)][(int)(px + dx - HITBOX)] == '0')
+		px += dx;
+	if (dy > 0 && data->map.grid[(int)(py + dy + HITBOX)][(int)px] == '0')
+		py += dy;
+	else if (dy < 0 && data->map.grid[(int)(py + dy - HITBOX)][(int)px] == '0')
+		py += dy;
+	data->map.player.pos.elements[0] = px;
+	data->map.player.pos.elements[1] = py;
 }
 
 /**
  * @brief allow to handle up
  * @param data all information about the program.
+ * @param map_x x of the player on the map
+ * @param map_y y of the player on the map
  * @return
  */
-static void	handle_up(t_data *data)
+static void	handle_down(t_data *data)
 {
-	int	x;
-	int	y;
+	double	dx;
+	double	dy;
+	double	px;
+	double	py;
 
-	y = (int)(data->map.player.pos.elements[1] + SPEED
-			* data->map.player.dir.elements[1]);
-	x = (int)(data->map.player.pos.elements[0] + 0.5f
-			* data->map.player.dir.elements[0]);
-	if (data->map.grid[y][x] == '0')
-	{
-		data->map.player.pos.elements[0] += SPEED
-			* data->map.player.dir.elements[0];
-		data->map.player.pos.elements[1] += SPEED
-			* data->map.player.dir.elements[1];
-	}
+	px = data->map.player.pos.elements[0];
+	py = data->map.player.pos.elements[1];
+	dx = SPEED * data->map.player.dir.elements[0];
+	dy = SPEED * data->map.player.dir.elements[1];
+	if (dx > 0 && data->map.grid[(int)py][(int)(px - dx - HITBOX)] == '0')
+		px -= dx;
+	else if (dx < 0 && data->map.grid[(int)(py)][(int)(px - dx - -HITBOX)] == '0')
+		px -= dx;
+	if (dy > 0 && data->map.grid[(int)(py - dy - HITBOX)][(int)px] == '0')
+		py -= dy;
+	else if (dy < 0 && data->map.grid[(int)(py - dy - -HITBOX)][(int)px] == '0')
+		py -= dy;
+	data->map.player.pos.elements[0] = px;
+	data->map.player.pos.elements[1] = py;
 }
 
 /**
