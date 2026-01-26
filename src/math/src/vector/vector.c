@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:58:08 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/22 18:06:23 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:24:38 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,6 @@ t_vec	copy_ptr(t_vec *v)
 
 	ft_memcpy(&ret, v, sizeof(t_vec));
 	return (ret);
-}
-
-/**
- * @brief display the value of a vector
- * @param the vector to display
- * @return
- */
-void	print(t_vec v)
-{
-	printf("[ ");
-	for (unsigned int i = 0; i < v.dim; i++)
-	{
-		printf("%f", v.elements[i]);
-		if (i < v.dim - 1)
-			printf(", ");
-		else
-			printf(" ");
-	}
-	printf("]\n");
 }
 
 /**
