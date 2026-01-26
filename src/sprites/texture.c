@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:55:13 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/26 12:10:52 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:28:46 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ static t_error	fill_image(t_data *data, char *path_to_asset, t_img *img)
 		error.message = "mlx_get_data_addr failed";
 		return (error);
 	}
-	img->bits_per_pixel = img->bits_per_pixel / 8;
 	img->double_height = (double)img->height;
 	img->pixels_per_line = img->line_length / sizeof(t_pixel);
 	return (error_ok());

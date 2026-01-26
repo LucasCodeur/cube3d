@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:10:16 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/22 16:49:22 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/26 13:28:18 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,9 @@ static t_error	save_ceiling_floor(char *id, char *info, t_data *data)
 		data->parsing->nb_valid_elements++;
 		return (error_ok());
 	}
-	return (error_ok());
+	error.code = ERR_INVALID_ARG;
+	error.message = "Double definition of a config element\n";
+	return (error);
 }
 
 t_error	save_element(char *id, char *info, t_data *data)

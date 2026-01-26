@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:26:12 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/26 10:54:23 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:46:44 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	execute(t_data *data)
 		rotate_hero(data);
 		draw_map(data);
 		draw_minimap(data);
+		mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.img, 0,
+			0);
 		data->fps.last_time = data->fps.current_time;
 	}
 	return (0);
@@ -113,8 +115,8 @@ static void	ininitialize_math_values(t_data *data)
  */
 static void	ininitialize_compute(t_compute *cube)
 {
-	cube->add_speed = 5.0 * (M_PI / 180);
-	cube->subt_speed = -5.0 * (M_PI / 180);
+	cube->add_speed = 3.0 * (M_PI / 180);
+	cube->subt_speed = -3.0 * (M_PI / 180);
 	cube->middle_screen_x = WIN_WIDTH / 2;
 	cube->middle_screen_y = WIN_HEIGHT / 2;
 	cube->frame_duration = 1.0 / FPS;

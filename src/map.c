@@ -6,13 +6,12 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 11:06:40 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/21 15:32:11 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/26 13:16:32 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 #include "parsing.h"
-
 #include <mlx.h>
 
 static int	compute_x_of_texture(t_data *data, t_img *text);
@@ -39,7 +38,6 @@ bool	draw_map(t_data *data)
 		draw_line(data, x);
 		x++;
 	}
-	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->img.img, 0, 0);
 	return (true);
 }
 
@@ -122,7 +120,7 @@ static void	put_all_pixels(t_data *data, t_img *text, int x, int y)
 	t_pixel	color;
 
 	dst = data->img.addr + x;
-	fill_color(&color, data->parsing->floor_rgb_color);
+	fill_color(&color, data->parsing->ceiling_rgb_color);
 	while (y++ < data->img.top_strip && y < WIN_HEIGHT)
 	{
 		*dst = color;
@@ -137,7 +135,7 @@ static void	put_all_pixels(t_data *data, t_img *text, int x, int y)
 		*dst = color;
 		dst += data->img.pixels_per_line;
 	}
-	fill_color(&color, data->parsing->ceiling_rgb_color);
+	fill_color(&color, data->parsing->floor_rgb_color);
 	while (y++ < WIN_HEIGHT)
 	{
 		*dst = color;
