@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/26 10:14:08 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/26 10:59:28 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define PLAYER_SIZE 4
 # define MINI_RADIUS 6
 # define SPEED 0.10
-# define FPS 30
+# define FPS 60
 # define HITBOX 0.2
 
 typedef struct s_parsing	t_parsing;

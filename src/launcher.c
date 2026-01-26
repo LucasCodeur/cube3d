@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:26:12 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/26 10:40:52 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/26 10:54:23 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	execute(t_data *data)
 		rotate_hero(data);
 		draw_map(data);
 		draw_minimap(data);
+		data->fps.last_time = data->fps.current_time;
 	}
 	return (0);
 }
