@@ -6,12 +6,11 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 09:43:33 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/22 17:03:35 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/26 11:39:17 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
-
 #include <X11/keysym.h>
 #include <mlx.h>
 
@@ -72,12 +71,7 @@ static bool	handle_up(t_data *data, int keycode)
 {
 	if (keycode == XK_s || keycode == XK_S)
 	{
-		// y = data->map.player.pos.elements[1] - SPEED
-		// 	* data->map.player.dir.elements[1];
-		// x = data->map.player.pos.elements[0] - 0.5f
-		// 	* data->map.player.dir.elements[0];
-		// if (data->map.grid[y][x] == '0')
-			data->keycode.down = true;
+		data->keycode.down = true;
 		return (true);
 	}
 	return (false);
@@ -87,12 +81,7 @@ static bool	handle_down(t_data *data, int keycode)
 {
 	if (keycode == XK_w || keycode == XK_W)
 	{
-		// y = (int)(data->map.player.pos.elements[1] + SPEED
-		// 		* data->map.player.dir.elements[1]);
-		// x = (int)(data->map.player.pos.elements[0] + 0.5f
-		// 		* data->map.player.dir.elements[0]);
-		// if (data->map.grid[y][x] == '0')
-			data->keycode.up = true;
+		data->keycode.up = true;
 		return (true);
 	}
 	return (false);

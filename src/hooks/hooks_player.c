@@ -6,13 +6,12 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 15:27:25 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/26 10:42:37 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/26 11:36:31 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 #include "lmath.h"
-
 #include <X11/keysym.h>
 #include <mlx.h>
 
@@ -57,7 +56,8 @@ static void	handle_up(t_data *data)
 	dy = SPEED * data->map.player.dir.elements[1];
 	if (dx > 0 && data->map.grid[(int)py][(int)(px + dx + HITBOX)] == '0')
 		px += dx;
-	else if (dx < 0 && data->map.grid[(int)(py)][(int)(px + dx - HITBOX)] == '0')
+	else if (dx < 0 && data->map.grid[(int)(py)][(int)(px + dx
+			- HITBOX)] == '0')
 		px += dx;
 	if (dy > 0 && data->map.grid[(int)(py + dy + HITBOX)][(int)px] == '0')
 		py += dy;
@@ -87,7 +87,8 @@ static void	handle_down(t_data *data)
 	dy = SPEED * data->map.player.dir.elements[1];
 	if (dx > 0 && data->map.grid[(int)py][(int)(px - dx - HITBOX)] == '0')
 		px -= dx;
-	else if (dx < 0 && data->map.grid[(int)(py)][(int)(px - dx - -HITBOX)] == '0')
+	else if (dx < 0 && data->map.grid[(int)(py)][(int)(px - dx -
+			-HITBOX)] == '0')
 		px -= dx;
 	if (dy > 0 && data->map.grid[(int)(py - dy - HITBOX)][(int)px] == '0')
 		py -= dy;
