@@ -26,11 +26,11 @@ static void	handle_down(t_data *data);
  */
 void	move_hero(t_data *data)
 {
-	if (data->keycode.down == true)
-		handle_down(data);
-	else if (data->keycode.up == true)
+	if (data->keycode.up == true)
 		handle_up(data);
-	else if (data->keycode.left == true)
+	else if (data->keycode.down == true)
+		handle_down(data);
+	if (data->keycode.left == true)
 		move_left_or_right(data, false);
 	else if (data->keycode.right == true)
 		move_left_or_right(data, true);
