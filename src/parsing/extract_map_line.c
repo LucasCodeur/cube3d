@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:10:11 by prigaudi          #+#    #+#             */
-/*   Updated: 2026/01/22 16:49:22 by prigaudi         ###   ########.fr       */
+/*   Updated: 2026/01/27 08:45:03 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static t_error	is_good_char(char *line, int i)
 {
 	t_error	error;
 
-	if (line[i] != '1' && line[i] != '0' && line[i] != ' ' && line[i] != 'D'
-		&& line[i] != 'N' && line[i] != 'S' && line[i] != 'E' && line[i] != 'W')
+	if (line[i] != '1' && line[i] != '0' && line[i] != ' ' && line[i] != 'N'
+		&& line[i] != 'S' && line[i] != 'E' && line[i] != 'W')
 	{
 		error.code = ERR_INVALID_ARG;
 		error.message = "Bad character in map structure\n";
