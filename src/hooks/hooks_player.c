@@ -102,7 +102,7 @@ static void	handle_down(t_data *data)
  * @brief allow to deplace the hero on the sides
  * @param data all information about the program
  * @param right boolean if true move on the right
- * and if false move on the right
+ * and if false move on the left
  * @return
  */
 static void	move_left_or_right(t_data *data, bool right)
