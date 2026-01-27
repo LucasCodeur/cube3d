@@ -1,6 +1,0 @@
-.obj/parsing/config.o: src/parsing/config.c inc/parsing.h inc/display.h \
- inc/error.h src//math/inc/lmath.h
-inc/parsing.h:
-inc/display.h:
-inc/error.h:
-src//math/inc/lmath.h:
