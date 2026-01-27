@@ -80,8 +80,8 @@ static int	compute_x_of_texture(t_data *data, t_img *text)
 		texture_x = 1;
 	else if (texture_x > text->height)
 		texture_x = text->height - 1;
-	if ((data->raycasting.side == 0 && data->raycasting.ray_dir.elements[0] < 0)
-		|| (data->raycasting.side == 1
+	if ((data->raycasting.which_side == false && data->raycasting.ray_dir.elements[0] < 0)
+		|| (data->raycasting.which_side == true
 			&& data->raycasting.ray_dir.elements[1] > 0))
 		texture_x = text->height - texture_x - 1;
 	return (texture_x);

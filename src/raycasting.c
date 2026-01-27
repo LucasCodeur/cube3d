@@ -48,7 +48,7 @@ t_vec	mapping_x_on_screen(int x)
 {
 	t_vec	camera;
 
-	camera.elements[0] = (x * 2 / (double)WIN_WIDTH) - 1;
+	camera.elements[0] = ((x * 2) / (double)WIN_WIDTH) - 1;
 	camera.elements[1] = 0.0f;
 	return (camera);
 }
@@ -79,7 +79,7 @@ t_vec	define_ray(t_data *data)
  */
 static void	fill_x_texture(t_data *data, double dist)
 {
-	if (data->raycasting.side == 0)
+	if (data->raycasting.which_side == false)
 	{
 		data->raycasting.wall_x = data->map.player.pos.elements[1] + dist
 			* data->raycasting.ray_dir.elements[1];

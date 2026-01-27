@@ -21,12 +21,12 @@ static t_error	fill_image(t_data *data, char *path_to_asset, t_img *img);
 
 	* @brief allow to choose which texture according
 		side and the direction of the ray
-	* @param all informatio about the program
+	* @param all information about the program
 	* @return the texture to display
 	*/
 void	choose_texture(t_data *data, t_img **text)
 {
-	if (data->raycasting.side == 0)
+	if (data->raycasting.which_side == false)
 	{
 		if (data->raycasting.ray_dir.elements[0] >= 0)
 			*text = &data->imgs.wall_west;

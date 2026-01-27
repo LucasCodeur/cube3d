@@ -19,7 +19,7 @@
 static t_vec	compute_slope(t_vec ray_dir);
 static void		define_first_step(t_data *data, t_vec ray_dir, t_vec *ray_len,
 					t_vec delta_dist);
-static int		size_ray(t_data *data, t_vec *ray_len, t_vec delta_dist);
+static bool		size_ray(t_data *data, t_vec *ray_len, t_vec delta_dist);
 
 /**
  * @brief allow to compute the distance when we encounter a wall
@@ -31,7 +31,7 @@ double	compute_dist(t_data *data, t_vec ray_dir)
 {
 	t_vec	ray_len;
 	t_vec	delta_dist;
-	double	perp_wall_dist;
+	double	orthogonal_dist;
 
 	ray_len.elements[0] = INFINITY;
 	ray_len.elements[1] = INFINITY;
@@ -44,10 +44,10 @@ double	compute_dist(t_data *data, t_vec ray_dir)
 	data->map.y = (int)data->map.player.pos.elements[1];
 	define_first_step(data, ray_dir, &ray_len, delta_dist);
 	if (size_ray(data, &ray_len, delta_dist) == 0)
-		perp_wall_dist = (ray_len.elements[0] - delta_dist.elements[0]);
+		orthogonal_dist = (ray_len.elements[0] - delta_dist.elements[0]);
 	else
-		perp_wall_dist = (ray_len.elements[1] - delta_dist.elements[1]);
-	return (perp_wall_dist);
+		orthogonal_dist = (ray_len.elements[1] - delta_dist.elements[1]);
+	return (orthogonal_dist);
 }
 
 /**
@@ -115,7 +115,7 @@ static void	define_first_step(t_data *data, t_vec ray_dir, t_vec *ray_len,
  * @param step unit of advancement of the ray
  * @return side to know which side of delta we have to subtract at ray_len
  */
-static int	size_ray(t_data *data, t_vec *ray_len, t_vec delta_dist)
+static bool	size_ray(t_data *data, t_vec *ray_len, t_vec delta_dist)
 {
 	while (data->map.grid[data->map.y][data->map.x] == '0')
 	{
@@ -123,14 +123,14 @@ static int	size_ray(t_data *data, t_vec *ray_len, t_vec delta_dist)
 		{
 			data->map.x += data->raycasting.step_x;
 			ray_len->elements[0] += delta_dist.elements[0];
-			data->raycasting.side = 0;
+			data->raycasting.which_side = false;
 		}
 		else
 		{
 			data->map.y += data->raycasting.step_y;
 			ray_len->elements[1] += delta_dist.elements[1];
-			data->raycasting.side = 1;
+			data->raycasting.which_side = true;
 		}
 	}
-	return (data->raycasting.side);
+	return (data->raycasting.which_side);
 }

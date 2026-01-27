@@ -173,7 +173,7 @@ typedef struct s_fps
 
 typedef struct s_raycasting
 {
-	int						side;
+	bool					which_side;
 	int						step_x;
 	int						step_y;
 	int						z;
