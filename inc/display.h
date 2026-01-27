@@ -6,7 +6,7 @@
 /*   By: prigaudi <prigaudi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/26 10:59:28 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/27 09:02:26 by prigaudi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 
 # include "error.h"
 # include "lmath.h"
-
 # include <math.h>
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdio.h>
 
-# define WIN_WIDTH 2000
-# define WIN_HEIGHT 1000
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 600
 
 # define SIZE_X 20
 # define SIZE_Y 20
