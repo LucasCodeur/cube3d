@@ -18,8 +18,8 @@
 
 static t_vec	compute_slope(t_vec ray_dir);
 static void		define_first_step(t_data *data, t_vec ray_dir, t_vec *ray_len,
-					t_vec delta_dist);
-static bool		size_ray(t_data *data, t_vec *ray_len, t_vec delta_dist);
+					t_vec next_line);
+static bool		size_ray(t_data *data, t_vec *ray_len, t_vec next_line);
 
 /**
  * @brief allow to compute the distance when we encounter a wall
@@ -30,23 +30,19 @@ static bool		size_ray(t_data *data, t_vec *ray_len, t_vec delta_dist);
 double	compute_dist(t_data *data, t_vec ray_dir)
 {
 	t_vec	ray_len;
-	t_vec	delta_dist;
+	t_vec	next_line;
 	double	orthogonal_dist;
 
 	ray_len.elements[0] = INFINITY;
 	ray_len.elements[1] = INFINITY;
-	delta_dist = compute_slope(ray_dir);
-	if (isinf(delta_dist.elements[0]))
-		delta_dist.elements[0] = 1e6;
-	if (isinf(delta_dist.elements[1]))
-		delta_dist.elements[1] = 1e6;
+	next_line = compute_slope(ray_dir);
 	data->map.x = (int)data->map.player.pos.elements[0];
 	data->map.y = (int)data->map.player.pos.elements[1];
-	define_first_step(data, ray_dir, &ray_len, delta_dist);
-	if (size_ray(data, &ray_len, delta_dist) == 0)
-		orthogonal_dist = (ray_len.elements[0] - delta_dist.elements[0]);
+	define_first_step(data, ray_dir, &ray_len, next_line);
+	if (size_ray(data, &ray_len, next_line) == 0)
+		orthogonal_dist = (ray_len.elements[0] - next_line.elements[0]);
 	else
-		orthogonal_dist = (ray_len.elements[1] - delta_dist.elements[1]);
+		orthogonal_dist = (ray_len.elements[1] - next_line.elements[1]);
 	return (orthogonal_dist);
 }
 
@@ -75,36 +71,36 @@ static t_vec	compute_slope(t_vec ray_dir)
  * @param data all information about the program
  * @param ray_dir direction of the ray
  * @param ray_len pointer of the length of the ray
- * @param delta_dist gradient in order tu multiply the position of the player to
+ * @param next_line gradient in order tu multiply the position of the player to
  * have the length of the ray advance by 1 unit
  * @return
  */
 static void	define_first_step(t_data *data, t_vec ray_dir, t_vec *ray_len,
-		t_vec delta_dist)
+		t_vec next_line)
 {
 	if (ray_dir.elements[0] <= 0 && ray_dir.elements[0] != INFINITY)
 	{
 		data->raycasting.step_x = -1;
 		ray_len->elements[0] = (data->map.player.pos.elements[0]
-				- (double)data->map.x) * delta_dist.elements[0];
+				- (double)data->map.x) * next_line.elements[0];
 	}
 	else if (ray_dir.elements[0] != INFINITY)
 	{
 		data->raycasting.step_x = 1;
 		ray_len->elements[0] = ((double)data->map.x + 1.0
-				- data->map.player.pos.elements[0]) * delta_dist.elements[0];
+				- data->map.player.pos.elements[0]) * next_line.elements[0];
 	}
 	if (ray_dir.elements[1] <= 0 && ray_dir.elements[1] != INFINITY)
 	{
 		data->raycasting.step_y = -1;
 		ray_len->elements[1] = (data->map.player.pos.elements[1]
-				- (double)data->map.y) * delta_dist.elements[1];
+				- (double)data->map.y) * next_line.elements[1];
 	}
 	else if (ray_dir.elements[1] != INFINITY)
 	{
 		data->raycasting.step_y = 1;
 		ray_len->elements[1] = ((double)data->map.y + 1.0
-				- data->map.player.pos.elements[1]) * delta_dist.elements[1];
+				- data->map.player.pos.elements[1]) * next_line.elements[1];
 	}
 }
 
@@ -115,20 +111,20 @@ static void	define_first_step(t_data *data, t_vec ray_dir, t_vec *ray_len,
  * @param step unit of advancement of the ray
  * @return side to know which side of delta we have to subtract at ray_len
  */
-static bool	size_ray(t_data *data, t_vec *ray_len, t_vec delta_dist)
+static bool	size_ray(t_data *data, t_vec *ray_len, t_vec next_line)
 {
 	while (data->map.grid[data->map.y][data->map.x] == '0')
 	{
 		if (ray_len->elements[0] <= ray_len->elements[1])
 		{
 			data->map.x += data->raycasting.step_x;
-			ray_len->elements[0] += delta_dist.elements[0];
+			ray_len->elements[0] += next_line.elements[0];
 			data->raycasting.which_side = false;
 		}
 		else
 		{
 			data->map.y += data->raycasting.step_y;
-			ray_len->elements[1] += delta_dist.elements[1];
+			ray_len->elements[1] += next_line.elements[1];
 			data->raycasting.which_side = true;
 		}
 	}

@@ -75,15 +75,16 @@ static int	compute_x_of_texture(t_data *data, t_img *text)
 {
 	int	texture_x;
 
-	texture_x = (int)(data->raycasting.wall_x * text->height);
+	texture_x = (int)(data->raycasting.wall_x * text->width);
 	if (texture_x < 0)
-		texture_x = 1;
-	else if (texture_x > text->height)
-		texture_x = text->height - 1;
-	if ((data->raycasting.which_side == false && data->raycasting.ray_dir.elements[0] < 0)
+		texture_x = 0;
+	else if (texture_x > text->width)
+		texture_x = text->width - 1;
+	if ((data->raycasting.which_side == false
+			&& data->raycasting.ray_dir.elements[0] < 0)
 		|| (data->raycasting.which_side == true
 			&& data->raycasting.ray_dir.elements[1] > 0))
-		texture_x = text->height - texture_x - 1;
+		texture_x = text->width - texture_x - 1;
 	return (texture_x);
 }
 
@@ -98,11 +99,11 @@ static int	compute_y_of_texture(t_img *text, int top_strip, int y)
 {
 	int	texture_y;
 
-	texture_y = 0;
-	if (top_strip < 0)
-		texture_y = (y - top_strip) * text->step;
-	else
+	texture_y = (y - top_strip) * text->step;
+	if (texture_y < 0)
 		texture_y = 0;
+	else if (texture_y >= text->height)
+		texture_y = text->height - 1;
 	return (texture_y);
 }
 

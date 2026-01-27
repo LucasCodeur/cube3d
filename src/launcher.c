@@ -12,7 +12,7 @@
 
 #include "display.h"
 #include "error.h"
-#include "parsing.h"
+
 #include <X11/X.h>
 #include <X11/keysym.h>
 #include <mlx.h>
