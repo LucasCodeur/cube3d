@@ -1,8 +1,8 @@
-This project has been created as part of the 42 curriculum by <lud-adam>, <prigaudi>.
+This project has been created as part of the 42 curriculum by lud-adam, prigaudi.
 
 ---
 
-# 📝 Cube3D
+# 📝 Description
 
 **Cube3D** is a 42 school team project. The goal is to create a video game inspired by **Wolfenstein 3D** (1992, developed by **Muse Software**), one of the first FPS games in video game history.
 
@@ -15,7 +15,7 @@ This project allows students to learn:
 
 ---
 
-# ⚙️ Instructions
+# ⚙️  Instructions
 
 ## 1. Pre-requisites
 

@@ -25,15 +25,14 @@ static bool	handle_up_and_down(t_data *data, int keycode);
  */
 int	press_move(int keycode, t_data *data)
 {
-	if (handle_up_and_down(data, keycode) == true)
-		return (0);
+	handle_up_and_down(data, keycode);
 	if (keycode == XK_d || keycode == XK_D)
 		data->keycode.right = true;
-	else if (keycode == XK_a || keycode == XK_A)
+	if (keycode == XK_a || keycode == XK_A)
 		data->keycode.left = true;
 	if (keycode == XK_Left)
 		data->keycode.rotate_left = true;
-	else if (keycode == XK_Right)
+	if (keycode == XK_Right)
 		data->keycode.rotate_right = true;
 	if (keycode == XK_Escape)
 		data->keycode.escape = true;
@@ -51,12 +50,12 @@ int	release_move(int keycode, t_data *data)
 {
 	if ((keycode == XK_s || keycode == XK_S) && data->keycode.down == true)
 		data->keycode.down = false;
-	else if ((keycode == XK_w || keycode == XK_W) && data->keycode.up == true)
+	if ((keycode == XK_w || keycode == XK_W) && data->keycode.up == true)
 		data->keycode.up = false;
 	if ((keycode == XK_d || keycode == XK_D)
 		&& data->keycode.right == true)
 		data->keycode.right = false;
-	else if ((keycode == XK_a || keycode == XK_A) && data->keycode.left == true)
+	if ((keycode == XK_a || keycode == XK_A) && data->keycode.left == true)
 		data->keycode.left = false;
 	if (keycode == XK_Left && data->keycode.rotate_left == true)
 		data->keycode.rotate_left = false;

@@ -16,6 +16,8 @@
 #include <X11/keysym.h>
 #include <mlx.h>
 
+static void	rotate_mouse(t_data *data, int delta_x);
+
 /**
  * @brief allow to rotate the player if boolean are true
  * @param data all information about the program
@@ -29,15 +31,13 @@ void	rotate_hero(t_data *data)
 				data->cube.subt_speed);
 		data->map.player.plane = rotate_vect(data->map.player.plane,
 				data->cube.subt_speed);
-		data->keycode.rotate_left = false;
 	}
-	else if (data->keycode.rotate_right == true)
+	if (data->keycode.rotate_right == true)
 	{
 		data->map.player.dir = rotate_vect(data->map.player.dir,
 				data->cube.add_speed);
 		data->map.player.plane = rotate_vect(data->map.player.plane,
 				data->cube.add_speed);
-		data->keycode.rotate_right = false;
 	}
 }
 
@@ -59,11 +59,33 @@ int	mouse_hook(int x, int y, t_data *data)
 		data->raycasting.z += delta_y;
 	if (delta_y < 0 && data->raycasting.z > -800)
 		data->raycasting.z += delta_y;
-	if (delta_x > 0)
-		data->keycode.rotate_left = true;
-	else if (delta_x < 0)
-		data->keycode.rotate_right = true;
+	rotate_mouse(data, delta_x);
 	mlx_mouse_move(data->mlx.ptr, data->mlx.win, data->cube.middle_screen_x,
 		data->cube.middle_screen_y);
 	return (0);
+}
+
+/**
+* @brief allow to rotate house according delta x
+* @param data all information about the program
+* @param delta_x movement of the mouse since the middle
+* of the screen
+* @return
+*/
+static void	rotate_mouse(t_data *data, int delta_x)
+{
+	if (delta_x > 0)
+	{
+		data->map.player.dir = rotate_vect(data->map.player.dir,
+				data->cube.subt_speed_mouse);
+		data->map.player.plane = rotate_vect(data->map.player.plane,
+				data->cube.subt_speed_mouse);
+	}
+	else if (delta_x < 0)
+	{
+		data->map.player.dir = rotate_vect(data->map.player.dir,
+				data->cube.add_speed_mouse);
+		data->map.player.plane = rotate_vect(data->map.player.plane,
+				data->cube.add_speed_mouse);
+	}
 }

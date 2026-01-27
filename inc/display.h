@@ -186,6 +186,8 @@ typedef struct s_compute
 {
 	double					add_speed;
 	double					subt_speed;
+	double					add_speed_mouse;
+	double					subt_speed_mouse;
 	double					frame_duration;
 	int						middle_screen_x;
 	int						middle_screen_y;
