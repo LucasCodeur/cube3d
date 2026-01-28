@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:42:31 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/28 16:20:39 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/28 18:35:17 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ class Bureaucrat
 
 		const std::string & getName() const;
 		unsigned short int getGrade() const;
+		GradeTooHighException
 };
 
 #endif

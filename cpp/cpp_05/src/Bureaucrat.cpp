@@ -6,11 +6,13 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:52:31 by lud-adam          #+#    #+#             */
-/*   Updated: 2026/01/28 16:20:06 by lud-adam         ###   ########.fr       */
+/*   Updated: 2026/01/28 18:35:15 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+
+#include <exception>
 
 Bureaucrat::Bureaucrat(void) : _name("John Doe"), _grade(150)
 {
@@ -50,3 +52,4 @@ unsigned short int Bureaucrat::getGrade() const
 {
 	return (this->_grade);
 }
+
