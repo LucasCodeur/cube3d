@@ -136,9 +136,14 @@ Raycasting is an algorithm that **traces rays** from the player’s position to 
 - [Cross product calculator](https://www.omnicalculator.com/fr/mathematiques/calculateur-produit-vectoriel)
 - [YouTube: Raycasting tutorial 1](https://www.youtube.com/watch?v=mR3Rwyu52rA)
 - [YouTube: Raycasting tutorial 2](https://www.youtube.com/watch?v=NbSee-XM7WA)
-- [Lodev Raycasting tutorial](https://lodev.org/cgtutor/raycasting.html)
 - [MiniLibX hook examples](https://42-cursus.gitbook.io/guide/minilibx/minilibx-hook-examples)
 - [Raycasting explanation](https://perso.esiee.fr/~buzerl/sphinx_IMA/80%20raycast/raycast.html)
+- [Super Fast Ray Casting in Tiled Worlds using DDA](https://www.youtube.com/watch?v=NbSee-XM7WA)
+
+## 💻 AI Usage
+
+- Correction of mistakes in the README.
+- Added explanations about the mathematics behind the project.
 
 ---
 

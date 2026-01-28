@@ -117,8 +117,8 @@ static void	ininitialize_compute(t_compute *cube)
 {
 	cube->add_speed = 3.0 * (M_PI / 180);
 	cube->subt_speed = -3.0 * (M_PI / 180);
-	cube->add_speed_mouse = 0.5 * (M_PI / 180);
-	cube->subt_speed_mouse = -0.5 * (M_PI / 180);
+	cube->add_speed_mouse = 1.0 * (M_PI / 180);
+	cube->subt_speed_mouse = -1.0 * (M_PI / 180);
 	cube->middle_screen_x = WIN_WIDTH / 2;
 	cube->middle_screen_y = WIN_HEIGHT / 2;
 	cube->frame_duration = 1.0 / FPS;

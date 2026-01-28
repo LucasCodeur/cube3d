@@ -5,8 +5,8 @@ EA     ./assets/textures/east.xpm
 WE      ./assets/textures/west.xpm
 
 
-F     0,0,0
-C   255,255,255
+F     26,29,33
+C   26,29,33
 
         1111111111111111111111111
         1000000000110000000000001
